@@ -1,6 +1,6 @@
 import Link from 'next/link';
-export const FlexwindHero1 = ({ config, theme }) => {
-  const { title, description, ctas, img, ratings } = config;
+export const FlexwindHero1 = ({ theme, ...rest }) => {
+  const { title, description, ctas, img, ratings } = rest;
   return (
     <main class='w-full'>
       <section class='relative pt-10 xl:pt-14'>
@@ -69,8 +69,8 @@ export const FlexwindHero1 = ({ config, theme }) => {
   );
 };
 
-export const FlexwindHero2 = ({ config, theme }) => {
-  const { title, description, ctas, partners, img1, img2 } = config;
+export const FlexwindHero2 = ({ theme, ...rest }) => {
+  const { title, description, ctas, partners, img1, img2 } = rest;
   return (
     <section class='py-4 mt-14 sm:mt16 lg:mt-0'>
       <div class='mx-auto lg:max-w-7xl w-full px-5 sm:px-10 md:px-12 lg:px-5 grid lg:grid-cols-2 lg:items-center gap-10'>
@@ -143,8 +143,8 @@ export const FlexwindHero2 = ({ config, theme }) => {
   );
 };
 
-export const FlexwindHero3 = ({ config, theme }) => {
-  const { title, description, cta, hint } = config;
+export const FlexwindHero3 = ({ theme, ...rest }) => {
+  const { title, description, cta, hint } = rest;
   return (
     <section class='bg-gray-100 dark:bg-gray-900 py-32 sm:py-36 lg:py-40 overflow-hidden h-[100dvh] min-h-max flex items-center relative'>
       <div
@@ -216,8 +216,8 @@ export const FlexwindHero3 = ({ config, theme }) => {
   );
 };
 
-export const FlexwindHero4 = ({ config, theme }) => {
-  const { title, description, ctas, img, data } = config;
+export const FlexwindHero4 = ({ theme, ...rest }) => {
+  const { title, description, ctas, img, data } = rest;
   const { email } = data;
   return (
     <section class='relative pt-32 lg:pt-36'>
@@ -321,8 +321,8 @@ export const FlexwindHero4 = ({ config, theme }) => {
   );
 };
 
-export const FlexwindHero6 = ({ config, theme }) => {
-  const { title, description, ctas, stats } = config;
+export const FlexwindHero6 = ({ theme, ...rest }) => {
+  const { title, description, ctas, stats } = rest;
   console.log(theme, config);
   console.log('primary', theme.colors.primaryColorCode);
   console.log('dark', theme.colors.darkThemeTextColorCode);
@@ -416,8 +416,8 @@ export const FlexwindHero6 = ({ config, theme }) => {
   );
 };
 
-export const FlexwindHero5 = ({ config, theme }) => {
-  const { title, description, img, ctas, stats } = config;
+export const FlexwindHero5 = ({ theme, ...rest }) => {
+  const { title, description, img, ctas, stats } = rest;
   return (
     <>
       <main>
@@ -500,7 +500,7 @@ export const FlexwindHero5 = ({ config, theme }) => {
   );
 };
 
-export const FlexwindHero7 = ({ config, theme }) => {
+export const FlexwindHero7 = ({ theme, ...rest }) => {
   return (
     <>
       <Navbar />
