@@ -8,7 +8,7 @@
 
 The **Ina Ethe Project** was conceived with the noble intention of assisting non-profit organizations (NPOs) in enhancing their donation collection through the innovative use of affiliate marketing. This initiative aimed to empower passionate individuals to advocate for meaningful causes, rewarding them with a portion of the donations they help generate.
 
-However, following some funding challenges and the subsequent withdrawal of key stakeholders, **Namoota Technologies** recognized the inherent potential of this initiative. Transitioning the project into their own hands, they have rebranded it as **Ina Ethe**, a term that beautifully translates to "Humanity" in Xhosa. This strategic transformation has broadened the platform's vision, evolving it into a versatile resource designed not only to support NPOs in their missions but also to include features like configurable website building and foster open-source innovation.
+However, following some funding challenges and the subsequent withdrawal of key stakeholders, **Namoota Technologies** recognized the inherent potential of this initiative. Transitioning the project into their own hands, they have rebranded it as **Ina Ethe**, a term that beautifully translates to "Give and Get" in Xhosa. This strategic transformation has broadened the platform's vision, evolving it into a versatile resource designed not only to support NPOs in their missions but also to include features like configurable website building and foster open-source innovation.
 
 Through this evolution, Ina Etheaspires to create a more significant positive impact for NPOs and their supporters, fostering a collaborative environment that champions both philanthropy and technological advancement.
 
