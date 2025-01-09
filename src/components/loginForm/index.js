@@ -45,7 +45,7 @@ const SubscriptionForm = ({ login }) => {
       setEmailError('');
     }
 
-    const API_URL = 'https://helpem-api.onrender.com/api' + '/login';
+    const API_URL = 'https://inaethe-api.onrender.com/api' + '/login';
     console.log(API_URL);
     fetch(API_URL, {
       method: 'POST',

@@ -6,7 +6,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useSearchParams } from 'next/navigation';
 
-const API_URL = 'https://helpem-api.onrender.com/api';
+const API_URL = 'https://inaethe-api.onrender.com/api';
 
 const levelPrices = {
   Nourisher: 50,

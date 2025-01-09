@@ -6,12 +6,13 @@ const Modal = ({ showModal, setShowModal, transaction }) => {
     <>
       {showModal ? (
         <>
-
           <div
             id='crud-modal'
             tabindex='-1'
             aria-hidden='true'
-            class={`${showModal ? "flex" : "hidden"}   backdrop-blur-md	 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full`}
+            class={`${
+              showModal ? 'flex' : 'hidden'
+            }   backdrop-blur-md	 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full`}
           >
             <div class='relative p-4 w-full max-w-md max-h-full'>
               <div class='relative bg-white rounded-lg shadow dark:bg-gray-700'>
@@ -68,7 +69,7 @@ const Modal = ({ showModal, setShowModal, transaction }) => {
                         for='name'
                         class='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
                       >
-                        Helpem Payment Id
+                        Ina Ethe Payment Id
                       </label>
                       <input
                         type='text'
@@ -186,16 +187,18 @@ const Modal = ({ showModal, setShowModal, transaction }) => {
                         placeholder='Type product name'
                         required=''
                         readOnly
-                        value={`${moment(transaction?.billing_date, 'YYYY-MM-DD').format('DD MMMM YYYY')}`}
+                        value={`${moment(
+                          transaction?.billing_date,
+                          'YYYY-MM-DD'
+                        ).format('DD MMMM YYYY')}`}
                       />
                     </div>
                   </div>
                   <button
                     type='submit'
-                    onClick={()=> setShowModal(!showModal)}
+                    onClick={() => setShowModal(!showModal)}
                     class='text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
                   >
-                    
                     Close
                   </button>
                 </form>

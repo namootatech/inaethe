@@ -1,5 +1,5 @@
 {
-  "themeName": "helpem",
+  "themeName": "inaethe",
   "partnerName": "Help'em",
   "progressColor": "#b91c1b",
   "heroHeader": "Transforming good intentions into tangible impacts.",
@@ -300,7 +300,7 @@
         { "type": "checkbox-center" },
         {
           "type": "center-width-text-block",
-          "title": "Thank You for Joining the HelpEm Community! ",
+          "title": "Thank You for Joining the InaEthe Community! ",
           "text": " Welcome aboard! Your support means the world to us and the non-profit organization you've chosen to subscribe to. Together, we're making a difference and creating positive change in the world."
         },
         {

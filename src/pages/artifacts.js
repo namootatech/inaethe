@@ -28,7 +28,7 @@ function Home({ theme }) {
       elements: [
         {
           type: 'image-block',
-          image: '/images/helpem/garbage.jpg',
+          image: '/images/inaethe/garbage.jpg',
         },
         {
           type: 'multi-text-blocks',
@@ -101,9 +101,9 @@ function Home({ theme }) {
     {
       type: 'card',
       title: 'Join Us',
-      image: '/images/helpem/donations-square.jpg',
+      image: '/images/inaethe/donations-square.jpg',
       description:
-        'Helpem is a community-driven organization. Join us today to make a difference in the lives of those in need.',
+        'Ina Ethe is a community-driven organization. Join us today to make a difference in the lives of those in need.',
       cta: {
         title: 'Get Involved',
         link: '/get-involved',
@@ -113,19 +113,19 @@ function Home({ theme }) {
       type: 'accordion',
       items: [
         {
-          title: 'What is Helpem?',
+          title: 'What is Ina Ethe?',
           content:
-            'Helpem is a community-driven organization that empowers non-profit organizations to generate crucial income for their causes.',
+            'Ina Ethe is a community-driven organization that empowers non-profit organizations to generate crucial income for their causes.',
         },
         {
-          title: 'How does Helpem work?',
+          title: 'How does Ina Ethe work?',
           content:
-            'Helpem connects non-profit organizations with individuals, allowing them to generate income while providing them with the opportunity to earn.',
+            'Ina Ethe connects non-profit organizations with individuals, allowing them to generate income while providing them with the opportunity to earn.',
         },
         {
-          title: 'What is the difference between Helpem and other platforms?',
+          title: 'What is the difference between Ina Ethe and other platforms?',
           content:
-            'Helpem empowers non-profit organizations to generate crucial income for their causes while providing individuals with the opportunity to earn.',
+            'Ina Ethe empowers non-profit organizations to generate crucial income for their causes while providing individuals with the opportunity to earn.',
         },
       ],
     },
@@ -166,7 +166,7 @@ function Home({ theme }) {
         },
       ],
       img: {
-        src: '/images/helpem/donations-square.jpg',
+        src: '/images/inaethe/donations-square.jpg',
         alt: 'Hero Image',
       },
       ratings: {
@@ -195,7 +195,7 @@ function Home({ theme }) {
         },
       ],
       img: {
-        src: '/images/helpem/donations-square.jpg',
+        src: '/images/inaethe/donations-square.jpg',
         alt: 'Hero Image',
       },
     },
@@ -222,7 +222,7 @@ function Home({ theme }) {
         },
       ],
       img: {
-        src: '/images/helpem/donations-square.jpg',
+        src: '/images/inaethe/donations-square.jpg',
         alt: 'Hero Image',
       },
     },
@@ -244,7 +244,7 @@ function Home({ theme }) {
         },
       ],
       img: {
-        src: '/images/helpem/donations-square.jpg',
+        src: '/images/inaethe/donations-square.jpg',
         alt: 'Hero Image',
       },
     },
@@ -256,9 +256,9 @@ function Home({ theme }) {
           <h3 className='text-2xl font-bold mt-8 mb-4'>Artifacts</h3>
           <p className='text-gray-200 mb-2'>
             Artifacts are the building blocks we use to build the custom webpage
-            confoiguration on the Helpem System. Artifacts are contained in the
-            configuration of a page. Listed below you will find a list of the
-            blocks we use.
+            confoiguration on the Ina Ethe System. Artifacts are contained in
+            the configuration of a page. Listed below you will find a list of
+            the blocks we use.
           </p>
         </div>
         <div className='grid grid-cols-8 gap-2'>

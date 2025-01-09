@@ -27,8 +27,6 @@ const MERCHANT_ID = process.env.NEXT_PUBLIC_MERCHANT_ID;
 const MERCHANT_KEY = process.env.NEXT_PUBLIC_MERCHANT_KEY;
 
 function ReturnPage({ theme }) {
-
-
   const params = useSearchParams();
 
   const userData = {
@@ -44,15 +42,27 @@ function ReturnPage({ theme }) {
     merchant_id: MERCHANT_ID,
     merchant_key: MERCHANT_KEY,
     return_url: `${WEBSITE_URL}/return?firstPaymentDone=true`,
-    cancel_url: `${WEBSITE_URL}/cancel?subscriptionId=${userData.subscriptionId}&userId${userData.userId}&subscriptionTier=${userData.subscriptionTier}&amount=${levelPrices[userData.subscriptionTier]}&firstName=${userData.firstName}&lastName=${userData.lastName}&email=${userData.email}&paymentMethod=${userData.paymentMethod}&agreeToTerms=${userData.agreeToTerms}&level=${keys(levelPrices).indexOf(userData.subscriptionTier) + 1}${userData?.parent ? `&parent=${userData?.parent}&` :''}&partner=${userData?.partner.slug}`,
+    cancel_url: `${WEBSITE_URL}/cancel?subscriptionId=${
+      userData.subscriptionId
+    }&userId${userData.userId}&subscriptionTier=${
+      userData.subscriptionTier
+    }&amount=${levelPrices[userData.subscriptionTier]}&firstName=${
+      userData.firstName
+    }&lastName=${userData.lastName}&email=${userData.email}&paymentMethod=${
+      userData.paymentMethod
+    }&agreeToTerms=${userData.agreeToTerms}&level=${
+      keys(levelPrices).indexOf(userData.subscriptionTier) + 1
+    }${userData?.parent ? `&parent=${userData?.parent}&` : ''}&partner=${
+      userData?.partner.slug
+    }`,
     notify_url: `${API_URL}/notify`,
     name_first: userData.firstName,
     name_last: userData.lastName,
     email_address: userData.email,
     m_payment_id: paymentId,
     amount: levelPrices[userData.subscriptionTier],
-    item_name: `Helpem Subscription`,
-    item_description: `Helpem Subscription for ${userData.firstName} ${userData.lastName} for the ${userData.subscriptionTier} package.`,
+    item_name: `Ina Ethe Subscription`,
+    item_description: `Ina Ethe Subscription for ${userData.firstName} ${userData.lastName} for the ${userData.subscriptionTier} package.`,
     subscription_type: 1,
     billing_date: moment().format('YYYY-MM-DD'),
     recurring_amount: levelPrices[userData.subscriptionTier],
@@ -73,17 +83,13 @@ function ReturnPage({ theme }) {
       custom_str1: userData?.parent ? userData?.parent : '',
     };
   }
-  const config = theme?.defaultPages?.find(
-    (p) => p.id === 'cancelled-payment'
-  );
+  const config = theme?.defaultPages?.find((p) => p.id === 'cancelled-payment');
   console.log('config', config);
 
   return (
     <Layout>
       <ToastContainer />
-      <ArtifactsWithData items={config?.artifacts}
-          data={payfastData}
-        />
+      <ArtifactsWithData items={config?.artifacts} data={payfastData} />
     </Layout>
   );
 }

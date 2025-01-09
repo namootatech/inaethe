@@ -81,10 +81,10 @@ export const FeatureSection = ({ features }) => (
           Features
         </h2>
         <p className='mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl'>
-          How Helpem Works
+          How Ina Ethe Works
         </p>
         <p className='mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto'>
-          Discover the key features that make Helpem the perfect platform for
+          Discover the key features that make Ina Ethe the perfect platform for
           affiliate marketing and donation collection.
         </p>
       </div>

@@ -1,10 +1,10 @@
-const helpemTheme = require(`./helpem/theme.json`);
+const inaetheTheme = require(`./inaethe/theme.json`);
 const fotTheme = require('./fot/theme.json');
 const blue = require('./blue/theme.json');
 const bananas = require('./go-bananas/theme.json');
 
 const themes = {
-  helpem: helpemTheme,
+  inaethe: inaetheTheme,
   fot: fotTheme,
   blue: blue,
   'go-bananas': bananas,
