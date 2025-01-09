@@ -2,15 +2,15 @@
 
 ![Logo](public/logo.png)
 
-# Ina Ethe - Where Giving meets reward - A subscription based affiliate marketing donations collection website.
+# Ina Ethe 
 
-
+>Ina Ethe is a subscription-based platform that leverages affiliate marketing to help individuals support and fund Non-Profit Organizations (NPOs). The platform allows users > to promote causes they care about, earning rewards through donations made by their network. By subscribing to the service, users contribute to NPOs while also benefiting > > from a revenue-sharing model that incentivizes active participation in charitable efforts.
 
 ## Why This Project Exists  
 
-The **Helpem Project** was conceived with the noble intention of assisting non-profit organizations (NPOs) in enhancing their donation collection through the innovative use of affiliate marketing. This initiative aimed to empower passionate individuals to advocate for meaningful causes, rewarding them with a portion of the donations they help generate.
+The  **Ina Ethe Project** was conceived with the noble intention of assisting non-profit organizations (NPOs) in enhancing their donation collection through the innovative use of affiliate marketing. This initiative aimed to empower passionate individuals to advocate for meaningful causes, rewarding them with a portion of the donations they help generate.
 
-However, following some funding challenges and the subsequent withdrawal of key stakeholders, **Namoota Technologies** recognized the inherent potential of this initiative. Transitioning the project into their own hands, they have rebranded it as **Botho**, a term that beautifully translates to "Humanity" in Xhosa. This strategic transformation has broadened the platform's vision, evolving it into a versatile resource designed not only to support NPOs in their missions but also to include features like configurable website building and foster open-source innovation. 
+However, following some funding challenges and the subsequent withdrawal of key stakeholders, **Namoota Technologies** recognized the inherent potential of this initiative. Transitioning the project into their own hands, they have rebranded it as **Ina Ethe**, a term that beautifully translates to "Humanity" in Xhosa. This strategic transformation has broadened the platform's vision, evolving it into a versatile resource designed not only to support NPOs in their missions but also to include features like configurable website building and foster open-source innovation. 
 
 Through this evolution, Ina Etheaspires to create a more significant positive impact for NPOs and their supporters, fostering a collaborative environment that champions both philanthropy and technological advancement. 
 
@@ -18,7 +18,7 @@ Through this evolution, Ina Etheaspires to create a more significant positive im
 
 ## How Ina EtheSeeks to Help
 
-**Botho** provides a dual-purpose platform:
+**Ina Ethe** provides a dual-purpose platform:
 
 1. **For NPOs**: It enables them to easily sign up, collect donations, and manage their networks and supporters.
 2. **For Individuals (Affiliates)**: It allows users to earn income by promoting the causes they believe in, creating a mutually beneficial system.
@@ -44,7 +44,7 @@ Ina Etheis a **configurable Next.js-based web application** designed to create w
 - **Configurable Website Builder**: Allows NPOs to create custom websites using pre-defined components.
 - **Subscription and Network Dashboard**: Affiliates and donors can manage their subscriptions and interactions.
 - **Admin Monitoring System**: Includes Slack notifications and internal tools for auditing and moderation.
-- **Multi-Domain Hosting**: NPOs can have standalone websites hosted under Botho’s main domain (e.g., `foodoneverytable.botho.co.za`).
+- **Multi-Domain Hosting**: NPOs can have standalone websites hosted under Ina Ethe’s main domain (e.g., `foodoneverytable.Ina Ethe.co.za`).
 - **Dynamic JSON Configuration**: Enables fully configurable pages and layouts.
 
 **Core Platform Overview**
