@@ -386,7 +386,7 @@ const CrossCenter = ({ config, data, theme }) => {
   );
 };
 
-const LoginButton = ({ config, theme }) => {
+const LoginButton = ({ theme, ...rest }) => {
   return (
     <Link href='/login' className={theme?.colors?.button?.primary?.class}>
       {config.title}
@@ -429,7 +429,7 @@ const Modal = ({ config, data, theme }) => {
   );
 };
 
-const AlertBanner = ({ config, theme }) => {
+const AlertBanner = ({ theme, ...rest }) => {
   const { message, alertType = 'info' } = config;
   const alertTypes = {
     success: 'bg-green-100 text-green-800',
@@ -460,7 +460,7 @@ const AlertBanner = ({ config, theme }) => {
   );
 };
 
-const Accordion = ({ config, theme }) => {
+const Accordion = ({ theme, ...rest }) => {
   const { items } = config;
   const [openIndex, setOpenIndex] = React.useState(null);
 
@@ -485,7 +485,7 @@ const Accordion = ({ config, theme }) => {
   );
 };
 
-const Card = ({ config, theme }) => {
+const Card = ({ theme, ...rest }) => {
   const { image, title, description, cta } = config;
   return (
     <div className='bg-white rounded-lg shadow-md overflow-hidden'>
@@ -503,7 +503,7 @@ const Card = ({ config, theme }) => {
   );
 };
 
-const Tabs = ({ config, theme }) => {
+const Tabs = ({ theme, ...rest }) => {
   const { tabs } = config;
   const [activeTab, setActiveTab] = React.useState(tabs[0].id);
 
@@ -546,28 +546,28 @@ const componentBuilders = {
   'full-width-text-block': fullWidthTextBlock,
   'center-width-text-block': centerWidthTextBlock,
   'payfast-button': ({ config, data, theme }) => (
-    <PayFastButton config={config} data={data} theme={theme} />
+    <PayFastButton {...rest} data={data} theme={theme} />
   ),
   'payfast-button-center-width': ({ config, data, theme }) => (
     <div className='max-w-2xl mx-auto p-4'>
-      <PayFastButton config={config} data={data} theme={theme} />
+      <PayFastButton {...rest} data={data} theme={theme} />
     </div>
   ),
-  'login-button': ({ config, theme }) => (
-    <LoginButton config={config} theme={theme} />
+  'login-button': ({ theme, ...rest }) => (
+    <LoginButton {...rest} theme={theme} />
   ),
-  'login-button-center-width': ({ config, theme }) => (
+  'login-button-center-width': ({ theme, ...rest }) => (
     <div className='max-w-2xl mx-auto p-4'>
-      <LoginButton config={config} theme={theme} />
+      <LoginButton {...rest} theme={theme} />
     </div>
   ),
-  'alert-banner': ({ config, theme }) => (
-    <AlertBanner config={config} theme={theme} />
+  'alert-banner': ({ theme, ...rest }) => (
+    <AlertBanner {...rest} theme={theme} />
   ),
-  accordion: ({ config, theme }) => <Accordion config={config} theme={theme} />,
-  card: ({ config, theme }) => <Card config={config} theme={theme} />,
-  modal: ({ config, theme }) => <Modal config={config} theme={theme} />,
-  tabs: ({ config, theme }) => <Tabs tabs={config} theme={theme} />,
+  accordion: ({ theme, ...rest }) => <Accordion {...rest} theme={theme} />,
+  card: ({ theme, ...rest }) => <Card {...rest} theme={theme} />,
+  modal: ({ theme, ...rest }) => <Modal {...rest} theme={theme} />,
+  tabs: ({ theme, ...rest }) => <Tabs tabs={config} theme={theme} />,
   FlexwindHero1,
   FlexwindHero5,
   FlexwindHero2,
@@ -579,7 +579,7 @@ const componentBuilders = {
 
 const Artifacts = ({ items, data, theme }) => {
   const Components = items.map((a, i) => {
-    return componentBuilders[a.type]({ config: a, data, theme });
+    return componentBuilders[a.type]({ ...a, data, theme });
   });
   return Components;
 };
