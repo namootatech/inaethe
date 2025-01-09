@@ -67,7 +67,7 @@ const Footer = ({ theme }) => {
           <span className='text-sm text-gray-900-500 sm:text-center dark:text-gray-900-400'>
             © 2023{' '}
             <Link href='https://inaethe.co.za' className='hover:underline'>
-              Help'em™
+              Ina Ethe™
             </Link>
             . All Rights Reserved.
           </span>

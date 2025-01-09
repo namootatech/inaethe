@@ -16,7 +16,7 @@ function Home({ theme }) {
     {
       type: 'hero',
       header: 'Transforming good intentions into tangible impacts.',
-      text: "At Help'em, we believe in the power of generosity and financial sustainability. Join us in building a community that empowers non-profit organizations to thrive while offering individuals the opportunity to earn while making a difference. Together, let's create a brighter future.",
+      text: "At Ina Ethe, we believe in the power of generosity and financial sustainability. Join us in building a community that empowers non-profit organizations to thrive while offering individuals the opportunity to earn while making a difference. Together, let's create a brighter future.",
       cta: {
         title: 'Make an Impact Today!',
         link: '/subscribe',
@@ -39,11 +39,11 @@ function Home({ theme }) {
           content: [
             {
               title: 'Our Mission',
-              text: "At Help'em, our mission is twofold: we empower non-profit organizations to generate crucial income for their causes, while simultaneously providing individuals with the opportunity to earn while helping these causes thrive. We believe in the power of mutual benefit, creating a platform where generosity and financial sustainability coexist.",
+              text: 'At Ina Ethe, our mission is twofold: we empower non-profit organizations to generate crucial income for their causes, while simultaneously providing individuals with the opportunity to earn while helping these causes thrive. We believe in the power of mutual benefit, creating a platform where generosity and financial sustainability coexist.',
             },
             {
               title: '',
-              text: "Join us in building a community that transforms good intentions into tangible impacts, ensuring a brighter future for both individuals and the non-profits they support. Help'em make a difference today!",
+              text: 'Join us in building a community that transforms good intentions into tangible impacts, ensuring a brighter future for both individuals and the non-profits they support. Ina Ethe make a difference today!',
             },
           ],
         },
@@ -70,7 +70,7 @@ function Home({ theme }) {
       ],
       bg: 'bg-red-700',
       fg: 'text-white',
-      title: "Why Help'em",
+      title: 'Why Ina Ethe',
     },
     {
       type: 'article',
@@ -84,11 +84,11 @@ function Home({ theme }) {
           content: [
             {
               title: 'Our Story',
-              text: "Help'em emerged in response to the African hunger crisis post-Covid. Starting with 'Food-On-Every-Table,' we sought aid from companies but faced silence. Adapting, we realized the need to address both hunger and South Africa's 40% unemployment.",
+              text: "Ina Ethe emerged in response to the African hunger crisis post-Covid. Starting with 'Food-On-Every-Table,' we sought aid from companies but faced silence. Adapting, we realized the need to address both hunger and South Africa's 40% unemployment.",
             },
             {
               title: 'Empowering Impactful Causes',
-              text: "Help'em is a unique platform uniting non-profits and individuals, offering a means for anyone with a worthy cause to generate income. Our resilient journey aims to make a lasting impact on hunger, unemployment, and funding challenges.",
+              text: 'Ina Ethe is a unique platform uniting non-profits and individuals, offering a means for anyone with a worthy cause to generate income. Our resilient journey aims to make a lasting impact on hunger, unemployment, and funding challenges.',
             },
           ],
         },

@@ -147,10 +147,10 @@ const SubscriptionForm = ({ user, theme }) => {
   return (
     <div className='md:w-9/12 p-8 mx-auto bg-white rounded-lg shadow-md'>
       <h1 className='text-2xl font-semibold mb-4 text-4xl'>
-        Join Help'em - Be a Hope Builder!
+        Join Ina Ethe - Be a Hope Builder!
       </h1>
       <p className='mb-4 mt-2 text-2xl'>
-        Subscribe to Help'em, and join us in our mission to end hunger in
+        Subscribe to Ina Ethe, and join us in our mission to end hunger in
         Africa. Choose a subscription tier and start making a real difference
         today.
       </p>
