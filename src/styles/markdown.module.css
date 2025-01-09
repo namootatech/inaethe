@@ -1,0 +1,14 @@
+
+
+.blog h1 {
+    @apply mt-8 mb-8 text-6xl;
+  }
+
+  .blog h2 {
+    @apply text-4xl;
+  }
+
+
+.blog p {
+  @apply my-8 text-xl;
+}

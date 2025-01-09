@@ -1,40 +1,190 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+---
 
-## Getting Started
+![Logo](public/logo.png)
 
-First, run the development server:
+# Ina Ethe - Where Giving meets reward - A subscription based affiliate marketing donations collection website.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+
+## Why This Project Exists  
+
+The **Helpem Project** was conceived with the noble intention of assisting non-profit organizations (NPOs) in enhancing their donation collection through the innovative use of affiliate marketing. This initiative aimed to empower passionate individuals to advocate for meaningful causes, rewarding them with a portion of the donations they help generate.
+
+However, following some funding challenges and the subsequent withdrawal of key stakeholders, **Namoota Technologies** recognized the inherent potential of this initiative. Transitioning the project into their own hands, they have rebranded it as **Botho**, a term that beautifully translates to "Humanity" in Xhosa. This strategic transformation has broadened the platform's vision, evolving it into a versatile resource designed not only to support NPOs in their missions but also to include features like configurable website building and foster open-source innovation. 
+
+Through this evolution, Ina Etheaspires to create a more significant positive impact for NPOs and their supporters, fostering a collaborative environment that champions both philanthropy and technological advancement. 
+
+---
+
+## How Ina EtheSeeks to Help
+
+**Botho** provides a dual-purpose platform:
+
+1. **For NPOs**: It enables them to easily sign up, collect donations, and manage their networks and supporters.
+2. **For Individuals (Affiliates)**: It allows users to earn income by promoting the causes they believe in, creating a mutually beneficial system.
+
+This approach fosters a sustainable ecosystem where philanthropy and personal financial growth coexist.
+
+---
+
+## What Type of Application Is This?
+
+Ina Etheis a **configurable Next.js-based web application** designed to create websites for NPOs. It is:
+
+- **Configurable**: Built to adapt to various requirements without extensive coding.
+- **Scalable**: Capable of hosting standalone NPO websites under the Ina Ethedomain.
+- **Customizable**: Offers tools to tailor websites according to individual NPO branding needs.
+- **Multi-purpose**: Extends beyond donation collection to support user subscriptions, network dashboards, and admin monitoring.
+
+---
+
+## Features
+
+- **Affiliate Marketing for Donations**: Affiliates earn income while promoting causes.
+- **Configurable Website Builder**: Allows NPOs to create custom websites using pre-defined components.
+- **Subscription and Network Dashboard**: Affiliates and donors can manage their subscriptions and interactions.
+- **Admin Monitoring System**: Includes Slack notifications and internal tools for auditing and moderation.
+- **Multi-Domain Hosting**: NPOs can have standalone websites hosted under Botho’s main domain (e.g., `foodoneverytable.botho.co.za`).
+- **Dynamic JSON Configuration**: Enables fully configurable pages and layouts.
+
+**Core Platform Overview**
+
+Our platform is designed to empower users to create dynamic and customizable websites efficiently. Here are some key features:
+
+1. **Configurable Websites**: Easily build websites using JSON configuration files, allowing for flexibility and personalization.
+2. **Dynamic Routing**: Leverage Next.js capabilities with getStaticPaths for generating pages, providing a seamless routing experience for users.
+
+3. **Subscription System**: Our platform includes a robust subscription management system with a progressive revenue sharing model—40% for the affiliate marketer, 40% for the selected non-profit organization (NPO), and 20% for enhancing the platform.
+
+**Website Builder Architecture**
+
+Our infrastructure is built on a Next.js Docker image, enabling straightforward deployment and scalability. The platform utilizes the `NEXT_PUBLIC_SITE_CONFIG_JSON_LINK` environment variable to ensure dynamic loading of configurations during both the build and runtime phases.
+
+To create your website, simply provide a link to your configuration file. The system will handle the rest, building the site, its pages, and components automatically. This allows you to establish an affiliate marketing donations website with ease, enabling users to collect donations for their favorite NPOs through subscriptions.
+
+**Considerations and Limitations**
+
+While our platform presents many advantages, it is essential to highlight some limitations regarding payment processing. Currently, donations are processed through the select payment gateway, Payfast. Unfortunately, customization for individual payment gateways or specific Payfast wallets isn’t available at this time. This design choice ensures a consistent 40-40-20 split for all transactions, thus supporting fair compensation for affiliates and NPOs while also maintaining resources for platform improvement.
+
+To prevent potential abuses and maintain fairness in the revenue split, access to the Payfast merchant dashboard is restricted. We understand that this may be a limitation for some users, but it is crucial for maintaining the integrity of our system. Our aim is to create a sustainable and equitable platform for all stakeholders involved.
+
+We appreciate your understanding and are continuously working to enhance our offerings, keeping your needs in mind. Your feedback is invaluable, and we are excited about the potential of our platform to create positive impacts for nonprofits and communities alike.
+
+---
+
+## Future Plans
+
+### 1. **Ina EtheNPO Configurable Website Builder**
+
+The existing platform will evolve into a comprehensive tool for building NPO websites with features such as:
+
+- Easy-to-use page configuration using JSON files.
+- Dynamic routing for on-the-fly page generation.
+- Pre-designed Tailwind CSS blocks for quick customization.
+
+### 2. **Standalone Configurable Website Builder**
+
+The website builder functionality will be extracted into a separate open-source product by Namoota.
+
+- Developers will be able to use it to create fully configurable Next.js applications for any domain.
+- It will include tools for generating JSON configuration files for custom pages.
+
+### 3. **Open-Source Tailwind Blocks NPM Package**
+
+A library of reusable Tailwind CSS blocks will be created, packaged as an NPM library, and released as open-source.
+
+- Components will be sourced from **Flowbite**, **Flexwind**, **PageDone**, and other platforms.
+- Developers can use these pre-designed components in their React applications.
+
+---
+
+## How the Website Builder Will Work
+
+The Ina Ethewebsite builder uses **dynamic JSON configuration** to generate pages dynamically. Here’s how it works:
+
+1. **JSON Configuration File**: Contains page definitions, component sequences, and styling options.
+2. **Dynamic Routing**: Utilizes Next.js’s `[id].js` dynamic routing to fetch and render page content.
+3. **AppContext Provider**: Shares configuration data across all components, enabling dynamic rendering.
+4. **Pre-Built Docker Image**: Developers can deploy a customized site by pulling the Docker image and providing a `.env` file with configuration details.
+
+Here’s an example structure for a page:
+
+```jsx
+function Page(props) {
+  const { pageId } = useSearchParams();
+  const page = props.siteConfig.pages.find((p) => p.id === pageId);
+
+  return (
+    <Layout>
+      <div className='container md:mt-4 md:px-16 px-4'>
+        {page && <RenderPageComponents components={page.components} />}
+      </div>
+    </Layout>
+  );
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Tailwind Blocks Collection
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+The process of building reusable components involves:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+1. **Collecting HTML Blocks**: Components will be sourced from platforms like **Flowbite**, **Flexwind**, and **PageDone**.
+2. **Converting HTML to React Components**:
+   - Transform static HTML into React components, ensuring proper JSX syntax and reusable props.
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Example Conversion of a "Hero Section" to a React Component
 
-## Learn More
+```jsx
+const Hero = ({ title, subtitle, buttonText, buttonLink }) => (
+  <section className='bg-blue-500 text-white py-10'>
+    <h1 className='text-4xl'>{title}</h1>
+    <p className='mt-4'>{subtitle}</p>
+    <a
+      href={buttonLink}
+      className='mt-6 px-6 py-3 bg-white text-blue-500 rounded'
+    >
+      {buttonText}
+    </a>
+  </section>
+);
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Making Components Configurable
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+- **Dynamic Content**: The components will pull text, images, and other content dynamically from a `config` object.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```jsx
+const Hero = ({ config }) => {
+  const { title, subtitle, button } = config.hero;
+  return (
+    <section className={`${config.theme.primaryBgClass} py-10`}>
+      <h1 className='text-4xl'>{title}</h1>
+      <p className='mt-4'>{subtitle}</p>
+      <a
+        href={button.link}
+        className={`${config.theme.primaryButton.bgClass} rounded`}
+      >
+        {button.text}
+      </a>
+    </section>
+  );
+};
+```
 
-## Deploy on Vercel
+- **Theme-Based Styling**: Buttons, backgrounds, and other elements will reference the `config.theme`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Demo and Component Previews
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+Converted components will be showcased on the `/components` page for easy review and testing.
+
+---
+
+## Contribution Guidelines
+
+### How to Get Started
+
+1. Clone this repository.
+2. Request a `.env` file from **Ayabonga Qwab** to set up your environment.
+3. Start contributing by collecting, converting, or enhancing Tailwind blocks and making them configurable using the `config` data.
