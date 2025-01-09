@@ -74,7 +74,7 @@ We appreciate your understanding and are continuously working to enhance our off
 
 ## Future Plans
 
-### 1. **Ina EtheNPO Configurable Website Builder**
+### 1. **Ina Ethe NPO Configurable Website Builder**
 
 The existing platform will evolve into a comprehensive tool for building NPO websites with features such as:
 
@@ -186,5 +186,5 @@ Converted components will be showcased on the `/components` page for easy review
 ### How to Get Started
 
 1. Clone this repository.
-2. Request a `.env` file from **Ayabonga Qwab** to set up your environment.
+2. Request a `.env` file from **Ayabonga Qwabi** to set up your environment.
 3. Start contributing by collecting, converting, or enhancing Tailwind blocks and making them configurable using the `config` data.
