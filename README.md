@@ -2,7 +2,7 @@
 
 # Ina Ethe
 
-> Ina Ethe is a subscription-based platform that leverages affiliate marketing to help individuals support and fund Non-Profit Organizations (NPOs). The platform allows users > to promote causes they care about, earning rewards through donations made by their network. By subscribing to the service, users contribute to NPOs while also benefiting > > from a revenue-sharing model that incentivizes active participation in charitable efforts.
+> Ina Ethe is a subscription-based platform that leverages affiliate marketing to help individuals support and fund Non-Profit Organizations (NPOs). The platform allows users to promote causes they care about, earning rewards through donations made by their network. By subscribing to the service, users contribute to NPOs while also benefiting from a revenue-sharing model that incentivizes active participation in charitable efforts.
 
 ## Why This Project Exists
 
