@@ -35,6 +35,7 @@ async function sendWhatsAppNotification(eventType, payload) {
 }
 
 function generateMessage(eventType, payload, gitDetails) {
+  console.log('Payload', payload);
   switch (eventType) {
     case 'push':
       return `
@@ -93,7 +94,7 @@ function getGitDetails() {
 // Parse inputs passed to the script
 const eventType = process.argv[2]; // e.g., 'push', 'issues', 'pull_request'
 const payloadPath = process.argv[3]; // Path to a JSON file containing the payload
-
+console.log('PR', process.env.EVENT_PAYLOADp.number);
 // Ensure both arguments are provided
 if (!eventType || !payloadPath) {
   console.error('Usage: node sendNotification.js <eventType> <payloadPath>');
@@ -106,7 +107,7 @@ import fs from 'fs';
 let payload;
 try {
   payload = process.env.EVENT_PAYLOAD;
-  console.log(process.env.EVENT_PAYLOAD);
+  console.log(process.env.EVENT_PAYLOAD.pull_request);
 } catch (error) {
   console.error('Error reading or parsing payload file:', error);
   process.exit(1);
