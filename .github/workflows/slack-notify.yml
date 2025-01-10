@@ -11,4 +11,4 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_LINK_NAMES: true
-          SLACK_FOOTER: 'Ina Ethe Client Website'
+          SLACK_FOOTER: 'INA ETHE Client Website'

@@ -69,7 +69,7 @@ const Modal = ({ showModal, setShowModal, transaction }) => {
                         for='name'
                         class='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
                       >
-                        Ina Ethe Payment Id
+                        INA ETHE Payment Id
                       </label>
                       <input
                         type='text'

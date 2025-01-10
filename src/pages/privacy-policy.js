@@ -8,7 +8,7 @@ const PrivacyPolicy = () => {
         <div className='max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg'>
           <h1 className='text-3xl font-bold mb-4'>Privacy Policy</h1>
           <p className='text-gray-700 mb-4'>
-            At Ina Ethe, we respect the privacy rights of our users. This
+            At INA ETHE, we respect the privacy rights of our users. This
             Privacy Policy outlines how we collect, use, and protect your
             personal information when you use our services.
           </p>

@@ -5,20 +5,29 @@
   "heroHeader": "Transforming good intentions into tangible impacts.",
   "heroParagraph": "At INA ETHE, we believe in the power of generosity and financial sustainability. Join us in building a community that empowers non-profit organizations to thrive while offering individuals the opportunity to earn while making a difference. Together, let's create a brighter future.",
   "heroButton": {
-    "class": " mb-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl px-4 py-3 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+    "class": " mb-6 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl px-4 py-3 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
     "cta": "Make an Impact Today!"
   },
-  "navCta": "Get started",
   "nav": {
     "ctaText": "Get started",
-    "ctaClass": "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  text-xl px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
-    "login": "text-white bg-black hover:bg-blue-800 hidden md:block focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  text-xl px-4 py-2 text-center ml-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    "ctaClass": "text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  text-xl px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+    "login": "text-white bg-black hover:bg-red-800 hidden md:block focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  text-xl px-4 py-2 text-center ml-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+    "burgerMenu": {
+      "class": "md:bg-transparent sm:bg-transparent  flex p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 flex-col",
+      "link": {
+        "activeClass": "text-xl block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-red-700 md:p-0 md:dark:text-red-500",
+        "inactiveClass": "text-xl block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0 md:dark:hover:text-red-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+      },
+      "login": {
+        "class": "md:hidden block text-white bg-black hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  text-xl px-4 py-2 text-center ml-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      }
+    }
   },
   "colors": {
-    "lightBgColoCode": "blue-50",
+    "lightBgColoCode": "red-50",
     "secondaryLighBgColorCode": "gray-100",
-    "primaryColorCode": "blue-700",
-    "secondaryColorCode": "blue-400",
+    "primaryColorCode": "red-700",
+    "secondaryColorCode": "gray-700",
     "textColorCode": "gray-700",
     "button": {
       "primary": {
@@ -29,23 +38,14 @@
       }
     }
   },
-  "burgerMenu": {
-    "class": "md:bg-transparent sm:bg-transparent  flex p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 flex-col",
-    "link": {
-      "activeClass": "text-xl block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500",
-      "inactiveClass": "text-xl block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-    },
-    "login": {
-      "class": "md:hidden block text-white bg-black hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  text-xl px-4 py-2 text-center ml-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-    }
-  },
+
   "section": {
     "header": {
-      "class": "text-blue-700 text-4xl mb-4 font-extrabold leading-none tracking-tight text-gray-900 dark:text-white"
+      "class": "text-red-700 text-4xl mb-4 font-extrabold leading-none tracking-tight text-gray-900 dark:text-white"
     }
   },
   "footer": {
-    "bg": "bg-blue-800",
+    "bg": "bg-red-800",
     "fg": "text-white"
   },
   "pages": [
@@ -108,7 +108,7 @@
               "text": "Join a passionate community of individuals dedicated to ending hunger in Africa."
             }
           ],
-          "bg": "bg-blue-700",
+          "bg": "bg-red-700",
           "fg": "text-white",
           "title": "Why INA ETHE"
         },
@@ -178,7 +178,7 @@
             "title": "Join Us Now!",
             "link": "/subscribe"
           },
-          "image": "donations.jpg"
+          "image": "images/inaethe/donations.jpg"
         },
         { "type": "space-above", "size": "24" },
         {
@@ -196,7 +196,7 @@
             },
             {
               "type": "image-block",
-              "image": "volunteers.jpg"
+              "image": "images/inaethe/volunteers.jpg"
             }
           ]
         },
@@ -226,7 +226,7 @@
             "title": "Join Us Now!",
             "link": "/subscribe"
           },
-          "image": "donations.jpg"
+          "image": "images/inaethe/donations.jpg"
         },
         { "type": "space-above", "size": "10" },
         {
@@ -266,7 +266,7 @@
         {
           "type": "center-width-text-block",
           "title": "Your Information Is Saved:",
-          "text": "Your details have been securely saved to our database, ensuring a seamless experience as you embark on your journey of giving back. Rest assublue, your support is in good hands."
+          "text": "Your details have been securely saved to our database, ensuring a seamless experience as you embark on your journey of giving back. Rest assured, your support is in good hands."
         },
         {
           "type": "center-width-text-block",
