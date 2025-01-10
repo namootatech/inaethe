@@ -25,6 +25,8 @@ import {
   FlexwindHero5,
 } from './heros';
 import { useConfig } from '@/context/ConfigContext';
+import { FlexwindFeatures1 } from './features';
+import { PageDoneHowItWorks1 } from './howItWorks';
 
 const imageBlock = (props) => (
   <div
@@ -590,12 +592,14 @@ const componentBuilders = {
   FlexwindHero4,
   FlexwindHero6,
   FlexwindHero7,
+  FlexwindFeatures1,
+  PageDoneHowItWorks1,
 };
 
-const Artifacts = ({ items, data }) => {
+const Artifacts = ({ items }) => {
   const theme = useConfig();
   const Components = items.map((a, i) => {
-    return componentBuilders[a.type]({ ...a, data, theme });
+    return componentBuilders[a.type]({ ...a, theme });
   });
   return Components;
 };
