@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
 async function sendWhatsAppNotification(author, message, hash, repo, date) {
   const url = 'https://api.ultramsg.com/instance103711/messages/chat';
