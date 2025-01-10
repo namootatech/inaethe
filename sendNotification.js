@@ -105,8 +105,8 @@ import fs from 'fs';
 
 let payload;
 try {
-  const payloadData = fs.readFileSync(payloadPath, 'utf-8');
-  payload = JSON.parse(payloadData);
+  payload = process.env.EVENT_PAYLOAD;
+  console.log(process.env.EVENT_PAYLOAD);
 } catch (error) {
   console.error('Error reading or parsing payload file:', error);
   process.exit(1);
