@@ -25,7 +25,7 @@ export const EventHandlersProvider = ({ children }) => {
         const handlerParams = handlerConfig['with-params'].map((param) => {
           switch (param.type) {
             case 'event-data':
-              return getInputEventPayload(payload, event);
+              return getInputEventPayload(param.payload, event);
             case 'component-state-value':
               return getComponentStateValue(param.payload, componentState);
             case 'site-config-value':
@@ -41,7 +41,19 @@ export const EventHandlersProvider = ({ children }) => {
           updateComponentState,
           event,
         };
-        handlers[handlerId](...handlerParams, props);
+        handlers[handlerId](...handlerParams, props)
+          .then((data) => {
+            const successHandlers = handlerConfig[
+              'when-handler-succeeds-run'
+            ]?.map((h) => eventCompletionHandlers[h]);
+            successHandlers?.forEach((handle) => handle(data, props));
+          })
+          .catch((e) => {
+            const failureHandlers = handlerConfig[
+              'when-handler-fails-run'
+            ]?.map((h) => eventCompletionHandlers[h]);
+            failureHandlers?.forEach((handle) => handle(e, props));
+          });
       } catch (e) {
         console.error('** [EVENT HANDLERS] error handling event:', e);
         throw e;
@@ -50,10 +62,10 @@ export const EventHandlersProvider = ({ children }) => {
   );
 
   return (
-    <ConfigContext.Provider value={handleEvent}>
+    <EventHandlersContext.Provider value={{ handleEvent }}>
       {children}
-    </ConfigContext.Provider>
+    </EventHandlersContext.Provider>
   );
 };
 
-export const useEventHandler = () => useContext(ConfigContext);
+export const useEventHandler = () => useContext(EventHandlersContext);
