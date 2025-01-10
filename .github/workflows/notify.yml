@@ -36,10 +36,6 @@ jobs:
       # Step 4: Extract Git Commit Details
       - name: Extract Commit Details
         run: |
-          if [[ $(git log -1 --pretty=format:'%s' | grep -i 'merge') ]]; then
-            echo "Skipping merge commit notification"
-            exit 0
-          fi
           echo "GIT_AUTHOR=$(git log -1 --pretty=format:'%an')" >> $GITHUB_ENV
           echo "GIT_MESSAGE=$(git log -1 --pretty=format:'%s')" >> $GITHUB_ENV
           echo "GIT_HASH=$(git log -1 --pretty=format:'%H')" >> $GITHUB_ENV
@@ -48,7 +44,12 @@ jobs:
 
       # Step 5: Notify with Commit Details
       - name: Send WhatsApp Notification
-        run: node sendCommitNotification.js push ./payload.json
+        run: |
+          if [[ $(git log -1 --pretty=format:'%s' | grep -i 'merge') ]]; then
+             echo "Skipping merge commit notification"
+             exit 0
+          fi
+          node sendCommitNotification.js push ./payload.json
         env:
           GIT_AUTHOR: ${{ env.GIT_AUTHOR }}
           GIT_MESSAGE: ${{ env.GIT_MESSAGE }}
