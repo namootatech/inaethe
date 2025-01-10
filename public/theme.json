@@ -238,12 +238,12 @@
           "type": "FlexwindHero4",
           "title": "Empowerment in Action",
           "description": "Join us in making a difference. Every step we take brings us closer to a brighter future. Together, we're transforming lives, building communities, and leaving a lasting legacy of compassion and change.",
-          "inputs": {
+          "data": {
             "email": {
               "on-change": {
                 "handle-with": "save-to-component-state",
                 "with-params": [
-                  { "type": "plain-string", "value": "email" },
+                  { "type": "plain-string", "payload": "email" },
                   {
                     "type": "event-data",
                     "payload": {
