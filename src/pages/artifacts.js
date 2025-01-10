@@ -221,13 +221,14 @@ function Home({ theme }) {
           },
         },
       ],
+      hint: 'Buy more today',
       img: {
         src: '/images/inaethe/donations-square.jpg',
         alt: 'Hero Image',
       },
     },
     {
-      type: 'FlexwindShadeColorImage',
+      type: 'FlexwindHero4',
       title: 'A Huge Title Hero that as a huge title hero',
       description:
         "This is a very long description that explains a bit more about what's going on in this hero and often talks about the products",
@@ -247,6 +248,51 @@ function Home({ theme }) {
         src: '/images/inaethe/donations-square.jpg',
         alt: 'Hero Image',
       },
+    },
+    {
+      type: 'FlexwindFeatures1',
+      title:
+        'Join Ina Ethe: Empower Communities Through Affiliate-Driven Donations',
+      description:
+        'Ina Ethe is revolutionizing the way we support causes that matter. With our subscription-based affiliate marketing platform, you can contribute to impactful initiatives while earning rewards. Partner with us to transform donations into meaningful change for communities nationwide.',
+      features: [
+        {
+          icon: 'dollar-sign',
+          title: 'Streamlined Donation Collection',
+          description:
+            'Ina Ethe simplifies the donation process, ensuring every contribution reaches the right cause efficiently. Our platform is built to maximize transparency and trust for both donors and affiliates.',
+        },
+        {
+          icon: 'graph',
+          title: 'Performance Analytics for Affiliates',
+          description:
+            'Track your campaign performance in real-time with our advanced analytics tools. Monitor the impact of your referrals, optimize your strategies, and maximize your rewards while driving donations.',
+        },
+        {
+          icon: 'users',
+          title: 'Community Engagement Made Easy',
+          description:
+            'Engage with a passionate network of affiliates and donors who share your vision. Build partnerships, share stories of impact, and inspire others to join the movement.',
+        },
+        {
+          icon: 'sliders',
+          title: 'Customizable Subscription Tiers',
+          description:
+            'Choose from flexible subscription tiers designed to suit different needs and goals. Whether you’re an individual donor or a large organization, Ina Ethe offers solutions tailored to you.',
+        },
+        {
+          icon: 'bank-card',
+          title: 'Secure and Reliable Transactions',
+          description:
+            'With cutting-edge payment processing, Ina Ethe ensures every transaction is secure and seamless. Donors can trust that their contributions are protected and efficiently allocated.',
+        },
+        {
+          icon: 'support',
+          title: 'Dedicated Support and Resources',
+          description:
+            'Our team is here to support you every step of the way. From campaign setup to troubleshooting, Ina Ethe provides resources and assistance to help you succeed.',
+        },
+      ],
     },
   ];
   return (
