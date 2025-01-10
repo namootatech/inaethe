@@ -6,7 +6,7 @@ import {
   getSiteConfigValue,
 } from './dataMining';
 import handlers from './handlers';
-
+import eventCompletionHandlers from './eventCompletionHandlers';
 const EventHandlersContext = createContext();
 
 export const EventHandlersProvider = ({ children }) => {
