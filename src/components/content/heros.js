@@ -223,14 +223,15 @@ export const FlexwindHero4 = ({ theme, data, ...rest }) => {
   const [state, setState] = useState({});
 
   const { title, description, ctas, img } = rest;
-  const { email } = inputs;
-  const handleEmailChangeEvent = useEventHandler()(
+  const { email } = data;
+  const { handleEvent } = useEventHandler();
+  const handleEmailChangeEvent = handleEvent(
     email['on-change'],
     theme,
     state,
     setState
   );
-  const handleSubmitEvent = useEventHandler()(
+  const handleSubmitEvent = handleEvent(
     ctas[0]['on-click'],
     theme,
     state,
