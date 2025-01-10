@@ -94,7 +94,7 @@ function getGitDetails() {
 // Parse inputs passed to the script
 const eventType = process.argv[2]; // e.g., 'push', 'issues', 'pull_request'
 const payloadPath = process.argv[3]; // Path to a JSON file containing the payload
-console.log('PR', process.env.EVENT_PAYLOADp.number);
+console.log('PR', process.env.EVENT_PAYLOAD.number);
 // Ensure both arguments are provided
 if (!eventType || !payloadPath) {
   console.error('Usage: node sendNotification.js <eventType> <payloadPath>');
