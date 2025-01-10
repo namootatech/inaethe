@@ -48,7 +48,7 @@ const author = process.env.GIT_AUTHOR;
 const message = process.env.GIT_MESSAGE;
 const hash = process.env.GIT_HASH;
 const repo = process.env.GIT_REPO;
-const branch = proces.env.GIT_BRANCH;
+const branch = process.env.GIT_BRANCH;
 const date = new Date().toISOString(); // Get current timestamp
 
 // Send the notification

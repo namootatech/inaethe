@@ -2,9 +2,11 @@ name: Node.js CI
 
 on:
   push:
-    branches: ['main']
+    branches:
+      - '*' # Trigger on push to any branch
   pull_request:
-    branches: ['main']
+    branches:
+      - '*' # Trigger on pull requests to any branch
 
 jobs:
   build:
