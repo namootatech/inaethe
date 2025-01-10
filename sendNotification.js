@@ -2,11 +2,9 @@ import fetch from 'node-fetch';
 import { execSync } from 'child_process';
 
 async function sendWhatsAppNotification(eventType, payload) {
-  console.log('event Type');
-  console.log('Payload keys', Object.keys(payload));
   const url = 'https://api.ultramsg.com/instance103711/messages/chat';
   const token = 'ewnmq9tmspauzmm6';
-  const to = '+27603116777';
+  const to = '120363389265603372@g.us';
 
   // Fetch Git details
   const gitDetails = getGitDetails();
@@ -94,7 +92,6 @@ function getGitDetails() {
 // Parse inputs passed to the script
 const eventType = process.argv[2]; // e.g., 'push', 'issues', 'pull_request'
 const payloadPath = process.argv[3]; // Path to a JSON file containing the payload
-console.log('PR', process.env.EVENT_PAYLOAD.number);
 // Ensure both arguments are provided
 if (!eventType || !payloadPath) {
   console.error('Usage: node sendNotification.js <eventType> <payloadPath>');
@@ -107,7 +104,6 @@ import fs from 'fs';
 let payload;
 try {
   payload = JSON.parse(process.env.EVENT_PAYLOAD);
-  console.log(process.env.EVENT_PAYLOAD.pull_request);
 } catch (error) {
   console.error('Error reading or parsing payload file:', error);
   process.exit(1);
