@@ -1,4 +1,7 @@
+import { useEventHandler } from '@/context/EventHandlers';
 import Link from 'next/link';
+import { path } from 'ramda';
+import { useState } from 'react';
 export const FlexwindHero1 = ({ theme, ...rest }) => {
   const { title, description, ctas, img, ratings } = rest;
   return (
@@ -144,7 +147,7 @@ export const FlexwindHero2 = ({ theme, ...rest }) => {
 };
 
 export const FlexwindHero3 = ({ theme, ...rest }) => {
-  const { title, description, cta, hint } = rest;
+  const { title, description, ctas, hint } = rest;
   return (
     <section class='bg-gray-100 dark:bg-gray-900 py-32 sm:py-36 lg:py-40 overflow-hidden h-[100dvh] min-h-max flex items-center relative'>
       <div
@@ -190,10 +193,10 @@ export const FlexwindHero3 = ({ theme, ...rest }) => {
           </p>
           <div class='flex justify-center'>
             <a
-              href={cta.link}
+              href={ctas[0].link}
               class={`px-8 h-12 rounded-full flex items-center gap-x-3 bg-${theme.colors.primaryColorCode} text-white hover:bg-opacity-80`}
             >
-              {cta.text}
+              {ctas[0].text}
               <span>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -216,9 +219,24 @@ export const FlexwindHero3 = ({ theme, ...rest }) => {
   );
 };
 
-export const FlexwindHero4 = ({ theme, ...rest }) => {
-  const { title, description, ctas, img, data } = rest;
+export const FlexwindHero4 = ({ theme, data, ...rest }) => {
+  const [state, setState] = useState({});
+
+  const { title, description, ctas, img } = rest;
   const { email } = data;
+  const { handleEvent } = useEventHandler();
+  const handleEmailChangeEvent = handleEvent(
+    email['on-change'],
+    theme,
+    state,
+    setState
+  );
+  const handleSubmitEvent = handleEvent(
+    ctas[0]['on-click'],
+    theme,
+    state,
+    setState
+  );
   return (
     <section class='relative pt-32 lg:pt-36'>
       <div class='mx-auto lg:max-w-7xl w-full px-5 sm:px-10 md:px-12 lg:px-5 flex flex-col lg:flex-row gap-10 lg:gap-12'>
@@ -273,12 +291,12 @@ export const FlexwindHero4 = ({ theme, ...rest }) => {
                   name=''
                   id=''
                   placeholder='johndoe@gmail.com'
-                  onChange={email.onChange}
-                  value={email.value}
+                  onChange={handleEmailChangeEvent}
+                  value={state.email}
                   class='w-full py-3 outline-none bg-transparent'
                 />
                 <button
-                  onClick={ctas[0].onClick}
+                  onClick={handleSubmitEvent}
                   class={`flex text-white justify-center items-center w-max min-w-max sm:w-max px-6 h-12 rounded-full outline-none relative overflow-hidden border duration-300 ease-linear
                             after:absolute after:inset-x-0 after:aspect-square after:scale-0 after:opacity-70 after:origin-center after:duration-300 after:ease-linear after:rounded-full after:top-0 after:left-0 after:bg-[#172554] hover:after:opacity-100 hover:after:scale-[2.5] bg-${theme.colors.primaryColorCode} border-transparent hover:border-${theme.colors.primaryColor}-900`}
                 >

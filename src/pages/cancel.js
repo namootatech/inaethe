@@ -1,4 +1,3 @@
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from '@/components/layout';
 import { useSearchParams } from 'next/navigation';

@@ -1,7 +1,7 @@
 {
   "organisationId": "inaethe",
   "partnerName": "INA ETHE",
-  "progressColor": "#b91c1b",
+  "progressColor": "#d946ef",
   "heroHeader": "Transforming good intentions into tangible impacts.",
   "heroParagraph": "At INA ETHE, we believe in the power of generosity and financial sustainability. Join us in building a community that empowers non-profit organizations to thrive while offering individuals the opportunity to earn while making a difference. Together, let's create a brighter future.",
   "heroButton": {
@@ -40,7 +40,7 @@
     "logo": "/logo.png"
   },
   "colors": {
-    "lightBgColoCode": "red-50",
+    "lightBgColoCode": "fuchsia-50",
     "secondaryLighBgColorCode": "gray-100",
     "primaryColorCode": "fuchsia-500",
     "secondaryColorCode": "gray-700",
@@ -231,45 +231,124 @@
       ]
     },
     {
-      "id": "cause",
-      "title": "Our Cause",
+      "id": "why-us",
+      "title": "Why us",
       "artifacts": [
         {
-          "type": "hero",
-          "header": "Empowerment in Action",
-          "text": "Join us in making a difference. Every step we take brings us closer to a brighter future. Together, we're transforming lives, building communities, and leaving a lasting legacy of compassion and change.",
-          "cta": {
-            "title": "Join Us Now!",
-            "link": "/subscribe"
+          "type": "FlexwindHero4",
+          "title": "Empowerment in Action",
+          "description": "Join us in making a difference. Every step we take brings us closer to a brighter future. Together, we're transforming lives, building communities, and leaving a lasting legacy of compassion and change.",
+          "data": {
+            "email": {
+              "on-change": {
+                "handle-with": "save-to-component-state",
+                "with-params": [
+                  { "type": "plain-string", "payload": "email" },
+                  {
+                    "type": "event-data",
+                    "payload": {
+                      "type": "path",
+                      "value": ["target", "value"]
+                    }
+                  }
+                ],
+                "when-handler-succeeds-run": ["do-nothing"],
+                "when-handler-fails-run": ["notify-something-went-wrong"]
+              }
+            }
           },
-          "image": "/images/inaethe/donations.jpg"
+          "ctas": [
+            {
+              "text": "Join Us Now!",
+              "on-click": {
+                "handle-with": "save-new-newsletter-subscriber",
+                "with-params": [
+                  {
+                    "type": "component-state-value",
+                    "payload": { "type": "field-id", "value": "email" }
+                  },
+                  {
+                    "type": "site-config-value",
+                    "payload": {
+                      "type": "field-id",
+                      "value": "organisationId"
+                    }
+                  }
+                ],
+                "when-handler-succeeds-run": [
+                  "notify-you-will-hear-from-us",
+                  "clear-component-state"
+                ],
+                "when-handler-fails-run": ["notify-something-went-wrong"]
+              }
+            }
+          ],
+          "img": {
+            "src": "/images/inaethe/donations.jpg",
+            "alt": "Hero Image"
+          }
         },
-        { "type": "space-above", "size": "10" },
         {
-          "type": "full-width-text-block",
-          "title": " ",
-          "text": "Discover INA ETHE, a unique vehicle empowering anyone with a noble cause to generate income. Our platform is a versatile solution that unites non-profits and individuals, fostering a community where support and financial sustainability converge for meaningful change. Join us in this journey of resilience as we strive to make a lasting impact on lives affected by hunger, unemployment, and insufficient funding for noble causes."
+          "type": "FlexwindFeatures1",
+          "hint": "Why us",
+          "title": "Join Ina Ethe: Empower Communities Through Affiliate-Driven Donations",
+          "description": "Ina Ethe is revolutionizing the way we support causes that matter. With our subscription-based affiliate marketing platform, you can contribute to impactful initiatives while earning rewards. Partner with us to transform donations into meaningful change for communities nationwide.",
+          "features": [
+            {
+              "icon": "dollar-sign",
+              "title": "Streamlined Donation Collection",
+              "description": "Ina Ethe simplifies the donation process, ensuring every contribution reaches the right cause efficiently. Our platform is built to maximize transparency and trust for both donors and affiliates."
+            },
+            {
+              "icon": "graph",
+              "title": "Performance Analytics for Affiliates",
+              "description": "Track your campaign performance in real-time with our advanced analytics tools. Monitor the impact of your referrals, optimize your strategies, and maximize your rewards while driving donations."
+            },
+            {
+              "icon": "users",
+              "title": "Community Engagement Made Easy",
+              "description": "Engage with a passionate network of affiliates and donors who share your vision. Build partnerships, share stories of impact, and inspire others to join the movement."
+            },
+            {
+              "icon": "sliders",
+              "title": "Customizable Subscription Tiers",
+              "description": "Choose from flexible subscription tiers designed to suit different needs and goals. Whether you’re an individual donor or a large organization, Ina Ethe offers solutions tailored to you."
+            },
+            {
+              "icon": "bank-card",
+              "title": "Secure and Reliable Transactions",
+              "description": "With cutting-edge payment processing, Ina Ethe ensures every transaction is secure and seamless. Donors can trust that their contributions are protected and efficiently allocated."
+            },
+            {
+              "icon": "support",
+              "title": "Dedicated Support and Resources",
+              "description": "Our team is here to support you every step of the way. From campaign setup to troubleshooting, Ina Ethe provides resources and assistance to help you succeed."
+            }
+          ]
         },
         {
-          "type": "full-width-text-block",
-          "title": "Our Mission",
-          "text": "At INA ETHE, our mission is twofold: we empower non-profit organizations to generate crucial income for their causes, while simultaneously providing individuals with the opportunity to earn while helping these causes thrive. We believe in the power of mutual benefit, creating a platform where generosity and financial sustainability coexist."
+          "type": "PageDoneHowItWorks1",
+          "title": "Empowering Donations Through Affiliates",
+          "description": "Ina Ethe makes it easy for you to contribute to meaningful causes while participating in a sustainable affiliate marketing program. Our platform is designed to ensure that both donors and affiliates can participate seamlessly, securely, and efficiently. Here’s how it works:",
+          "steps": [
+            {
+              "title": "Sign Up and Choose a Cause",
+              "description": "Get started by signing up on the Ina Ethe platform. You can either join as an affiliate marketer to promote causes or as a donor to contribute directly. Choose the cause or campaign you want to support or promote.",
+              "icon": "FaUserPlus"
+            },
+            {
+              "title": "Donate or Refer",
+              "description": "Donors can make direct contributions to their chosen campaigns through secure payment methods. Affiliates can share their unique referral link to encourage others to donate. Each successful referral helps affiliates earn rewards while making a meaningful impact.",
+              "icon": "RiBankCardLine"
+            },
+            {
+              "title": "Track, Earn, and Engage",
+              "description": "Track your donations or affiliate earnings via the dashboard. Affiliates can monitor their referral success, and donors can see the impact of their contributions. Engage with the community to share experiences and learn more about the campaigns you’re supporting.",
+              "icon": "FaUsers"
+            }
+          ]
         },
-        {
-          "type": "full-width-text-block",
-          "title": "Our Vision",
-          "text": "Our vision at INA ETHE is to create a world where we can collectively contribute to each other's well-being. We envision a future where individuals and non-profits come together to create meaningful change, fostering a community that empowers everyone to make a difference."
-        },
-        {
-          "type": "full-width-text-block",
-          "title": "Our Values",
-          "text": "At INA ETHE, our values serve as our guiding light. They include 'compassion', 'transparency,' 'collaboration,' and these principles underpin everything we do. We take pride in our commitment to complete transparency in our operations, ensuring that every contribution makes a meaningful impact."
-        },
-        {
-          "type": "full-width-text-block",
-          "title": "Our Impact",
-          "text": "Your subscription directly translates into meals for those in need. We offer complete transparency in our operations, and we invite you to join a passionate community of individuals dedicated to ending hunger in Africa."
-        }
+        { "type": "space-above", "size": "10" }
       ]
     }
   ],

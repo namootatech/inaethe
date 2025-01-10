@@ -10,7 +10,8 @@ import { useRouter } from 'next/router';
 import { CookiesProvider } from 'react-cookie';
 import { ConfigProvider } from '@/context/ConfigContext';
 import ProgressBarContainer from '@/components/ProgresssBarContainer';
-
+import { EventHandlersProvider } from '@/context/EventHandlers';
+import { ToastContainer, toast } from 'react-toastify';
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
   useEffect(() => {
@@ -42,12 +43,15 @@ export default function MyApp({ Component, pageProps }) {
         }}
       ></script>
       <ConfigProvider>
-        <Provider store={store}>
-          <CookiesProvider defaultSetOptions={{ path: '/' }}>
-            <ProgressBarContainer />
-            <Component {...pageProps} />
-          </CookiesProvider>
-        </Provider>
+        <EventHandlersProvider>
+          <Provider store={store}>
+            <CookiesProvider defaultSetOptions={{ path: '/' }}>
+              <ProgressBarContainer />
+              <ToastContainer />
+              <Component {...pageProps} />
+            </CookiesProvider>
+          </Provider>
+        </EventHandlersProvider>
       </ConfigProvider>
     </>
   );

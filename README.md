@@ -10,7 +10,7 @@ The **INA ETHE Project** was conceived with the noble intention of assisting non
 
 However, following some funding challenges and the subsequent withdrawal of key stakeholders, **Namoota Technologies** recognized the inherent potential of this initiative. Transitioning the project into their own hands, they have rebranded it as **INA ETHE**, a term that beautifully translates to "Give and Get" in Xhosa. This strategic transformation has broadened the platform's vision, evolving it into a versatile resource designed not only to support NPOs in their missions but also to include features like configurable website building and foster open-source innovation.
 
-Through this evolution, INA ETHEaspires to create a more significant positive impact for NPOs and their supporters, fostering a collaborative environment that champions both philanthropy and technological advancement.
+Through this evolution, INA ETHE aspires to create a more significant positive impact for NPOs and their supporters, fostering a collaborative environment that champions both philanthropy and technological advancement.
 
 ---
 
