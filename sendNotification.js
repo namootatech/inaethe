@@ -3,7 +3,7 @@ import { execSync } from 'child_process';
 
 async function sendWhatsAppNotification(eventType, payload) {
   console.log('event Type');
-  console.log('Payload', payload);
+  console.log('Payload', Object.keys(payload));
   const url = 'https://api.ultramsg.com/instance103711/messages/chat';
   const token = 'ewnmq9tmspauzmm6';
   const to = '+27603116777';
