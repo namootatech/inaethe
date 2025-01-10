@@ -1,20 +1,18 @@
 import fetch from 'node-fetch';
+import { execSync } from 'child_process';
 
-async function sendWhatsAppNotification(author, message, hash, repo, date) {
+async function sendWhatsAppNotification(eventType, payload) {
+  console.log('event Type');
+  console.log('Payload', payload);
   const url = 'https://api.ultramsg.com/instance103711/messages/chat';
   const token = 'ewnmq9tmspauzmm6';
-  const to = '120363389265603372@g.us';
+  const to = '+27603116777';
 
-  const body = `
-📢 *New Commit Notification*
-👤 *Author*: ${author}
-📝 *Message*: ${message}
-🔗 *Commit Hash*: ${hash}
-🌐 *Repository*: ${repo}
-⏰ *Date*: ${date}
+  // Fetch Git details
+  const gitDetails = getGitDetails();
 
-🔗 View Commit: https://github.com/${repo}/commit/${hash}
-  `;
+  // Generate a dynamic message based on the event type and Git details
+  const body = generateMessage(eventType, payload, gitDetails);
 
   const params = new URLSearchParams();
   params.append('token', token);
@@ -36,12 +34,85 @@ async function sendWhatsAppNotification(author, message, hash, repo, date) {
   }
 }
 
-// Retrieve commit details from the environment variables
-const author = process.env.GIT_AUTHOR;
-const message = process.env.GIT_MESSAGE;
-const hash = process.env.GIT_HASH;
-const repo = process.env.GITHUB_REPOSITORY;
-const date = new Date().toISOString(); // Get current timestamp
+function generateMessage(eventType, payload, gitDetails) {
+  switch (eventType) {
+    case 'push':
+      return `
+📢 *Push Event*
+👤 *Author*: ${payload.pusher.name || gitDetails.author}
+📝 *Message*: ${payload.head_commit.message || gitDetails.message}
+🔗 *Commit*: ${payload.head_commit.url || gitDetails.hash}
+🌐 *Repository*: ${payload.repository.full_name}
+      `;
 
-// Send the notification
-sendWhatsAppNotification(author, message, hash, repo, date);
+    case 'issues':
+      return `
+📢 *Issue Event*: ${payload.action}
+👤 *User*: ${payload.issue.user.login}
+📝 *Title*: ${payload.issue.title}
+🔗 *URL*: ${payload.issue.html_url}
+🌐 *Repository*: ${payload.repository.full_name}
+      `;
+
+    case 'pull_request':
+      return `
+📢 *Pull Request Event*: ${payload.action}
+👤 *User*: ${payload.pull_request.user.login}
+📝 *Title*: ${payload.pull_request.title}
+🔗 *URL*: ${payload.pull_request.html_url}
+🌐 *Repository*: ${payload.repository.full_name}
+      `;
+
+    default:
+      return `
+📢 *${eventType} Event*
+Event details: ${JSON.stringify(payload, null, 2)}
+🔗 *Git Commit*: ${gitDetails.hash}
+👤 *Author*: ${gitDetails.author}
+📝 *Message*: ${gitDetails.message}
+      `;
+  }
+}
+
+function getGitDetails() {
+  try {
+    const author = execSync("git log -1 --pretty=format:'%an'")
+      .toString()
+      .trim();
+    const message = execSync("git log -1 --pretty=format:'%s'")
+      .toString()
+      .trim();
+    const hash = execSync("git log -1 --pretty=format:'%H'").toString().trim();
+    return { author, message, hash };
+  } catch (error) {
+    console.error('Error fetching Git details:', error);
+    return { author: 'Unknown', message: 'Unknown', hash: 'Unknown' };
+  }
+}
+
+// Parse inputs passed to the script
+const eventType = process.argv[2]; // e.g., 'push', 'issues', 'pull_request'
+const payloadPath = process.argv[3]; // Path to a JSON file containing the payload
+
+// Ensure both arguments are provided
+if (!eventType || !payloadPath) {
+  console.error('Usage: node sendNotification.js <eventType> <payloadPath>');
+  process.exit(1);
+}
+
+// Load the payload from the provided path
+import fs from 'fs';
+
+let payload;
+try {
+  const payloadData = fs.readFileSync(payloadPath, 'utf-8');
+  payload = JSON.parse(payloadData);
+} catch (error) {
+  console.error('Error reading or parsing payload file:', error);
+  process.exit(1);
+}
+
+// Call the notification function
+sendWhatsAppNotification(eventType, payload).catch((error) =>
+  console.error('Error executing notification:', error)
+);
