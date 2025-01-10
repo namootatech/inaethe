@@ -44,12 +44,7 @@ jobs:
 
       # Step 5: Notify with Commit Details
       - name: Send WhatsApp Notification
-        run: |
-          if [[ $(git log -1 --pretty=format:'%s' | grep -i 'merge') ]]; then
-             echo "Skipping merge commit notification"
-             exit 0
-          fi
-          node sendCommitNotification.js push ./payload.json
+        run: node sendCommitNotification.js push ./payload.json
         env:
           GIT_AUTHOR: ${{ env.GIT_AUTHOR }}
           GIT_MESSAGE: ${{ env.GIT_MESSAGE }}
