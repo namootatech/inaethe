@@ -1,27 +1,51 @@
-# org-notifications/.github/workflows/notify.yml
-name: Notify on Events
+name: Node.js CI
 
 on:
-  workflow_call:
-    inputs:
-      event:
-        required: true
-        type: string
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
 
 jobs:
-  notify:
+  build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      # Step 1: Check out the code
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      # Step 2: Set up Node.js
+      - name: Set Up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
-          node-version: '21'
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
 
-      - name: Install dependencies
+      # Step 3: Install dependencies
+      - name: Install Dependencies
         run: npm install
 
-      - name: Send Notification
-        run: node sendNotification.js ${{ inputs.event }}
+      # Step 4: Extract Git Commit Details
+      - name: Extract Commit Details
+        run: |
+          echo "GIT_AUTHOR=$(git log -1 --pretty=format:'%an')" >> $GITHUB_ENV
+          echo "GIT_MESSAGE=$(git log -1 --pretty=format:'%s')" >> $GITHUB_ENV
+          echo "GIT_HASH=$(git log -1 --pretty=format:'%H')" >> $GITHUB_ENV
+          echo "GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_ENV
+          echo "GIT_REPO=$(basename `git rev-parse --show-toplevel`)" >> $GITHUB_ENV
+
+      # Step 5: Notify with Commit Details
+      - name: Send WhatsApp Notification
+        run: node sendCommitNotification.js push ./payload.json
+        env:
+          GIT_AUTHOR: ${{ env.GIT_AUTHOR }}
+          GIT_MESSAGE: ${{ env.GIT_MESSAGE }}
+          GIT_HASH: ${{ env.GIT_HASH }}
+          GIT_BRANCH: ${{ env.GIT_BRANCH }}
+          GIT_REPO: ${{ env.GIT_REPO }}
