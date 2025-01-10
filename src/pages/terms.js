@@ -8,7 +8,7 @@ const TermsAndConditions = () => {
         <div className='max-w-2xl mx-auto p-4 bg-white rounded-lg shadow-md'>
           <h1 className='text-2xl font-semibold mb-4'>Terms and Conditions</h1>
           <p className='mb-4'>
-            These terms and conditions ("Terms") govern your use of the Ina Ethe
+            These terms and conditions ("Terms") govern your use of the INA ETHE
             service. By accessing or using the service, you agree to be bound by
             these Terms. Please read them carefully.
           </p>

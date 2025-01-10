@@ -35,7 +35,7 @@ const SubscriptionForm = ({ user, theme }) => {
     agreeToTerms: false,
     subscriptionTier: 'Nourisher',
     amount: 50,
-    partner: { name: theme?.partnerName, slug: theme?.themeName },
+    partner: { name: theme?.partnerName, slug: theme?.organisationId },
     parent: parent,
   });
 
@@ -138,7 +138,7 @@ const SubscriptionForm = ({ user, theme }) => {
     if (theme) {
       setFormData({
         ...formData,
-        partner: { name: theme?.partnerName, slug: theme?.themeName },
+        partner: { name: theme?.partnerName, slug: theme?.organisationId },
       });
     }
   }, [theme]);
@@ -147,10 +147,10 @@ const SubscriptionForm = ({ user, theme }) => {
   return (
     <div className='md:w-9/12 p-8 mx-auto bg-white rounded-lg shadow-md'>
       <h1 className='text-2xl font-semibold mb-4 text-4xl'>
-        Join Ina Ethe - Be a Hope Builder!
+        Join INA ETHE - Be a Hope Builder!
       </h1>
       <p className='mb-4 mt-2 text-2xl'>
-        Subscribe to Ina Ethe, and join us in our mission to end hunger in
+        Subscribe to INA ETHE, and join us in our mission to end hunger in
         Africa. Choose a subscription tier and start making a real difference
         today.
       </p>
