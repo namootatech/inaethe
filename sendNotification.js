@@ -3,7 +3,7 @@ import { execSync } from 'child_process';
 
 async function sendWhatsAppNotification(eventType, payload) {
   console.log('event Type');
-  console.log('Payload', Object.keys(payload));
+  console.log('Payload keys', Object.keys(payload));
   const url = 'https://api.ultramsg.com/instance103711/messages/chat';
   const token = 'ewnmq9tmspauzmm6';
   const to = '+27603116777';
@@ -106,7 +106,7 @@ import fs from 'fs';
 
 let payload;
 try {
-  payload = process.env.EVENT_PAYLOAD;
+  payload = JSON.parse(process.env.EVENT_PAYLOAD);
   console.log(process.env.EVENT_PAYLOAD.pull_request);
 } catch (error) {
   console.error('Error reading or parsing payload file:', error);
