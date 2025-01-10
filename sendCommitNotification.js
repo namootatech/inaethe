@@ -10,17 +10,18 @@ async function sendWhatsAppNotification(
 ) {
   const url = 'https://api.ultramsg.com/instance103711/messages/chat';
   const token = 'ewnmq9tmspauzmm6';
-  const to = '+27603116777'; //'120363389265603372@g.us';
+  const to = '120363389265603372@g.us';
 
   const body = `
-📢 *New Commit Notification*
-👤 *Author*: ${author}
+📢 *Make way for a new commit 😎🙆‍♀️ *
+😤 *Author*: ${author}
 📝 *Message*: ${message}
-🔗 *Commit Hash*: ${hash}
+🤝 *Commit Hash*: ${hash}
 🌐 *Repository*: ${repo}
+👊 *Branch*: ${branch}
 ⏰ *Date*: ${date}
 
-🔗 View Commit: https://github.com/namootatech/${repo}/commit/${hash}
+🔗 Inspect 👀: https://github.com/namootatech/${repo}/commit/${hash}
   `;
 
   const params = new URLSearchParams();
