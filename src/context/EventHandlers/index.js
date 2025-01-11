@@ -6,7 +6,7 @@ import {
   getSiteConfigValue,
 } from './dataMining';
 import handlers from './handlers';
-
+import eventCompletionHandlers from './eventCompletionHandlers';
 const EventHandlersContext = createContext();
 
 export const EventHandlersProvider = ({ children }) => {
@@ -45,17 +45,26 @@ export const EventHandlersProvider = ({ children }) => {
           .then((data) => {
             const successHandlers = handlerConfig[
               'when-handler-succeeds-run'
-            ]?.map((h) => eventCompletionHandlers[h]);
-            successHandlers?.forEach((handle) => handle(data, props));
+            ]?.map((h) => [h, eventCompletionHandlers[h]]);
+            successHandlers?.forEach((handlePair) => {
+              const [type, handle] = handlePair;
+              console.log('** [EVENT SUCCESS HANDLERS] handling with: ', type);
+              return handle(handlerParams, data, props);
+            });
           })
           .catch((e) => {
+            console.log('** [EVENT HANDLERS ERROR] error handling event:', e);
             const failureHandlers = handlerConfig[
               'when-handler-fails-run'
-            ]?.map((h) => eventCompletionHandlers[h]);
-            failureHandlers?.forEach((handle) => handle(e, props));
+            ]?.map((h) => [h, eventCompletionHandlers[h]]);
+            failureHandlers?.forEach((handlePair) => {
+              const [type, handle] = handlePair;
+              console.log('** [EVENT FAIL HANDLERS] handling with: ', type);
+              return handle(handlerParams, e, props);
+            });
           });
       } catch (e) {
-        console.error('** [EVENT HANDLERS] error handling event:', e);
+        console.error('** [EVENT HANDLERS RROR] error handling event:', e);
         throw e;
       }
     }

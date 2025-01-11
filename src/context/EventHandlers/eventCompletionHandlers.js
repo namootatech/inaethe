@@ -1,22 +1,28 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
-const saveNewsLetterSubscriber = async (email, npoId) => {
-  return axios.post('/api/save-news-letter-subscriber', {
-    email,
-    organisationId: npoId,
-  });
+const notiftySomethingWentWrong = async (handlerParams, response, config) => {
+  return toast.error(
+    `Something went wrong , please try again',
+    ${response.response.data.message}`
+  );
 };
 
-const saveToComponentState = async (key, value, props) => {
-  const { updateComponentState } = props;
+const notifyYouWillHearFromUs = async (handlerParams, response, config) => {
+  return toast.info('Success!, You will hear from us soon.');
+};
+
+const clearComponentState = async (handlerParams, response, config) => {
+  const [key, value] = handlerParams;
+  const { updateComponentState } = config;
   return updateComponentState({ [key]: value });
 };
 
 const handlers = {
-  'notify-something-went-wrong': saveNewsLetterSubscriber,
-  'clear-component-state': saveToComponentState,
-  "notify-you-will-hear-from-us": ()=>{}
-  "do-nothing": ()=>{}
+  'notify-something-went-wrong': notiftySomethingWentWrong,
+  'clear-component-state': clearComponentState,
+  'notify-you-will-hear-from-us': notifyYouWillHearFromUs,
+  'do-nothing': () => {},
 };
 
 export default handlers;
