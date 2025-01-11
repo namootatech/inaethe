@@ -1,6 +1,4 @@
 import clientPromise from '@/util/mongo';
-import { ObjectId } from 'mongodb';
-const { App } = require('@slack/bolt');
 
 const isDevEnvironment = process.env.NODE_ENV === 'development';
 
@@ -17,9 +15,17 @@ export default async function handler(req, res) {
 
       const user = req.body;
       const newUser = { ...user, createdAt: new Date() };
-      console.log('Request', req.body);
-      console.log('newUser', newUser);
+
       if (user.email) {
+        const existingUser = await collection.findOne({ email: user.email });
+        if (!existingUser) {
+          await collection.insertOne(newUser);
+          res.status(200).json({ status: 'success', message: 'Subscribed!' });
+        } else {
+          res
+            .status(400)
+            .json({ status: 'error', message: 'Email already exists' });
+        }
       }
     } catch (e) {
       console.log(

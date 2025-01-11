@@ -1,3 +1,5 @@
+'use client';
+
 import { useEventHandler } from '@/context/EventHandlers';
 import Link from 'next/link';
 import { path } from 'ramda';
@@ -224,7 +226,11 @@ export const FlexwindHero4 = ({ theme, data, ...rest }) => {
 
   const { title, description, ctas, img } = rest;
   const { email } = data;
-  const { handleEvent } = useEventHandler();
+  const { handleEvent } = useEventHandler
+    ? useEventHandler()
+    : {
+        handleEvent: () => {},
+      };
   const handleEmailChangeEvent = handleEvent(
     email['on-change'],
     theme,

@@ -1,17 +1,21 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-const notiftySomethingWentWrong = async (key, value, props) => {
-  return toast.error('Something went wrong , please try again');
+const notiftySomethingWentWrong = async (handlerParams, response, config) => {
+  return toast.error(
+    `Something went wrong , please try again',
+    ${response.response.data.message}`
+  );
 };
 
-const notifyYouWillHearFromUs = async (key, value, props) => {
+const notifyYouWillHearFromUs = async (handlerParams, response, config) => {
   return toast.info('Success!, You will hear from us soon.');
 };
 
-const clearComponentState = async (key, value, props) => {
-  const { updateComponentState } = props;
-  return updateComponentState({});
+const clearComponentState = async (handlerParams, response, config) => {
+  const [key, value] = handlerParams;
+  const { updateComponentState } = config;
+  return updateComponentState({ [key]: value });
 };
 
 const handlers = {
