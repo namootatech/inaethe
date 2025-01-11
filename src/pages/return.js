@@ -97,7 +97,6 @@ function ReturnPage() {
 
   return (
     <Layout>
-      <ToastContainer />
       {userData.firstPaymentDone === 'false' && (
         <RenderPageComponents
           items={noFirstPaymentConfig.components}

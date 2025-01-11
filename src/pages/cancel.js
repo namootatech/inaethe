@@ -87,7 +87,6 @@ function ReturnPage() {
 
   return (
     <Layout>
-      <ToastContainer />
       <RenderPageComponents items={config?.components} data={payfastData} />
     </Layout>
   );
