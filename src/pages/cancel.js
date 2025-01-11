@@ -20,18 +20,6 @@ const levelPrices = {
   SustainabilityChampion: 5000,
   GlobalImpactVisionary: 10000,
 };
-<div
-  className='absolute inset-0'
-  style={{
-    backgroundImage: `url('/${rest.image}')`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    zIndex: -1,
-  }}
-></div>;
-<div
-  className={`bg-[url('/images/${theme.themeName}/${props.image}')] bg-cover h-full `}
-/>;
 const WEBSITE_URL = process.env.NEXT_PUBLIC_WEBSITE_URL;
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const MERCHANT_ID = process.env.NEXT_PUBLIC_MERCHANT_ID;
