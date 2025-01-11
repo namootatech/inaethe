@@ -1,26 +1,8 @@
-const { spawn } = require('child_process');
+const { exec } = require('child_process');
+const fs = require('fs');
 const path = require('path');
 
-const getScript = (url) => `
-#!/bin/bash
-
-# Get the URL from the argument
-URL=${url}
-
-# Log the URL or process it
-echo "Received URL: $URL"
-
-# Example: Use curl to fetch the URL's content (or any other processing)
-curl -s "$URL" > ./fetched_content.txt
-
-pwd
-
-echo "URL content saved to /tmp/fetched_content.txt"
-`;
-
 exports.handler = async (event) => {
-  console.log('** [FUNCTIONS] handling deploy function **');
-
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
@@ -29,65 +11,76 @@ exports.handler = async (event) => {
   }
 
   try {
-    // Parse the incoming URL from the request body
-    const { url } = JSON.parse(event.body);
-    console.log(`** [FUNCTIONS] deploying new site with config url ${url} **`);
+    // Parse request body
+    const { orgName, config, customDomain } = JSON.parse(event.body);
 
-    if (!url) {
-      console.log(
-        `** [FUNCTIONS] Error no config url provided in request body **`
-      );
+    if (!orgName || !config || !customDomain) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ error: 'Missing URL in request body' }),
+        body: JSON.stringify({ error: 'Missing required fields' }),
       };
     }
 
-    console.log(
-      `** [FUNCTIONS] Executing bash script with config url: ${url}.... **`
+    const configFileName = `${orgName}.json`;
+    const repoPath = '/tmp/inaethe-repo'; // Temporary clone directory
+    const configFilePath = path.join(repoPath, 'public/themes', configFileName);
+
+    // Step 1: Clone the repository
+    console.log('Cloning repository...');
+    await executeCommand(
+      `git clone https://github.com/your-org/inaethe.git ${repoPath}`
     );
 
-    // Path to your bash script
-    const scriptPath = path.resolve(__dirname, './scripts/deploy.sh');
+    // Step 2: Write the config file to the public/themes folder
+    console.log(`Writing config file: ${configFileName}`);
+    fs.writeFileSync(configFilePath, JSON.stringify(config, null, 2));
 
-    // Start the script process
-    const process = spawn('bash', ['-c', getScript(url)]);
+    // Step 3: Commit and push the new config file
+    console.log('Committing and pushing changes...');
+    await executeCommand(
+      `
+      cd ${repoPath} &&
+      git add public/themes/${configFileName} &&
+      git commit -m "Add config for ${orgName}" &&
+      git push origin main
+    `
+    );
 
-    // Log output and errors incrementally
-    let output = '';
-    process.stdout.on('data', (data) => {
-      const message = data.toString();
-      console.log(`** [FUNCTIONS][stdout]: ${message}`);
-      output += message;
-    });
+    // Optional: Step 4: Trigger GitHub Actions or Netlify CLI to deploy a sub-site
+    console.log(`Deploying sub-site for ${orgName}...`);
+    await executeCommand(
+      `
+      netlify sites:create --name ${orgName} --custom-domain ${customDomain} &&
+      netlify deploy --prod --dir=${repoPath}/out
+    `
+    );
 
-    process.stderr.on('data', (data) => {
-      const error = data.toString();
-      console.error(`** [FUNCTIONS][stderr]: ${error}`);
-    });
-
-    // Wait for the process to complete
-    const result = await new Promise((resolve, reject) => {
-      process.on('close', (code) => {
-        if (code === 0) {
-          resolve(output.trim());
-        } else {
-          reject(`Process exited with code ${code}`);
-        }
-      });
-    });
-
-    console.log(`** [FUNCTIONS] Done Deploy. Success. ${url} **`);
+    console.log('Sub-site deployed successfully!');
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: 'Script executed successfully', result }),
+      body: JSON.stringify({
+        message: `Configuration added and sub-site deployed for ${orgName}.`,
+      }),
     };
   } catch (error) {
-    console.error(`** [FUNCTIONS] Error: ${error.message} **`);
+    console.error('Error:', error.message);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: error.message }),
     };
   }
+};
+
+// Helper function to execute shell commands
+const executeCommand = (cmd) => {
+  return new Promise((resolve, reject) => {
+    exec(cmd, (error, stdout, stderr) => {
+      if (error) {
+        reject(stderr || error.message);
+      } else {
+        resolve(stdout.trim());
+      }
+    });
+  });
 };
