@@ -1,4 +1,4 @@
-import { Inter } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 import RenderPageComponents from '@/components/content/generator';
 import Layout from '@/components/layout';
 import {
