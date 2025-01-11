@@ -52,7 +52,7 @@
     {
       "id": "homepage",
       "title": "Home",
-      "artifacts": [
+      "components": [
         {
           "type": "hero",
           "header": "Transforming good intentions into tangible impacts.",
@@ -143,7 +143,7 @@
     {
       "id": "about",
       "title": "About",
-      "artifacts": [
+      "components": [
         {
           "type": "article",
           "elements": [
@@ -217,7 +217,7 @@
     {
       "id": "cause",
       "title": "Our Cause",
-      "artifacts": [
+      "components": [
         {
           "type": "hero",
           "header": "Empowerment in Action",
@@ -261,7 +261,7 @@
     {
       "id": "subscribe-return-without-first-payment-done",
       "title": "Subscribe",
-      "artifacts": [
+      "components": [
         { "type": "space-above", "size": "10" },
         {
           "type": "center-width-text-block",
@@ -295,7 +295,7 @@
     {
       "id": "subscribe-return-with-first-payment-done",
       "title": "Subscribe",
-      "artifacts": [
+      "components": [
         { "type": "space-above", "size": "10" },
         { "type": "checkbox-center" },
         {
@@ -324,7 +324,7 @@
     {
       "id": "cancelled-payment",
       "title": "Payment Unsuccessful",
-      "artifacts": [
+      "components": [
         { "type": "space-above", "size": "10" },
         { "type": "cross-center" },
         {

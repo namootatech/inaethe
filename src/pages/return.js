@@ -8,7 +8,9 @@ import { postToURL } from '@/components/payfast/payfast';
 import { v4 as uuidv4 } from 'uuid';
 import { keys } from 'ramda';
 import moment from 'moment';
-import Artifacts, { ArtifactsWithData } from '@/components/content/generator';
+import RenderPageComponents, {
+  RenderPageComponents,
+} from '@/components/content/generator';
 
 const levelPrices = {
   Nourisher: 50,
@@ -97,14 +99,14 @@ function ReturnPage({ theme }) {
     <Layout>
       <ToastContainer />
       {userData.firstPaymentDone === 'false' && (
-        <ArtifactsWithData
-          items={noFirstPaymentConfig.artifacts}
+        <RenderPageComponents
+          items={noFirstPaymentConfig.components}
           data={payfastData}
         />
       )}
       {/* button for the user to login to their dashboard */}
       {userData.firstPaymentDone === 'true' && (
-        <Artifacts items={firstPaymentDoneConfig.artifacts} />
+        <RenderPageComponents items={firstPaymentDoneConfig.components} />
       )}
     </Layout>
   );

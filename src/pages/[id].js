@@ -1,6 +1,6 @@
 import Layout from '@/components/layout';
 import { connect } from 'react-redux';
-import Artifacts from '@/components/content/generator';
+import RenderPageComponents from '@/components/content/generator';
 import { useConfig } from '@/context/ConfigContext';
 import { useEffect, useState } from 'react';
 
@@ -78,7 +78,7 @@ function Page(props) {
   return (
     <Layout>
       <div className='container md:mt-4 md:px-16 px-4'>
-        {page && <Artifacts items={page?.artifacts} />}
+        {page && <RenderPageComponents items={page?.components} />}
       </div>
     </Layout>
   );

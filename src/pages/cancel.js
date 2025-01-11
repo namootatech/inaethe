@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { keys } from 'ramda';
 import moment from 'moment';
-import { ArtifactsWithData } from '@/components/content/generator';
+import { RenderPageComponents } from '@/components/content/generator';
 
 const levelPrices = {
   Nourisher: 50,
@@ -99,7 +99,7 @@ function ReturnPage({ theme }) {
   return (
     <Layout>
       <ToastContainer />
-      <ArtifactsWithData items={config?.artifacts} data={payfastData} />
+      <RenderPageComponents items={config?.components} data={payfastData} />
     </Layout>
   );
 }
