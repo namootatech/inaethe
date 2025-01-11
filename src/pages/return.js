@@ -8,9 +8,8 @@ import { postToURL } from '@/components/payfast/payfast';
 import { v4 as uuidv4 } from 'uuid';
 import { keys } from 'ramda';
 import moment from 'moment';
-import RenderPageComponents, {
-  RenderPageComponents,
-} from '@/components/content/generator';
+import RenderPageComponents from '@/components/content/generator';
+import { useConfig } from '@/context/ConfigContext';
 
 const levelPrices = {
   Nourisher: 50,
@@ -31,8 +30,9 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const MERCHANT_ID = process.env.NEXT_PUBLIC_MERCHANT_ID;
 const MERCHANT_KEY = process.env.NEXT_PUBLIC_MERCHANT_KEY;
 
-function ReturnPage({ theme }) {
+function ReturnPage() {
   const params = useSearchParams();
+  const theme = useConfig();
 
   const userData = {
     partner: { name: theme?.partnerName, slug: theme?.organisationId },
