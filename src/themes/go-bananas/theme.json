@@ -47,7 +47,7 @@
     {
       "id": "homepage",
       "title": "Home",
-      "artifacts": [
+      "components": [
         {
           "type": "hero",
           "header": "Banana Bliss Worldwide",
@@ -139,7 +139,7 @@
     {
       "id": "about",
       "title": "About",
-      "artifacts": [
+      "components": [
         {
           "type": "full-width-text-block",
           "title": "Celebrating Bananas Worldwide",
@@ -180,7 +180,7 @@
     {
       "id": "cause",
       "title": "Our Banana Cause",
-      "artifacts": [
+      "components": [
         {
           "type": "full-width-text-block",
           "title": "Spreading Joy with Bananas",
@@ -216,7 +216,7 @@
     {
       "id": "services",
       "title": "Services",
-      "artifacts": [
+      "components": [
         {
           "type": "spa-block",
           "elements": [
@@ -273,7 +273,7 @@
     {
       "id": "subscribe",
       "title": "Subscribe",
-      "artifacts": [
+      "components": [
         {
           "type": "full-width-text-block",
           "title": "Subscribe to Go Bananas",
@@ -294,7 +294,7 @@
     {
       "id": "subscribe-return-without-first-payment-done",
       "title": "Subscribe",
-      "artifacts": [
+      "components": [
         { "type": "space-above", "size": "10" },
         {
           "type": "full-width-text-block",
@@ -322,7 +322,7 @@
     {
       "id": "subscribe-return-with-first-payment-done",
       "title": "Subscribe",
-      "artifacts": [
+      "components": [
         { "type": "space-above", "size": "10" },
         {
           "type": "full-width-text-block",
@@ -349,7 +349,7 @@
     {
       "id": "subscribe-return-with-first-payment-failed",
       "title": "Subscribe",
-      "artifacts": [
+      "components": [
         {
           "type": "full-width-text-block",
           "title": "Subscribe to Go Bananas",

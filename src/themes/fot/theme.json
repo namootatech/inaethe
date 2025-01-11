@@ -47,7 +47,7 @@
     {
       "id": "homepage",
       "title": "Home",
-      "artifacts": [
+      "components": [
         {
           "type": "hero",
           "header": "Feeding Hope in Africa",
@@ -139,7 +139,7 @@
     {
       "id": "about",
       "title": "About",
-      "artifacts": [
+      "components": [
         {
           "type": "full-width-text-block",
           "title": "Feeding Hope in Africa",
@@ -180,7 +180,7 @@
     {
       "id": "cause",
       "title": "Our Cause",
-      "artifacts": [
+      "components": [
         {
           "type": "full-width-text-block",
           "title": "Ending Hunger in Africa ",
