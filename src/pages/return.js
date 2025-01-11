@@ -33,7 +33,7 @@ function ReturnPage({ theme }) {
   const params = useSearchParams();
 
   const userData = {
-    partner: { name: theme?.partnerName, slug: theme?.themeName },
+    partner: { name: theme?.partnerName, slug: theme?.organisationId },
   };
 
   for (const [key, value] of params.entries()) {
@@ -64,8 +64,8 @@ function ReturnPage({ theme }) {
     email_address: userData.email,
     m_payment_id: paymentId,
     amount: levelPrices[userData.subscriptionTier],
-    item_name: `Ina Ethe Subscription`,
-    item_description: `Ina Ethe Subscription for ${userData.firstName} ${userData.lastName} for the ${userData.subscriptionTier} package.`,
+    item_name: `INA ETHE Subscription`,
+    item_description: `INA ETHE Subscription for ${userData.firstName} ${userData.lastName} for the ${userData.subscriptionTier} package.`,
     subscription_type: 1,
     billing_date: moment().format('YYYY-MM-DD'),
     recurring_amount: levelPrices[userData.subscriptionTier],

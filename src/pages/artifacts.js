@@ -16,7 +16,7 @@ function Home({ theme }) {
     {
       type: 'hero',
       header: 'Transforming good intentions into tangible impacts.',
-      text: "At Ina Ethe, we believe in the power of generosity and financial sustainability. Join us in building a community that empowers non-profit organizations to thrive while offering individuals the opportunity to earn while making a difference. Together, let's create a brighter future.",
+      text: "At INA ETHE, we believe in the power of generosity and financial sustainability. Join us in building a community that empowers non-profit organizations to thrive while offering individuals the opportunity to earn while making a difference. Together, let's create a brighter future.",
       cta: {
         title: 'Make an Impact Today!',
         link: '/subscribe',
@@ -39,11 +39,11 @@ function Home({ theme }) {
           content: [
             {
               title: 'Our Mission',
-              text: 'At Ina Ethe, our mission is twofold: we empower non-profit organizations to generate crucial income for their causes, while simultaneously providing individuals with the opportunity to earn while helping these causes thrive. We believe in the power of mutual benefit, creating a platform where generosity and financial sustainability coexist.',
+              text: 'At INA ETHE, our mission is twofold: we empower non-profit organizations to generate crucial income for their causes, while simultaneously providing individuals with the opportunity to earn while helping these causes thrive. We believe in the power of mutual benefit, creating a platform where generosity and financial sustainability coexist.',
             },
             {
               title: '',
-              text: 'Join us in building a community that transforms good intentions into tangible impacts, ensuring a brighter future for both individuals and the non-profits they support. Ina Ethe make a difference today!',
+              text: 'Join us in building a community that transforms good intentions into tangible impacts, ensuring a brighter future for both individuals and the non-profits they support. INA ETHE make a difference today!',
             },
           ],
         },
@@ -70,7 +70,7 @@ function Home({ theme }) {
       ],
       bg: 'bg-red-700',
       fg: 'text-white',
-      title: 'Why Ina Ethe',
+      title: 'Why INA ETHE',
     },
     {
       type: 'article',
@@ -84,11 +84,11 @@ function Home({ theme }) {
           content: [
             {
               title: 'Our Story',
-              text: "Ina Ethe emerged in response to the African hunger crisis post-Covid. Starting with 'Food-On-Every-Table,' we sought aid from companies but faced silence. Adapting, we realized the need to address both hunger and South Africa's 40% unemployment.",
+              text: "INA ETHE emerged in response to the African hunger crisis post-Covid. Starting with 'Food-On-Every-Table,' we sought aid from companies but faced silence. Adapting, we realized the need to address both hunger and South Africa's 40% unemployment.",
             },
             {
               title: 'Empowering Impactful Causes',
-              text: 'Ina Ethe is a unique platform uniting non-profits and individuals, offering a means for anyone with a worthy cause to generate income. Our resilient journey aims to make a lasting impact on hunger, unemployment, and funding challenges.',
+              text: 'INA ETHE is a unique platform uniting non-profits and individuals, offering a means for anyone with a worthy cause to generate income. Our resilient journey aims to make a lasting impact on hunger, unemployment, and funding challenges.',
             },
           ],
         },
@@ -103,7 +103,7 @@ function Home({ theme }) {
       title: 'Join Us',
       image: '/images/inaethe/donations-square.jpg',
       description:
-        'Ina Ethe is a community-driven organization. Join us today to make a difference in the lives of those in need.',
+        'INA ETHE is a community-driven organization. Join us today to make a difference in the lives of those in need.',
       cta: {
         title: 'Get Involved',
         link: '/get-involved',
@@ -113,19 +113,19 @@ function Home({ theme }) {
       type: 'accordion',
       items: [
         {
-          title: 'What is Ina Ethe?',
+          title: 'What is INA ETHE?',
           content:
-            'Ina Ethe is a community-driven organization that empowers non-profit organizations to generate crucial income for their causes.',
+            'INA ETHE is a community-driven organization that empowers non-profit organizations to generate crucial income for their causes.',
         },
         {
-          title: 'How does Ina Ethe work?',
+          title: 'How does INA ETHE work?',
           content:
-            'Ina Ethe connects non-profit organizations with individuals, allowing them to generate income while providing them with the opportunity to earn.',
+            'INA ETHE connects non-profit organizations with individuals, allowing them to generate income while providing them with the opportunity to earn.',
         },
         {
-          title: 'What is the difference between Ina Ethe and other platforms?',
+          title: 'What is the difference between INA ETHE and other platforms?',
           content:
-            'Ina Ethe empowers non-profit organizations to generate crucial income for their causes while providing individuals with the opportunity to earn.',
+            'INA ETHE empowers non-profit organizations to generate crucial income for their causes while providing individuals with the opportunity to earn.',
         },
       ],
     },
@@ -221,13 +221,14 @@ function Home({ theme }) {
           },
         },
       ],
+      hint: 'Buy more today',
       img: {
         src: '/images/inaethe/donations-square.jpg',
         alt: 'Hero Image',
       },
     },
     {
-      type: 'FlexwindShadeColorImage',
+      type: 'FlexwindHero4',
       title: 'A Huge Title Hero that as a huge title hero',
       description:
         "This is a very long description that explains a bit more about what's going on in this hero and often talks about the products",
@@ -248,6 +249,51 @@ function Home({ theme }) {
         alt: 'Hero Image',
       },
     },
+    {
+      type: 'FlexwindFeatures1',
+      title:
+        'Join Ina Ethe: Empower Communities Through Affiliate-Driven Donations',
+      description:
+        'Ina Ethe is revolutionizing the way we support causes that matter. With our subscription-based affiliate marketing platform, you can contribute to impactful initiatives while earning rewards. Partner with us to transform donations into meaningful change for communities nationwide.',
+      features: [
+        {
+          icon: 'dollar-sign',
+          title: 'Streamlined Donation Collection',
+          description:
+            'Ina Ethe simplifies the donation process, ensuring every contribution reaches the right cause efficiently. Our platform is built to maximize transparency and trust for both donors and affiliates.',
+        },
+        {
+          icon: 'graph',
+          title: 'Performance Analytics for Affiliates',
+          description:
+            'Track your campaign performance in real-time with our advanced analytics tools. Monitor the impact of your referrals, optimize your strategies, and maximize your rewards while driving donations.',
+        },
+        {
+          icon: 'users',
+          title: 'Community Engagement Made Easy',
+          description:
+            'Engage with a passionate network of affiliates and donors who share your vision. Build partnerships, share stories of impact, and inspire others to join the movement.',
+        },
+        {
+          icon: 'sliders',
+          title: 'Customizable Subscription Tiers',
+          description:
+            'Choose from flexible subscription tiers designed to suit different needs and goals. Whether you’re an individual donor or a large organization, Ina Ethe offers solutions tailored to you.',
+        },
+        {
+          icon: 'bank-card',
+          title: 'Secure and Reliable Transactions',
+          description:
+            'With cutting-edge payment processing, Ina Ethe ensures every transaction is secure and seamless. Donors can trust that their contributions are protected and efficiently allocated.',
+        },
+        {
+          icon: 'support',
+          title: 'Dedicated Support and Resources',
+          description:
+            'Our team is here to support you every step of the way. From campaign setup to troubleshooting, Ina Ethe provides resources and assistance to help you succeed.',
+        },
+      ],
+    },
   ];
   return (
     <Layout>
@@ -256,7 +302,7 @@ function Home({ theme }) {
           <h3 className='text-2xl font-bold mt-8 mb-4'>Artifacts</h3>
           <p className='text-gray-200 mb-2'>
             Artifacts are the building blocks we use to build the custom webpage
-            confoiguration on the Ina Ethe System. Artifacts are contained in
+            confoiguration on the INA ETHE System. Artifacts are contained in
             the configuration of a page. Listed below you will find a list of
             the blocks we use.
           </p>

@@ -1,18 +1,27 @@
 {
-  "themeName": "inaethe",
-  "partnerName": "Ina Ethe",
+  "organisationId": "inaethe",
+  "partnerName": "INA ETHE",
   "progressColor": "#b91c1b",
   "heroHeader": "Transforming good intentions into tangible impacts.",
-  "heroParagraph": "At Ina Ethe, we believe in the power of generosity and financial sustainability. Join us in building a community that empowers non-profit organizations to thrive while offering individuals the opportunity to earn while making a difference. Together, let's create a brighter future.",
+  "heroParagraph": "At INA ETHE, we believe in the power of generosity and financial sustainability. Join us in building a community that empowers non-profit organizations to thrive while offering individuals the opportunity to earn while making a difference. Together, let's create a brighter future.",
   "heroButton": {
     "class": " mb-6 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl px-4 py-3 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
     "cta": "Make an Impact Today!"
   },
-  "navCta": "Get started",
   "nav": {
     "ctaText": "Get started",
     "ctaClass": "text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  text-xl px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
-    "login": "text-white bg-black hover:bg-red-800 hidden md:block focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  text-xl px-4 py-2 text-center ml-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    "login": "text-white bg-black hover:bg-red-800 hidden md:block focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  text-xl px-4 py-2 text-center ml-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+    "burgerMenu": {
+      "class": "md:bg-transparent sm:bg-transparent  flex p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 flex-col",
+      "link": {
+        "activeClass": "text-xl block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-red-700 md:p-0 md:dark:text-red-500",
+        "inactiveClass": "text-xl block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0 md:dark:hover:text-red-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+      },
+      "login": {
+        "class": "md:hidden block text-white bg-black hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  text-xl px-4 py-2 text-center ml-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      }
+    }
   },
   "colors": {
     "lightBgColoCode": "red-50",
@@ -29,16 +38,7 @@
       }
     }
   },
-  "burgerMenu": {
-    "class": "md:bg-transparent sm:bg-transparent  flex p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 flex-col",
-    "link": {
-      "activeClass": "text-xl block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-red-700 md:p-0 md:dark:text-red-500",
-      "inactiveClass": "text-xl block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0 md:dark:hover:text-red-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-    },
-    "login": {
-      "class": "md:hidden block text-white bg-black hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  text-xl px-4 py-2 text-center ml-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-    }
-  },
+
   "section": {
     "header": {
       "class": "text-red-700 text-4xl mb-4 font-extrabold leading-none tracking-tight text-gray-900 dark:text-white"
@@ -56,7 +56,7 @@
         {
           "type": "hero",
           "header": "Transforming good intentions into tangible impacts.",
-          "text": "At Ina Ethe, we believe in the power of generosity and financial sustainability. Join us in building a community that empowers non-profit organizations to thrive while offering individuals the opportunity to earn while making a difference. Together, let's create a brighter future.",
+          "text": "At INA ETHE, we believe in the power of generosity and financial sustainability. Join us in building a community that empowers non-profit organizations to thrive while offering individuals the opportunity to earn while making a difference. Together, let's create a brighter future.",
           "cta": {
             "title": "Make an Impact Today!",
             "link": "/subscribe"
@@ -79,11 +79,11 @@
               "content": [
                 {
                   "title": "Our Mission",
-                  "text": "At Ina Ethe, our mission is twofold: we empower non-profit organizations to generate crucial income for their causes, while simultaneously providing individuals with the opportunity to earn while helping these causes thrive. We believe in the power of mutual benefit, creating a platform where generosity and financial sustainability coexist."
+                  "text": "At INA ETHE, our mission is twofold: we empower non-profit organizations to generate crucial income for their causes, while simultaneously providing individuals with the opportunity to earn while helping these causes thrive. We believe in the power of mutual benefit, creating a platform where generosity and financial sustainability coexist."
                 },
                 {
                   "title": "",
-                  "text": "Join us in building a community that transforms good intentions into tangible impacts, ensuring a brighter future for both individuals and the non-profits they support. Ina Ethe make a difference today!"
+                  "text": "Join us in building a community that transforms good intentions into tangible impacts, ensuring a brighter future for both individuals and the non-profits they support. INA ETHE make a difference today!"
                 }
               ]
             }
@@ -110,7 +110,7 @@
           ],
           "bg": "bg-red-700",
           "fg": "text-white",
-          "title": "Why Ina Ethe"
+          "title": "Why INA ETHE"
         },
         {
           "type": "article",
@@ -124,11 +124,11 @@
               "content": [
                 {
                   "title": "Our Story",
-                  "text": "Ina Ethe emerged in response to the African hunger crisis post-Covid. Starting with 'Food-On-Every-Table,' we sought aid from companies but faced silence. Adapting, we realized the need to address both hunger and South Africa's 40% unemployment."
+                  "text": "INA ETHE emerged in response to the African hunger crisis post-Covid. Starting with 'Food-On-Every-Table,' we sought aid from companies but faced silence. Adapting, we realized the need to address both hunger and South Africa's 40% unemployment."
                 },
                 {
                   "title": "Empowering Impactful Causes",
-                  "text": "Ina Ethe is a unique platform uniting non-profits and individuals, offering a means for anyone with a worthy cause to generate income. Our resilient journey aims to make a lasting impact on hunger, unemployment, and funding challenges."
+                  "text": "INA ETHE is a unique platform uniting non-profits and individuals, offering a means for anyone with a worthy cause to generate income. Our resilient journey aims to make a lasting impact on hunger, unemployment, and funding challenges."
                 }
               ]
             },
@@ -157,7 +157,7 @@
               "content": [
                 {
                   "title": "Our Story",
-                  "text": "Our story at Ina Ethe began in the aftermath of the Covid pandemic when a group of compassionate individuals, dismayed by the growing hunger crisis in Africa, took action. Starting the non-profit 'Food-On-Every-Table' we sought financial support from companies to address the urgent issue of hunger. However, the response was dishearteningly silent, prompting us to reassess our approach. \n\n Recognizing the economic challenges faced by businesses, coupled with South Africa's staggering 40% unemployment rate, we understood the need for a sustainable solution that addressed both hunger and unemployment.  "
+                  "text": "Our story at INA ETHE began in the aftermath of the Covid pandemic when a group of compassionate individuals, dismayed by the growing hunger crisis in Africa, took action. Starting the non-profit 'Food-On-Every-Table' we sought financial support from companies to address the urgent issue of hunger. However, the response was dishearteningly silent, prompting us to reassess our approach. \n\n Recognizing the economic challenges faced by businesses, coupled with South Africa's staggering 40% unemployment rate, we understood the need for a sustainable solution that addressed both hunger and unemployment.  "
                 }
               ]
             }
@@ -167,18 +167,18 @@
         {
           "type": "full-width-text-block",
           "title": "",
-          "text": " Moreover, as we delved deeper into the philanthropic landscape, we realized that other noteworthy causes were grappling with similar funding challenges. \n\n In response, we developed a unique vehicle at Ina Ethe, offering a means for anyone with a worthy cause to generate income, creating a versatile platform that empowers diverse initiatives. Out of this realization, Ina Ethe emerged – a dynamic solution uniting non-profits and individuals, fostering a community where support and financial sustainability converge to create meaningful change. Our journey reflects the resilience born from adversity, as we strive to make a lasting impact on the lives of those facing hunger, unemployment, and a shortage of funding for their noble causes. \n\n Join us in building a community that transforms good intentions into tangible impacts, ensuring a brighter future for both individuals and the non-profits they support. Ina Ethe make a difference today!"
+          "text": " Moreover, as we delved deeper into the philanthropic landscape, we realized that other noteworthy causes were grappling with similar funding challenges. \n\n In response, we developed a unique vehicle at INA ETHE, offering a means for anyone with a worthy cause to generate income, creating a versatile platform that empowers diverse initiatives. Out of this realization, INA ETHE emerged – a dynamic solution uniting non-profits and individuals, fostering a community where support and financial sustainability converge to create meaningful change. Our journey reflects the resilience born from adversity, as we strive to make a lasting impact on the lives of those facing hunger, unemployment, and a shortage of funding for their noble causes. \n\n Join us in building a community that transforms good intentions into tangible impacts, ensuring a brighter future for both individuals and the non-profits they support. INA ETHE make a difference today!"
         },
         { "type": "space-above", "size": "24" },
         {
           "type": "hero",
           "header": "Join the movement",
-          "text": "Ina Ethe is more than an initiative; it's a movement of compassion, driven by the belief that change is possible when people come together. Whether you're interested in subscribing, volunteering, or partnering with us, we invite you to be a part of our journey.",
+          "text": "INA ETHE is more than an initiative; it's a movement of compassion, driven by the belief that change is possible when people come together. Whether you're interested in subscribing, volunteering, or partnering with us, we invite you to be a part of our journey.",
           "cta": {
             "title": "Join Us Now!",
             "link": "/subscribe"
           },
-          "image": "donations.jpg"
+          "image": "images/inaethe/donations.jpg"
         },
         { "type": "space-above", "size": "24" },
         {
@@ -190,13 +190,13 @@
               "content": [
                 {
                   "title": "How the Help’em system works",
-                  "text": "When you join as a subscriber, you become a Hope Builder, and the process is straightforward: \n• Your recruits contribute a monthly subscription fee, determined by their chosen package. \n• You earn a 40% Monthly Income per Recruit from the monthly subscription fee of each person you bring on board. \n• Another 40% of the subscription fee is directed towards the cause chosen by your recruit or subscriber. \n• The remaining 20% is allocated to sustaining, advancing, and continually improving the Ina Ethe system. \n• Your subscription extends beyond a mere commitment; it embodies a promise of hope. Join us today and be a part of creating a world where we can collectively contribute to each other's well-being."
+                  "text": "When you join as a subscriber, you become a Hope Builder, and the process is straightforward: \n• Your recruits contribute a monthly subscription fee, determined by their chosen package. \n• You earn a 40% Monthly Income per Recruit from the monthly subscription fee of each person you bring on board. \n• Another 40% of the subscription fee is directed towards the cause chosen by your recruit or subscriber. \n• The remaining 20% is allocated to sustaining, advancing, and continually improving the INA ETHE system. \n• Your subscription extends beyond a mere commitment; it embodies a promise of hope. Join us today and be a part of creating a world where we can collectively contribute to each other's well-being."
                 }
               ]
             },
             {
               "type": "image-block",
-              "image": "volunteers.jpg"
+              "image": "images/inaethe/volunteers.jpg"
             }
           ]
         },
@@ -204,12 +204,12 @@
         {
           "type": "full-width-text-block",
           "title": "Our Values",
-          "text": "At Ina Ethe, our values serve as our guiding light. They include 'compassion', 'transparency,' 'collaboration,' and these principles underpin everything we do. We take pride in our commitment to complete transparency in our operations, ensuring that every contribution makes a meaningful impact."
+          "text": "At INA ETHE, our values serve as our guiding light. They include 'compassion', 'transparency,' 'collaboration,' and these principles underpin everything we do. We take pride in our commitment to complete transparency in our operations, ensuring that every contribution makes a meaningful impact."
         },
         {
           "type": "full-width-text-block",
           "title": "Meet our team",
-          "text": "Our success is a testament to the dedication and passion of our team. Meet the individuals who drive Ina Ethe forward, from our founders to our committed volunteers. Together, we share a common goal - to eradicate hunger in Africa and to bring hope to those who need it most."
+          "text": "Our success is a testament to the dedication and passion of our team. Meet the individuals who drive INA ETHE forward, from our founders to our committed volunteers. Together, we share a common goal - to eradicate hunger in Africa and to bring hope to those who need it most."
         },
         { "type": "space-above", "size": "24" }
       ]
@@ -226,28 +226,28 @@
             "title": "Join Us Now!",
             "link": "/subscribe"
           },
-          "image": "donations.jpg"
+          "image": "images/inaethe/donations.jpg"
         },
         { "type": "space-above", "size": "10" },
         {
           "type": "full-width-text-block",
           "title": " ",
-          "text": "Discover Ina Ethe, a unique vehicle empowering anyone with a noble cause to generate income. Our platform is a versatile solution that unites non-profits and individuals, fostering a community where support and financial sustainability converge for meaningful change. Join us in this journey of resilience as we strive to make a lasting impact on lives affected by hunger, unemployment, and insufficient funding for noble causes."
+          "text": "Discover INA ETHE, a unique vehicle empowering anyone with a noble cause to generate income. Our platform is a versatile solution that unites non-profits and individuals, fostering a community where support and financial sustainability converge for meaningful change. Join us in this journey of resilience as we strive to make a lasting impact on lives affected by hunger, unemployment, and insufficient funding for noble causes."
         },
         {
           "type": "full-width-text-block",
           "title": "Our Mission",
-          "text": "At Ina Ethe, our mission is twofold: we empower non-profit organizations to generate crucial income for their causes, while simultaneously providing individuals with the opportunity to earn while helping these causes thrive. We believe in the power of mutual benefit, creating a platform where generosity and financial sustainability coexist."
+          "text": "At INA ETHE, our mission is twofold: we empower non-profit organizations to generate crucial income for their causes, while simultaneously providing individuals with the opportunity to earn while helping these causes thrive. We believe in the power of mutual benefit, creating a platform where generosity and financial sustainability coexist."
         },
         {
           "type": "full-width-text-block",
           "title": "Our Vision",
-          "text": "Our vision at Ina Ethe is to create a world where we can collectively contribute to each other's well-being. We envision a future where individuals and non-profits come together to create meaningful change, fostering a community that empowers everyone to make a difference."
+          "text": "Our vision at INA ETHE is to create a world where we can collectively contribute to each other's well-being. We envision a future where individuals and non-profits come together to create meaningful change, fostering a community that empowers everyone to make a difference."
         },
         {
           "type": "full-width-text-block",
           "title": "Our Values",
-          "text": "At Ina Ethe, our values serve as our guiding light. They include 'compassion', 'transparency,' 'collaboration,' and these principles underpin everything we do. We take pride in our commitment to complete transparency in our operations, ensuring that every contribution makes a meaningful impact."
+          "text": "At INA ETHE, our values serve as our guiding light. They include 'compassion', 'transparency,' 'collaboration,' and these principles underpin everything we do. We take pride in our commitment to complete transparency in our operations, ensuring that every contribution makes a meaningful impact."
         },
         {
           "type": "full-width-text-block",

@@ -1,17 +1,18 @@
 import '@/styles/globals.css';
-import NextNProgress from 'nextjs-progressbar';
+
 import { Provider } from 'react-redux';
 import store from '@/store';
-import { getThemeConfig } from '@/themes';
 import Script from 'next/script';
 import { hotjar } from 'react-hotjar';
 import { useEffect } from 'react';
 import * as gtag from '@/lib/gtag';
 import { useRouter } from 'next/router';
 import { CookiesProvider } from 'react-cookie';
-
+import { ConfigProvider } from '@/context/ConfigContext';
+import ProgressBarContainer from '@/components/ProgresssBarContainer';
+import { EventHandlersProvider } from '@/context/EventHandlers';
+import { ToastContainer, toast } from 'react-toastify';
 export default function MyApp({ Component, pageProps }) {
-  const theme = getThemeConfig();
   const router = useRouter();
   useEffect(() => {
     hotjar.initialize(3906314, 6);
@@ -41,13 +42,17 @@ export default function MyApp({ Component, pageProps }) {
    gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');`,
         }}
       ></script>
-
-      <Provider store={store}>
-        <CookiesProvider defaultSetOptions={{ path: '/' }}>
-          <NextNProgress color={theme.progressColor} />
-          <Component {...pageProps} theme={theme} />
-        </CookiesProvider>
-      </Provider>
+      <ConfigProvider>
+        <EventHandlersProvider>
+          <Provider store={store}>
+            <CookiesProvider defaultSetOptions={{ path: '/' }}>
+              <ProgressBarContainer />
+              <ToastContainer />
+              <Component {...pageProps} />
+            </CookiesProvider>
+          </Provider>
+        </EventHandlersProvider>
+      </ConfigProvider>
     </>
   );
 }

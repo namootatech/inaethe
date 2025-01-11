@@ -1,4 +1,3 @@
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from '@/components/layout';
 import { useSearchParams } from 'next/navigation';
@@ -20,7 +19,18 @@ const levelPrices = {
   SustainabilityChampion: 5000,
   GlobalImpactVisionary: 10000,
 };
-
+<div
+  className='absolute inset-0'
+  style={{
+    backgroundImage: `url('/${rest.image}')`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    zIndex: -1,
+  }}
+></div>;
+<div
+  className={`bg-[url('/images/${theme.themeName}/${props.image}')] bg-cover h-full `}
+/>;
 const WEBSITE_URL = process.env.NEXT_PUBLIC_WEBSITE_URL;
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const MERCHANT_ID = process.env.NEXT_PUBLIC_MERCHANT_ID;
@@ -30,7 +40,7 @@ function ReturnPage({ theme }) {
   const params = useSearchParams();
 
   const userData = {
-    partner: { name: theme?.partnerName, slug: theme?.themeName },
+    partner: { name: theme?.partnerName, slug: theme?.organisationId },
   };
 
   for (const [key, value] of params.entries()) {
@@ -61,8 +71,8 @@ function ReturnPage({ theme }) {
     email_address: userData.email,
     m_payment_id: paymentId,
     amount: levelPrices[userData.subscriptionTier],
-    item_name: `Ina Ethe Subscription`,
-    item_description: `Ina Ethe Subscription for ${userData.firstName} ${userData.lastName} for the ${userData.subscriptionTier} package.`,
+    item_name: `INA ETHE Subscription`,
+    item_description: `INA ETHE Subscription for ${userData.firstName} ${userData.lastName} for the ${userData.subscriptionTier} package.`,
     subscription_type: 1,
     billing_date: moment().format('YYYY-MM-DD'),
     recurring_amount: levelPrices[userData.subscriptionTier],

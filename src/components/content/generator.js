@@ -7,7 +7,7 @@ import React from 'react';
 import Link from 'next/link';
 import nl2br from 'nl2br';
 import { postToURL } from '@/components/payfast/payfast';
-const theme = getThemeConfig();
+
 import { connect } from 'react-redux';
 const icons = {
   'food-truck': GiFoodTruck,
@@ -24,30 +24,38 @@ import {
   FlexwindHero7,
   FlexwindHero5,
 } from './heros';
+import { useConfig } from '@/context/ConfigContext';
+import { FlexwindFeatures1 } from './features';
+import { PageDoneHowItWorks1 } from './howItWorks';
 
-const imageBlock = (config) => (
+const imageBlock = (props) => (
   <div
-    className={`bg-[url('/images/${theme.themeName}/${config.image}')] bg-cover h-full `}
+    style={{
+      backgroundImage: `url('${props.image}')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    }}
+    className={`h-full `}
   />
 );
-const multiTextBlock = (config) => (
+const multiTextBlock = (props) => (
   <div className='h-full px-8 py-8 text-center md:text-left'>
-    {config.content.map((item) => (
+    {props.content.map((item) => (
       <React.Fragment key={item.title}>
-        <h2 className={theme?.section?.header?.class}>{item.title}</h2>
+        <h2 className={props.theme?.section?.header?.class}>{item.title}</h2>
         <p
           className=' text-base/loose text-2xl md:text-2xl lg:text-2xl dark:text-gray-900 mb-4'
           dangerouslySetInnerHTML={{ __html: nl2br(item.text) }}
         />
       </React.Fragment>
     ))}
-    {config.cta && (
+    {props.cta && (
       <Link
         type='button'
-        href={config.cta.link}
-        className={theme?.nav?.ctaClass}
+        href={props.cta.link}
+        className={props.theme?.nav?.ctaClass}
       >
-        {config.cta.title}
+        {props.cta.title}
       </Link>
     )}
   </div>
@@ -58,15 +66,14 @@ const articleElementBuilders = {
   'multi-text-blocks': multiTextBlock,
 };
 
-const articleBuilder = ({ config }) => {
-  console.log('config', config);
-  const { elements } = config;
-  console.log('elements', elements);
+const articleBuilder = ({ theme, ...rest }) => {
+  const { elements } = rest;
+  console.log('theme ar bui', theme);
   return (
     <div className='container'>
       <div className={`grid md:grid-cols-${elements?.length} grid-cols-1`}>
         {elements?.map((e) => {
-          return articleElementBuilders[e.type](e);
+          return articleElementBuilders[e.type]({ ...e, theme });
         })}
       </div>
     </div>
@@ -81,10 +88,10 @@ export const FeatureSection = ({ features }) => (
           Features
         </h2>
         <p className='mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl'>
-          How Ina Ethe Works
+          How INA ETHE Works
         </p>
         <p className='mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto'>
-          Discover the key features that make Ina Ethe the perfect platform for
+          Discover the key features that make INA ETHE the perfect platform for
           affiliate marketing and donation collection.
         </p>
       </div>
@@ -149,7 +156,7 @@ export const TestimonialSection = ({ testimonials }) => (
   </div>
 );
 
-export const PricingSection = ({ plans }) => (
+export const PricingSection = ({ ...rest }) => (
   <div className='bg-gray-100 py-12'>
     <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
       <div className='lg:text-center'>
@@ -161,7 +168,7 @@ export const PricingSection = ({ plans }) => (
         </p>
       </div>
       <div className='mt-10 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-8'>
-        {plans.map((plan) => (
+        {rest.plans.map((plan) => (
           <div
             key={plan.name}
             className='relative p-8 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col'
@@ -208,19 +215,19 @@ export const PricingSection = ({ plans }) => (
   </div>
 );
 
-const spaBuilder = ({ config }) => {
+const spaBuilder = ({ ...rest }) => {
   return (
     <div
-      className={`h-full w-full px-10 py-10 px-10 text-center md:text-left ${config?.bg} ${config?.fg} text-center`}
+      className={`h-full w-full px-10 py-10 px-10 text-center md:text-left ${rest?.bg} ${rest?.fg} text-center`}
     >
       <h2 className=' text-6xl mb-4 text-center mt-4 font-extrabold leading-none tracking-tight dark:text-gray-900'>
-        {config?.title}
+        {rest?.title}
       </h2>
       <br />
       <div
-        className={`grid md:grid-cols-${config?.elements?.length} grid-cols-1 flex flex-col justify-center items-center section-image `}
+        className={`grid md:grid-cols-${rest?.elements?.length} grid-cols-1 flex flex-col justify-center items-center section-image `}
       >
-        {config.elements.map((e) => {
+        {rest.elements.map((e) => {
           const Icon = icons[e.icon];
           return (
             <div
@@ -240,26 +247,36 @@ const spaBuilder = ({ config }) => {
     </div>
   );
 };
-const heroBuilder = ({ config }) => {
+const heroBuilder = ({ theme, ...rest }) => {
   return (
-    <div
-      className={`container h-full bg-[url('/images/${theme?.themeName}/${config.image}')] home-page-header flex flex-col justify-center items-center`}
-    >
+    <div className='relative container h-full home-page-header flex flex-col justify-center items-center'>
+      {/* Background div */}
+      <div
+        className='absolute inset-0'
+        style={{
+          backgroundImage: `url('${rest.image}')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          zIndex: -1,
+        }}
+      ></div>
+
+      {/* Content */}
       <div className='grid md:grid-cols-2 grid-cols-1 flex flex-col justify-center items-center'>
         <div className='h-full px-8 py-8 text-center md:text-left'>
           <h1 className='white-text text-red-700 text-4xl mb-4 font-extrabold leading-none tracking-tight text-gray-900 dark:text-gray-900'>
-            {config?.header}
+            {rest?.header}
           </h1>
-          {config?.subHeader && (
+          {rest?.subHeader && (
             <h2 className='white-text text-2xl mb-4 font-extrabold leading-none tracking-tight text-gray-900 dark:text-gray-900'>
-              {config?.subHeader}
+              {rest?.subHeader}
             </h2>
           )}
           <p className='white-text text-base/loose text-2xl md:text-2xl lg:text-2xl dark:text-gray-100 mb-6'>
-            {config?.text}
+            {rest?.text}
           </p>
-          <Link href={config.cta.link} className={theme?.heroButton?.class}>
-            {config.cta.title}
+          <Link href={rest.cta.link} className={theme?.heroButton?.class}>
+            {rest.cta.title}
           </Link>
         </div>
       </div>
@@ -267,42 +284,42 @@ const heroBuilder = ({ config }) => {
   );
 };
 
-const fullWidthTextBlock = ({ config }) => (
-  <div key={`section-${config.title}`}>
+const fullWidthTextBlock = ({ ...rest }) => (
+  <div key={`section-${rest.title}`}>
     <h1 className='max-w-lg text-3xl font-semibold leading-normal text-gray-900 dark:text-gray-900 mb-2'>
-      {config?.title}
+      {rest?.title}
     </h1>
     <div
       className='text-left text-2xl dark:text-gray-400 mt-2 mb-12'
-      dangerouslySetInnerHTML={{ __html: nl2br(config?.text) }}
+      dangerouslySetInnerHTML={{ __html: nl2br(rest?.text) }}
     />
   </div>
 );
 
-const centerWidthTextBlock = ({ config }) => (
-  <div key={`section-${config.title} `} className='max-w-2xl mx-auto p-4'>
+const centerWidthTextBlock = ({ ...rest }) => (
+  <div key={`section-${rest.title} `} className='max-w-2xl mx-auto p-4'>
     <h1 className='text-3xl font-semibold leading-normal text-gray-900 dark:text-gray-900 mb-2'>
-      {config?.title}
+      {rest?.title}
     </h1>
     <div
       className='text-left text-2xl dark:text-gray-400 mt-2 mb-12'
-      dangerouslySetInnerHTML={{ __html: nl2br(config?.text) }}
+      dangerouslySetInnerHTML={{ __html: nl2br(rest?.text) }}
     />
   </div>
 );
 
-const PayFastButton = ({ config, data, theme }) => {
+const PayFastButton = ({ theme, data, ...rest }) => {
   return (
     <button
       className={theme?.colors?.button?.primary?.class}
       onClick={() => postToURL(process.env.NEXT_PUBLIC_PAYFAST_URL, data)}
     >
-      {config.title}
+      {rest.title}
     </button>
   );
 };
 
-const CheckBox = ({ config, data, theme }) => {
+const CheckBox = ({ theme, data, ...rest }) => {
   return (
     <div className='bg-white p-8 rounded-lg w-44 h-44 shadow-md max-w-md w-full flex items-center justify-center flex-col'>
       <svg
@@ -322,7 +339,7 @@ const CheckBox = ({ config, data, theme }) => {
   );
 };
 
-const CheckBoxCenter = ({ config, data, theme }) => {
+const CheckBoxCenter = ({ theme, data, ...rest }) => {
   return (
     <div className='w-full flex flex-col items-center justify-center'>
       <div className='bg-white p-8 rounded-full border border-green-500 shadow-md w-44 h-44 flex items-center justify-center flex-col'>
@@ -344,7 +361,7 @@ const CheckBoxCenter = ({ config, data, theme }) => {
   );
 };
 
-const Cross = ({ config, data, theme }) => {
+const Cross = ({ theme, data, ...rest }) => {
   return (
     <div className='bg-white p-8 w-44 h-44 rounded-lg shadow-md max-w-md w-full flex items-center justify-center flex-col'>
       <svg
@@ -364,7 +381,7 @@ const Cross = ({ config, data, theme }) => {
   );
 };
 
-const CrossCenter = ({ config, data, theme }) => {
+const CrossCenter = ({ theme, data, ...rest }) => {
   return (
     <div className='w-full flex flex-col items-center justify-center'>
       <div className='bg-white p-8 rounded-full border border-red-500 shadow-md w-44 h-44 flex items-center justify-center flex-col'>
@@ -389,13 +406,13 @@ const CrossCenter = ({ config, data, theme }) => {
 const LoginButton = ({ theme, ...rest }) => {
   return (
     <Link href='/login' className={theme?.colors?.button?.primary?.class}>
-      {config.title}
+      {rest.title}
     </Link>
   );
 };
 
-const Modal = ({ config, data, theme }) => {
-  const { isOpen, onClose, title, children } = config;
+const Modal = ({ theme, data, ...rest }) => {
+  const { isOpen, onClose, title, children } = rest;
   return (
     isOpen && (
       <div className='fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50'>
@@ -430,7 +447,7 @@ const Modal = ({ config, data, theme }) => {
 };
 
 const AlertBanner = ({ theme, ...rest }) => {
-  const { message, alertType = 'info' } = config;
+  const { message, alertType = 'info' } = rest;
   const alertTypes = {
     success: 'bg-green-100 text-green-800',
     error: 'bg-red-100 text-red-800',
@@ -461,7 +478,7 @@ const AlertBanner = ({ theme, ...rest }) => {
 };
 
 const Accordion = ({ theme, ...rest }) => {
-  const { items } = config;
+  const { items } = rest;
   const [openIndex, setOpenIndex] = React.useState(null);
 
   const toggle = (index) => {
@@ -486,7 +503,7 @@ const Accordion = ({ theme, ...rest }) => {
 };
 
 const Card = ({ theme, ...rest }) => {
-  const { image, title, description, cta } = config;
+  const { image, title, description, cta } = rest;
   return (
     <div className='bg-white rounded-lg shadow-md overflow-hidden'>
       <img src={image} alt={title} className='w-full h-48 object-cover' />
@@ -504,7 +521,7 @@ const Card = ({ theme, ...rest }) => {
 };
 
 const Tabs = ({ theme, ...rest }) => {
-  const { tabs } = config;
+  const { tabs } = rest;
   const [activeTab, setActiveTab] = React.useState(tabs[0].id);
 
   return (
@@ -541,14 +558,14 @@ const componentBuilders = {
   'checkbox-center': CheckBoxCenter,
   cross: Cross,
   'cross-center': CrossCenter,
-  'space-above': ({ config }) => <div className={`h-${config.size}`} />,
-  'space-below': ({ config }) => <div className={`h-${config.size}`} />,
+  'space-above': ({ ...rest }) => <div className={`h-${rest.size}`} />,
+  'space-below': ({ ...rest }) => <div className={`h-${rest.size}`} />,
   'full-width-text-block': fullWidthTextBlock,
   'center-width-text-block': centerWidthTextBlock,
-  'payfast-button': ({ config, data, theme }) => (
+  'payfast-button': ({ theme, data, ...rest }) => (
     <PayFastButton {...rest} data={data} theme={theme} />
   ),
-  'payfast-button-center-width': ({ config, data, theme }) => (
+  'payfast-button-center-width': ({ theme, data, ...rest }) => (
     <div className='max-w-2xl mx-auto p-4'>
       <PayFastButton {...rest} data={data} theme={theme} />
     </div>
@@ -567,7 +584,7 @@ const componentBuilders = {
   accordion: ({ theme, ...rest }) => <Accordion {...rest} theme={theme} />,
   card: ({ theme, ...rest }) => <Card {...rest} theme={theme} />,
   modal: ({ theme, ...rest }) => <Modal {...rest} theme={theme} />,
-  tabs: ({ theme, ...rest }) => <Tabs tabs={config} theme={theme} />,
+  tabs: ({ theme, ...rest }) => <Tabs tabs={rest} theme={theme} />,
   FlexwindHero1,
   FlexwindHero5,
   FlexwindHero2,
@@ -575,11 +592,14 @@ const componentBuilders = {
   FlexwindHero4,
   FlexwindHero6,
   FlexwindHero7,
+  FlexwindFeatures1,
+  PageDoneHowItWorks1,
 };
 
-const Artifacts = ({ items, data, theme }) => {
+const Artifacts = ({ items }) => {
+  const theme = useConfig();
   const Components = items.map((a, i) => {
-    return componentBuilders[a.type]({ ...a, data, theme });
+    return componentBuilders[a.type]({ ...a, theme });
   });
   return Components;
 };
