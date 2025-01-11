@@ -2,7 +2,6 @@
   "name": "botho",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -16,6 +15,7 @@
     "@slack/bolt": "^4.2.0",
     "apexcharts": "^4.3.0",
     "axios": "^1.7.9",
+    "flatpickr": "^4.6.13",
     "gray-matter": "^4.0.3",
     "js-cookie": "^3.0.5",
     "jsvectormap": "^1.6.0",

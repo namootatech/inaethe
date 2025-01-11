@@ -1,6 +1,6 @@
 import Layout from '@/components/layout';
 import { connect } from 'react-redux';
-import Artifacts from '@/components/content/generator';
+import RenderPageComponents from '@/components/content/generator';
 import { useConfig } from '@/context/ConfigContext';
 import { useEffect, useState } from 'react';
 
@@ -8,28 +8,42 @@ const fetchConfig = async () => {
   try {
     console.log(
       '** [FETCH CONFIG] config path',
-      process.env.NEXT_PUBLIC_CONFIG_LINK
+      process.env.NEXT_PUBLIC_CONFIG_NAME
     );
 
-    let configPath = process.env.NEXT_PUBLIC_CONFIG_LINK;
+    let configPath = process.env.NEXT_PUBLIC_CONFIG_NAME;
 
     // If configPath is a relative path, prepend the base URL
     if (!configPath.startsWith('http')) {
       const baseUrl =
-        process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+        process.env.NEXT_PUBLIC_WEBSITE_URL || 'http://localhost:3000';
       configPath = `${baseUrl}${
         configPath.startsWith('/') ? '' : '/'
       }${configPath}`;
     }
-
-    const response = await fetch(configPath); // Use the resolved absolute URL
-    if (!response.ok) throw new Error('Failed to fetch config');
+    console.log('pulling from', configPath);
+    // Attempt to fetch the config file
+    const response = await fetch(configPath);
+    if (!response.ok) throw new Error('Failed to fetch config from URL');
 
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error fetching config:', error);
-    return null; // Graceful fallback
+    console.warn(
+      'Error fetching config from URL, falling back to local import:',
+      error
+    );
+
+    // Fallback to importing directly from the public folder
+    try {
+      const localConfig = await import(
+        `../../public/${process.env.NEXT_PUBLIC_CONFIG_NAME}`
+      );
+      return localConfig.default || localConfig; // Ensure compatibility with module systems
+    } catch (importError) {
+      console.error('Error importing local config:', importError);
+      return null; // Graceful fallback
+    }
   }
 };
 
@@ -78,7 +92,7 @@ function Page(props) {
   return (
     <Layout>
       <div className='container md:mt-4 md:px-16 px-4'>
-        {page && <Artifacts items={page?.artifacts} />}
+        {page && <RenderPageComponents items={page?.components} />}
       </div>
     </Layout>
   );

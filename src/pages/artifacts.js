@@ -1,5 +1,5 @@
-import { Inter } from 'next/font/google';
-import Artifacts from '@/components/content/generator';
+import { Poppins } from 'next/font/google';
+import RenderPageComponents from '@/components/content/generator';
 import Layout from '@/components/layout';
 import components from '@/config/demo';
 import { useState } from 'react';
@@ -13,12 +13,12 @@ function Home({ theme }) {
     <Layout>
       <div className=' container mx-auto ext-lg text-gray-800 max-w-8xl my-8'>
         <div className='bg-gray-900 text-white text-lg p-8 my-4 rounded-md'>
-          <h3 className='text-2xl font-bold mt-8 mb-4'>Artifacts</h3>
+          <h3 className='text-2xl font-bold mt-8 mb-4'>RenderPageComponents</h3>
           <p className='text-gray-200 mb-2'>
-            Artifacts are the building blocks we use to build the custom webpage
-            confoiguration on the INA ETHE System. Artifacts are contained in
-            the configuration of a page. Listed below you will find a list of
-            the blocks we use.
+            RenderPageComponents are the building blocks we use to build the
+            custom webpage confoiguration on the INA ETHE System.
+            RenderPageComponents are contained in the configuration of a page.
+            Listed below you will find a list of the blocks we use.
           </p>
         </div>
         <div className='grid grid-cols-8 gap-2'>
@@ -38,7 +38,7 @@ function Home({ theme }) {
           </div>
           <div className='col-span-6 border border-gray-200 border solid rounded-md p-4'>
             {selectedComponent && (
-              <Artifacts items={[selectedComponent]} theme={theme} />
+              <RenderPageComponents items={[selectedComponent]} theme={theme} />
             )}
           </div>
         </div>

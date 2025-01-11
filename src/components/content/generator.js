@@ -596,7 +596,7 @@ const componentBuilders = {
   PageDoneHowItWorks1,
 };
 
-const Artifacts = ({ items }) => {
+const RenderPageComponents = ({ items }) => {
   const theme = useConfig();
   const Components = items.map((a, i) => {
     return componentBuilders[a.type]({ ...a, theme });
@@ -604,4 +604,4 @@ const Artifacts = ({ items }) => {
   return Components;
 };
 
-export default Artifacts;
+export default RenderPageComponents;

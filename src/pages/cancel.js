@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { keys } from 'ramda';
 import moment from 'moment';
-import { ArtifactsWithData } from '@/components/content/generator';
+import RenderPageComponents from '@/components/content/generator';
+import { useConfig } from '@/context/ConfigContext';
 
 const levelPrices = {
   Nourisher: 50,
@@ -19,26 +20,14 @@ const levelPrices = {
   SustainabilityChampion: 5000,
   GlobalImpactVisionary: 10000,
 };
-<div
-  className='absolute inset-0'
-  style={{
-    backgroundImage: `url('/${rest.image}')`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    zIndex: -1,
-  }}
-></div>;
-<div
-  className={`bg-[url('/images/${theme.themeName}/${props.image}')] bg-cover h-full `}
-/>;
 const WEBSITE_URL = process.env.NEXT_PUBLIC_WEBSITE_URL;
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const MERCHANT_ID = process.env.NEXT_PUBLIC_MERCHANT_ID;
 const MERCHANT_KEY = process.env.NEXT_PUBLIC_MERCHANT_KEY;
 
-function ReturnPage({ theme }) {
+function ReturnPage() {
   const params = useSearchParams();
-
+  const theme = useConfig();
   const userData = {
     partner: { name: theme?.partnerName, slug: theme?.organisationId },
   };
@@ -98,8 +87,7 @@ function ReturnPage({ theme }) {
 
   return (
     <Layout>
-      <ToastContainer />
-      <ArtifactsWithData items={config?.artifacts} data={payfastData} />
+      <RenderPageComponents items={config?.components} data={payfastData} />
     </Layout>
   );
 }
