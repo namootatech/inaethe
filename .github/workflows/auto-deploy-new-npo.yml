@@ -96,7 +96,7 @@ jobs:
           echo "Site creation response: $RESPONSE"
 
           # Extract site ID and name from the response
-          SITE_ID=$(echo $RESPONSE | jq -r '.id')
+          SITE_ID=$(echo $RESPONSE | jq -r '.site_id')
           SITE_NAME=$(echo $RESPONSE | jq -r '.name')
 
           echo "NETLIFY_SITE_ID=$SITE_ID" >> $GITHUB_ENV
@@ -104,7 +104,7 @@ jobs:
 
       - name: Set environment variables on Netlify
         run: |
-          curl -X POST https://api.netlify.com/api/v1/sites/${{ env.SITE_ID }}/env \
+          curl -X POST https://api.netlify.com/api/v1/sites/${{ env.NETLIFY_SITE_ID }}/env \
             -H "Authorization: Bearer ${{ secrets.NETLIFY_AUTH_TOKEN }}" \
             -H "Content-Type: application/json" \
             -d '{
@@ -123,6 +123,8 @@ jobs:
             }'
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          SITE_NAME: ${{ env.SITE_NAME }}
+          NETLIFY_SITE_ID: ${{ env.NETLIFY_SITE_ID }}
 
       - name: Link GitHub repo to Netlify
         run: netlify link --id ${{ env.NETLIFY_SITE_ID }} --name ${{ env.SITE_NAME }}
