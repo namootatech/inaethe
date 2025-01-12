@@ -19,21 +19,32 @@ jobs:
           COMMIT_MESSAGE=$(git log -1 --pretty=%B)
           echo "Commit message: $COMMIT_MESSAGE"
 
-          # Check if the commit message contains '::auto-deploy::'
           if ! echo "$COMMIT_MESSAGE" | grep -q "::auto-deploy::"; then
-            echo "Commit message does not contain '::auto-deploy::', skipping deployment.";
+            echo "Commit message does not contain '::auto-deploy::', skipping deployment."
             exit 0
           fi
 
-          # Extract orgName from commit message using regex
-          if [[ "$COMMIT_MESSAGE" =~ "::auto-deploy::[[:space:]]*>[[:space:]]*(.*) ]]; then
+          if [[ "$COMMIT_MESSAGE" =~ "::auto-deploy::[[:space:]]*>[[:space:]]*(.*)" ]]; then
             orgName="${BASH_REMATCH[1]}"
-            echo "Extracted orgName: $orgName"
-            echo "orgName=$orgName" >> $GITHUB_ENV  # Set the extracted orgName as an environment variable
+            echo "orgName=$orgName" >> $GITHUB_ENV
           else
             echo "orgName not found in commit message, skipping deployment."
             exit 0
           fi
+
+      - name: Fetch GitHub repo details
+        id: fetch_github_details
+        run: |
+          REPO_DETAILS=$(curl -s -H "Authorization: Bearer ${{ secrets.GIT_PASS }}" \
+            "https://api.github.com/repos/${{ github.repository }}")
+          echo "Repo details: $REPO_DETAILS"
+
+          REPO_ID=$(echo "$REPO_DETAILS" | jq -r '.id')
+          echo "repo_id=$REPO_ID" >> $GITHUB_ENV
+
+          INSTALLATION_ID=$(curl -s -H "Authorization: Bearer ${{ secrets.GIT_PASS }}" \
+            "https://api.github.com/repos/${{ github.repository }}/installation" | jq -r '.id')
+          echo "installation_id=$INSTALLATION_ID" >> $GITHUB_ENV
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
@@ -54,84 +65,123 @@ jobs:
       - name: Create site on Netlify using API
         id: create_site
         run: |
-          RESPONSE=$(curl -X POST https://api.netlify.com/api/v1/sites \
+          PAYLOAD=$(cat <<EOF
+          {
+            "account_slug": "clinicplusdev",
+            "name": "ie-${orgName}-za",
+            "env": [
+              {
+                "key": "NEXT_PUBLIC_CONFIG_NAME",
+                "scopes": ["builds", "functions", "runtime", "post_processing"],
+                "values": [{"context": "all", "value": "${orgName}.json"}]
+              },
+              {
+                "key": "NEXT_PUBLIC_API_URL",
+                "scopes": ["builds", "functions", "runtime", "post_processing"],
+                "values": [{"context": "all", "value": "${{ secrets.NEXT_PUBLIC_API_URL }}""}]
+              },
+              {
+                "key": "NEXT_PUBLIC_PAYFAST_URL",
+                "scopes": ["builds", "functions", "runtime", "post_processing"],
+                "values": [{"context": "all", "value": "${{ secrets.NEXT_PUBLIC_PAYFAST_URL }}"}]
+              },
+              {
+                "key": "NEXT_PUBLIC_WEBSITE_URL",
+                "scopes": ["builds", "functions", "runtime", "post_processing"],
+                "values": [{"context": "all", "value": "${{ secrets.NEXT_PUBLIC_WEBSITE_URL }}"}]
+              },
+              {
+                "key": "NEXT_PUBLIC_MERCHANT_ID",
+                "scopes": ["builds", "functions", "runtime", "post_processing"],
+                "values": [{"context": "all", "value": "${{ secrets.NEXT_PUBLIC_MERCHANT_ID }}"}]
+              },
+              {
+                "key": "NEXT_PUBLIC_MERCHANT_KEY",
+                "scopes": ["builds", "functions", "runtime", "post_processing"],
+                "values": [{"context": "all", "value": "${{ secrets.NEXT_PUBLIC_MERCHANT_KEY }}"}]
+              },
+              {
+                "key": "NEXT_PUBLIC_GOOGLE_ANALYTICS",
+                "scopes": ["builds", "functions", "runtime", "post_processing"],
+                "values": [{"context": "all", "value": "${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS }}"}]
+              },
+              {
+                "key": "NEXT_PUBLIC_MONGODB_URI",
+                "scopes": ["builds", "functions", "runtime", "post_processing"],
+                "values": [{"context": "all", "value": "${{ secrets.NEXT_PUBLIC_MONGODB_URI }}"}]
+              },
+              {
+                "key": "NEXT_PUBLIC_MONGODB_DB",
+                "scopes": ["builds", "functions", "runtime", "post_processing"],
+                "values": [{"context": "all", "value": "${{ secrets.NEXT_PUBLIC_MONGODB_DB }}"}]
+              },
+              {
+                "key": "NETLIFY_AUTH_TOKEN",
+                "scopes": ["builds", "functions", "runtime", "post_processing"],
+                "values": [{"context": "all", "value": "${{ secrets.NETLIFY_AUTH_TOKEN }}"]
+              },
+              {
+                "key": "GIT_USER",
+                "scopes": ["builds", "functions", "runtime", "post_processing"],
+                "values": [{"context": "all", "value": "${{ secrets.GIT_USER }}"}]
+              },
+              {
+                "key": "GIT_PASS",
+                "scopes": ["builds", "functions", "runtime", "post_processing"],
+                "values": [{"context": "all", "value":"${{ secrets.GIT_PASS }}"}]
+              }
+            ],
+            "account_slug":"clinicplusdev",
+             "created_via": "",
+             "default_hooks_data: {},
+            "repo": {
+              "provider": "github",
+              "installation_id": ${{ env.installation_id }},
+              "id": ${{ env.repo_id }},
+              "repo": "namoota/inaethe",
+              "owner_type": "Organization",
+              "private": true,
+              "branch": "main",
+              "framework": "next"
+              "frameworkName": "Next.js",
+              "dir": ".next",
+              "visualEditor": {
+                "hasConfig": false
+              },
+              "frameworkLogo": {
+               "default": "https://framework-info.netlify.app/logos/nextjs/light.svg",
+               "light": "https://framework-info.netlify.app/logos/nextjs/light.svg",
+               "dark": "https://framework-info.netlify.app/logos/nextjs/dark.svg"
+              },
+              "base": "",
+              "siteName": "ie-${orgName}-za",
+              "cmd": "npm run build",
+              "plugins_installed": [],
+              "plugins": [{"package": "@netlify/plugin-nextjs"}],
+              "plugins_recommended": [
+                  "@netlify/plugin-nextjs"
+              ],
+              "package_path": "",
+              "framework": "next"
+            }
+          }
+            EOF
+          )
+
+          echo "Site creation payload: $PAYLOAD"
+
+          RESPONSE=$(curl -X POST https://api.netlify.com/api/v1/clinicplusdev/sites \
             -H "Authorization: Bearer ${{ secrets.NETLIFY_AUTH_TOKEN }}" \
             -H "Content-Type: application/json" \
-            -d '{
-                "name": "ie-test-za",
-                "custom_domain": "test.xhap.co.za",
-                "team": "Humphrey Odilo'\''s team",
-                "account_id": "60064e41e91328d07182bf09",
-                "account_slug": "clinicplusdev",
-                "account_name": "Humphrey Odilo'\''s team",
-                "deploy_id": "678338abf2c6b90008d73118",
-                "deploy_hook": "https://api.netlify.com/hooks/github",
-                "user_id": "60064e41e91328d07182bf08",
-                "admin_url": "https://app.netlify.com/sites/inaethe",
-                "plan": "nf_team_pro",
-                "premium": false,
-                "claimed": true,
-                "build_settings": {
-                    "cmd": "npm run build",
-                    "dir": ".next",
-                    "installation_id": 44315287,
-                    "untrusted_flow": "review",
-                    "repo_type": "git",
-                    "repo_branch": "main",
-                    "repo_path": "namootatech/inaethe",
-                    "repo_url": "https://github.com/namootatech/inaethe",
-                    "repo_owner_type": "Organization",
-                    "provider": "github",
-                    "allowed_branches": ["main"],
-                    "functions_dir": null,
-                    "skip_prs": null,
-                    "base_rel_dir": true,
-                    "stop_builds": false,
-                    "public_repo": false,
-                    "skip_automatic_builds": null,
-                    "configuration_file_path": null,
-                    "package_path": ""
-                }
-                }')
+            -d "$PAYLOAD")
           echo "Site creation response: $RESPONSE"
 
-          # Extract site ID and name from the response
-          SITE_ID=$(echo $RESPONSE | jq -r '.site_id')
-          SITE_NAME=$(echo $RESPONSE | jq -r '.name')
-
+          SITE_ID=$(echo $RESPONSE | jq -r '.id')
           echo "NETLIFY_SITE_ID=$SITE_ID" >> $GITHUB_ENV
-          echo "SITE_NAME=$SITE_NAME" >> $GITHUB_ENV
-
-      - name: Set environment variables on Netlify
-        run: |
-          curl -X POST https://api.netlify.com/api/v1/sites/${{ env.NETLIFY_SITE_ID }}/env \
-            -H "Authorization: Bearer ${{ secrets.NETLIFY_AUTH_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            -d '{
-              "NEXT_PUBLIC_API_URL": "${{ secrets.NEXT_PUBLIC_API_URL }}",
-              "NEXT_PUBLIC_PAYFAST_URL" :"${{ secrets.NEXT_PUBLIC_PAYFAST_URL }}",
-              "NEXT_PUBLIC_WEBSITE_URL" :"${{ secrets.NEXT_PUBLIC_WEBSITE_URL }}",
-              "NEXT_PUBLIC_MERCHANT_ID" :"${{ secrets.NEXT_PUBLIC_MERCHANT_ID }}",
-              "NEXT_PUBLIC_MERCHANT_KEY": "${{ secrets.NEXT_PUBLIC_MERCHANT_KEY }}",
-              "NEXT_PUBLIC_GOOGLE_ANALYTICS": "${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS }}",
-              "NEXT_PUBLIC_MONGODB_URI": "${{ secrets.NEXT_PUBLIC_MONGODB_URI }}",
-              "NEXT_PUBLIC_MONGODB_DB": "${{ secrets.NEXT_PUBLIC_MONGODB_DB }}",
-              "NEXT_PUBLIC_CONFIG_NAME": "${orgName}.json",
-              "NETLIFY_AUTH_TOKEN": "${{ secrets.NETLIFY_AUTH_TOKEN }}",
-              "GIT_USER": "${{ secrets.GIT_USER }}",
-              "GIT_PASS": "${{ secrets.GIT_PASS }}"
-            }'
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          SITE_NAME: ${{ env.SITE_NAME }}
-          NETLIFY_SITE_ID: ${{ env.NETLIFY_SITE_ID }}
-
-      - name: Link GitHub repo to Netlify
-        run: netlify link --id ${{ env.NETLIFY_SITE_ID }} --name ${{ env.SITE_NAME }}
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          SITE_NAME: ${{ env.SITE_NAME }}
-          NETLIFY_SITE_ID: ${{ env.NETLIFY_SITE_ID }}
+          INSTALLATION_ID: ${{env.installation_id}}
+          REPO_ID: ${{ env.repo_id }}
 
       - name: Trigger deploy on Netlify
         run: netlify deploy --prod --trigger
