@@ -42,7 +42,7 @@ jobs:
           fi
 
           # Extract orgName if present in the commit message
-          if [[ "$COMMIT_MESSAGE" =~ ::auto-deploy::[[:space:]]*>\[[:space:]]*(.*) ]]; then
+          if [[ "$COMMIT_MESSAGE" =~ ::auto-deploy::[[:space:]]*\\>[[:space:]]*(.*) ]]; then
           orgName="${BASH_REMATCH[1]}"
           echo "Organization Name: $orgName"
           else
