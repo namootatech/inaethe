@@ -91,7 +91,7 @@ jobs:
                 "skip_automatic_builds": null,
                 "configuration_file_path": null,
                 "package_path": "",
-                "provider": "github",
+                "provider": "github"
               }
             }')
           echo "Site creation response: $RESPONSE"
