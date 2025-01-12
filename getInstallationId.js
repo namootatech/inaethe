@@ -10,6 +10,7 @@ import fetch from 'node-fetch'; // Ensure this package is installed
  * @throws {Error} - Throws an error if the installation is not found or the request fails.
  */
 async function getInstallationId(token, login) {
+  console.log('org', token);
   const apiUrl = 'https://api.github.com/orgs/namootatech/installations';
 
   try {
