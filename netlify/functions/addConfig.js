@@ -92,7 +92,7 @@ exports.handler = async (event) => {
         await executeCommand(
           `
       cd ${repoPath} &&
-      git commit -m "Add config for ${orgName}"
+      git commit -m "::auto-deploy:: > ${orgName}"
       `
         );
         console.log('** [ADD CONFIG FUNCTION] Changes committed successfully.');
