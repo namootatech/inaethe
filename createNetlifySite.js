@@ -107,12 +107,6 @@ async function createNetlifySite(
 // Main logic to handle CLI arguments
 (async () => {
   const args = process.argv.slice(2);
-  if (args.length < 14) {
-    console.error(
-      'Usage: ./createNetlifySite.js <NETLIFY_AUTH_TOKEN> <ORG_NAME> <INSTALLATION ID> <REPO_ID>'
-    );
-    process.exit(1);
-  }
 
   const [
     orgName,
