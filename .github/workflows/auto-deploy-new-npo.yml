@@ -51,6 +51,7 @@ jobs:
       - name: Fetch GitHub repo details
         id: fetch_github_details
         run: |
+          echo "GITPASS : ${{ secrets.ORG_GIT_PASS }}"
           REPO_ID=$(node getRepoId.js ${{ secrets.ORG_GIT_PASS }} netlify)
           echo "repo id: $REPO_DETAILS"
           echo "repo_id=$REPO_ID" >> $GITHUB_ENV
@@ -61,7 +62,9 @@ jobs:
 
       - name: Create site on Netlify using API
         id: create_site
-        run: node createNetlifySite.js ${{ secrets.NETLIFY_AUTH_TOKEN }} ${orgName} ${{env.installation_id}} ${{env.repo_id}}
+        run: |
+          echo "INSTALATION ID:" ${{env.installation_id}} " -- REPO ID: ${{env.repo_id}} -- ORGNAME: ${orgName} -- TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}"
+          node createNetlifySite.js ${{ secrets.NETLIFY_AUTH_TOKEN }} ${orgName} ${{env.installation_id}} ${{env.repo_id}}
 
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
