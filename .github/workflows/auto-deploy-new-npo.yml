@@ -35,14 +35,12 @@ jobs:
       - name: Fetch GitHub repo details
         id: fetch_github_details
         run: |
-          REPO_DETAILS=$(curl -L -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ secrets.GIT_PASS }}" -H "X-GitHub-Api-Version: 2022-11-28" "https://api.github.com/repos/${{ github.repository }}")
-          echo "Repo details: $REPO_DETAILS"
-
-          REPO_ID=$(echo "$REPO_DETAILS" | jq -r '.id')
+          REPO_ID=$(node getRepoId.js ${{ secrets.ORG_GIT_PASS }} netlify)
+          echo "repo id: $REPO_DETAILS"
           echo "repo_id=$REPO_ID" >> $GITHUB_ENV
 
-          INSTALLATION_ID=$(curl -L -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ secrets.GIT_PASS }}" -H "X-GitHub-Api-Version: 2022-11-28" "https://api.github.com/repos/${{ github.repository }}/installation")
-          echo "Installation Details $INSTALLATION_ID" 
+          INSTALLATION_ID=$(getInstallationId.js  ${{ secrets.ORG_GIT_PASS }} namootatech  )
+          echo "installation id: $INSTALLATION_ID" 
           echo "installation_id=$INSTALLATION_ID" >> $GITHUB_ENV
 
       - name: Set up Node.js
@@ -63,114 +61,8 @@ jobs:
 
       - name: Create site on Netlify using API
         id: create_site
-        run: |
-          PAYLOAD=$(cat <<EOF
-          {
-            "account_slug": "clinicplusdev",
-            "name": "${orgName}-inaethe-za",
-            "env": [
-              {
-                "key": "NEXT_PUBLIC_CONFIG_NAME",
-                "scopes": ["builds", "functions", "runtime", "post_processing"],
-                "values": [{"context": "all", "value": "${orgName}.json"}]
-              },
-              {
-                "key": "NEXT_PUBLIC_API_URL",
-                "scopes": ["builds", "functions", "runtime", "post_processing"],
-                "values": [{"context": "all", "value": "${{ secrets.NEXT_PUBLIC_API_URL }}"}]
-              },
-              {
-                "key": "NEXT_PUBLIC_PAYFAST_URL",
-                "scopes": ["builds", "functions", "runtime", "post_processing"],
-                "values": [{"context": "all", "value": "${{ secrets.NEXT_PUBLIC_PAYFAST_URL }}"}]
-              },
-              {
-                "key": "NEXT_PUBLIC_WEBSITE_URL",
-                "scopes": ["builds", "functions", "runtime", "post_processing"],
-                "values": [{"context": "all", "value": "${{ secrets.NEXT_PUBLIC_WEBSITE_URL }}"}]
-              },
-              {
-                "key": "NEXT_PUBLIC_MERCHANT_ID",
-                "scopes": ["builds", "functions", "runtime", "post_processing"],
-                "values": [{"context": "all", "value": "${{ secrets.NEXT_PUBLIC_MERCHANT_ID }}"}]
-              },
-              {
-                "key": "NEXT_PUBLIC_MERCHANT_KEY",
-                "scopes": ["builds", "functions", "runtime", "post_processing"],
-                "values": [{"context": "all", "value": "${{ secrets.NEXT_PUBLIC_MERCHANT_KEY }}"}]
-              },
-              {
-                "key": "NEXT_PUBLIC_GOOGLE_ANALYTICS",
-                "scopes": ["builds", "functions", "runtime", "post_processing"],
-                "values": [{"context": "all", "value": "${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS }}"}]
-              },
-              {
-                "key": "NEXT_PUBLIC_MONGODB_URI",
-                "scopes": ["builds", "functions", "runtime", "post_processing"],
-                "values": [{"context": "all", "value": "${{ secrets.NEXT_PUBLIC_MONGODB_URI }}"}]
-              },
-              {
-                "key": "NEXT_PUBLIC_MONGODB_DB",
-                "scopes": ["builds", "functions", "runtime", "post_processing"],
-                "values": [{"context": "all", "value": "${{ secrets.NEXT_PUBLIC_MONGODB_DB }}"}]
-              },
-              {
-                "key": "NETLIFY_AUTH_TOKEN",
-                "scopes": ["builds", "functions", "runtime", "post_processing"],
-                "values": [{"context": "all", "value": "${{ secrets.NETLIFY_AUTH_TOKEN }}"}]
-              },
-              {
-                "key": "GIT_USER",
-                "scopes": ["builds", "functions", "runtime", "post_processing"],
-                "values": [{"context": "all", "value": "${{ secrets.GIT_USER }}"}]
-              },
-              {
-                "key": "GIT_PASS",
-                "scopes": ["builds", "functions", "runtime", "post_processing"],
-                "values": [{"context": "all", "value":"${{ secrets.GIT_PASS }}"}]
-              }
-            ],
-             "created_via": "",
-             "default_hooks_data": {},
-            "repo": {
-              "provider": "github",
-              "installation_id": ${{ env.installation_id }},
-              "id": ${{ env.repo_id }},
-              "repo": "namoota/inaethe",
-              "owner_type": "Organization",
-              "private": true,
-              "branch": "main",
-              "framework": "next",
-              "frameworkName": "Next.js",
-              "dir": ".next",
-              "visualEditor": {
-                "hasConfig": false
-              },
-              "frameworkLogo": {
-               "default": "https://framework-info.netlify.app/logos/nextjs/light.svg",
-               "light": "https://framework-info.netlify.app/logos/nextjs/light.svg",
-               "dark": "https://framework-info.netlify.app/logos/nextjs/dark.svg"
-              },
-              "base": "",
-              "siteName": "${orgName}-inaethe-za",
-              "cmd": "npm run build",
-              "plugins_installed": [],
-              "plugins": [{"package": "@netlify/plugin-nextjs"}],
-              "plugins_recommended": [
-                  "@netlify/plugin-nextjs"
-              ],
-              "package_path": ""
-            }
-          }
-          EOF
-          )
+        run: node createNetlifySite.js ${{ secrets.NETLIFY_AUTH_TOKEN }} ${orgName} ${{env.installation_id}} ${{env.repo_id}}
 
-          echo "Site creation payload: $PAYLOAD"
-          RESPONSE=$(curl -X POST https://api.netlify.com/api/v1/clinicplusdev/sites -H "Authorization: Bearer ${NETLIFY_AUTH_TOKEN}" -H "Content-Type: application/json" -d "$PAYLOAD")
-          echo "Site creation response: $RESPONSE"
-
-          SITE_ID=$(echo $RESPONSE | jq -r '.id')
-          echo "NETLIFY_SITE_ID=$SITE_ID" >> $GITHUB_ENV
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           INSTALLATION_ID: ${{env.installation_id}}
