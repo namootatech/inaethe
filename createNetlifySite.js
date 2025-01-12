@@ -22,7 +22,7 @@ async function createNetlifySite(
   NEXT_PUBLIC_GOOGLE_ANALYTICS,
   NEXT_PUBLIC_MONGODB_URI,
   NEXT_PUBLIC_MONGODB_DB,
-  NEXT_PUBLIC_CONFIG_NAME = 'config',
+  NEXT_PUBLIC_CONFIG_NAME = 'config.json',
   GIT_USER,
   GIT_PASS
 ) {
@@ -107,7 +107,7 @@ async function createNetlifySite(
 // Main logic to handle CLI arguments
 (async () => {
   const args = process.argv.slice(2);
-  if (args.length < 4) {
+  if (args.length < 14) {
     console.error(
       'Usage: ./createNetlifySite.js <NETLIFY_AUTH_TOKEN> <ORG_NAME> <INSTALLATION ID> <REPO_ID>'
     );
@@ -126,10 +126,14 @@ async function createNetlifySite(
     NEXT_PUBLIC_MERCHANT_KEY,
     NEXT_PUBLIC_GOOGLE_ANALYTICS,
     NEXT_PUBLIC_MONGODB_URI,
-    NEXT_PUBLIC_MONGODB_DB,
+    NEXT_PUBLIC_MONGODB_DB = 'unknown',
     GIT_USER,
     GIT_PASS,
   ] = args;
+
+  console.log(process.argv);
+  console.log('\nArguments:', args);
+
   console.log('\n\nToken:', NETLIFY_AUTH_TOKEN);
   console.log('Org Name:', orgName);
   console.log('Installation ID:', installation_id);
@@ -164,8 +168,8 @@ async function createNetlifySite(
     NEXT_PUBLIC_MERCHANT_KEY,
     NEXT_PUBLIC_GOOGLE_ANALYTICS,
     NEXT_PUBLIC_MONGODB_URI,
-    NEXT_PUBLIC_MONGODB_DB,
-    orgName || 'config',
+    NEXT_PUBLIC_MONGODB_DB || 'unknown',
+    `${orgName}.json` || 'config',
     GIT_USER,
     GIT_PASS
   );
