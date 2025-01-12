@@ -156,7 +156,7 @@ async function createNetlifySite(
     process.exit(1);
   }
 
-  if (!token) {
+  if (!NETLIFY_AUTH_TOKEN) {
     console.error('Netlify API authentication token is required');
     process.exit(1);
   }
