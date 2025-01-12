@@ -19,13 +19,15 @@ async function getRepoId(token, repoPath) {
 
     if (!repoResponse.ok) {
       const data = await repoResponse.json();
+      console.log('Data response: ');
       console.log(data);
-      throw new Error(`HTTP error: ${data.message}`);
+      throw new Error(`HTTP error: ${{ data, token }}`);
     }
 
     const repoData = await repoResponse.json();
     return repoData.id;
   } catch (error) {
+    console.log('Token');
     console.error('Error fetching data:', error.message);
     throw error;
   }
