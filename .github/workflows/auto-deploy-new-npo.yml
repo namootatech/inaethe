@@ -52,11 +52,11 @@ jobs:
         id: fetch_github_details
         run: |
           echo "GITPASS : ${{ secrets.ORG_GIT_PASS }}"
-          REPO_ID=$(node getRepoId.js ${{ secrets.ORG_GIT_PASS }} netlify)
+          REPO_ID=$(node getRepoId.js ${{ secrets.ORG_GIT_PASS }} namootatech/inaethe)
           echo "repo id: $REPO_DETAILS"
           echo "repo_id=$REPO_ID" >> $GITHUB_ENV
 
-          INSTALLATION_ID=$(getInstallationId.js  ${{ secrets.ORG_GIT_PASS }} namootatech  )
+          INSTALLATION_ID=$(getInstallationId.js  ${{ secrets.ORG_GIT_PASS }} netlify  )
           echo "installation id: $INSTALLATION_ID" 
           echo "installation_id=$INSTALLATION_ID" >> $GITHUB_ENV
 

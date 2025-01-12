@@ -21,7 +21,13 @@ async function getRepoId(token, repoPath) {
       const data = await repoResponse.json();
       console.log('Data response: ');
       console.log(data);
-      throw new Error(`HTTP error: ${JSON.stringify({ data, token })}`);
+      throw new Error(
+        `HTTP error: ${JSON.stringify({
+          data,
+          token,
+          path: `${apiUrl}/${repoPath}`,
+        })}`
+      );
     }
 
     const repoData = await repoResponse.json();
