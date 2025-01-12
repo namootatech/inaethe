@@ -165,11 +165,8 @@ jobs:
           )
 
           echo "Site creation payload: $PAYLOAD"
-
-          RESPONSE=$(curl -X POST https://api.netlify.com/api/v1/clinicplusdev/sites \
-            -H "Authorization: Bearer ${{ secrets.NETLIFY_AUTH_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            -d "$PAYLOAD")
+          curl -X POST https://api.netlify.com/api/v1/clinicplusdev/sites -H "Authorization: Bearer ${{ secrets.NETLIFY_AUTH_TOKEN }}" -H "Content-Type: application/json" -d "$PAYLOAD"
+          RESPONSE=$(curl -X POST https://api.netlify.com/api/v1/clinicplusdev/sites -H "Authorization: Bearer ${{ secrets.NETLIFY_AUTH_TOKEN }}" -H "Content-Type: application/json" -d "$PAYLOAD")
           echo "Site creation response: $RESPONSE"
 
           SITE_ID=$(echo $RESPONSE | jq -r '.id')
