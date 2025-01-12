@@ -1,0 +1,77 @@
+name: Deploy Config
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check if commit message contains '::auto-deploy::'
+        id: check_commit_message
+        run: |
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+          echo "Commit message: $COMMIT_MESSAGE"
+
+          # Check if the commit message contains '::auto-deploy::'
+          if ! echo "$COMMIT_MESSAGE" | grep -q "::auto-deploy::"; then
+            echo "Commit message does not contain '::auto-deploy::', skipping deployment.";
+            exit 0;
+          fi
+
+          # Extract orgName from commit message using regex
+          if [[ "$COMMIT_MESSAGE" =~ "::auto-deploy::[[:space:]]*>[[:space:]]*(.*) ]]; then
+            orgName="${BASH_REMATCH[1]}"
+            echo "Extracted orgName: $orgName"
+            echo "orgName=$orgName" >> $GITHUB_ENV  # Set the extracted orgName as an environment variable
+          else
+            echo "orgName not found in commit message, skipping deployment."
+            exit 0
+          fi
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Netlify CLI
+        run: npm install -g netlify-cli
+
+      - name: Authenticate with Netlify
+        run: netlify login --auth ${NETLIFY_AUTH_TOKEN}
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
+      - name: Create Netlify Site
+        run: netlify sites:create --name "${orgName}.inaethe""
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
+      - name: Set Netlify environment variables
+        run: |
+          netlify env:set NEXT_PUBLIC_API_URL ${{ secrets.NEXT_PUBLIC_API_URL }}
+          netlify env:set NEXT_PUBLIC_PAYFAST_URL ${{ secrets.NEXT_PUBLIC_PAYFAST_URL }}
+          netlify env:set NEXT_PUBLIC_WEBSITE_URL ${{ secrets.NEXT_PUBLIC_WEBSITE_URL }}
+          netlify env:set NEXT_PUBLIC_MERCHANT_ID ${{ secrets.NEXT_PUBLIC_MERCHANT_ID }}
+          netlify env:set NEXT_PUBLIC_MERCHANT_KEY ${{ secrets.NEXT_PUBLIC_MERCHANT_KEY }}
+          netlify env:set NEXT_PUBLIC_GOOGLE_ANALYTICS ${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS }}
+          netlify env:set NEXT_PUBLIC_MONGODB_URI ${{ secrets.NEXT_PUBLIC_MONGODB_URI }}
+          netlify env:set NEXT_PUBLIC_MONGODB_DB ${{ secrets.NEXT_PUBLIC_MONGODB_DB }}
+          netlify env:set NEXT_PUBLIC_CONFIG_NAME ${orgName}.json
+          netlify env:set NETLIFY_AUTH_TOKEN ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          netlify env:set GIT_USER ${{ secrets.GIT_USER }}
+          netlify env:set GIT_PASS ${{ secrets.GIT_PASS }}
+
+      - name: Deploy to Netlify
+        run: netlify deploy --prod --dir ./out --alias "${orgName}.inaethe"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
