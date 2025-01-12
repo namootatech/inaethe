@@ -51,27 +51,79 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
-      - name: Create Netlify Site
-        run: netlify sites:create --name "${orgName}.inaethe"
+      - name: Create site on Netlify using API
+        id: create_site
+        run: |
+          RESPONSE=$(curl -X POST https://api.netlify.com/api/v1/sites \
+            -H "Authorization: Bearer ${{ secrets.NETLIFY_AUTH_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "name": "ie-${orgName}-za",
+              "custom_domain": "${orgName}.xhap.co.za",
+              "team": "Humphrey Odilo'\''s team",
+              "account_id": "60064e41e91328d07182bf09",
+              "account_slug": "clinicplusdev",
+              "account_name": "Humphrey Odilo'\''s team",
+              "deploy_id": "678338abf2c6b90008d73118",
+              "deploy_hook": "https://api.netlify.com/hooks/github",
+              "user_id": "60064e41e91328d07182bf08",
+              "admin_url": "https://app.netlify.com/sites/inaethe",
+              "plan": "nf_team_pro",
+              "premium": false,
+              "claimed": true,
+              "build_settings": {
+                "cmd": "npm run build",
+                "dir": ".next",
+                "installation_id": 44315287,
+                "untrusted_flow": "review",
+                "repo_type": "git",
+                "repo_branch": "main",
+                "repo_path": "namootatech/inaethe",
+                "repo_url": "https://github.com/namootatech/inaethe",
+                "repo_owner_type": "Organization",
+                "provider": "github",
+                "allowed_branches": ["main"]
+              }
+            }')
+          echo "Site creation response: $RESPONSE"
+
+          # Extract site ID and name from the response
+          SITE_ID=$(echo $RESPONSE | jq -r '.id')
+          SITE_NAME=$(echo $RESPONSE | jq -r '.name')
+
+          echo "NETLIFY_SITE_ID=$SITE_ID" >> $GITHUB_ENV
+          echo "SITE_NAME=$SITE_NAME" >> $GITHUB_ENV
+
+      - name: Set environment variables on Netlify
+        run: |
+          curl -X POST https://api.netlify.com/api/v1/sites/${{ env.SITE_ID }}/env \
+            -H "Authorization: Bearer ${{ secrets.NETLIFY_AUTH_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "NEXT_PUBLIC_API_URL": "${{ secrets.NEXT_PUBLIC_API_URL }}",
+              "NEXT_PUBLIC_PAYFAST_URL" :"${{ secrets.NEXT_PUBLIC_PAYFAST_URL }}",
+              "NEXT_PUBLIC_WEBSITE_URL" :"${{ secrets.NEXT_PUBLIC_WEBSITE_URL }}",
+              "NEXT_PUBLIC_MERCHANT_ID" :"${{ secrets.NEXT_PUBLIC_MERCHANT_ID }}",
+              "NEXT_PUBLIC_MERCHANT_KEY": "${{ secrets.NEXT_PUBLIC_MERCHANT_KEY }}",
+              "NEXT_PUBLIC_GOOGLE_ANALYTICS": "${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS }}",
+              "NEXT_PUBLIC_MONGODB_URI": "${{ secrets.NEXT_PUBLIC_MONGODB_URI }}",
+              "NEXT_PUBLIC_MONGODB_DB": "${{ secrets.NEXT_PUBLIC_MONGODB_DB }}",
+              "NEXT_PUBLIC_CONFIG_NAME": "${orgName}.json",
+              "NETLIFY_AUTH_TOKEN": "${{ secrets.NETLIFY_AUTH_TOKEN }}",
+              "GIT_USER": "${{ secrets.GIT_USER }}",
+              "GIT_PASS": "${{ secrets.GIT_PASS }}"
+            }'
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
-      - name: Set Netlify environment variables
-        run: |
-          netlify env:set NEXT_PUBLIC_API_URL ${{ secrets.NEXT_PUBLIC_API_URL }}
-          netlify env:set NEXT_PUBLIC_PAYFAST_URL ${{ secrets.NEXT_PUBLIC_PAYFAST_URL }}
-          netlify env:set NEXT_PUBLIC_WEBSITE_URL ${{ secrets.NEXT_PUBLIC_WEBSITE_URL }}
-          netlify env:set NEXT_PUBLIC_MERCHANT_ID ${{ secrets.NEXT_PUBLIC_MERCHANT_ID }}
-          netlify env:set NEXT_PUBLIC_MERCHANT_KEY ${{ secrets.NEXT_PUBLIC_MERCHANT_KEY }}
-          netlify env:set NEXT_PUBLIC_GOOGLE_ANALYTICS ${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS }}
-          netlify env:set NEXT_PUBLIC_MONGODB_URI ${{ secrets.NEXT_PUBLIC_MONGODB_URI }}
-          netlify env:set NEXT_PUBLIC_MONGODB_DB ${{ secrets.NEXT_PUBLIC_MONGODB_DB }}
-          netlify env:set NEXT_PUBLIC_CONFIG_NAME ${orgName}.json
-          netlify env:set NETLIFY_AUTH_TOKEN ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          netlify env:set GIT_USER ${{ secrets.GIT_USER }}
-          netlify env:set GIT_PASS ${{ secrets.GIT_PASS }}
+      - name: Link GitHub repo to Netlify
+        run: netlify link --id ${{ env.NETLIFY_SITE_ID }} --name ${{ env.SITE_NAME }}
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          SITE_NAME: ${{ env.SITE_NAME }}
+          NETLIFY_SITE_ID: ${{ env.NETLIFY_SITE_ID }}
 
-      - name: Deploy to Netlify
-        run: netlify deploy --prod --dir ./out --alias "${orgName}.inaethe"
+      - name: Trigger deploy on Netlify
+        run: netlify deploy --prod --alias "ie-${orgName}-za" --trigger
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
