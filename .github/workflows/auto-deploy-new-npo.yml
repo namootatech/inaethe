@@ -50,9 +50,6 @@ jobs:
           exit 0
           fi
 
-      - name: Fetch GitHub repo details
-        id: fetch_github_details
-        run: |
           echo "GITPASS : ${{ secrets.ORG_GIT_PASS }}"
           export REPO_ID=$(node getRepoId.js ${{ secrets.ORG_GIT_PASS }} namootatech/inaethe)
           echo "repo id: $REPO_ID"

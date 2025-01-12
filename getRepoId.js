@@ -3,7 +3,6 @@
 import fetch from 'node-fetch';
 
 async function getRepoId(token, repoPath) {
-  console.log('org', token);
   const apiUrl = 'https://api.github.com/repos';
 
   try {
