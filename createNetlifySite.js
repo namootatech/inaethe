@@ -23,11 +23,43 @@ const secrets = {
   GIT_PASS: process.env.GIT_PASS,
 };
 
-async function createNetlifySite(token, orgName, installation_id, repo_id) {
+async function createNetlifySite(
+  orgName,
+  installation_id,
+  repo_id,
+  NETLIFY_AUTH_TOKEN,
+  NEXT_PUBLIC_API_URL,
+  NEXT_PUBLIC_PAYFAST_URL,
+  NEXT_PUBLIC_WEBSITE_URL,
+  NEXT_PUBLIC_MERCHANT_ID,
+  NEXT_PUBLIC_MERCHANT_KEY,
+  NEXT_PUBLIC_GOOGLE_ANALYTICS,
+  NEXT_PUBLIC_MONGODB_URI,
+  NEXT_PUBLIC_MONGODB_DB,
+  NEXT_PUBLIC_CONFIG_NAME,
+  GIT_USER,
+  GIT_PASS
+) {
   const apiUrl = `https://api.netlify.com/api/v1/sites`;
+  const secrets = {
+    NETLIFY_AUTH_TOKEN,
+    NEXT_PUBLIC_API_URL,
+    NEXT_PUBLIC_PAYFAST_URL,
+    NEXT_PUBLIC_WEBSITE_URL,
+    NEXT_PUBLIC_MERCHANT_ID,
+    NEXT_PUBLIC_MERCHANT_KEY,
+    NEXT_PUBLIC_GOOGLE_ANALYTICS,
+    NEXT_PUBLIC_MONGODB_URI,
+    NEXT_PUBLIC_MONGODB_DB,
+    NEXT_PUBLIC_CONFIG_NAME,
+    GIT_USER,
+    GIT_PASS,
+  };
+  const token = NETLIFY_AUTH_TOKEN;
   const payload = {
     account_slug: 'clinicplusdev',
     name: `${orgName}-inaethe-za`,
+    custom_domain: `${orgName}.xhap.co.za`,
     env: Object.entries(secrets).map(([key, value]) => ({
       key,
       scopes: ['builds', 'functions', 'runtime', 'post_processing'],
@@ -92,10 +124,25 @@ async function createNetlifySite(token, orgName, installation_id, repo_id) {
     process.exit(1);
   }
 
-  const [token, orgName, installation_id, repo_id] = args;
-  console.log('Token:', token);
+  const [
+    orgName,
+    installation_id,
+    repo_id,
+    NETLIFY_AUTH_TOKEN,
+    NEXT_PUBLIC_API_URL,
+    NEXT_PUBLIC_PAYFAST_URL,
+    NEXT_PUBLIC_WEBSITE_URL,
+    NEXT_PUBLIC_MERCHANT_ID,
+    NEXT_PUBLIC_MERCHANT_KEY,
+    NEXT_PUBLIC_GOOGLE_ANALYTICS,
+    NEXT_PUBLIC_MONGODB_URI,
+    NEXT_PUBLIC_MONGODB_DB,
+    NEXT_PUBLIC_CONFIG_NAME,
+    GIT_USER,
+    GIT_PASS,
+  ] = args;
+  console.log('\n\nToken:', token);
   console.log('Org Name:', orgName);
-  console.log('Secrets:', secrets);
   console.log('Installation ID:', installation_id);
   console.log('Repository ID:', repo_id);
 
@@ -117,9 +164,21 @@ async function createNetlifySite(token, orgName, installation_id, repo_id) {
   const randomTwoDigitNumber = Math.floor(Math.random() * 100) + 10;
 
   await createNetlifySite(
-    token,
-    orgName || `unknown-hope-${randomTwoDigitNumber}`,
+    orgName,
     installation_id,
-    repo_id
+    repo_id,
+    NETLIFY_AUTH_TOKEN,
+    NEXT_PUBLIC_API_URL,
+    NEXT_PUBLIC_PAYFAST_URL,
+    NEXT_PUBLIC_WEBSITE_URL,
+    NEXT_PUBLIC_MERCHANT_ID,
+    NEXT_PUBLIC_MERCHANT_KEY,
+    NEXT_PUBLIC_GOOGLE_ANALYTICS,
+    NEXT_PUBLIC_MONGODB_URI,
+    NEXT_PUBLIC_MONGODB_DB,
+    NEXT_PUBLIC_MONGODB_DB,
+    NEXT_PUBLIC_CONFIG_NAME,
+    GIT_USER,
+    GIT_PASS
   );
 })();
