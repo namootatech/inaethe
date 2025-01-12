@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import fetch from 'node-fetch'; // Ensure you have this package installed
-
+import 'dotenv';
 /**
  * Creates a Netlify site by making a POST request to the Netlify API.
  * @param {string} token - The Netlify API authentication token.
@@ -22,6 +22,7 @@ const secrets = {
   GIT_USER: process.env.GIT_USER,
   GIT_PASS: process.env.GIT_PASS,
 };
+
 async function createNetlifySite(token, orgName, installation_id, repo_id) {
   const apiUrl = `https://api.netlify.com/api/v1/sites`;
   const payload = {
