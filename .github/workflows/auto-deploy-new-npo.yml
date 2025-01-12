@@ -68,7 +68,7 @@ jobs:
           INSTALLATION_ID: ${{env.installation_id}}
           REPO_ID: ${{ env.repo_id }}
 
-      - name: Trigger deploy on Netlify
+      - name: Trigger deploy
         run: netlify deploy --prod --trigger
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
