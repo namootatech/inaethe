@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set Up Node.js
         uses: actions/setup-node@v4
@@ -42,7 +42,7 @@ jobs:
           fi
 
           # Extract orgName if present in the commit message
-          if [[ "$COMMIT_MESSAGE" =~ ::auto-deploy::[[:space:]]*\\>[[:space:]]*(.*) ]]; then
+          if [[ "$COMMIT_MESSAGE" =~ ::auto-deploy::[[:space:]]*(.*) ]]; then
           orgName="${BASH_REMATCH[1]}"
           echo "Organization Name: $orgName"
           else
