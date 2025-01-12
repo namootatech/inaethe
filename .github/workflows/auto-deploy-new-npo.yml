@@ -58,42 +58,41 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.NETLIFY_AUTH_TOKEN }}" \
             -H "Content-Type: application/json" \
             -d '{
-              "name": "ie-${orgName}-za",
-              "custom_domain": "${orgName}.xhap.co.za",
-              "team": "Humphrey Odilo'\''s team",
-              "account_id": "60064e41e91328d07182bf09",
-              "account_slug": "clinicplusdev",
-              "account_name": "Humphrey Odilo'\''s team",
-              "deploy_id": "678338abf2c6b90008d73118",
-              "deploy_hook": "https://api.netlify.com/hooks/github",
-              "user_id": "60064e41e91328d07182bf08",
-              "admin_url": "https://app.netlify.com/sites/inaethe",
-              "plan": "nf_team_pro",
-              "premium": false,
-              "claimed": true,
-              "build_settings": {
-                "cmd": "npm run build",
-                "dir": ".next",
-                "installation_id": 44315287,
-                "untrusted_flow": "review",
-                "repo_type": "git",
-                "repo_branch": "main",
-                "repo_path": "namootatech/inaethe",
-                "repo_url": "https://github.com/namootatech/inaethe",
-                "repo_owner_type": "Organization",
-                "provider": "github",
-                "allowed_branches": ["main"]
-                "functions_dir": null,
-                "skip_prs": null,
-                "base_rel_dir": true,
-                "stop_builds": false,
-                "public_repo": false,
-                "skip_automatic_builds": null,
-                "configuration_file_path": null,
-                "package_path": "",
-                "provider": "github"
-              }
-            }')
+                "name": "ie-jvc-za",
+                "custom_domain": "weest.xhap.co.za",
+                "team": "Humphrey Odilo'\''s team",
+                "account_id": "60064e41e91328d07182bf09",
+                "account_slug": "clinicplusdev",
+                "account_name": "Humphrey Odilo'\''s team",
+                "deploy_id": "678338abf2c6b90008d73118",
+                "deploy_hook": "https://api.netlify.com/hooks/github",
+                "user_id": "60064e41e91328d07182bf08",
+                "admin_url": "https://app.netlify.com/sites/inaethe",
+                "plan": "nf_team_pro",
+                "premium": false,
+                "claimed": true,
+                "build_settings": {
+                    "cmd": "npm run build",
+                    "dir": ".next",
+                    "installation_id": 44315287,
+                    "untrusted_flow": "review",
+                    "repo_type": "git",
+                    "repo_branch": "main",
+                    "repo_path": "namootatech/inaethe",
+                    "repo_url": "https://github.com/namootatech/inaethe",
+                    "repo_owner_type": "Organization",
+                    "provider": "github",
+                    "allowed_branches": ["main"],
+                    "functions_dir": null,
+                    "skip_prs": null,
+                    "base_rel_dir": true,
+                    "stop_builds": false,
+                    "public_repo": false,
+                    "skip_automatic_builds": null,
+                    "configuration_file_path": null,
+                    "package_path": ""
+                }
+                }')
           echo "Site creation response: $RESPONSE"
 
           # Extract site ID and name from the response
