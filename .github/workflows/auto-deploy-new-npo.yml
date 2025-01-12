@@ -83,6 +83,15 @@ jobs:
                 "repo_owner_type": "Organization",
                 "provider": "github",
                 "allowed_branches": ["main"]
+                "functions_dir": null,
+                "skip_prs": null,
+                "base_rel_dir": true,
+                "stop_builds": false,
+                "public_repo": false,
+                "skip_automatic_builds": null,
+                "configuration_file_path": null,
+                "package_path": "",
+                "provider": "github",
               }
             }')
           echo "Site creation response: $RESPONSE"
