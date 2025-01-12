@@ -44,7 +44,7 @@ jobs:
 
       # Step 5: Notify with Commit Details
       - name: Send WhatsApp Notification
-        run: node sendCommitNotification.js push ./payload.json
+        run: node ./workflow/sendCommitNotification.js push ./payload.json
         env:
           GIT_AUTHOR: ${{ env.GIT_AUTHOR }}
           GIT_MESSAGE: ${{ env.GIT_MESSAGE }}

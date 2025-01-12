@@ -36,7 +36,7 @@ jobs:
       - name: Send WhatsApp Notification
         run: |
           echo "Sending Notification..."
-          node sendNotification.js ${{ github.event_name }} ./payload.json
+          node ./workflow/sendNotification.js ${{ github.event_name }} ./payload.json
         env:
           EVENT_PAYLOAD: ${{ toJson(github.event) }}
 

@@ -51,15 +51,15 @@ jobs:
           fi
 
           echo "GITPASS : ${{ secrets.ORG_GIT_PASS }}"
-          export REPO_ID=$(node getRepoId.js ${{ secrets.ORG_GIT_PASS }} namootatech/inaethe)
+          export REPO_ID=$(node ./workflow/getRepoId.js ${{ secrets.ORG_GIT_PASS }} namootatech/inaethe)
           echo "repo id: $REPO_ID"
 
-          export INSTALLATION_ID=$(node getInstallationId.js ${{ secrets.ORG_GIT_PASS }} netlify)
+          export INSTALLATION_ID=$(node ./workflow/getInstallationId.js ${{ secrets.ORG_GIT_PASS }} netlify)
           echo "installation id: $INSTALLATION_ID"
 
           echo "INSTALATION ID: $INSTALLATION_ID  -- REPO ID: $REPO_ID -- ORGNAME: $orgName -- TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}"
           run: |
-          node createNetlifySite.js \
+          node ./workflow/createNetlifySite.js \
             "$orgName" \
             "$INSTALLATION_ID" \
             "$REPO_ID" \

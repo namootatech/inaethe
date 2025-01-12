@@ -36,7 +36,7 @@ export const ConfigProvider = ({ children }) => {
         // Fallback to direct import from public folder
         try {
           const localConfig = await import(
-            `../../public/${process.env.NEXT_PUBLIC_CONFIG_NAME}`
+            `../../public/themes/${process.env.NEXT_PUBLIC_CONFIG_NAME}`
           );
           setConfig(localConfig.default || localConfig); // Set the imported config
         } catch (importError) {
