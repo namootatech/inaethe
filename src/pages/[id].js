@@ -37,7 +37,7 @@ const fetchConfig = async () => {
     // Fallback to importing directly from the public folder
     try {
       const localConfig = await import(
-        `../../public/${process.env.NEXT_PUBLIC_CONFIG_NAME}`
+        `../../public/themes/${process.env.NEXT_PUBLIC_CONFIG_NAME}`
       );
       return localConfig.default || localConfig; // Ensure compatibility with module systems
     } catch (importError) {
