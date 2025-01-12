@@ -165,7 +165,7 @@ jobs:
               "framework": "next"
             }
           }
-        EOF
+          EOF
           )
 
           echo "Site creation payload: $PAYLOAD"
