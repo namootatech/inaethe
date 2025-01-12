@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const fetch = require('node-fetch'); // Ensure this package is installed
+import fetch from 'node-fetch'; // Ensure this package is installed
 
 /**
  * Fetches the installation ID matching the specified account login.

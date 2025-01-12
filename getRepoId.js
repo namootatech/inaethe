@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
 async function getRepoId(token, repoPath) {
   const apiUrl = 'https://api.github.com/repos';
