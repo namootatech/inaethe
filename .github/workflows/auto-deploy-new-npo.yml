@@ -22,7 +22,7 @@ jobs:
           # Check if the commit message contains '::auto-deploy::'
           if ! echo "$COMMIT_MESSAGE" | grep -q "::auto-deploy::"; then
             echo "Commit message does not contain '::auto-deploy::', skipping deployment.";
-            exit 0;
+            exit 0
           fi
 
           # Extract orgName from commit message using regex
@@ -52,7 +52,7 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
       - name: Create Netlify Site
-        run: netlify sites:create --name "${orgName}.inaethe""
+        run: netlify sites:create --name "${orgName}.inaethe"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
