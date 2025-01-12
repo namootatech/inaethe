@@ -13,6 +13,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Set Up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Netlify CLI
+        run: npm install -g netlify-cli
+
+      - name: Authenticate with Netlify
+        run: netlify login --auth ${NETLIFY_AUTH_TOKEN}
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
       - name: Check if commit message contains '::auto-deploy::'
         id: check_commit_message
         run: |
@@ -42,22 +58,6 @@ jobs:
           INSTALLATION_ID=$(getInstallationId.js  ${{ secrets.ORG_GIT_PASS }} namootatech  )
           echo "installation id: $INSTALLATION_ID" 
           echo "installation_id=$INSTALLATION_ID" >> $GITHUB_ENV
-
-      - name: Set Up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22.x'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Install Netlify CLI
-        run: npm install -g netlify-cli
-
-      - name: Authenticate with Netlify
-        run: netlify login --auth ${NETLIFY_AUTH_TOKEN}
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
       - name: Create site on Netlify using API
         id: create_site
