@@ -38,7 +38,7 @@ async function createNetlifySite(
     NEXT_PUBLIC_MONGODB_URI,
     NEXT_PUBLIC_MONGODB_DB,
     NEXT_PUBLIC_CONFIG_NAME,
-    NEXT_PUBLIC_VERBOSE_LOGGING: true,
+    NEXT_PUBLIC_VERBOSE_LOGGING: 'true',
     GIT_USER,
     GIT_PASS,
   };
