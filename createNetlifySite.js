@@ -70,7 +70,7 @@ async function createNetlifySite(
       provider: 'github',
       installation_id: installation_id,
       id: repo_id,
-      repo: 'namoota/inaethe',
+      repo: 'namootatech/inaethe',
       owner_type: 'Organization',
       private: true,
       branch: 'main',
