@@ -27,6 +27,7 @@ async function getInstallationId(token, login) {
     // Check if the response is successful
     if (!response.ok) {
       const data = await response.json();
+      console.log('t=', token);
       console.log(data);
       throw new Error(`HTTP error : ${response.message}`);
     }
