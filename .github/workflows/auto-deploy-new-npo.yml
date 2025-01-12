@@ -66,7 +66,7 @@ jobs:
           PAYLOAD=$(cat <<EOF
           {
             "account_slug": "clinicplusdev",
-            "name": "ie-${orgName}-za",
+            "name": "${orgName}-inaethe-za",
             "env": [
               {
                 "key": "NEXT_PUBLIC_CONFIG_NAME",
@@ -151,7 +151,7 @@ jobs:
                "dark": "https://framework-info.netlify.app/logos/nextjs/dark.svg"
               },
               "base": "",
-              "siteName": "ie-${orgName}-za",
+              "siteName": ""${orgName}-inaethe-za",
               "cmd": "npm run build",
               "plugins_installed": [],
               "plugins": [{"package": "@netlify/plugin-nextjs"}],
@@ -165,7 +165,6 @@ jobs:
           )
 
           echo "Site creation payload: $PAYLOAD"
-          curl -X POST https://api.netlify.com/api/v1/clinicplusdev/sites -H "Authorization: Bearer ${{ secrets.NETLIFY_AUTH_TOKEN }}" -H "Content-Type: application/json" -d "$PAYLOAD"
           RESPONSE=$(curl -X POST https://api.netlify.com/api/v1/clinicplusdev/sites -H "Authorization: Bearer ${{ secrets.NETLIFY_AUTH_TOKEN }}" -H "Content-Type: application/json" -d "$PAYLOAD")
           echo "Site creation response: $RESPONSE"
 
