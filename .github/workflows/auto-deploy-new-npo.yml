@@ -129,9 +129,8 @@ jobs:
                 "values": [{"context": "all", "value":"${{ secrets.GIT_PASS }}"}]
               }
             ],
-            "account_slug":"clinicplusdev",
              "created_via": "",
-             "default_hooks_data: {},
+             "default_hooks_data": {},
             "repo": {
               "provider": "github",
               "installation_id": ${{ env.installation_id }},
@@ -159,8 +158,7 @@ jobs:
               "plugins_recommended": [
                   "@netlify/plugin-nextjs"
               ],
-              "package_path": "",
-              "framework": "next"
+              "package_path": ""
             }
           }
           EOF
