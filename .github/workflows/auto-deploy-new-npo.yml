@@ -78,7 +78,7 @@ jobs:
               {
                 "key": "NEXT_PUBLIC_API_URL",
                 "scopes": ["builds", "functions", "runtime", "post_processing"],
-                "values": [{"context": "all", "value": "${{ secrets.NEXT_PUBLIC_API_URL }}""}]
+                "values": [{"context": "all", "value": "${{ secrets.NEXT_PUBLIC_API_URL }}"}]
               },
               {
                 "key": "NEXT_PUBLIC_PAYFAST_URL",
@@ -142,7 +142,7 @@ jobs:
               "owner_type": "Organization",
               "private": true,
               "branch": "main",
-              "framework": "next"
+              "framework": "next",
               "frameworkName": "Next.js",
               "dir": ".next",
               "visualEditor": {
