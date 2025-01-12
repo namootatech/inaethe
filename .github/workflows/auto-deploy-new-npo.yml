@@ -58,8 +58,8 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.NETLIFY_AUTH_TOKEN }}" \
             -H "Content-Type: application/json" \
             -d '{
-                "name": "ie-ook-za",
-                "custom_domain": "ook.xhap.co.za",
+                "name": "ie-test-za",
+                "custom_domain": "test.xhap.co.za",
                 "team": "Humphrey Odilo'\''s team",
                 "account_id": "60064e41e91328d07182bf09",
                 "account_slug": "clinicplusdev",
