@@ -61,8 +61,8 @@ jobs:
       - name: Create site on Netlify using API
         id: create_site
         run: |
-          echo "INSTALATION ID:" ${{env.installation_id}} " -- REPO ID: ${repo_id} -- ORGNAME: ${orgName} -- TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}"
-          node createNetlifySite.js ${{ secrets.NETLIFY_AUTH_TOKEN }} ${orgName} ${installation_id} ${repo_id}
+          echo "INSTALATION ID:" $installation_id " -- REPO ID: $repo_id -- ORGNAME: $orgName -- TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}"
+          node createNetlifySite.js ${{ secrets.NETLIFY_AUTH_TOKEN }} $orgName $installation_id $repo_id
 
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
