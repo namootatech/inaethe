@@ -9,20 +9,6 @@ import 'dotenv';
  * @param {object} secrets - The secrets to include in the payload.
  */
 
-const secrets = {
-  NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
-  NEXT_PUBLIC_PAYFAST_URL: process.env.NEXT_PUBLIC_PAYFAST_URL,
-  NEXT_PUBLIC_WEBSITE_URL: process.env.NEXT_PUBLIC_WEBSITE_URL,
-  NEXT_PUBLIC_MERCHANT_ID: process.env.NEXT_PUBLIC_MERCHANT_ID,
-  NEXT_PUBLIC_MERCHANT_KEY: process.env.NEXT_PUBLIC_MERCHANT_KEY,
-  NEXT_PUBLIC_GOOGLE_ANALYTICS: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS,
-  NEXT_PUBLIC_MONGODB_URI: process.env.NEXT_PUBLIC_MONGODB_URI,
-  NEXT_PUBLIC_MONGODB_DB: process.env.NEXT_PUBLIC_MONGODB_DB,
-  NETLIFY_AUTH_TOKEN: process.env.NETLIFY_AUTH_TOKEN,
-  GIT_USER: process.env.GIT_USER,
-  GIT_PASS: process.env.GIT_PASS,
-};
-
 async function createNetlifySite(
   orgName,
   installation_id,
@@ -36,7 +22,7 @@ async function createNetlifySite(
   NEXT_PUBLIC_GOOGLE_ANALYTICS,
   NEXT_PUBLIC_MONGODB_URI,
   NEXT_PUBLIC_MONGODB_DB,
-  NEXT_PUBLIC_CONFIG_NAME,
+  NEXT_PUBLIC_CONFIG_NAME = 'config',
   GIT_USER,
   GIT_PASS
 ) {
@@ -55,16 +41,20 @@ async function createNetlifySite(
     GIT_USER,
     GIT_PASS,
   };
+  console.log(secrets);
+
+  const environmentVariables = Object.entries(secrets).map(([key, value]) => ({
+    key,
+    scopes: ['builds', 'functions', 'runtime', 'post_processing'],
+    values: [{ context: 'all', value }],
+  }));
+
   const token = NETLIFY_AUTH_TOKEN;
   const payload = {
     account_slug: 'clinicplusdev',
     name: `${orgName}-inaethe-za`,
     custom_domain: `${orgName}.xhap.co.za`,
-    env: Object.entries(secrets).map(([key, value]) => ({
-      key,
-      scopes: ['builds', 'functions', 'runtime', 'post_processing'],
-      values: [{ context: 'all', value }],
-    })),
+    env: environmentVariables,
     created_via: '',
     repo: {
       provider: 'github',
@@ -137,7 +127,6 @@ async function createNetlifySite(
     NEXT_PUBLIC_GOOGLE_ANALYTICS,
     NEXT_PUBLIC_MONGODB_URI,
     NEXT_PUBLIC_MONGODB_DB,
-    NEXT_PUBLIC_CONFIG_NAME,
     GIT_USER,
     GIT_PASS,
   ] = args;
@@ -176,8 +165,7 @@ async function createNetlifySite(
     NEXT_PUBLIC_GOOGLE_ANALYTICS,
     NEXT_PUBLIC_MONGODB_URI,
     NEXT_PUBLIC_MONGODB_DB,
-    NEXT_PUBLIC_MONGODB_DB,
-    NEXT_PUBLIC_CONFIG_NAME,
+    orgName || 'config',
     GIT_USER,
     GIT_PASS
   );
