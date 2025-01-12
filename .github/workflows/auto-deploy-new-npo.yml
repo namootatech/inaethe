@@ -58,8 +58,8 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.NETLIFY_AUTH_TOKEN }}" \
             -H "Content-Type: application/json" \
             -d '{
-                "name": "ie-jvc-za",
-                "custom_domain": "weest.xhap.co.za",
+                "name": "ie-ook-za",
+                "custom_domain": "ook.xhap.co.za",
                 "team": "Humphrey Odilo'\''s team",
                 "account_id": "60064e41e91328d07182bf09",
                 "account_slug": "clinicplusdev",
@@ -132,6 +132,6 @@ jobs:
           NETLIFY_SITE_ID: ${{ env.NETLIFY_SITE_ID }}
 
       - name: Trigger deploy on Netlify
-        run: netlify deploy --prod --alias "ie-${orgName}-za" --trigger
+        run: netlify deploy --prod --trigger
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
