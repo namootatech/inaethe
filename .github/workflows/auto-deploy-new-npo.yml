@@ -151,7 +151,7 @@ jobs:
                "dark": "https://framework-info.netlify.app/logos/nextjs/dark.svg"
               },
               "base": "",
-              "siteName": ""${orgName}-inaethe-za",
+              "siteName": "${orgName}-inaethe-za",
               "cmd": "npm run build",
               "plugins_installed": [],
               "plugins": [{"package": "@netlify/plugin-nextjs"}],
