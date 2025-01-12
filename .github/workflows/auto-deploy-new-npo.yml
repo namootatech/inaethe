@@ -116,7 +116,7 @@ jobs:
               {
                 "key": "NETLIFY_AUTH_TOKEN",
                 "scopes": ["builds", "functions", "runtime", "post_processing"],
-                "values": [{"context": "all", "value": "${{ secrets.NETLIFY_AUTH_TOKEN }}"]
+                "values": [{"context": "all", "value": "${{ secrets.NETLIFY_AUTH_TOKEN }}"}]
               },
               {
                 "key": "GIT_USER",
