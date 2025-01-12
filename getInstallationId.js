@@ -29,7 +29,7 @@ async function getInstallationId(token, login) {
       const data = await response.json();
       console.log('t=', token);
       console.log(data);
-      throw new Error(`HTTP error : ${{ data, token }}`);
+      throw new Error(`HTTP error : ${JSON.stringify({ data, token })}`);
     }
 
     // Parse the JSON response
