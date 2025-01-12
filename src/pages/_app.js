@@ -42,17 +42,17 @@ export default function MyApp({ Component, pageProps }) {
    gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');`,
         }}
       ></script>
-      <ConfigProvider>
-        <EventHandlersProvider>
-          <Provider store={store}>
+      <Provider store={store}>
+        <ConfigProvider>
+          <EventHandlersProvider>
             <CookiesProvider defaultSetOptions={{ path: '/' }}>
               <ProgressBarContainer />
               <ToastContainer />
               <Component {...pageProps} />
             </CookiesProvider>
-          </Provider>
-        </EventHandlersProvider>
-      </ConfigProvider>
+          </EventHandlersProvider>
+        </ConfigProvider>
+      </Provider>
     </>
   );
 }
