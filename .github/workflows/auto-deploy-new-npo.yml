@@ -58,7 +58,7 @@ jobs:
           echo "installation id: $INSTALLATION_ID"
 
           echo "INSTALATION ID:" $INSTALLATION_ID " -- REPO ID: $REPO_ID -- ORGNAME: $orgName -- TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}"
-          node createNetlifySite.js $orgName $INSTALLATION_ID $REPO_ID ${{ secrets.NETLIFY_AUTH_TOKEN }} ${{secrets.NEXT_PUBLIC_API_URL}} ${{secrets.NEXT_PUBLIC_PAYFAST_URL}} ${{secrets.NEXT_PUBLIC_WEBSITE_URL}} ${{secrets.NEXT_PUBLIC_MERCHANT_ID}} ${{secrets.NEXT_PUBLIC_MERCHANT_KEY}} ${{secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS}} ${{secrets.NEXT_PUBLIC_MONGODB_URI}} ${{secrets.NEXT_PUBLIC_MONGODB_DB}} ${orgName.json} ${{secrets.GIT_USER}} ${{secrets.GIT_PASS}}
+          node createNetlifySite.js $orgName $INSTALLATION_ID $REPO_ID ${{ secrets.NETLIFY_AUTH_TOKEN }} ${{secrets.NEXT_PUBLIC_API_URL}} ${{secrets.NEXT_PUBLIC_PAYFAST_URL}} ${{secrets.NEXT_PUBLIC_WEBSITE_URL}} ${{secrets.NEXT_PUBLIC_MERCHANT_ID}} ${{secrets.NEXT_PUBLIC_MERCHANT_KEY}} ${{secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS}} ${{secrets.NEXT_PUBLIC_MONGODB_URI}} ${{secrets.NEXT_PUBLIC_MONGODB_DB}} ${orgName}.json ${{secrets.GIT_USER}} ${{secrets.GIT_PASS}}
 
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

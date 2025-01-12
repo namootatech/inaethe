@@ -141,7 +141,7 @@ async function createNetlifySite(
     GIT_USER,
     GIT_PASS,
   ] = args;
-  console.log('\n\nToken:', token);
+  console.log('\n\nToken:', NETLIFY_AUTH_TOKEN);
   console.log('Org Name:', orgName);
   console.log('Installation ID:', installation_id);
   console.log('Repository ID:', repo_id);
