@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import fetch from 'node-fetch'; // Ensure you have this package installed
-import fs from 'fs';
+const fetch = require('node-fetch'); // Ensure you have this package installed
+const fs = require('fs');
 
 /**
  * Creates a Netlify site by making a POST request to the Netlify API.
