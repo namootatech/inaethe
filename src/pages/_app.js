@@ -1,7 +1,6 @@
 import '@/styles/globals.css';
 
 import { ConfigProvider } from '@/context/ConfigContext';
-import ProgressBarContainer from '@/components/ProgresssBarContainer';
 import { EventHandlersProvider } from '@/context/EventHandlers';
 import { ToastContainer, toast } from 'react-toastify';
 import { AuthProvider } from '@/context/AuthContext';
@@ -30,7 +29,6 @@ function MyApp({ Component, pageProps }) {
     <AuthProvider>
       <ConfigProvider>
         <EventHandlersProvider>
-          <ProgressBarContainer />
           <ToastContainer />
           <Component {...pageProps} />
         </EventHandlersProvider>
