@@ -1,6 +1,0 @@
-[functions]
-  [functions.environment]
-  NETLIFY_AUTH_TOKEN = "your-netlify-auth-token"
-  GIT_USER = "your-git-username"
-  GIT_PASS = "your-git-password-or-pat"
-
