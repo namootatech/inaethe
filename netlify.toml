@@ -1,8 +1,8 @@
 [functions]
   [functions.environment]
-  NETLIFY_AUTH_TOKEN = "your-netlify-auth-token"
-  GIT_USER = "your-git-username"
-  GIT_PASS = "your-git-password-or-pat"
+  NETLIFY_AUTH_TOKEN = "nfp_BaYPcjV42nUWQg1XXeZasUmfjTKT7hsYf9fd"
+  GIT_USER = "ayabongaqwabi"
+  GIT_PASS = "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"
 [build]
   command = "npm run build"
   publish = ".next"

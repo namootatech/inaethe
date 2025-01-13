@@ -31,7 +31,10 @@ async function createNetlifySite(
     NETLIFY_AUTH_TOKEN,
     NEXT_PUBLIC_API_URL,
     NEXT_PUBLIC_PAYFAST_URL,
-    NEXT_PUBLIC_WEBSITE_URL,
+    NEXT_PUBLIC_WEBSITE_URL:
+      orgName && orgName !== '' && orgName !== 'unknown'
+        ? `https://${orgName}.xhap.co.za`
+        : NEXT_PUBLIC_WEBSITE_URL,
     NEXT_PUBLIC_MERCHANT_ID,
     NEXT_PUBLIC_MERCHANT_KEY,
     NEXT_PUBLIC_GOOGLE_ANALYTICS,
