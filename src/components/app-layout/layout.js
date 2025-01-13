@@ -1,10 +1,8 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import Loader from "@/components/common/Loader";
+'use client';
+import React, { useEffect, useState } from 'react';
+import Loader from '@/components/common/Loader';
 
-export default function RootLayout({
-  children,
-}) {
+export default function RootLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -15,10 +13,11 @@ export default function RootLayout({
   }, []);
 
   return (
-    <html lang="en">
+    <html lang='en'>
       <body suppressHydrationWarning={true}>
-        <div className="dark:bg-boxdark-2 dark:text-bodydark">
-          {loading ? <Loader /> : children}
+        <div className='dark:bg-boxdark-2 dark:text-bodydark'>
+          {loading && <Loader />}
+          {!loading && <>{children}</>}
         </div>
       </body>
     </html>

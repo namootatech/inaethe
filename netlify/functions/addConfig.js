@@ -26,8 +26,8 @@ exports.handler = async (event) => {
 
     const configFileName = `${orgName}.json`;
     const repoPath = '/tmp/inaethe-repo'; // Temporary clone directory
-    const themesDirPath = path.join(repoPath, 'public/themes');
-    const configFilePath = path.join(themesDirPath, configFileName);
+    const siteConfigsDirPath = path.join(repoPath, 'public/siteConfigs');
+    const configFilePath = path.join(siteConfigsDirPath, configFileName);
 
     // Step 1: Clone the repository
     await executeCommand(`rm -rf ${repoPath}`);
@@ -46,13 +46,15 @@ exports.handler = async (event) => {
       repoPath
     );
 
-    // Step 2: Ensure the public/themes directory exists
-    console.log('** [ADD CONFIG FUNCTION] Ensuring themes directory exists...');
-    if (!fs.existsSync(themesDirPath)) {
-      fs.mkdirSync(themesDirPath, { recursive: true });
+    // Step 2: Ensure the public/siteConfigs directory exists
+    console.log(
+      '** [ADD CONFIG FUNCTION] Ensuring siteConfigs directory exists...'
+    );
+    if (!fs.existsSync(siteConfigsDirPath)) {
+      fs.mkdirSync(siteConfigsDirPath, { recursive: true });
       console.log(
         '** [ADD CONFIG FUNCTION] Created missing directory:',
-        themesDirPath
+        siteConfigsDirPath
       );
     }
 
@@ -71,7 +73,7 @@ exports.handler = async (event) => {
     await executeCommand(
       `
       cd ${repoPath} &&
-      git add public/themes/${configFileName}
+      git add public/siteConfigs/${configFileName}
      `
     );
     // Step 4: Commit and push the new config file
@@ -84,7 +86,7 @@ exports.handler = async (event) => {
     `
       );
 
-      if (!stagedFiles.includes(`public/themes/${configFileName}`)) {
+      if (!stagedFiles.includes(`public/siteConfigs/${configFileName}`)) {
         console.warn(
           `** [ADD CONFIG FUNCTION] File ${configFileName} is not staged. Skipping commit.`
         );

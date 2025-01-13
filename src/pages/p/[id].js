@@ -1,5 +1,4 @@
 import Layout from '@/components/layout';
-import { connect } from 'react-redux';
 import RenderPageComponents from '@/components/content/generator';
 import { useConfig } from '@/context/ConfigContext';
 import { useEffect, useState } from 'react';
@@ -37,7 +36,7 @@ const fetchConfig = async () => {
     // Fallback to importing directly from the public folder
     try {
       const localConfig = await import(
-        `../../public/themes/${process.env.NEXT_PUBLIC_CONFIG_NAME}`
+        `../../../public/siteConfigs/${process.env.NEXT_PUBLIC_CONFIG_NAME}`
       );
       return localConfig.default || localConfig; // Ensure compatibility with module systems
     } catch (importError) {
@@ -48,8 +47,25 @@ const fetchConfig = async () => {
 };
 
 export async function getStaticProps({ params }) {
-  const id = params.id;
-  return { props: { id } };
+  const config = await fetchConfig();
+  let id = params.id;
+  const page = config?.pages?.find((page) => page.id === id);
+  if (!id) {
+    return {
+      notFound: true,
+    };
+  }
+  if (id === '') {
+    id = 'homepage';
+  }
+
+  console.log(
+    '** [ID PAGE] Found config for organisation id: ',
+    config?.organisationId
+  );
+  return {
+    props: { id, page },
+  };
 }
 
 export async function getStaticPaths() {
@@ -65,43 +81,14 @@ export async function getStaticPaths() {
   };
 }
 
-function Page(props) {
-  const [config, setConfig] = useState(null);
-
-  useEffect(() => {
-    const getConfig = async () => {
-      if (!config) {
-        const configData = await fetchConfig();
-        setConfig(configData);
-      }
-    };
-    getConfig();
-  }, []);
-
-  let pageId = props.id;
-
-  if (pageId === '') {
-    pageId = 'homepage';
-  }
-
-  const page = config?.pages?.find((page) => page.id === pageId);
-  console.log(
-    '** [ID PAGE] Found config for organisation id: ',
-    config?.organisationId
-  );
+function Page({ page, id }) {
   return (
     <Layout>
-      <div className='container md:mt-4 md:px-16 px-4'>
+      <div className='w-full md:mt-4'>
         {page && <RenderPageComponents items={page?.components} />}
       </div>
     </Layout>
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    theme: state.theme,
-  };
-};
-
-export default connect(mapStateToProps)(Page);
+export default Page;

@@ -1,10 +1,11 @@
 import moment from 'moment';
 import Image from 'next/image';
-import { connect } from 'react-redux';
 import Modal from '../modal';
 import { useState } from 'react';
+import { useAuth } from '@/context/AuthContext';
 
-const TableTwo = ({ transactions }) => {
+const TableTwo = () => {
+  const { transactions } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [transaction, setTransaction] = useState(null);
   const viewTransAction = (transaction) => {
@@ -168,7 +169,11 @@ const TableTwo = ({ transactions }) => {
                 </td>
               </tr>
               <tr>
-                <td scope='col' colSpan={2} class='px-6 py-3 flex items-center justify-center'>
+                <td
+                  scope='col'
+                  colSpan={2}
+                  class='px-6 py-3 flex items-center justify-center'
+                >
                   <button
                     className='text-xs text-white bg-red-800 rounded-lg px-12 py-4'
                     onClick={() => viewTransAction(transaction)}
@@ -185,10 +190,4 @@ const TableTwo = ({ transactions }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    transactions: state?.auth?.transactions,
-  };
-};
-
-export default connect(mapStateToProps)(TableTwo);
+export default TableTwo;

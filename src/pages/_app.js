@@ -1,18 +1,17 @@
 import '@/styles/globals.css';
 
-import { Provider } from 'react-redux';
-import store from '@/store';
+import { ConfigProvider } from '@/context/ConfigContext';
+import ProgressBarContainer from '@/components/ProgresssBarContainer';
+import { EventHandlersProvider } from '@/context/EventHandlers';
+import { ToastContainer, toast } from 'react-toastify';
+import { AuthProvider } from '@/context/AuthContext';
+import { Suspense } from 'react';
 import Script from 'next/script';
 import { hotjar } from 'react-hotjar';
 import { useEffect } from 'react';
 import * as gtag from '@/lib/gtag';
 import { useRouter } from 'next/router';
-import { CookiesProvider } from 'react-cookie';
-import { ConfigProvider } from '@/context/ConfigContext';
-import ProgressBarContainer from '@/components/ProgresssBarContainer';
-import { EventHandlersProvider } from '@/context/EventHandlers';
-import { ToastContainer, toast } from 'react-toastify';
-export default function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }) {
   const router = useRouter();
   useEffect(() => {
     hotjar.initialize(3906314, 6);
@@ -28,31 +27,19 @@ export default function MyApp({ Component, pageProps }) {
     };
   }, [router.events]);
   return (
-    <>
-      <script
-        async
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
-      ></script>
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-   window.dataLayer = window.dataLayer || [];
-   function gtag(){dataLayer.push(arguments);}
-   gtag('js', new Date());
-   gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');`,
-        }}
-      ></script>
-      <Provider store={store}>
-        <ConfigProvider>
-          <EventHandlersProvider>
-            <CookiesProvider defaultSetOptions={{ path: '/' }}>
-              <ProgressBarContainer />
-              <ToastContainer />
-              <Component {...pageProps} />
-            </CookiesProvider>
-          </EventHandlersProvider>
-        </ConfigProvider>
-      </Provider>
-    </>
+    <AuthProvider>
+      <ConfigProvider>
+        <EventHandlersProvider>
+          <ProgressBarContainer />
+          <ToastContainer />
+          <Component {...pageProps} />
+        </EventHandlersProvider>
+      </ConfigProvider>
+    </AuthProvider>
   );
 }
+export default (props) => {
+  <Suspense fallback={<>Loading...</>}>
+    <MyApp {...props} />
+  </Suspense>;
+};

@@ -1,16 +1,12 @@
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from '@/components/layout';
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { postToURL } from '@/components/payfast/payfast';
 import { v4 as uuidv4 } from 'uuid';
 import { keys } from 'ramda';
 import moment from 'moment';
 import RenderPageComponents from '@/components/content/generator';
 import { useConfig } from '@/context/ConfigContext';
-
+import { Suspense } from 'react';
 const levelPrices = {
   Nourisher: 50,
   CaringPartner: 100,
@@ -23,8 +19,6 @@ const levelPrices = {
   SustainabilityChampion: 5000,
   GlobalImpactVisionary: 10000,
 };
-
-const PAYFAST_URL = process.env.NEXT_PUBLIC_PAYFAST_URL;
 const WEBSITE_URL = process.env.NEXT_PUBLIC_WEBSITE_URL;
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const MERCHANT_ID = process.env.NEXT_PUBLIC_MERCHANT_ID;
@@ -32,10 +26,12 @@ const MERCHANT_KEY = process.env.NEXT_PUBLIC_MERCHANT_KEY;
 
 function ReturnPage() {
   const params = useSearchParams();
-  const theme = useConfig();
-
+  const siteConfig = useConfig();
   const userData = {
-    partner: { name: theme?.partnerName, slug: theme?.organisationId },
+    partner: {
+      name: siteConfig?.partnerName,
+      slug: siteConfig?.organisationId,
+    },
   };
 
   for (const [key, value] of params.entries()) {
@@ -66,8 +62,8 @@ function ReturnPage() {
     email_address: userData.email,
     m_payment_id: paymentId,
     amount: levelPrices[userData.subscriptionTier],
-    item_name: `INA ETHE Subscription`,
-    item_description: `INA ETHE Subscription for ${userData.firstName} ${userData.lastName} for the ${userData.subscriptionTier} package.`,
+    item_name: `Inaethe Subscription`,
+    item_description: `Inaethe Subscription for ${userData.firstName} ${userData.lastName} for the ${userData.subscriptionTier} package.`,
     subscription_type: 1,
     billing_date: moment().format('YYYY-MM-DD'),
     recurring_amount: levelPrices[userData.subscriptionTier],
@@ -79,7 +75,7 @@ function ReturnPage() {
     custom_str2: userData?.userId ? userData?.userId : '',
     custom_str3: userData?.subscriptionId ? userData?.subscriptionId : '',
     custom_str4: userData?.partner?.slug ? userData?.partner?.slug : '',
-    custom_str5: userData?.subscriptionTier ? userData?.subscriptionTier : '',
+    ustom_str5: userData?.subscriptionTier ? userData?.subscriptionTier : '',
   };
 
   if (userData?.parent) {
@@ -88,33 +84,20 @@ function ReturnPage() {
       custom_str1: userData?.parent ? userData?.parent : '',
     };
   }
-  const noFirstPaymentConfig = theme?.defaultPages?.find(
-    (p) => p.id === 'subscribe-return-without-first-payment-done'
+  const config = siteConfig?.defaultPages?.find(
+    (p) => p.id === 'cancelled-payment'
   );
-  const firstPaymentDoneConfig = theme?.defaultPages?.find(
-    (p) => p.id === 'subscribe-return-with-first-payment-done'
-  );
+  console.log('config', config);
 
   return (
     <Layout>
-      {userData.firstPaymentDone === 'false' && (
-        <RenderPageComponents
-          items={noFirstPaymentConfig.components}
-          data={payfastData}
-        />
-      )}
-      {/* button for the user to login to their dashboard */}
-      {userData.firstPaymentDone === 'true' && (
-        <RenderPageComponents items={firstPaymentDoneConfig.components} />
-      )}
+      <RenderPageComponents items={config?.components} data={payfastData} />
     </Layout>
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    theme: state.theme,
-  };
+export default () => {
+  <Suspense fallback={<>Loading...</>}>
+    <ReturnPage />
+  </Suspense>;
 };
-
-export default connect(mapStateToProps)(ReturnPage);

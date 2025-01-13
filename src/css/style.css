@@ -30,11 +30,11 @@
   @apply !inline-flex gap-1.5;
 }
 
-.apexcharts-tooltip.apexcharts-theme-light {
+.apexcharts-tooltip.apexcharts-siteConfig-light {
   @apply dark:!border-strokedark dark:!bg-boxdark;
 }
 
-.apexcharts-tooltip.apexcharts-theme-light .apexcharts-tooltip-title {
+.apexcharts-tooltip.apexcharts-siteConfig-light .apexcharts-tooltip-title {
   @apply dark:!border-strokedark dark:!bg-meta-4;
 }
 

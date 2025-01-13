@@ -27,7 +27,7 @@ const icons = {
 };
 
 export const FlexwindFeatures1 = ({
-  theme,
+  siteConfig,
   title,
   hint,
   description,
@@ -59,7 +59,7 @@ export const FlexwindFeatures1 = ({
                 className='flex flex-col items-center text-center space-y-4'
               >
                 <span
-                  className={`text-${theme.colors.primaryColorCode} flex items-center justify-center w-12 h-12 p-2 rounded-md bg-${theme.colors.lightBgColoCode} dark:bg-gray-900 dark:text-blue-500 flex w-max`}
+                  className={`text-${siteConfig.colors.primaryColorCode} flex items-center justify-center w-12 h-12 p-2 rounded-md bg-${siteConfig.colors.lightBgColoCode} dark:bg-gray-900 dark:text-blue-500 flex w-max`}
                 >
                   {React.createElement(icons[feature.icon] || BiSupport, {
                     size: 24,

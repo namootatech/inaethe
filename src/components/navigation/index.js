@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import { useState } from 'react';
-import { connect } from 'react-redux';
 import React from 'react';
 import { useConfig } from '@/context/ConfigContext';
+import { useAuth } from '@/context/AuthContext';
 
-const Navigation = ({ user }) => {
+const Navigation = () => {
+  const { user } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const toggleIsOpen = () => setIsOpen(!isOpen);
   const config = useConfig();
@@ -98,7 +99,7 @@ const Navigation = ({ user }) => {
               {config.pages.map((p) => (
                 <li key={p.id}>
                   <Link
-                    href={p.id}
+                    href={`/p/${p.id}`}
                     className={config?.nav.burgerMenu?.link?.inactiveClass}
                   >
                     {p.title}
@@ -128,10 +129,4 @@ const Navigation = ({ user }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    user: state?.auth?.user,
-  };
-};
-
-export default connect(mapStateToProps)(Navigation);
+export default Navigation;

@@ -17,7 +17,7 @@ export const ConfigProvider = ({ children }) => {
             process.env.NEXT_PUBLIC_WEBSITE_URL || 'http://localhost:3000';
           configPath = `${baseUrl}${
             configPath.startsWith('/') ? '' : '/'
-          }${configPath}`;
+          }/siteConfigs/${configPath}`;
         }
 
         console.log(
@@ -36,7 +36,7 @@ export const ConfigProvider = ({ children }) => {
         // Fallback to direct import from public folder
         try {
           const localConfig = await import(
-            `../../public/themes/${process.env.NEXT_PUBLIC_CONFIG_NAME}`
+            `../../public/siteConfigs/${process.env.NEXT_PUBLIC_CONFIG_NAME}`
           );
           setConfig(localConfig.default || localConfig); // Set the imported config
         } catch (importError) {

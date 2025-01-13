@@ -1,24 +1,24 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { connect } from 'react-redux';
 import cookies from 'js-cookie';
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 import { Avatar } from './avatar';
+import { useAuth } from '@/context/AuthContext';
 
-
-const DropdownUser = ({ user }) => {
+const DropdownUser = () => {
+  const { user } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [emailMd5, setEmailMd5] = useState('');
   const router = useRouter();
   const trigger = useRef(null);
   const dropdown = useRef(null);
 
-  useEffect(()=>{
+  useEffect(() => {
     fetch(`/api/gravatar?email=${user?.email}`)
-    .then((res) => res.json())
-    .then((data) => setEmailMd5(data.emailMd5));
-  },[]);
+      .then((res) => res.json())
+      .then((data) => setEmailMd5(data.emailMd5));
+  }, []);
 
   console.log('emailMd5', emailMd5);
   // close on click outside
@@ -54,7 +54,6 @@ const DropdownUser = ({ user }) => {
     return () => document.removeEventListener('keydown', keyHandler);
   });
 
-
   return (
     <div className='relative'>
       <Link
@@ -73,16 +72,16 @@ const DropdownUser = ({ user }) => {
         <span className='h-12 w-12 rounded-full'>
           {user?.image && (
             <Image
-            width={112}
-            height={112}
-            className="rounded-full w-80 h-80"
-            src={user?.image}
-            style={{
-              width: 'auto',
-              height: 'auto',
-            }}
-            alt='User'
-          />
+              width={112}
+              height={112}
+              className='rounded-full w-80 h-80'
+              src={user?.image}
+              style={{
+                width: 'auto',
+                height: 'auto',
+              }}
+              alt='User'
+            />
           )}
           {!user?.image && emailMd5 && (
             <div className='flex items-center justify-center w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700'>
@@ -198,10 +197,4 @@ const DropdownUser = ({ user }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    user: state?.auth?.user,
-  };
-};
-
-export default connect(mapStateToProps)(DropdownUser);
+export default DropdownUser;

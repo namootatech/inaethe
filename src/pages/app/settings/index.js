@@ -1,20 +1,16 @@
+'use client';
+
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
 import Image from 'next/image';
 import { Metadata } from 'next';
 import DefaultLayout from '@/components/Layouts/DefaultLayout';
-import { connect } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { omit, set } from 'ramda';
 import { ToastContainer, toast } from 'react-toastify';
-import {useRouter } from "next/router";
+import { useRouter } from 'next/router';
 import 'react-toastify/dist/ReactToastify.css';
+import { useAuth } from '@/context/AuthContext';
 
-
-export const metadata = {
-  title: 'Next.js Settings | TailAdmin - Next.js Dashboard Template',
-  description:
-    'This is Next.js Settings page for TailAdmin - Next.js Tailwind CSS Admin Dashboard Template',
-};
 const capitalizeNames = (user) => {
   return {
     ...user,
@@ -27,7 +23,8 @@ const capitalizeNames = (user) => {
   };
 };
 
-const Settings = ({ user }) => {
+const Settings = () => {
+  const { user } = useAuth();
   const router = useRouter();
   const [formData, setFormData] = useState(user);
   const [errors, setErrors] = useState([]);
@@ -35,10 +32,10 @@ const Settings = ({ user }) => {
   useEffect(() => {
     if (user) {
       setFormData(capitalizeNames(user));
-      if(user?.image){
+      if (user?.image) {
         const imagePreview = document.getElementById('image-preview');
-      imagePreview.innerHTML = `<img src="${user.image}" class="max-h-48 rounded-lg mx-auto" alt="Image preview" />`;
-      imagePreview.classList.remove(
+        imagePreview.innerHTML = `<img src="${user.image}" class="max-h-48 rounded-lg mx-auto" alt="Image preview" />`;
+        imagePreview.classList.remove(
           'border-dashed',
           'border-2',
           'border-gray-400'
@@ -92,31 +89,38 @@ const Settings = ({ user }) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(omit(["password", "confirmPassword", "hash"], formData)),
+      body: JSON.stringify(
+        omit(['password', 'confirmPassword', 'hash'], formData)
+      ),
     })
-      .then((res) =>{
-        toast.success('Your profile has been updated! Please refresh this page.', {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          theme: 'light',
-        })
-        const emailChanged = formData.email !== user.email;
-        if (emailChanged) {
-          toast.warning('Your recently changed your email please login again.', {
+      .then((res) => {
+        toast.success(
+          'Your profile has been updated! Please refresh this page.',
+          {
             position: 'top-right',
-            autoClose: 3000,
+            autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
-            theme: 'light',
-          })
+            siteConfig: 'light',
+          }
+        );
+        const emailChanged = formData.email !== user.email;
+        if (emailChanged) {
+          toast.warning(
+            'Your recently changed your email please login again.',
+            {
+              position: 'top-right',
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              siteConfig: 'light',
+            }
+          );
           setTimeout(() => {
             router.push('/login');
           }, 3000);
         }
-      }
-      )
+      })
       .then((data) => {
         console.log('Updated', data);
       });
@@ -507,9 +511,4 @@ const Settings = ({ user }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    user: state?.auth?.user,
-  };
-};
-export default connect(mapStateToProps)(Settings);
+export default Settings;

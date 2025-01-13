@@ -1,24 +1,21 @@
+'use client';
+
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
 import TableOne from '@/components/Tables/TableOne';
 import TableThree from '@/components/Tables/TableThree';
 import DefaultLayout from '@/components/Layouts/DefaultLayout';
-import { connect } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { set } from 'ramda';
 import moment from 'moment';
+import { useAuth } from '@/context/AuthContext';
 
 const capitalize = (s) => {
   if (typeof s !== 'string') return '';
   return s.charAt(0).toUpperCase() + s.slice(1);
 };
 
-export const metadata = {
-  title: 'Next.js Tables | TailAdmin - Next.js Dashboard Template',
-  description:
-    'This is Next.js Tables page for TailAdmin - Next.js Tailwind CSS Admin Dashboard Template',
-};
-
-const AffiliatesPage = ({ user }) => {
+const AffiliatesPage = () => {
+  const { user } = useAuth();
   const [copyText, setCopyText] = useState('Copy');
   const [affiliates, setAffiliates] = useState([]);
   const [shortenedUrl, setShortenedUrl] = useState('');
@@ -70,7 +67,7 @@ const AffiliatesPage = ({ user }) => {
       <div className='flex flex-col gap-10 py-4 px-4'>
         <TableOne />
         <div className='rounded-sm md:border md:border-stroke bg-white px-1 md:px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1'>
-        <h1 className="text-2xl py-2 font-bold">Affiliates</h1>
+          <h1 className='text-2xl py-2 font-bold'>Affiliates</h1>
           <h1>Your affiliate link</h1>
 
           <p className='text-base my-2'>
@@ -98,10 +95,7 @@ const AffiliatesPage = ({ user }) => {
                   key={key}
                 >
                   <tr className='grid grid-cols-2 w-full  '>
-                    <th
-                      scope='col'
-                      class='px-6 py-3 p-4 rounded bg-gray-50'
-                    >
+                    <th scope='col' class='px-6 py-3 p-4 rounded bg-gray-50'>
                       <h5 className='text-sm font-medium uppercase xsm:text-base'>
                         Name
                       </h5>
@@ -140,25 +134,21 @@ const AffiliatesPage = ({ user }) => {
                           <table className='table-auto w-full'>
                             <tbody>
                               <tr className=''>
+                                <td className='py-2 px-2 '>Date</td>
                                 <td className='py-2 px-2 '>
-                                  Date
-                                </td>
-                                <td className='py-2 px-2 '>
-                                  {moment(affiliate?.transaction?.billing_date).format("DD MMM YYYY")}
+                                  {moment(
+                                    affiliate?.transaction?.billing_date
+                                  ).format('DD MMM YYYY')}
                                 </td>
                               </tr>
                               <tr className=''>
-                                <td className='py-2 px-2 '>
-                                  Amount
-                                </td>
+                                <td className='py-2 px-2 '>Amount</td>
                                 <td className='py-2 px-2 '>
                                   {affiliate?.transaction?.amount_gross}
                                 </td>
                               </tr>
                               <tr className=''>
-                                <td className='py-2 px-2 '>
-                                  status
-                                </td>
+                                <td className='py-2 px-2 '>status</td>
                                 <td className='py-2 px-2 '>
                                   {affiliate?.transaction?.payment_status}
                                 </td>
@@ -166,7 +156,11 @@ const AffiliatesPage = ({ user }) => {
                             </tbody>
                           </table>
                         )}
-                        {!affiliate.transaction && <p class="px-6 py-3 p-4 text-wrap break-words text-xs text-black ">No transaction</p>}
+                        {!affiliate.transaction && (
+                          <p class='px-6 py-3 p-4 text-wrap break-words text-xs text-black '>
+                            No transaction
+                          </p>
+                        )}
                       </p>
                     </td>
                   </tr>
@@ -176,19 +170,36 @@ const AffiliatesPage = ({ user }) => {
           </table>
           <table className='hidden sm:hidden md:grid grid-cols-1 w-full table-auto w-full py-2 mt-2 mb-4'>
             <thead className='grid grid-cols-4 w-full rounded rounded-lg bg-gray-50'>
-              <th className='py-2 px-2 text-left col-span-1' colSpan={1}>Name</th>
-              <th className='py-2 px-2 text-left col-span-1'colSpan={1}>Email</th>
-              <th className='py-2 px-2 text-left col-span-2' colSpan={2}>Latest Transaction</th>
+              <th className='py-2 px-2 text-left col-span-1' colSpan={1}>
+                Name
+              </th>
+              <th className='py-2 px-2 text-left col-span-1' colSpan={1}>
+                Email
+              </th>
+              <th className='py-2 px-2 text-left col-span-2' colSpan={2}>
+                Latest Transaction
+              </th>
             </thead>
             <tbody className='grid grid-cols-1 w-full'>
               {affiliates.map((affiliate) => (
-                <tr key={affiliate._id} className='grid grid-cols-4 w-full' >
-                  <td className='py-2 px-2 col-span-1 break-words text-wrap' colSpan={1}>
+                <tr key={affiliate._id} className='grid grid-cols-4 w-full'>
+                  <td
+                    className='py-2 px-2 col-span-1 break-words text-wrap'
+                    colSpan={1}
+                  >
                     {capitalize(affiliate.firstName)}{' '}
                     {capitalize(affiliate.lastName)}
                   </td>
-                  <td className='py-2 px-2 col-span-1 break-words text-wrap' colSpan={1}>{affiliate.email}</td>
-                  <td className='py-2 px-2 border border-gray-100 col-span-2' colSpan={2}>
+                  <td
+                    className='py-2 px-2 col-span-1 break-words text-wrap'
+                    colSpan={1}
+                  >
+                    {affiliate.email}
+                  </td>
+                  <td
+                    className='py-2 px-2 border border-gray-100 col-span-2'
+                    colSpan={2}
+                  >
                     {affiliate.transaction && (
                       <table className='table-auto w-full'>
                         <tbody>
@@ -223,8 +234,4 @@ const AffiliatesPage = ({ user }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  user: state?.auth?.user,
-});
-
-export default connect(mapStateToProps)(AffiliatesPage);
+export default AffiliatesPage;

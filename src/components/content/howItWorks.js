@@ -1,4 +1,4 @@
-export const PageDoneHowItWorks1 = ({ theme, ...rest }) => {
+export const PageDoneHowItWorks1 = ({ siteConfig, ...rest }) => {
   const { title, description, steps } = rest;
   return (
     <section class='py-24 relative'>
@@ -18,12 +18,12 @@ export const PageDoneHowItWorks1 = ({ theme, ...rest }) => {
                 <div class='grow shrink basis-0 flex-col justify-start items-center gap-2.5 inline-flex'>
                   <div class='self-stretch flex-col justify-start items-center gap-0.5 flex'>
                     <h3
-                      class={`self-stretch text-center text-${theme.colors.primaryColorCode} text-4xl font-extrabold font-manrope leading-normal`}
+                      class={`self-stretch text-center text-${siteConfig.colors.primaryColorCode} text-4xl font-extrabold font-manrope leading-normal`}
                     >
                       {i + 1}
                     </h3>
                     <h4
-                      class={`self-stretch text-center text-${theme.colors.textColorCode} text-xl font-semibold leading-8`}
+                      class={`self-stretch text-center text-${siteConfig.colors.textColorCode} text-xl font-semibold leading-8`}
                     >
                       {s.title}
                     </h4>
@@ -34,7 +34,7 @@ export const PageDoneHowItWorks1 = ({ theme, ...rest }) => {
                 </div>
                 {i < steps.length - 1 && (
                   <svg
-                    class={`md:flex hidden text-${theme.colors.primaryColorCode}`}
+                    class={`md:flex hidden text-${siteConfig.colors.primaryColorCode}`}
                     xmlns='http://www.w3.org/2000/svg'
                     width='24'
                     height='24'
@@ -43,7 +43,7 @@ export const PageDoneHowItWorks1 = ({ theme, ...rest }) => {
                   >
                     <path
                       d='M5.50159 6L11.5018 12.0002L5.49805 18.004M12.5016 6L18.5018 12.0002L12.498 18.004'
-                      stroke={theme.progressColor}
+                      stroke={siteConfig.progressColor}
                       stroke-width='1.6'
                       stroke-linecap='round'
                       stroke-linejoin='round'

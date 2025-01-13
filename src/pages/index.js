@@ -4,13 +4,18 @@ import RenderPageComponents from '@/components/content/generator';
 import { useConfig } from '@/context/ConfigContext';
 import { useEffect, useState } from 'react';
 
-function Home({ theme }) {
+function Home({ siteConfig }) {
   const config = useConfig();
 
   const page = config?.pages?.find((page) => page.id === 'homepage');
   return (
     <Layout>
-      {page && <RenderPageComponents items={page?.components} theme={theme} />}
+      {page && (
+        <RenderPageComponents
+          items={page?.components}
+          siteConfig={siteConfig}
+        />
+      )}
     </Layout>
   );
 }

@@ -1,16 +1,16 @@
-const inaetheTheme = require(`./inaethe/theme.json`);
-const fotTheme = require('./fot/theme.json');
-const blue = require('./blue/theme.json');
-const bananas = require('./go-bananas/theme.json');
+const inaethesiteConfig = require(`./inaethe/siteConfig.json`);
+const fotsiteConfig = require('./fot/siteConfig.json');
+const blue = require('./blue/siteConfig.json');
+const bananas = require('./go-bananas/siteConfig.json');
 
-const themes = {
-  inaethe: inaetheTheme,
-  fot: fotTheme,
+const siteConfigs = {
+  inaethe: inaethesiteConfig,
+  fot: fotsiteConfig,
   blue: blue,
   'go-bananas': bananas,
 };
 
-export const getThemeConfig = () => {
-  console.log('setting theme', process.env.NEXT_PUBLIC_THEME);
-  return themes[process.env.NEXT_PUBLIC_THEME];
+export const getsiteConfigConfig = () => {
+  console.log('setting siteConfig', process.env.NEXT_PUBLIC_siteConfig);
+  return siteConfigs[process.env.NEXT_PUBLIC_siteConfig];
 };

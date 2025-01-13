@@ -2,7 +2,6 @@ import Navigation from '../navigation';
 import Footer from '@/components/footer';
 import { use } from 'marked';
 import Head from 'next/head';
-import { connect } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useConfig } from '@/context/ConfigContext';
 
@@ -22,7 +21,7 @@ const Layout = ({ children }) => {
             <link rel='icon' href={config?.favicon.size192} sizes='any' />
           </Head>
           <Navigation />
-          <main className='container mx-auto mt-20'>{children}</main>
+          <main className='w-screen md:w-full mt-20'>{children}</main>
           <Footer />
         </>
       )}
@@ -30,16 +29,4 @@ const Layout = ({ children }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    theme: state.theme,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    saveTheme: (theme) => dispatch({ type: 'SAVE_THEME', payload: theme }),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Layout);
+export default Layout;

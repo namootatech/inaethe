@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { connect } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { useCookies } from 'react-cookie';
+import { useAuth } from '@/context/AuthContext';
 
-const SubscriptionForm = ({ login }) => {
+const LoginForm = () => {
+  const { setUser } = useAuth();
   const [cookies, setCookie] = useCookies(['user']);
 
   const router = useRouter();
@@ -63,7 +64,7 @@ const SubscriptionForm = ({ login }) => {
           setEmailError(response.message);
         } else {
           console.log('You have successfully loggedin.');
-          login(response.data);
+          setUser(response.data);
 
           console.log('User data', response.data);
 
@@ -194,10 +195,5 @@ const SubscriptionForm = ({ login }) => {
     </div>
   );
 };
-const mapDispatchToProps = (dispatch) => {
-  return {
-    login: (data) => dispatch({ type: 'LOGIN', payload: data }),
-  };
-};
 
-export default connect(null, mapDispatchToProps)(SubscriptionForm);
+export default LoginForm;

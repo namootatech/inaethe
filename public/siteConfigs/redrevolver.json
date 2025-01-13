@@ -27,7 +27,7 @@
     "ico": "",
     "appleTouch": "",
     "mask": "",
-    "theme": "",
+    "siteConfig": "",
     "msTile": "",
     "yandex": "",
     "manifest": "",
@@ -263,19 +263,12 @@
                     "type": "event-data",
                     "payload": {
                       "type": "path",
-                      "value": [
-                        "target",
-                        "value"
-                      ]
+                      "value": ["target", "value"]
                     }
                   }
                 ],
-                "when-handler-succeeds-run": [
-                  "do-nothing"
-                ],
-                "when-handler-fails-run": [
-                  "notify-something-went-wrong"
-                ]
+                "when-handler-succeeds-run": ["do-nothing"],
+                "when-handler-fails-run": ["notify-something-went-wrong"]
               }
             }
           },
@@ -304,9 +297,7 @@
                   "notify-you-will-hear-from-us",
                   "clear-component-state"
                 ],
-                "when-handler-fails-run": [
-                  "notify-something-went-wrong"
-                ]
+                "when-handler-fails-run": ["notify-something-went-wrong"]
               }
             }
           ],
@@ -318,13 +309,13 @@
         {
           "type": "FlexwindFeatures1",
           "hint": "Why us",
-          "title": "Join Ina Ethe: Empower Communities Through Affiliate-Driven Donations",
-          "description": "Ina Ethe is revolutionizing the way we support causes that matter. With our subscription-based affiliate marketing platform, you can contribute to impactful initiatives while earning rewards. Partner with us to transform donations into meaningful change for communities nationwide.",
+          "title": "Join Inaethe: Empower Communities Through Affiliate-Driven Donations",
+          "description": "Inaethe is revolutionizing the way we support causes that matter. With our subscription-based affiliate marketing platform, you can contribute to impactful initiatives while earning rewards. Partner with us to transform donations into meaningful change for communities nationwide.",
           "features": [
             {
               "icon": "dollar-sign",
               "title": "Streamlined Donation Collection",
-              "description": "Ina Ethe simplifies the donation process, ensuring every contribution reaches the right cause efficiently. Our platform is built to maximize transparency and trust for both donors and affiliates."
+              "description": "Inaethe simplifies the donation process, ensuring every contribution reaches the right cause efficiently. Our platform is built to maximize transparency and trust for both donors and affiliates."
             },
             {
               "icon": "graph",
@@ -339,28 +330,28 @@
             {
               "icon": "sliders",
               "title": "Customizable Subscription Tiers",
-              "description": "Choose from flexible subscription tiers designed to suit different needs and goals. Whether you’re an individual donor or a large organization, Ina Ethe offers solutions tailored to you."
+              "description": "Choose from flexible subscription tiers designed to suit different needs and goals. Whether you’re an individual donor or a large organization, Inaethe offers solutions tailored to you."
             },
             {
               "icon": "bank-card",
               "title": "Secure and Reliable Transactions",
-              "description": "With cutting-edge payment processing, Ina Ethe ensures every transaction is secure and seamless. Donors can trust that their contributions are protected and efficiently allocated."
+              "description": "With cutting-edge payment processing, Inaethe ensures every transaction is secure and seamless. Donors can trust that their contributions are protected and efficiently allocated."
             },
             {
               "icon": "support",
               "title": "Dedicated Support and Resources",
-              "description": "Our team is here to support you every step of the way. From campaign setup to troubleshooting, Ina Ethe provides resources and assistance to help you succeed."
+              "description": "Our team is here to support you every step of the way. From campaign setup to troubleshooting, Inaethe provides resources and assistance to help you succeed."
             }
           ]
         },
         {
           "type": "PageDoneHowItWorks1",
           "title": "Empowering Donations Through Affiliates",
-          "description": "Ina Ethe makes it easy for you to contribute to meaningful causes while participating in a sustainable affiliate marketing program. Our platform is designed to ensure that both donors and affiliates can participate seamlessly, securely, and efficiently. Here’s how it works:",
+          "description": "Inaethe makes it easy for you to contribute to meaningful causes while participating in a sustainable affiliate marketing program. Our platform is designed to ensure that both donors and affiliates can participate seamlessly, securely, and efficiently. Here’s how it works:",
           "steps": [
             {
               "title": "Sign Up and Choose a Cause",
-              "description": "Get started by signing up on the Ina Ethe platform. You can either join as an affiliate marketer to promote causes or as a donor to contribute directly. Choose the cause or campaign you want to support or promote.",
+              "description": "Get started by signing up on the Inaethe platform. You can either join as an affiliate marketer to promote causes or as a donor to contribute directly. Choose the cause or campaign you want to support or promote.",
               "icon": "FaUserPlus"
             },
             {
