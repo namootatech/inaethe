@@ -10,14 +10,14 @@ export const ConfigProvider = ({ children }) => {
       try {
         console.log('** [CONFIG CONTEXT] Building config url...');
         let configPath = process.env.NEXT_PUBLIC_CONFIG_NAME;
-
+        console.log('** [CONFIG] Config path: ' + configPath);
         // If configPath is a relative path, prepend the base URL
         if (!configPath.startsWith('http')) {
           const baseUrl =
             process.env.NEXT_PUBLIC_WEBSITE_URL || 'http://localhost:3000';
-          configPath = `${baseUrl}${
-            configPath.startsWith('/') ? '' : '/'
-          }/siteConfigs/${configPath}`;
+          console.log('** [CONFIG] Config base URL: ' + baseUrl);
+          configPath = `${baseUrl}/siteConfigs/${configPath}`;
+          console.log('** [CONFIG] Config final URL: ' + configPath);
         }
 
         console.log(
