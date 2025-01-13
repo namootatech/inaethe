@@ -1,0 +1,50 @@
+name: Track Issues and Pull Requests
+
+on:
+  issues:
+    types: [opened, edited, closed, reopened]
+  pull_request:
+    types: [opened, edited, closed, reopened, ready_for_review]
+
+jobs:
+  track-issues-and-prs:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2: Set Up Node.js (Optional, if you need Node.js for custom scripts)
+      - name: Set Up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+
+      - name: Install dependencies
+        run: npm install
+      # Step 3: Log Event Details (for debugging or visibility)
+      - name: Log Event Details
+        run: |
+          echo "Event Name: ${{ github.event_name }}"
+          echo "Action: ${{ github.event.action }}"
+          echo "Actor: ${{ github.actor }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Issue/PR Number: ${{ github.event.issue.number || github.event.pull_request.number }}"
+
+      # Step 4: Send Notifications (Optional)
+      - name: Send WhatsApp Notification
+        run: |
+          echo "Sending Notification..."
+          node ./workflow/sendNotification.js ${{ github.event_name }} ./payload.json
+        env:
+          EVENT_PAYLOAD: ${{ toJson(github.event) }}
+
+      # Step 5: Custom Scripts or Integrations
+      - name: Process Issues or PRs
+        run: |
+          if [ "${{ github.event_name }}" == "issues" ]; then
+            echo "Processing Issue: ${{ github.event.issue.title }}"
+          elif [ "${{ github.event_name }}" == "pull_request" ]; then
+            echo "Processing Pull Request: ${{ github.event.pull_request.title }}"
+          fi

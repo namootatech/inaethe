@@ -1,0 +1,90 @@
+name: Deploy Config
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set Up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Netlify CLI
+        run: npm install -g netlify-cli
+
+      - name: Authenticate with Netlify
+        run: netlify login --auth ${NETLIFY_AUTH_TOKEN}
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
+      - name: Check if commit message contains '::auto-deploy::'
+        id: check_commit_message
+        run: |
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+          echo "Commit message: $COMMIT_MESSAGE"
+
+          # Check if the commit message contains "::auto-deploy::"
+          if ! echo "$COMMIT_MESSAGE" | grep -q "::auto-deploy::"; then
+          echo "Commit message does not contain '::auto-deploy::', skipping deployment."
+          exit 0
+          fi
+
+          # Extract orgName if present in the commit message
+          if [[ "$COMMIT_MESSAGE" =~ ::auto-deploy::[[:space:]]*(.*) ]]; then
+          orgName="${BASH_REMATCH[1]}"
+          echo "Organization Name: $orgName"
+          else
+          echo "orgName not found in commit message, skipping deployment."
+          exit 0
+          fi
+
+          echo "GITPASS : ${{ secrets.ORG_GIT_PASS }}"
+          export REPO_ID=$(node ./workflow/getRepoId.js ${{ secrets.ORG_GIT_PASS }} namootatech/inaethe)
+          echo "repo id: $REPO_ID"
+
+          export INSTALLATION_ID=$(node ./workflow/getInstallationId.js ${{ secrets.ORG_GIT_PASS }} netlify)
+          echo "installation id: $INSTALLATION_ID"
+
+          echo "INSTALATION ID: $INSTALLATION_ID  -- REPO ID: $REPO_ID -- ORGNAME: $orgName -- TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}"
+          run: |
+          node ./workflow/createNetlifySite.js \
+            "$orgName" \
+            "$INSTALLATION_ID" \
+            "$REPO_ID" \
+            "$NETLIFY_AUTH_TOKEN" \
+            "$NEXT_PUBLIC_API_URL" \
+            "$NEXT_PUBLIC_PAYFAST_URL" \
+            "$NEXT_PUBLIC_WEBSITE_URL" \
+            "$NEXT_PUBLIC_MERCHANT_ID" \
+            "$NEXT_PUBLIC_MERCHANT_KEY" \
+            "$NEXT_PUBLIC_GOOGLE_ANALYTICS" \
+            "$NEXT_PUBLIC_MONGODB_URI" \
+            "$NEXT_PUBLIC_MONGODB_DB" \
+            "$GIT_USER" \
+            "$GIT_PASS"
+          echo "Done. Building... Check Netlify Web UI..."
+        env:
+          env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          NEXT_PUBLIC_PAYFAST_URL: ${{ secrets.NEXT_PUBLIC_PAYFAST_URL }}
+          NEXT_PUBLIC_WEBSITE_URL: ${{ secrets.NEXT_PUBLIC_WEBSITE_URL }}
+          NEXT_PUBLIC_MERCHANT_ID: ${{ secrets.NEXT_PUBLIC_MERCHANT_ID }}
+          NEXT_PUBLIC_MERCHANT_KEY: ${{ secrets.NEXT_PUBLIC_MERCHANT_KEY }}
+          NEXT_PUBLIC_GOOGLE_ANALYTICS: ${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS }}
+          NEXT_PUBLIC_MONGODB_URI: ${{ secrets.NEXT_PUBLIC_MONGODB_URI }}
+          NEXT_PUBLIC_MONGODB_DB: ${{ secrets.NEXT_PUBLIC_MONGODB_DB }}
+          GIT_USER: ${{ secrets.GIT_USER }}
+          GIT_PASS: ${{ secrets.GIT_PASS }}
