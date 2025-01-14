@@ -6,7 +6,7 @@ import React from 'react';
 import Link from 'next/link';
 import nl2br from 'nl2br';
 import { postToURL } from '@/components/payfast/payfast';
-
+import NpoRegistrationForm from '../NpoRegistrationForm';
 const icons = {
   'food-truck': GiFoodTruck,
   book: BsBook,
@@ -25,6 +25,7 @@ import {
 import { useConfig } from '@/context/ConfigContext';
 import { FlexwindFeatures1 } from './features';
 import { PageDoneHowItWorks1 } from './howItWorks';
+import { keys } from 'ramda';
 
 const imageBlock = (props) => (
   <div
@@ -591,6 +592,33 @@ const Tabs = ({ siteConfig, ...rest }) => {
   );
 };
 
+const CenteredPageHeader = ({ siteConfig, ...rest }) => (
+  <div className='sm:mx-auto sm:w-full sm:max-w-4xl'>
+    <h2 className='mt-6 text-center text-3xl font-extrabold text-white'>
+      {rest.title}
+    </h2>
+    <p className='mt-2 text-center text-sm text-gray-300'>{rest.description}</p>
+  </div>
+);
+
+const CenteredPageComponentsContainer = ({ siteConfig, ...rest }) => {
+  const { components, maxWidthinXLsize } = rest;
+  console.log('components: ' + components);
+  return (
+    <div
+      className={`mt-8 mx-auto sm:w-full flex items-center justify-center h-full md:max-w-${maxWidthinXLsize}xl`}
+    >
+      {components.map((component, index) => {
+        return (
+          <div key={index} className='flex flex-wrap'>
+            {componentBuilders[component.type]({ ...components, siteConfig })}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
 const componentBuilders = {
   article: articleBuilder,
   'spa-block': spaBuilder,
@@ -632,6 +660,16 @@ const componentBuilders = {
   tabs: ({ siteConfig, ...rest }) => (
     <Tabs tabs={rest} siteConfig={siteConfig} />
   ),
+  'centered-page-header': ({ siteConfig, ...rest }) => (
+    <CenteredPageHeader {...rest} siteConfig={siteConfig} />
+  ),
+  'centered-page-components-container': ({ siteConfig, ...rest }) => (
+    <CenteredPageComponentsContainer {...rest} siteConfig={siteConfig} />
+  ),
+  'state-handled-npo-registration-form': ({ siteConfig, ...rest }) => (
+    <NpoRegistrationForm {...rest} siteConfig={siteConfig} />
+  ),
+
   FlexwindHero1,
   FlexwindHero5,
   FlexwindHero2,
