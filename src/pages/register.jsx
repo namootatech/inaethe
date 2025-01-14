@@ -13,6 +13,7 @@ import {
 import { useConfig } from '@/context/ConfigContext';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import { useApi } from '@/context/ApiContext';
+import { toast } from 'react-hot-toast';
 
 const levelPrices = {
   Nourisher: 50,
@@ -75,11 +76,14 @@ export default function Register() {
         .then((response) => {
           console.log(response);
           setError(null);
+          toast.success(
+            'Registration Successful! Check your email for confirmation.'
+          );
         })
         .catch((e) => {
-          console.error(e);
-          setError(e.message);
+          setError(e);
           setLoading(false);
+          toast.error(`Registration failed. ${error}. Please try again. `);
         });
       // Handle success or error
       // router.push('/dashboard');

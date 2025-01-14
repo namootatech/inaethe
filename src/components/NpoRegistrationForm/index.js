@@ -140,9 +140,7 @@ const NpoRegistrationForm = () => {
           );
         })
         .catch((error) => {
-          toast.error(
-            `Registration failed. ${error.message}. Please try again. `
-          );
+          toast.error(`Registration failed. ${error}. Please try again. `);
         });
 
       toast.success(

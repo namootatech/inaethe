@@ -19,8 +19,7 @@ exports.handler = async function (event, context) {
   await client.connect();
   try {
     const { email, password } = JSON.parse(event.body);
-
-    const client = require('../lib/mongoClient'); // Assuming mongoClient is a shared instance of MongoDB connection
+    // Assuming mongoClient is a shared instance of MongoDB connection
     const users = client.db(NEXT_PUBLIC_MONGODB_DB).collection('users');
     const user = await users.findOne({ email });
 

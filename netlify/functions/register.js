@@ -41,6 +41,22 @@ exports.handler = async (event, context) => {
 
     const { email, password } = data;
 
+    // Check if email already exists
+    console.log('** [REGISTERFUNCTION] Checking if email already exists...');
+    const users = client.db(NEXT_PUBLIC_MONGODB_DB).collection('users');
+    const existingUser = await users.findOne({ email });
+
+    if (existingUser) {
+      console.log(`** [REGISTERFUNCTION] Email already exists: ${email}`);
+      return {
+        statusCode: 409, // Conflict
+        body: JSON.stringify({
+          message: 'Email already exists',
+          error: true,
+        }),
+      };
+    }
+
     // Hash password
     console.log('** [REGISTERFUNCTION] Hashing user password...');
     const hash = bcrypt.hashSync(password);
@@ -54,7 +70,6 @@ exports.handler = async (event, context) => {
     console.log(
       '** [REGISTERFUNCTION] Inserting user into "users" collection...'
     );
-    const users = client.db(NEXT_PUBLIC_MONGODB_DB).collection('users');
     const userResult = await users.insertOne(
       omit(
         ['partner', 'subscriptionTier'],
@@ -102,20 +117,9 @@ exports.handler = async (event, context) => {
       subscriptionResult
     );
 
-    // Notify via Slack
-    console.log('** [REGISTERFUNCTION] Sending Slack notification...');
-    const parent = await users.findOne({ _id: new ObjectId(data.parent) });
-    await slackNotifications.notifyNewSubscription(data, parent, false);
-    console.log('** [REGISTERFUNCTION] Slack notification sent.');
-
-    // Send welcome email
-    console.log('** [REGISTERFUNCTION] Sending subscription welcome email...');
-    await sendSubscriptionsWelcomeEmail(client, data);
-    console.log('** [REGISTERFUNCTION] Welcome email sent.');
-
     // Respond to client
     console.log('** [REGISTERFUNCTION] Returning success response...');
-    return {
+    const response = {
       statusCode: 200,
       body: JSON.stringify({
         message: 'success',
@@ -123,6 +127,27 @@ exports.handler = async (event, context) => {
         subscription: subscriptionResult.insertedId.toString(),
       }),
     };
+
+    // Send notifications as an after-effect
+    console.log('** [REGISTERFUNCTION] Processing notifications...');
+    (async () => {
+      try {
+        const parent = await users.findOne({ _id: new ObjectId(data.parent) });
+        console.log('** [REGISTERFUNCTION] Sending Slack notification...');
+        await slackNotifications.notifyNewSubscription(data, parent, false);
+        console.log('** [REGISTERFUNCTION] Slack notification sent.');
+
+        console.log(
+          '** [REGISTERFUNCTION] Sending subscription welcome email...'
+        );
+        await sendSubscriptionsWelcomeEmail(client, data);
+        console.log('** [REGISTERFUNCTION] Welcome email sent.');
+      } catch (notifyError) {
+        console.error('** [REGISTERFUNCTION] Notification error:', notifyError);
+      }
+    })();
+
+    return response;
   } catch (error) {
     console.error('** [REGISTERFUNCTION] Error encountered:', error);
     return {

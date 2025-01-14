@@ -39,10 +39,15 @@ export const ApiProvider = ({ children }) => {
         `*** [API CONTEXT] Error during request to: ${endpoint}`,
         err
       );
-      console.log(err.data);
+      console.log('Api error happened', err.response, err.response.data);
       setLoading(false);
       setError(err.message || 'Something went wrong');
-      return Promise.reject(err.data || { message: 'Something went wrong' });
+      return Promise.reject(
+        err.response.data.message ||
+          err.data.message ||
+          e.message ||
+          'Something went wrong'
+      );
     }
   };
 

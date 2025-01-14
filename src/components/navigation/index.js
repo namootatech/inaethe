@@ -42,14 +42,14 @@ const Navigation = () => {
             <>
               <Link
                 type='button'
-                href='/subscribe'
+                href='/register'
                 className={config?.nav?.ctaClass}
               >
                 Get started
               </Link>
               <Link
                 type='button'
-                href='/login'
+                href='/signin'
                 className='text-white bg-black hover:bg-red-800 hidden md:block focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  text-xl px-4 py-2 text-center ml-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
               >
                 Login
@@ -116,7 +116,7 @@ const Navigation = () => {
               </li>
               <Link
                 type='button'
-                href='/login'
+                href='/signin'
                 className='md:hidden block text-white bg-black hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  text-xl px-4 py-2 text-center ml-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
               >
                 Login
