@@ -7,6 +7,7 @@ import { useState } from 'react';
 function Components({ siteConfig }) {
   const [email, setEmail] = useState('');
   const [selectedComponent, selectComponent] = useState(null);
+
   console.log('page siteConfig', siteConfig);
 
   return (

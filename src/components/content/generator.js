@@ -22,9 +22,16 @@ import {
   FlexwindHero7,
   FlexwindHero5,
 } from './heros';
+
 import { useConfig } from '@/context/ConfigContext';
 import { FlexwindFeatures1 } from './features';
 import { PageDoneHowItWorks1 } from './howItWorks';
+
+import { 
+  FlowBiteCta1,
+  FlowBiteCta2,
+  FlowBiteCta3,
+} from './ctas'
 
 const imageBlock = (props) => (
   <div
@@ -639,6 +646,9 @@ const componentBuilders = {
   FlexwindHero4,
   FlexwindHero6,
   FlexwindHero7,
+  FlowBiteCta1: (props) => <FlowBiteCta1 {...props} />,
+  FlowBiteCta2: (props) => <FlowBiteCta2 {...props} />,
+  FlowBiteCta3: (props) => <FlowBiteCta3 {...props} />
   FlexwindFeatures1,
   PageDoneHowItWorks1,
 };
