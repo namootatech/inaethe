@@ -4,7 +4,7 @@ const sendSubscriptionsWelcomeEmail = async (mongoClient, data) => {
   const partnerSlug = data.partner.slug;
   console.log('partnerSlug', partnerSlug);
   const partnerCollection = mongoClient
-    .db(process.env.SELECTED_DB)
+    .db(process.env.NEXT_PUBLIC_MONGODB_DB)
     .collection('partners');
   const partner = await partnerCollection.findOne({ slug: partnerSlug });
   const { email, firstName, lastName } = data;

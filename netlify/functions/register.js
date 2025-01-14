@@ -7,7 +7,7 @@ const {
 } = require('./notifications/email/notifications');
 require('dotenv').config();
 
-const SELECTED_DB = process.env.NEXT_PUBLIC_MONGODB_DB;
+const NEXT_PUBLIC_MONGODB_DB = process.env.NEXT_PUBLIC_MONGODB_DB;
 
 exports.handler = async (event, context) => {
   console.log('** [REGISTERFUNCTION] Start handling request...');
@@ -54,7 +54,7 @@ exports.handler = async (event, context) => {
     console.log(
       '** [REGISTERFUNCTION] Inserting user into "users" collection...'
     );
-    const users = client.db(SELECTED_DB).collection('users');
+    const users = client.db(NEXT_PUBLIC_MONGODB_DB).collection('users');
     const userResult = await users.insertOne(
       omit(
         ['partner', 'subscriptionTier'],
@@ -70,7 +70,9 @@ exports.handler = async (event, context) => {
 
     // Create subscription object
     console.log('** [REGISTERFUNCTION] Creating subscription object...');
-    const subscriptions = client.db(SELECTED_DB).collection('subscriptions');
+    const subscriptions = client
+      .db(NEXT_PUBLIC_MONGODB_DB)
+      .collection('subscriptions');
     const subscription = {
       userid: userId,
       email,

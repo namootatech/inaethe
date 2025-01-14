@@ -1,17 +1,19 @@
 const { MongoClient, ObjectId } = require('mongodb');
 require('dotenv').config();
 
-const SELECTED_DB = process.env.SELECTED_DB;
+const NEXT_PUBLIC_MONGODB_DB = process.env.NEXT_PUBLIC_MONGODB_DB;
 
 exports.handler = async (event, context) => {
-  const client = new MongoClient(process.env.MONGODB_URI, {
+  const client = new MongoClient(process.env.NEXT_PUBLIC_MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
 
   try {
     await client.connect();
-    const usersCollection = client.db(SELECTED_DB).collection('users');
+    const usersCollection = client
+      .db(NEXT_PUBLIC_MONGODB_DB)
+      .collection('users');
 
     // Parse user data from the body
     const user = JSON.parse(event.body);

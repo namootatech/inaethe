@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt-nodejs');
 const { MongoClient, ObjectId } = require('mongodb');
 require('dotenv').config();
 
-const SELECTED_DB = process.env.SELECTED_DB;
+const NEXT_PUBLIC_MONGODB_DB = process.env.NEXT_PUBLIC_MONGODB_DB;
 
 exports.handler = async function (event, context) {
   // Ensure the request method is POST
@@ -12,7 +12,7 @@ exports.handler = async function (event, context) {
       body: JSON.stringify({ message: 'Method Not Allowed' }),
     };
   }
-  const client = new MongoClient(process.env.MONGODB_URI, {
+  const client = new MongoClient(process.env.NEXT_PUBLIC_MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
@@ -21,16 +21,20 @@ exports.handler = async function (event, context) {
     const { email, password } = JSON.parse(event.body);
 
     const client = require('../lib/mongoClient'); // Assuming mongoClient is a shared instance of MongoDB connection
-    const users = client.db(SELECTED_DB).collection('users');
+    const users = client.db(NEXT_PUBLIC_MONGODB_DB).collection('users');
     const user = await users.findOne({ email });
 
     if (user && bcrypt.compareSync(password, user.hash)) {
-      const subscriptions = client.db(SELECTED_DB).collection('subscriptions');
+      const subscriptions = client
+        .db(NEXT_PUBLIC_MONGODB_DB)
+        .collection('subscriptions');
       const userSubscriptions = await subscriptions
         .find({ userid: new ObjectId(user._id.toString()) })
         .toArray();
 
-      const transactions = client.db(SELECTED_DB).collection('transactions');
+      const transactions = client
+        .db(NEXT_PUBLIC_MONGODB_DB)
+        .collection('transactions');
       const userTransactions = await transactions
         .find({ custom_str2: user._id.toString() })
         .toArray();

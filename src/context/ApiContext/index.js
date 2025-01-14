@@ -33,15 +33,16 @@ export const ApiProvider = ({ children }) => {
       });
       console.log(`*** [API CONTEXT] Response received from: ${endpoint}`);
       setLoading(false);
-      return response.data;
+      return Promise.resolve(response.data);
     } catch (err) {
       console.error(
         `*** [API CONTEXT] Error during request to: ${endpoint}`,
         err
       );
+      console.log(err.data);
       setLoading(false);
       setError(err.message || 'Something went wrong');
-      throw err;
+      return Promise.reject(err.data || { message: 'Something went wrong' });
     }
   };
 
@@ -81,6 +82,11 @@ export const ApiProvider = ({ children }) => {
     return await apiRequest('/getPartners');
   };
 
+  const addNpo = async (data) => {
+    console.log('*** [API CONTEXT] Adding partner...');
+    return await apiRequest('/addPartner', 'POST', data);
+  };
+
   const addPost = async (postData) => {
     console.log('*** [API CONTEXT] Adding a new post...');
     return await apiRequest('/posts', 'POST', postData);
@@ -111,6 +117,7 @@ export const ApiProvider = ({ children }) => {
         updatePost,
         deletePost,
         addSubscription,
+        addNpo,
       }}
     >
       {children}

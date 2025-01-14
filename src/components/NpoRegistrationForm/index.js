@@ -16,6 +16,7 @@ import {
   BriefcaseIcon,
 } from '@heroicons/react/24/outline';
 import { useConfig } from '@/context/ConfigContext';
+import { useApi } from '@/context/ApiContext';
 
 const schema = yup.object().shape({
   organizationName: yup.string().required('Organization name is required'),
@@ -56,7 +57,7 @@ const InputField = ({
   <div className={`relative ${className}`}>
     <label
       htmlFor={name}
-      className='block text-sm font-medium text-gray-300 mb-1'
+      className='block text-lg font-medium text-gray-300 mb-1'
     >
       {label}
     </label>
@@ -68,7 +69,7 @@ const InputField = ({
         {...register(name)}
         type={type}
         id={name}
-        className='block w-full pl-10 py-2 px-4 sm:text-sm rounded-md bg-gray-700 border-gray-600 text-white focus:ring-teal-500 focus:border-teal-500'
+        className='block w-full pl-10 py-3 px-6 sm:text-lg rounded-md bg-gray-700 border-gray-600 text-white focus:ring-teal-500 focus:border-teal-500'
         {...rest}
       />
     </div>
@@ -88,7 +89,7 @@ const SelectField = ({
   <div className='relative'>
     <label
       htmlFor={name}
-      className='block text-sm font-medium text-gray-300 mb-1'
+      className='block text-lg font-medium text-gray-300 mb-1'
     >
       {label}
     </label>
@@ -99,7 +100,7 @@ const SelectField = ({
       <select
         {...register(name)}
         id={name}
-        className='block w-full pl-10 py-2 px-4 sm:text-sm rounded-md bg-gray-700 border-gray-600 text-white focus:ring-teal-500 focus:border-teal-500'
+        className='block w-full pl-10 py-4 px-4 sm:text-sm rounded-md bg-gray-700 border-gray-600 text-white text-lg focus:ring-teal-500 focus:border-teal-500'
         {...rest}
       >
         <option value=''>Select {label}</option>
@@ -115,6 +116,7 @@ const SelectField = ({
 );
 
 const NpoRegistrationForm = () => {
+  const api = useApi();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const siteConfig = useConfig();
   const {
@@ -126,11 +128,23 @@ const NpoRegistrationForm = () => {
   });
 
   const onSubmit = async (data) => {
+    console.log(data);
     setIsSubmitting(true);
     try {
       // Simulating API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      console.log(data);
+      api
+        .addNpo(data)
+        .then((response) => {
+          toast.success(
+            'Registration Successful! Check your email for confirmation.'
+          );
+        })
+        .catch((error) => {
+          toast.error(
+            `Registration failed. ${error.message}. Please try again. `
+          );
+        });
+
       toast.success(
         'Registration Successful! Check your email for confirmation.'
       );
@@ -250,12 +264,12 @@ const NpoRegistrationForm = () => {
             id='agreeTerms'
             name='agreeTerms'
             type='checkbox'
-            className='h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300 rounded'
+            className='h-8 w-8 text-teal-600 focus:ring-teal-500 border-gray-300 rounded'
             {...register('agreeTerms')}
           />
           <label
             htmlFor='agreeTerms'
-            className='ml-2 block text-sm text-gray-300'
+            className='ml-2 block text-lg text-gray-300'
           >
             I agree to the{' '}
             <a
@@ -277,12 +291,12 @@ const NpoRegistrationForm = () => {
             id='newsletter'
             name='newsletter'
             type='checkbox'
-            className='h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300 rounded'
+            className='h-8 w-8 text-teal-600 focus:ring-teal-500 border-gray-300 rounded'
             {...register('newsletter')}
           />
           <label
             htmlFor='newsletter'
-            className='ml-2 block text-sm text-gray-300'
+            className='ml-2 block text-lg text-gray-300'
           >
             Subscribe to the newsletter
           </label>
@@ -291,7 +305,7 @@ const NpoRegistrationForm = () => {
         <div>
           <button
             type='submit'
-            className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-${siteConfig.colors.accentColor}-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500`}
+            className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-${siteConfig.colors.accentColor}-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500`}
             disabled={isSubmitting}
           >
             {isSubmitting ? 'Registering...' : 'Register'}
