@@ -11,6 +11,7 @@ import { ThemeProvider } from 'next-themes';
 import Layout from '@/components/layout';
 import AppLayout from '@/components/app/layout';
 import { usePathname } from 'next/navigation';
+import { ApiProvider } from '@/context/ApiContext';
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -33,16 +34,18 @@ export default function App({ Component, pageProps }) {
 
   return (
     <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-      <AuthProvider>
-        <ConfigProvider>
-          <EventHandlersProvider>
-            <RouteLayout>
-              <ToastContainer />
-              <Component {...pageProps} />
-            </RouteLayout>
-          </EventHandlersProvider>
-        </ConfigProvider>
-      </AuthProvider>
+      <ApiProvider>
+        <AuthProvider>
+          <ConfigProvider>
+            <EventHandlersProvider>
+              <RouteLayout>
+                <ToastContainer />
+                <Component {...pageProps} />
+              </RouteLayout>
+            </EventHandlersProvider>
+          </ConfigProvider>
+        </AuthProvider>
+      </ApiProvider>
     </ThemeProvider>
   );
 }
