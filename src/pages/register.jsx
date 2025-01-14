@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/card';
 import { useConfig } from '@/context/ConfigContext';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
+import { useApi } from '@/context/ApiContext';
 
 const levelPrices = {
   Nourisher: 50,
@@ -27,6 +28,7 @@ const levelPrices = {
 };
 
 export default function Register() {
+  const api = useApi();
   const siteConfig = useConfig();
   const [formData, setFormData] = useState({
     firstName: '',
@@ -68,6 +70,17 @@ export default function Register() {
     console.log('Form submitted:', formData);
     setTimeout(() => {
       setLoading(false);
+      api
+        .register(formData)
+        .then((response) => {
+          console.log(response);
+          setError(null);
+        })
+        .catch((e) => {
+          console.error(e);
+          setError(e.message);
+          setLoading(false);
+        });
       // Handle success or error
       // router.push('/dashboard');
     }, 2000);
