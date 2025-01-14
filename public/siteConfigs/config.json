@@ -359,6 +359,24 @@
         },
         { "type": "space-above", "size": "10" }
       ]
+    },
+    {
+      "id": "register-npo",
+      "title": "Register NPO",
+      "type": "centered-color-page",
+      "colorCode": "gray-900",
+      "components": [
+        {
+          "type": "centered-page-header",
+          "title": "Join Ina Ethe & Empower Your Impact",
+          "description": "Register your organization to access tools and connect with a broader community"
+        },
+        {
+          "type": "centered-page-components-container",
+          "maxWidthinXLsize": 4,
+          "components": [{ "type": "state-handled-npo-registration-form" }]
+        }
+      ]
     }
   ],
   "defaultPages": [
