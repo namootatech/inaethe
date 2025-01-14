@@ -277,6 +277,46 @@ const components = [
       },
     ],
   },
+  {
+    type: 'FlowBiteCta1',
+    props: {
+      // theme: theme,
+      title: 'Your Title Here',
+      description:
+        'Your description text goes here. Make it engaging and informative.',
+      link: '/your-destination-url',
+      image: 'https://your-light-theme-image-url.jpg', // Optional - will use default if not provided
+      darkImage: 'https://your-dark-theme-image-url.jpg', // Optional - will use default if not provided
+    },
+  },
+  // FlowBiteCta2 CTA
+  {
+    type: 'FlowBiteCta2',
+    props: {
+      heading: 'Join our platform today!',
+      description:
+        'Discover a world of endless possibilities with our cutting-edge tools and features.',
+      primaryButton: {
+        text: 'Sign Up Now',
+        link: '/signup',
+      },
+      secondaryButton: {
+        text: 'Learn More',
+        link: '/learn-more',
+      },
+    },
+  },
+  // FlowBiteCta3 CTA
+  {
+    type: 'FlowBiteCta3',
+    props: {
+      // theme: theme,
+      title: 'Start your journey with us today',
+      description: 'Join our community and discover amazing opportunities',
+      buttonText: 'Get Started',
+      buttonLink: '/signup',
+    },
+  },
 ];
 
 export default components;
