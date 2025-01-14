@@ -3,7 +3,7 @@ import React, { createContext, useContext, useState } from 'react';
 import axios from 'axios';
 
 // Set your API base URL (replace with your actual API URL)
-const API_URL = process.env.NEXT_PUBLIC_WEBSITE_URL + '/.netlify/functions/api';
+const API_URL = process.env.NEXT_PUBLIC_FUNCTIONS_URL + '/.netlify/functions';
 
 // Create a context for the API
 const ApiContext = createContext();
@@ -48,12 +48,12 @@ export const ApiProvider = ({ children }) => {
   // API functions to interact with the server
   const register = async (userData) => {
     console.log('*** [API CONTEXT] Registering new user...');
-    return await apiRequest('/auth/register', 'POST', userData);
+    return await apiRequest('/register', 'POST', userData);
   };
 
   const login = async (credentials) => {
     console.log('*** [API CONTEXT] Logging in user...');
-    return await apiRequest('/auth/login', 'POST', credentials);
+    return await apiRequest('/login', 'POST', credentials);
   };
 
   const getUser = async () => {
@@ -110,6 +110,7 @@ export const ApiProvider = ({ children }) => {
         addPost,
         updatePost,
         deletePost,
+        addSubscription,
       }}
     >
       {children}
