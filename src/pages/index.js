@@ -1,12 +1,21 @@
-import { Inter } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 import Layout from '@/components/layout';
-import Artifacts from '@/components/content/generator';
+import RenderPageComponents from '@/components/content/generator';
+import { useConfig } from '@/context/ConfigContext';
+import { useEffect, useState } from 'react';
 
-function Home({ theme }) {
-  const page = theme?.pages?.find((page) => page.id === 'homepage');
+function Home({ siteConfig }) {
+  const config = useConfig();
+
+  const page = config?.pages?.find((page) => page.id === 'homepage');
   return (
     <Layout>
-      {page && <Artifacts items={page?.artifacts} theme={theme} />}
+      {page && (
+        <RenderPageComponents
+          items={page?.components}
+          siteConfig={siteConfig}
+        />
+      )}
     </Layout>
   );
 }

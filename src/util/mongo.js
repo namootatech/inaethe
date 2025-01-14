@@ -1,23 +1,25 @@
 // mongodb.js
 
-const { MongoClient } = require('mongodb');
+import { MongoClient } from 'mongodb';
 
 const uri = process.env.NEXT_PUBLIC_MONGODB_URI;
 const options = {
   useUnifiedTopology: true,
   useNewUrlParser: true,
-}
+};
 
-let client
-let clientPromise
+let client;
+let clientPromise;
 
 if (!process.env.NEXT_PUBLIC_MONGODB_URI) {
-  throw new Error('Add Mongo URI to Environment vars')
+  throw new Error('Add Mongo URI to Environment vars');
 }
 
 if (process.env.NODE_ENV === 'development') {
   if (!global._mongoClientPromise) {
-    client = new MongoClient(uri, {
+    client = new MongoClient(
+      uri,
+      {
         useUnifiedTopology: true,
       },
       {
@@ -28,25 +30,28 @@ if (process.env.NODE_ENV === 'development') {
       },
       {
         keepAlive: 1,
-      })
-    global._mongoClientPromise = client.connect()
+      }
+    );
+    global._mongoClientPromise = client.connect();
   }
-  clientPromise = global._mongoClientPromise
+  clientPromise = global._mongoClientPromise;
 } else {
-  client = new MongoClient(uri, {
-    useUnifiedTopology: true,
-  },
-  {
-    useNewUrlParser: true,
-  },
-  {
-    connectTimeoutMS: 30000,
-  },
-  {
-    keepAlive: 1,
-  })
-  clientPromise = client.connect()
+  client = new MongoClient(
+    uri,
+    {
+      useUnifiedTopology: true,
+    },
+    {
+      useNewUrlParser: true,
+    },
+    {
+      connectTimeoutMS: 30000,
+    },
+    {
+      keepAlive: 1,
+    }
+  );
+  clientPromise = client.connect();
 }
 
-
-module.exports = clientPromise
+export default clientPromise;

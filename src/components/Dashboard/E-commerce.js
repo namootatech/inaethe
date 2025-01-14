@@ -4,12 +4,13 @@ import TableOne from '../Tables/TableOne';
 import TableTwo from '../Tables/TableTwo';
 import FreeModal from '../free-modal';
 import { useState } from 'react';
-import { connect } from 'react-redux';
 import { dissoc, dissocPath, keys, pipe, set } from 'ramda';
 import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment';
 import { useSearchParams } from 'next/navigation';
 import { postToURL } from '../payfast/payfast';
+import { useAuth } from '@/context/AuthContext';
+import { Suspense } from 'react';
 
 const levelPrices = {
   Nourisher: 50,
@@ -58,8 +59,8 @@ const getPayFastData = (
     email_address: userData.email,
     m_payment_id: paymentId,
     amount: levelPrices[subscriptionTier],
-    item_name: `INA ETHE Subscription`,
-    item_description: `INA ETHE Subscription for ${userData.firstName} ${userData.lastName} for the ${subscriptionTier} package at ${selectedPartner.name}`,
+    item_name: `Inaethe Subscription`,
+    item_description: `Inaethe Subscription for ${userData.firstName} ${userData.lastName} for the ${subscriptionTier} package at ${selectedPartner.name}`,
     subscription_type: 1,
     billing_date: moment().format('YYYY-MM-DD'),
     recurring_amount: levelPrices[subscriptionTier],
@@ -107,8 +108,8 @@ const getPayFastDataWithExistingToken = (
     email_address: userData.email,
     m_payment_id: paymentId,
     amount: levelPrices[subscriptionTier],
-    item_name: `INA ETHE Subscription`,
-    item_description: `INA ETHE Subscription for ${userData.firstName} ${userData.lastName} for the ${subscriptionTier} package at ${selectedPartner.name}`,
+    item_name: `Inaethe Subscription`,
+    item_description: `Inaethe Subscription for ${userData.firstName} ${userData.lastName} for the ${subscriptionTier} package at ${selectedPartner.name}`,
     subscription_type: 1,
     billing_date: moment().format('YYYY-MM-DD'),
     recurring_amount: levelPrices[subscriptionTier],
@@ -154,8 +155,8 @@ const getPayFastRetryData = (userData) => {
     email_address: userData.email,
     m_payment_id: paymentId,
     amount: levelPrices[userData.subscriptionTier],
-    item_name: `INA ETHE Subscription`,
-    item_description: `INA ETHE Subscription for ${userData.firstName} ${userData.lastName} for the ${userData.subscriptionTier} package at ${userData.partner.name}`,
+    item_name: `Inaethe Subscription`,
+    item_description: `Inaethe Subscription for ${userData.firstName} ${userData.lastName} for the ${userData.subscriptionTier} package at ${userData.partner.name}`,
     subscription_type: 1,
     billing_date: moment().format('YYYY-MM-DD'),
     recurring_amount: levelPrices[userData.subscriptionTier],
@@ -173,7 +174,9 @@ const getPayFastRetryData = (userData) => {
   return payfastData;
 };
 
-const ECommerce = ({ userData }) => {
+const ECommerce = () => {
+  const { user } = useAuth();
+  const userData = user;
   const params = useSearchParams();
   let payfastUserData = {};
 
@@ -313,7 +316,7 @@ const ECommerce = ({ userData }) => {
         <div class='flex flex-row'>
           <button
             onClick={() => setShowSubscriptionModal(true)}
-            class='white-text bg-red-800 me-2 mb-2 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center '
+            class='text-white bg-red-800 me-2 mb-2 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center '
           >
             Add new Subscription
           </button>
@@ -616,12 +619,8 @@ const ECommerce = ({ userData }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  userData: pipe(
-    dissocPath(['user', 'password']),
-    dissocPath(['user', 'confirmPassword']),
-    dissocPath(['user', 'hash'])
-  )(state.auth),
-});
-
-export default connect(mapStateToProps, null)(ECommerce);
+export default (props) => {
+  <Suspense fallback={<>Loading...</>}>
+    <ECommerce {...props} />
+  </Suspense>;
+};

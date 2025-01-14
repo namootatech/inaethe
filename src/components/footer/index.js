@@ -1,17 +1,18 @@
+import { useConfig } from '@/context/ConfigContext';
 import Link from 'next/link';
-import { connect } from 'react-redux';
 
-const Footer = ({ theme }) => {
+const Footer = () => {
+  const siteConfig = useConfig();
   return (
     <footer
-      className={`${theme?.footer?.bg} ${theme?.footer?.fg} dark:bg-red-900 py-8`}
+      className={`bg-${siteConfig?.colors.primaryColor}-700 ${siteConfig?.footer?.fg} dark:bg-red-900 py-8`}
     >
       <div className='mx-auto w-full max-w-screen-xl px-4 py-12 lg:py-8'>
         <div className='md:flex md:justify-between'>
           <div className='mb-6 md:mb-0'>
             <Link href='/' className='flex items-center'>
               <span className='self-center text-2xl font-semibold whitespace-nowrap dark:text-gray-900'>
-                {theme?.partnerName}
+                {siteConfig?.partnerName}
               </span>
             </Link>
           </div>
@@ -23,7 +24,7 @@ const Footer = ({ theme }) => {
               <ul className='text-gray-900-500 dark:text-gray-900-400 font-medium'>
                 <li className='mb-4'>
                   <Link href='/' className='hover:underline'>
-                    {theme?.partnerName}
+                    {siteConfig?.partnerName}
                   </Link>
                 </li>
               </ul>
@@ -67,7 +68,7 @@ const Footer = ({ theme }) => {
           <span className='text-sm text-gray-900-500 sm:text-center dark:text-gray-900-400'>
             © 2023{' '}
             <Link href='https://inaethe.co.za' className='hover:underline'>
-              INA ETHE™
+              Inaethe™
             </Link>
             . All Rights Reserved.
           </span>
@@ -98,10 +99,4 @@ const Footer = ({ theme }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    theme: state.theme,
-  };
-};
-
-export default connect(mapStateToProps)(Footer);
+export default Footer;

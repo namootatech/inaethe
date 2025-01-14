@@ -1,17 +1,14 @@
 import '@/styles/globals.css';
-
-import { Provider } from 'react-redux';
-import store from '@/store';
-import Script from 'next/script';
+import { ConfigProvider } from '@/context/ConfigContext';
+import { EventHandlersProvider } from '@/context/EventHandlers';
+import { ToastContainer } from 'react-toastify';
+import { AuthProvider } from '@/context/AuthContext';
 import { hotjar } from 'react-hotjar';
 import { useEffect } from 'react';
 import * as gtag from '@/lib/gtag';
 import { useRouter } from 'next/router';
-import { CookiesProvider } from 'react-cookie';
-import { ConfigProvider } from '@/context/ConfigContext';
-import ProgressBarContainer from '@/components/ProgresssBarContainer';
 
-export default function MyApp({ Component, pageProps }) {
+export default function App({ Component, pageProps }) {
   const router = useRouter();
   useEffect(() => {
     hotjar.initialize(3906314, 6);
@@ -27,28 +24,13 @@ export default function MyApp({ Component, pageProps }) {
     };
   }, [router.events]);
   return (
-    <>
-      <script
-        async
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
-      ></script>
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-   window.dataLayer = window.dataLayer || [];
-   function gtag(){dataLayer.push(arguments);}
-   gtag('js', new Date());
-   gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');`,
-        }}
-      ></script>
+    <AuthProvider>
       <ConfigProvider>
-        <Provider store={store}>
-          <CookiesProvider defaultSetOptions={{ path: '/' }}>
-            <ProgressBarContainer />
-            <Component {...pageProps} />
-          </CookiesProvider>
-        </Provider>
+        <EventHandlersProvider>
+          <ToastContainer />
+          <Component {...pageProps} />
+        </EventHandlersProvider>
       </ConfigProvider>
-    </>
+    </AuthProvider>
   );
 }

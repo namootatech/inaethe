@@ -1,22 +1,22 @@
 ![Logo](public/logo.png)
 
-# INA ETHE
+# Inaethe
 
-> INA ETHE is a subscription-based platform that leverages affiliate marketing to help individuals support and fund Non-Profit Organizations (NPOs). The platform allows users to promote causes they care about, earning rewards through donations made by their network. By subscribing to the service, users contribute to NPOs while also benefiting from a revenue-sharing model that incentivizes active participation in charitable efforts.
+> Inaethe is a subscription-based platform that leverages affiliate marketing to help individuals support and fund Non-Profit Organizations (NPOs). The platform allows users to promote causes they care about, earning rewards through donations made by their network. By subscribing to the service, users contribute to NPOs while also benefiting from a revenue-sharing model that incentivizes active participation in charitable efforts.
 
 ## Why This Project Exists
 
-The **INA ETHE Project** was conceived with the noble intention of assisting non-profit organizations (NPOs) in enhancing their donation collection through the innovative use of affiliate marketing. This initiative aimed to empower passionate individuals to advocate for meaningful causes, rewarding them with a portion of the donations they help generate.
+The **Inaethe Project** was conceived with the noble intention of assisting non-profit organizations (NPOs) in enhancing their donation collection through the innovative use of affiliate marketing. This initiative aimed to empower passionate individuals to advocate for meaningful causes, rewarding them with a portion of the donations they help generate.
 
-However, following some funding challenges and the subsequent withdrawal of key stakeholders, **Namoota Technologies** recognized the inherent potential of this initiative. Transitioning the project into their own hands, they have rebranded it as **INA ETHE**, a term that beautifully translates to "Give and Get" in Xhosa. This strategic transformation has broadened the platform's vision, evolving it into a versatile resource designed not only to support NPOs in their missions but also to include features like configurable website building and foster open-source innovation.
+However, following some funding challenges and the subsequent withdrawal of key stakeholders, **Namoota Technologies** recognized the inherent potential of this initiative. Transitioning the project into their own hands, they have rebranded it as **Inaethe**, a term that beautifully translates to "Give and Get" in Xhosa. This strategic transformation has broadened the platform's vision, evolving it into a versatile resource designed not only to support NPOs in their missions but also to include features like configurable website building and foster open-source innovation.
 
-Through this evolution, INA ETHEaspires to create a more significant positive impact for NPOs and their supporters, fostering a collaborative environment that champions both philanthropy and technological advancement.
+Through this evolution, Inaethe aspires to create a more significant positive impact for NPOs and their supporters, fostering a collaborative environment that champions both philanthropy and technological advancement.
 
 ---
 
-## How INA ETHESeeks to Help
+## How InaetheSeeks to Help
 
-**INA ETHE** provides a dual-purpose platform:
+**Inaethe** provides a dual-purpose platform:
 
 1. **For NPOs**: It enables them to easily sign up, collect donations, and manage their networks and supporters.
 2. **For Individuals (Affiliates)**: It allows users to earn income by promoting the causes they believe in, creating a mutually beneficial system.
@@ -27,10 +27,10 @@ This approach fosters a sustainable ecosystem where philanthropy and personal fi
 
 ## What Type of Application Is This?
 
-INA ETHEis a **configurable Next.js-based web application** designed to create websites for NPOs. It is:
+Inaetheis a **configurable Next.js-based web application** designed to create websites for NPOs. It is:
 
 - **Configurable**: Built to adapt to various requirements without extensive coding.
-- **Scalable**: Capable of hosting standalone NPO websites under the INA ETHEdomain.
+- **Scalable**: Capable of hosting standalone NPO websites under the Inaethedomain.
 - **Customizable**: Offers tools to tailor websites according to individual NPO branding needs.
 - **Multi-purpose**: Extends beyond donation collection to support user subscriptions, network dashboards, and admin monitoring.
 
@@ -42,7 +42,7 @@ INA ETHEis a **configurable Next.js-based web application** designed to create w
 - **Configurable Website Builder**: Allows NPOs to create custom websites using pre-defined components.
 - **Subscription and Network Dashboard**: Affiliates and donors can manage their subscriptions and interactions.
 - **Admin Monitoring System**: Includes Slack notifications and internal tools for auditing and moderation.
-- **Multi-Domain Hosting**: NPOs can have standalone websites hosted under INA ETHE’s main domain (e.g., `foodoneverytable.INA ETHE.co.za`).
+- **Multi-Domain Hosting**: NPOs can have standalone websites hosted under Inaethe’s main domain (e.g., `foodoneverytable.Inaethe.co.za`).
 - **Dynamic JSON Configuration**: Enables fully configurable pages and layouts.
 
 **Core Platform Overview**
@@ -72,7 +72,7 @@ We appreciate your understanding and are continuously working to enhance our off
 
 ## Future Plans
 
-### 1. **INA ETHE NPO Configurable Website Builder**
+### 1. **Inaethe NPO Configurable Website Builder**
 
 The existing platform will evolve into a comprehensive tool for building NPO websites with features such as:
 
@@ -98,7 +98,7 @@ A library of reusable Tailwind CSS blocks will be created, packaged as an NPM li
 
 ## How the Website Builder Will Work
 
-The INA ETHEwebsite builder uses **dynamic JSON configuration** to generate pages dynamically. Here’s how it works:
+The Inaethewebsite builder uses **dynamic JSON configuration** to generate pages dynamically. Here’s how it works:
 
 1. **JSON Configuration File**: Contains page definitions, component sequences, and styling options.
 2. **Dynamic Routing**: Utilizes Next.js’s `[id].js` dynamic routing to fetch and render page content.
@@ -157,12 +157,12 @@ const Hero = ({ title, subtitle, buttonText, buttonLink }) => (
 const Hero = ({ config }) => {
   const { title, subtitle, button } = config.hero;
   return (
-    <section className={`${config.theme.primaryBgClass} py-10`}>
+    <section className={`${config.siteConfig.primaryBgClass} py-10`}>
       <h1 className='text-4xl'>{title}</h1>
       <p className='mt-4'>{subtitle}</p>
       <a
         href={button.link}
-        className={`${config.theme.primaryButton.bgClass} rounded`}
+        className={`${config.siteConfig.primaryButton.bgClass} rounded`}
       >
         {button.text}
       </a>
@@ -171,7 +171,7 @@ const Hero = ({ config }) => {
 };
 ```
 
-- **Theme-Based Styling**: Buttons, backgrounds, and other elements will reference the `config.theme`.
+- **siteConfig-Based Styling**: Buttons, backgrounds, and other elements will reference the `config.siteConfig`.
 
 ### Demo and Component Previews
 

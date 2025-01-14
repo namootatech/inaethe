@@ -1,12 +1,16 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import Layout from "@/components/layout";
-import SubscriptionForm from "@/components/subscriptionForm";
-import { useSearchParams } from "next/navigation";
+import Image from 'next/image';
+import { Poppins } from 'next/font/google';
+import Layout from '@/components/layout';
+import SubscriptionForm from '@/components/subscriptionForm';
+import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Poppins({
+  subsets: ['latin'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+});
 
-export default function Home() {
+function SubscribePage() {
   const params = useSearchParams();
   const userData = {};
 
@@ -14,10 +18,16 @@ export default function Home() {
     userData[key] = value;
   }
   return (
-    <Layout>
-      <div className="container mt-4 md:px-10 md:py-10 px-2 py-2">
+    <div>
+      <div className='container mt-4 md:px-10 md:py-10 px-2 py-2'>
         <SubscriptionForm user={userData} />
       </div>
-    </Layout>
+    </div>
   );
 }
+
+export default () => {
+  <Suspense fallback={<>Loading...</>}>
+    <SubscribePage />
+  </Suspense>;
+};

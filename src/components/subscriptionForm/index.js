@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { connect } from 'react-redux';
 import { assoc, keys } from 'ramda';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
+import { useConfig } from '@/context/ConfigContext';
+import { useAuth } from '@/context/AuthContext';
 
 const API_URL = 'https://inaethe-api.onrender.com/api';
 
@@ -21,9 +23,11 @@ const levelPrices = {
   GlobalImpactVisionary: 10000,
 };
 
-const SubscriptionForm = ({ user, theme }) => {
+const SubscriptionForm = () => {
   const router = useRouter();
   const params = useSearchParams();
+  const siteConfig = useConfig();
+  const { user } = useAuth();
   const parent = params.get('parent');
   console.log('Parent', parent);
   const [formData, setFormData] = useState({
@@ -35,7 +39,10 @@ const SubscriptionForm = ({ user, theme }) => {
     agreeToTerms: false,
     subscriptionTier: 'Nourisher',
     amount: 50,
-    partner: { name: theme?.partnerName, slug: theme?.organisationId },
+    partner: {
+      name: siteConfig?.partnerName,
+      slug: siteConfig?.organisationId,
+    },
     parent: parent,
   });
 
@@ -135,22 +142,25 @@ const SubscriptionForm = ({ user, theme }) => {
   });
 
   useEffect(() => {
-    if (theme) {
+    if (siteConfig) {
       setFormData({
         ...formData,
-        partner: { name: theme?.partnerName, slug: theme?.organisationId },
+        partner: {
+          name: siteConfig?.partnerName,
+          slug: siteConfig?.organisationId,
+        },
       });
     }
-  }, [theme]);
+  }, [siteConfig]);
 
   console.log('API URL', API_URL);
   return (
     <div className='md:w-9/12 p-8 mx-auto bg-white rounded-lg shadow-md'>
       <h1 className='text-2xl font-semibold mb-4 text-4xl'>
-        Join INA ETHE - Be a Hope Builder!
+        Join Inaethe - Be a Hope Builder!
       </h1>
       <p className='mb-4 mt-2 text-2xl'>
-        Subscribe to INA ETHE, and join us in our mission to end hunger in
+        Subscribe to Inaethe, and join us in our mission to end hunger in
         Africa. Choose a subscription tier and start making a real difference
         today.
       </p>
@@ -383,10 +393,8 @@ const SubscriptionForm = ({ user, theme }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    theme: state.theme,
-  };
+export default () => {
+  <Suspense fallback={<>Loading...</>}>
+    <SubscriptionForm />
+  </Suspense>;
 };
-
-export default connect(mapStateToProps)(SubscriptionForm);
