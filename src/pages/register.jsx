@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -10,14 +11,29 @@ import {
   CardFooter,
 } from '@/components/ui/card';
 import { useConfig } from '@/context/ConfigContext';
+import { EyeIcon, EyeOffIcon } from 'lucide-react';
+
+const levelPrices = {
+  Nourisher: 50,
+  CaringPartner: 100,
+  HarmonyAdvocate: 200,
+  UnitySupporter: 300,
+  HopeBuilder: 500,
+  CompassionAmbassador: 1000,
+  LifelineCreator: 2000,
+  EmpowermentLeader: 3000,
+  SustainabilityChampion: 5000,
+  GlobalImpactVisionary: 10000,
+};
+
 export default function Register() {
   const siteConfig = useConfig();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
-    email: null,
-    password: null,
-    confirmPassword: null,
+    email: '',
+    password: '',
+    confirmPassword: '',
     agreeToTerms: false,
     subscriptionTier: 'Nourisher',
     amount: 50,
@@ -25,7 +41,6 @@ export default function Register() {
       name: siteConfig?.partnerName,
       slug: siteConfig?.organisationId,
     },
-    parent: parent,
   });
   const router = useRouter();
 
@@ -35,257 +50,282 @@ export default function Register() {
   const [termsError, setTermsError] = useState('');
   const [canSubmit, setCanSubmit] = useState(false);
   const [error, setError] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleInputChange = (e) => {
-    console.log(e.target.name, e.target.value);
-    if (e.target.name === 'subscriptionTier') {
-      setFormData({
-        ...formData,
-        [e.target.name]: e.target.value,
-        amount: levelPrices[e.target.value],
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [e.target.name]: e.target.value,
-      });
-    }
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+      amount:
+        name === 'subscriptionTier' ? levelPrices[value] : prevData.amount,
+    }));
   };
 
   const handleSubmit = (e) => {
-    console.log('Posting to', API_URL);
     e.preventDefault();
-    console.log('saving formData', formData);
     setLoading(true);
-    axios
-      .post(`${API_URL}/register`, assoc('parent', parent, formData))
-      .then((res) => {
-        console.log('user saved successfully', res.data);
-        setLoading(false);
-        router.push(
-          `/return?partner=${formData.partner.slug}&subscriptionId=${
-            res.data.subscription
-          }&userId=${res.data.user}&firstPaymentDone=false&subscriptionTier=${
-            formData.subscriptionTier
-          }&amount=${levelPrices[formData.subscriptionTier]}&firstName=${
-            formData.firstName
-          }&lastName=${formData.lastName}&email=${
-            formData.email
-          }&paymentMethod=${formData.paymentMethod}&agreeToTerms=${
-            formData.agreeToTerms
-          }&level=${keys(levelPrices).indexOf(formData.subscriptionTier) + 1}${
-            parent ? `&parent=${parent}&` : ''
-          }`
-        );
-      })
-      .catch((err) => {
-        console.log('error saving user', err);
-        setLoading(false);
-        setError(err.message);
-      });
+    console.log('Form submitted:', formData);
+    setTimeout(() => {
+      setLoading(false);
+      // Handle success or error
+      // router.push('/dashboard');
+    }, 2000);
   };
 
   const toggleTerms = () => {
-    setFormData({
-      ...formData,
-      agreeToTerms: !formData.agreeToTerms,
-    });
+    setFormData((prevData) => ({
+      ...prevData,
+      agreeToTerms: !prevData.agreeToTerms,
+    }));
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   useEffect(() => {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    if (!emailPattern.test(formData.email) && email !== null) {
-      setEmailError('Please enter a valid email address.');
-      setCanSubmit(false);
-    } else {
-      setEmailError('');
-    }
+    setEmailError(
+      !emailPattern.test(formData.email) && formData.email !== ''
+        ? 'Please enter a valid email address.'
+        : ''
+    );
 
-    if (formData.password !== formData.confirmPassword) {
-      setPasswordError('Passwords do not match.');
-      setCanSubmit(false);
-    } else {
-      setPasswordError('');
-    }
+    setPasswordError(
+      formData.password !== formData.confirmPassword
+        ? 'Passwords do not match.'
+        : ''
+    );
 
-    if (formData.agreeToTerms === false) {
-      setTermsError('You must agree to the terms and conditions.');
-      setCanSubmit(false);
-    } else {
-      setTermsError('');
-    }
+    setTermsError(
+      !formData.agreeToTerms
+        ? 'You must agree to the terms and conditions.'
+        : ''
+    );
 
-    if (
-      formData.agreeToTerms === true &&
-      formData.password === formData.confirmPassword &&
-      emailPattern.test(formData.email)
-    ) {
-      setCanSubmit(true);
-    }
-  });
+    setCanSubmit(
+      emailPattern.test(formData.email) &&
+        formData.password === formData.confirmPassword &&
+        formData.agreeToTerms
+    );
+  }, [formData]);
 
-  useEffect(() => {
-    if (siteConfig) {
-      setFormData({
-        ...formData,
-        partner: {
-          name: siteConfig?.partnerName,
-          slug: siteConfig?.organisationId,
-        },
-      });
-    }
-  }, [siteConfig]);
-
-  console.log('API URL', API_URL);
   return (
-    <div className='flex flex-col bg-gray-900 text-gray-700  items-center justify-center min-h-screen bg-background'>
-      <div className='container max-w-4xl mx-auto text-white text-center floex items-center justify-center'>
-        <h1 className='text-2xl font-semibold mb-4 text-4xl'>
+    <div className='min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8'>
+      <div className='max-w-4xl mx-auto text-center mb-12 mt-6'>
+        <h1 className='text-4xl font-bold text-white mb-4'>
           Join Inaethe - Be a Hope Builder!
         </h1>
-        <p className='mb-4 mt-2 text-2xl text-gray-200'>
+        <p className='text-xl text-gray-300'>
           Subscribe with Inaethe, and join us in our mission to help save the
           world. Choose a subscription tier and start making a real difference
           today.
         </p>
       </div>
-      <Card className='w-[350px] bg-white'>
-        <CardHeader>
-          <CardTitle>Register for Ina-ethe</CardTitle>
+
+      <Card className='w-full max-w-2xl bg-white shadow-xl border-0 rounded-lg overflow-hidden my-4'>
+        <CardHeader
+          className={`bg-${siteConfig.colors.accentColor}-900 text-white p-6`}
+        >
+          <CardTitle className='text-2xl font-semibold'>
+            Register for Ina-ethe
+          </CardTitle>
         </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit}>
-            <div className='space-y-4'>
+        <CardContent className='p-6'>
+          <form onSubmit={handleSubmit} className='space-y-6'>
+            <div className='grid grid-cols-2 gap-4'>
               <div>
                 <label
-                  htmlFor='name'
-                  className='block text-sm font-medium text-gray-700'
+                  htmlFor='firstName'
+                  className='block text-sm font-medium text-gray-700 mb-1'
                 >
-                  Name
+                  First Name
                 </label>
-                <Input id='name' type='text' required />
+                <Input
+                  id='firstName'
+                  name='firstName'
+                  type='text'
+                  required
+                  value={formData.firstName}
+                  onChange={handleInputChange}
+                />
               </div>
               <div>
                 <label
-                  htmlFor='email'
-                  className='block text-sm font-medium text-gray-700'
+                  htmlFor='lastName'
+                  className='block text-sm font-medium text-gray-700 mb-1'
                 >
-                  Email
+                  Last Name
                 </label>
-                <Input id='email' type='email' required />
+                <Input
+                  id='lastName'
+                  name='lastName'
+                  type='text'
+                  required
+                  value={formData.lastName}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor='confirmPassword'
+                  className='block text-sm font-medium text-gray-700 mb-1'
+                >
+                  Confirm Password
+                </label>
+                <Input
+                  id='confirmPassword'
+                  name='confirmPassword'
+                  type='password'
+                  required
+                  value={formData.confirmPassword}
+                  onChange={handleInputChange}
+                />
+                {passwordError && (
+                  <p className='mt-1 text-sm text-red-600'>{passwordError}</p>
+                )}
               </div>
               <div>
                 <label
                   htmlFor='password'
-                  className='block text-sm font-medium text-gray-700'
+                  className='block text-sm font-medium text-gray-700 mb-1'
                 >
                   Password
                 </label>
-                <Input id='password' type='password' required />
+                <div className='relative'>
+                  <Input
+                    id='password'
+                    name='password'
+                    type={showPassword ? 'text' : 'password'}
+                    required
+                    className='pr-10'
+                    value={formData.password}
+                    onChange={handleInputChange}
+                  />
+                  <button
+                    type='button'
+                    className='absolute inset-y-0 right-0 pr-3 flex items-center'
+                    onClick={togglePasswordVisibility}
+                  >
+                    {showPassword ? (
+                      <EyeOffIcon className='h-5 w-5 text-gray-400' />
+                    ) : (
+                      <EyeIcon className='h-5 w-5 text-gray-400' />
+                    )}
+                  </button>
+                </div>
               </div>
               <div>
                 <label
-                  htmlFor='userType'
-                  className='block text-sm font-medium text-gray-700'
+                  htmlFor='email'
+                  className='block text-sm font-medium text-gray-700 mb-1'
                 >
-                  User Type
+                  Email
+                </label>
+                <Input
+                  id='email'
+                  name='email'
+                  type='email'
+                  required
+                  value={formData.email}
+                  onChange={handleInputChange}
+                />
+                {emailError && (
+                  <p className='mt-1 text-sm text-red-600'>{emailError}</p>
+                )}
+              </div>
+              <div>
+                <label
+                  htmlFor='subscriptionTier'
+                  className='block text-sm font-medium text-gray-700 mb-1'
+                >
+                  Subscription Tier
                 </label>
                 <select
-                  id='userType'
-                  value={userType}
+                  id='subscriptionTier'
+                  name='subscriptionTier'
+                  value={formData.subscriptionTier}
                   onChange={handleInputChange}
-                  className='mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 border border-solid focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md'
+                  className='border border-solid b p-2 mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm rounded-md'
                 >
-                  <option key='Nourisher' value='Nourisher'>
-                    Nourisher Level (R50/month)
-                  </option>
-                  <option key='CaringPartner' value='CaringPartner'>
-                    Caring Partner Level (R100/month)
-                  </option>
-                  <option key='HarmonyAdvocate' value='HarmonyAdvocate'>
-                    Harmony Advocate Level (R200/month)
-                  </option>
-                  <option key='UnitySupporter' value='UnitySupporter'>
-                    Unity Supporter Level (R300/month)
-                  </option>
-                  <option key='HopeBuilder ' value='HopeBuilder '>
-                    Hope Builder Level (R500/month)
-                  </option>
-                  <option
-                    key='CompassionAmbassador'
-                    value='CompassionAmbassador'
-                  >
-                    Compassion Ambassador Level (R1000/month)
-                  </option>
-                  <option key='LifelineCreator' value='LifelineCreator'>
-                    Lifeline Creator Level (R2000/month)
-                  </option>
-                  <option key='EmpowermentLeader' value='EmpowermentLeader'>
-                    Empowerment Leader Level (R3000/month)
-                  </option>
-                  <option
-                    key='SustainabilityChampion'
-                    value='SustainabilityChampion'
-                  >
-                    Sustainability Champion Level (R5000/month)
-                  </option>
-                  <option
-                    key='GlobalImpactVisionary'
-                    value='GlobalImpactVisionary'
-                  >
-                    Global Impact Visionary Level (R10,000/month)
-                  </option>
+                  {Object.entries(levelPrices).map(([tier, price]) => (
+                    <option key={tier} value={tier}>
+                      {tier} Level (R{price}/month)
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
-            {termsError && <p className='text-red-500'>{termsError}</p>}
-            {error && <p className='text-red-500'>{error}</p>}
-            {canSubmit && (
-              <>
-                {!loading && (
-                  <Button
-                    type='submit'
-                    className='w-full mt-4 bg-pink-700 text-gray-100'
+
+            <div className='flex items-center'>
+              <input
+                id='agreeToTerms'
+                name='agreeToTerms'
+                type='checkbox'
+                className='h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300 rounded'
+                checked={formData.agreeToTerms}
+                onChange={toggleTerms}
+              />
+              <label
+                htmlFor='agreeToTerms'
+                className='ml-2 block text-sm text-gray-900'
+              >
+                I agree to the{' '}
+                <Link
+                  href='/terms'
+                  className='text-pink-600 hover:text-pink-500'
+                >
+                  Terms and Conditions
+                </Link>
+              </label>
+            </div>
+            {termsError && <p className='text-sm text-red-600'>{termsError}</p>}
+            {error && <p className='text-sm text-red-600'>{error}</p>}
+            <Button
+              type='submit'
+              className='w-full bg-pink-600 text-white hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500'
+              disabled={!canSubmit || loading}
+            >
+              {loading ? (
+                <>
+                  <svg
+                    className='animate-spin -ml-1 mr-3 h-5 w-5 text-white'
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='none'
+                    viewBox='0 0 24 24'
                   >
-                    Subscribe
-                  </Button>
-                )}
-                {loading && (
-                  <Button
-                    type='submit'
-                    className='w-full mt-4 bg-pink-700 text-gray-100 disabled'
-                    disabled
-                  >
-                    <svg
-                      aria-hidden='true'
-                      role='status'
-                      className='inline w-4 h-4 me-3 text-white animate-spin'
-                      viewBox='0 0 100 101'
-                      fill='none'
-                      xmlns='http://www.w3.org/2000/svg'
-                    >
-                      <path
-                        d='M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z'
-                        fill='#E5E7EB'
-                      />
-                      <path
-                        d='M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z'
-                        fill='currentColor'
-                      />
-                    </svg>
-                    Loading...
-                  </Button>
-                )}
-              </>
-            )}
+                    <circle
+                      className='opacity-25'
+                      cx='12'
+                      cy='12'
+                      r='10'
+                      stroke='currentColor'
+                      strokeWidth='4'
+                    ></circle>
+                    <path
+                      className='opacity-75'
+                      fill='currentColor'
+                      d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+                    ></path>
+                  </svg>
+                  Loading...
+                </>
+              ) : (
+                'Subscribe'
+              )}
+            </Button>
           </form>
         </CardContent>
-        <CardFooter>
-          <p className='text-sm text-center w-full text-gray-700'>
+        <CardFooter className='bg-gray-50 px-6 py-4'>
+          <p className='text-sm text-center w-full text-gray-600'>
             Already have an account?{' '}
-            <a href='/signin' className='text-primary hover:underline'>
+            <Link
+              href='/signin'
+              className='font-medium text-pink-600 hover:text-pink-500'
+            >
               Sign in here
-            </a>
+            </Link>
           </p>
         </CardFooter>
       </Card>
