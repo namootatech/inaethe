@@ -44,6 +44,7 @@
     "secondaryLighBgColorCode": "gray-100",
     "primaryColorCode": "pink-500",
     "primaryColor": "pink",
+    "accentColor": "indigo",
     "secondaryColor": "gray",
     "secondaryColorCode": "gray-700",
     "textColorCode": "gray-700",
