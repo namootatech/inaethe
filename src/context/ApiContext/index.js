@@ -62,6 +62,11 @@ export const ApiProvider = ({ children }) => {
     return await apiRequest('/login', 'POST', credentials);
   };
 
+  const restoreUser = async (token) => {
+    console.log('*** [API CONTEXT] Logging in user...');
+    return await apiRequest('/restoreUser', 'POST', token);
+  };
+
   const getUser = async () => {
     console.log('*** [API CONTEXT] Fetching current user...');
     return await apiRequest('/user');
@@ -122,6 +127,7 @@ export const ApiProvider = ({ children }) => {
         updatePost,
         deletePost,
         addSubscription,
+        restoreUser,
         addNpo,
       }}
     >

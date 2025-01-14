@@ -35,9 +35,9 @@ export default function SignIn() {
   };
   return (
     <div className='flex items-center justify-center min-h-screen bg-gray-900'>
-      <Card className='w-[350px]'>
+      <Card className='w-[350px] bg-white'>
         <CardHeader>
-          <CardTitle className='text-white'>Sign In to Inaethe</CardTitle>
+          <CardTitle className='text-gray-700'>Sign In to Inaethe</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit}>
@@ -45,7 +45,7 @@ export default function SignIn() {
               <div>
                 <label
                   htmlFor='email'
-                  className='block text-lg font-medium text-white my-2'
+                  className='block text-lg font-medium text-gray-700 my-2'
                 >
                   Email
                 </label>
@@ -61,7 +61,7 @@ export default function SignIn() {
               <div>
                 <label
                   htmlFor='password'
-                  className='block text-lg font-medium text-white my-2'
+                  className='block text-lg font-medium text-gray-700 my-2'
                 >
                   Password
                 </label>
@@ -77,7 +77,7 @@ export default function SignIn() {
               <div>
                 <label
                   htmlFor='userType'
-                  className='block text-lg font-medium text-white'
+                  className='block text-lg font-medium text-gray-700'
                 >
                   User Type
                 </label>
@@ -85,7 +85,7 @@ export default function SignIn() {
                   id='userType'
                   value={userType}
                   onChange={(e) => setUserType(e.target.value)}
-                  className='mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-lg rounded-md'
+                  className='mt-1 block w-full pl-3 pr-10 py-2 text-base border border-solid border-gray-900 focus:outline-none focus:ring-primary focus:border-gray-700 sm:text-lg rounded-md'
                 >
                   <option value='subscriber'>Subscriber</option>
                   <option value='npo'>NPO Organization</option>
@@ -94,7 +94,7 @@ export default function SignIn() {
             </div>
             <Button
               type='submit'
-              className={`w-full mt-4 bg-${siteConfig.colors.primaryColor}-500 text-lg text-white`}
+              className={`w-full mt-4 bg-${siteConfig.colors.primaryColor}-500 text-lg text-white hover:bg-${siteConfig.colors.primaryColor}-900 hover:text-gray-700 hover:font-bold transition-all duration-200 ease-in-out`}
             >
               Sign In
             </Button>
@@ -103,7 +103,10 @@ export default function SignIn() {
         <CardFooter>
           <p className='text-lg text-center w-full'>
             Don't have an account?{' '}
-            <a href='/register' className='text-primary hover:underline'>
+            <a
+              href='/register'
+              className={`text-${siteConfig.colors.accentColor}-600 hover:underline`}
+            >
               Register here
             </a>
           </p>
