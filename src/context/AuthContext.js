@@ -1,8 +1,9 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useApi } from './ApiContext';
 import Cookies from 'js-cookie';
-import jwt from 'jsonwebtoken';
+import sign from 'jwt-encode';
 import { useRouter } from 'next/router';
+import { isNil } from 'ramda';
 
 const AuthContext = createContext();
 
@@ -10,29 +11,39 @@ export const AuthProvider = ({ children }) => {
   const router = useRouter();
   const [user, setUser] = useState(null);
   const api = useApi();
-  const jwtSecret = process.env.NEXT_JWT_ENCODE_SECRET;
+  const jwtSecret = process.env.NEXT_PUBLIC_JWT_ENCODE_SECRET;
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const storedUser = Cookies.get('user');
-    if (storedUser && jwtSecret) {
+    console.log(
+      '** [AUTH CONTEXT] Cookie User',
+      !isNil(storedUser) ? JSON.parse(storedUser) : storedUser,
+      jwtSecret
+    );
+    if (storedUser && jwtSecret && isNil(user)) {
       const parsedUser = JSON.parse(storedUser);
-
+      console.log('** [AUTH CONTEXT] Restoring user:', parsedUser);
       // Encode email with JWT
-      const encodedEmail = jwt.sign({ email: parsedUser.email }, jwtSecret);
+      const encodedEmail = sign({ email: parsedUser.email }, jwtSecret);
 
       api
-        .restoreUser(encodedEmail)
+        .restoreUser({ token: encodedEmail })
         .then((restoredUser) => {
-          setUser(restoredUser);
+          setUser(restoredUser.data);
+          console.log(
+            '** [AUTH CONTEXT] Restored full user:',
+            restoredUser.data
+          );
         })
         .catch((error) => {
-          console.error('Failed to restore user:', error);
+          console.error('** [AUTH CONTEXT] Failed to restore user:', error);
           setUser(null); // Clear the user state on error
           Cookies.remove('user'); // Clear the cookie
         })
         .finally(() => setLoading(false));
     } else {
+      console.log('** [AUTH CONTEXT] No user found in cookies');
       setLoading(false); // No user to restore
     }
   }, [api, jwtSecret]);
@@ -41,12 +52,18 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     return api
       .login(data)
-      .then((user) => {
-        setUser(user);
+      .then((data) => {
+        console.log('** [AUTH CONTEXT] Login data', data);
+        setUser(data.data);
+        Cookies.set('user', JSON.stringify(data.data.user), { expires: 2 });
+        console.log(
+          '** [AUTH CONTEXT] User loggedin & cookie set:',
+          data.data.user
+        );
         return Promise.resolve(user);
       })
       .catch((error) => {
-        console.error('Login failed', error);
+        console.error('** [AUTH CONTEXT] Login failed', error);
         return Promise.reject(error);
       })
       .finally(() => setLoading(false));
