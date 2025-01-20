@@ -9,14 +9,9 @@ export default function Layout({ children }) {
 
   return (
     <SidebarProvider>
-      <div className='flex h-screen bg-gray-900 text-gray-100 grid grid-cols-6'>
-        <div className='col-span-2'>
-          <Sidebar
-            expanded={sidebarExpanded}
-            setExpanded={setSidebarExpanded}
-          />
-        </div>
-        <div className='col-span-4 flex flex-col flex-1 overflow-hidden'>
+      <div className='flex h-screen bg-gray-950 text-gray-100'>
+        <Sidebar expanded={sidebarExpanded} setExpanded={setSidebarExpanded} />
+        <div className='flex flex-col flex-1 overflow-hidden'>
           <TopBar />
           <main className='flex-1 overflow-x-hidden overflow-y-auto bg-gray-800 p-6'>
             {children}
