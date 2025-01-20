@@ -1,25 +1,24 @@
 {
-  "organisationId": "cyanpeople",
-  "partnerName": "Cyan People",
-  "progressColor": "cyan",
-  "tagline": "Changing how people interact with wild life, tommorow!",
-  "about": "At Cyan People, we believe in the power of generosity and financial sustainability. Join us in building a community that empowers non-profit organizations to thrive while offering individuals the opportunity to earn while making a difference. Together, let's create a brighter future.",
+  "organisationId": "feedmefood",
+  "partnerName": "Feed Me Food",
+  "tagline": "Transforming good intentions into tangible impacts.",
+  "about": "At Inaethe, we believe in the power of generosity and financial sustainability. Join us in building a community that empowers non-profit organizations to thrive while offering individuals the opportunity to earn while making a difference. Together, let's create a brighter future.",
   "cta": {
-    "class": " mb-6 text-white bg-cyan-500 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl px-4 py-3 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+    "class": " mb-6 text-white bg-amber-500 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-amber-300 font-medium rounded-lg text-xl px-4 py-3 text-center mr-3 md:mr-0 dark:bg-amber-600 dark:hover:bg-amber-700 dark:focus:ring-amber-800",
     "text": "Make an Impact Today!"
   },
   "nav": {
     "ctaText": "Get started",
-    "ctaClass": "text-white bg-cyan-500 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  text-xl px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
-    "login": "text-white bg-black hover:bg-red-800 hidden md:block focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  text-xl px-4 py-2 text-center ml-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+    "ctaClass": "text-white bg-amber-500 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-amber-300 font-medium rounded-lg  text-xl px-4 py-2 text-center mr-3 md:mr-0 dark:bg-amber-600 dark:hover:bg-amber-700 dark:focus:ring-amber-800",
+    "login": "text-white bg-black hover:bg-gray-800 hidden md:block focus:ring-4 focus:outline-none focus:ring-amber-300 font-medium rounded-lg  text-xl px-4 py-2 text-center ml-3 md:mr-0 dark:bg-amber-600 dark:hover:bg-amber-700 dark:focus:ring-amber-800",
     "burgerMenu": {
       "class": "md:bg-transparent sm:bg-transparent  flex p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 flex-col",
       "link": {
-        "activeClass": "text-xl block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-cyan-500 md:p-0 md:dark:text-red-500",
-        "inactiveClass": "text-xl block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-cyan-500 md:p-0 md:dark:hover:text-red-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+        "activeClass": "text-xl block py-2 pl-3 pr-4 text-white bg-amber-700 rounded md:bg-transparent md:text-amber-500 md:p-0 md:dark:text-gray-500",
+        "inactiveClass": "text-xl block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-amber-500 md:p-0 md:dark:hover:text-gray-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
       },
       "login": {
-        "class": "md:hidden block text-white bg-black hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  text-xl px-4 py-2 text-center ml-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        "class": "md:hidden block text-white bg-black hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-amber-300 font-medium rounded-lg  text-xl px-4 py-2 text-center ml-3 md:mr-0 dark:bg-amber-600 dark:hover:bg-amber-700 dark:focus:ring-amber-800"
       }
     }
   },
@@ -37,13 +36,13 @@
     "size512": ""
   },
   "brand": {
-    "logo": "/matlogo.png"
+    "logo": "/logo.png"
   },
   "colors": {
-    "lightBgColoCode": "cyan-50",
+    "lightBgColoCode": "amber-50",
     "secondaryLighBgColorCode": "gray-100",
-    "primaryColorCode": "cyan-500",
-    "primaryColor": "cyan",
+    "primaryColorCode": "amber-500",
+    "primaryColor": "amber",
     "accentColor": "indigo",
     "secondaryColor": "gray",
     "secondaryColorCode": "gray-700",
@@ -51,21 +50,21 @@
     "progressColor": "#d946ef",
     "button": {
       "primary": {
-        "class": "text-white bg-cyan-500 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  text-xl px-4 py-3 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        "class": "text-white bg-amber-500 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-amber-300 font-medium rounded-lg  text-xl px-4 py-3 text-center mr-3 md:mr-0 dark:bg-amber-600 dark:hover:bg-amber-700 dark:focus:ring-amber-800"
       },
       "secondary": {
-        "class": "text-white bg-black hover:bg-red-800 hidden md:block focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  text-xl px-4 py-2 text-center ml-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        "class": "text-white bg-gray-700 hover:bg-gray-800 hidden md:block focus:ring-4 focus:outline-none focus:ring-amber-300 font-medium rounded-lg  text-xl px-4 py-2 text-center ml-3 md:mr-0 dark:bg-amber-600 dark:hover:bg-amber-700 dark:focus:ring-amber-800"
       }
     }
   },
 
   "section": {
     "header": {
-      "class": "text-cyan-500 text-4xl mb-4 font-extrabold leading-none tracking-tight text-gray-900 dark:text-white"
+      "class": "text-amber-500 text-4xl mb-4 font-extrabold leading-none tracking-tight text-gray-900 dark:text-white"
     }
   },
   "footer": {
-    "bg": "bg-red-800",
+    "bg": "bg-gray-800",
     "fg": "text-white"
   },
   "pages": [
@@ -76,15 +75,20 @@
         {
           "type": "hero",
           "header": "Transforming good intentions into tangible impacts.",
-          "text": "At CYan People, we believe in the power of generosity and financial sustainability. Join us in building a community that empowers non-profit organizations to thrive while offering individuals the opportunity to earn while making a difference. Together, let's create a brighter future.",
+          "text": "At Inaethe, we believe in the power of generosity and financial sustainability. Join us in building a community that empowers non-profit organizations to thrive while offering individuals the opportunity to earn while making a difference. Together, let's create a brighter future.",
           "cta": {
             "title": "Make an Impact Today!",
             "link": "/subscribe"
+          },
+          "logo": {
+            "src": "/logo.png",
+            "alt": "Inaethe logo"
           },
           "image": "/images/inaethe/home-page-header.jpg"
         },
         {
           "type": "article",
+          "image": "/images/inaethe/garbage.jpg",
           "elements": [
             {
               "type": "image-block",
@@ -99,11 +103,11 @@
               "content": [
                 {
                   "title": "Our Mission",
-                  "text": "At CYan People, our mission is twofold: we empower non-profit organizations to generate crucial income for their causes, while simultaneously providing individuals with the opportunity to earn while helping these causes thrive. We believe in the power of mutual benefit, creating a platform where generosity and financial sustainability coexist."
+                  "text": "At Inaethe, our mission is twofold: we empower non-profit organizations to generate crucial income for their causes, while simultaneously providing individuals with the opportunity to earn while helping these causes thrive. We believe in the power of mutual benefit, creating a platform where generosity and financial sustainability coexist."
                 },
                 {
                   "title": "",
-                  "text": "Join us in building a community that transforms good intentions into tangible impacts, ensuring a brighter future for both individuals and the non-profits they support. CYan People make a difference today!"
+                  "text": "Join us in building a community that transforms good intentions into tangible impacts, ensuring a brighter future for both individuals and the non-profits they support. Inaethe make a difference today!"
                 }
               ]
             }
@@ -128,12 +132,13 @@
               "text": "Join a passionate community of individuals dedicated to ending hunger in Africa."
             }
           ],
-          "bg": "bg-cyan-500",
+          "bg": "bg-amber-800",
           "fg": "text-white",
-          "title": "Why CYan People"
+          "title": "Why Inaethe"
         },
         {
           "type": "article",
+          "image": "/images/inaethe/donations-square.jpg",
           "elements": [
             {
               "type": "multi-text-blocks",
@@ -144,11 +149,11 @@
               "content": [
                 {
                   "title": "Our Story",
-                  "text": "CYan People emerged in response to the African hunger crisis post-Covid. Starting with 'Food-On-Every-Table,' we sought aid from companies but faced silence. Adapting, we realized the need to address both hunger and South Africa's 40% unemployment."
+                  "text": "Inaethe emerged in response to the African hunger crisis post-Covid. Starting with 'Food-On-Every-Table,' we sought aid from companies but faced silence. Adapting, we realized the need to address both hunger and South Africa's 40% unemployment."
                 },
                 {
                   "title": "Empowering Impactful Causes",
-                  "text": "CYan People is a unique platform uniting non-profits and individuals, offering a means for anyone with a worthy cause to generate income. Our resilient journey aims to make a lasting impact on hunger, unemployment, and funding challenges."
+                  "text": "Inaethe is a unique platform uniting non-profits and individuals, offering a means for anyone with a worthy cause to generate income. Our resilient journey aims to make a lasting impact on hunger, unemployment, and funding challenges."
                 }
               ]
             },
@@ -177,7 +182,7 @@
               "content": [
                 {
                   "title": "Our Story",
-                  "text": "Our story at CYan People began in the aftermath of the Covid pandemic when a group of compassionate individuals, dismayed by the growing hunger crisis in Africa, took action. Starting the non-profit 'Food-On-Every-Table' we sought financial support from companies to address the urgent issue of hunger. However, the response was dishearteningly silent, prompting us to reassess our approach. \n\n Recognizing the economic challenges faced by businesses, coupled with South Africa's staggering 40% unemployment rate, we understood the need for a sustainable solution that addressed both hunger and unemployment.  "
+                  "text": "Our story at Inaethe began in the aftermath of the Covid pandemic when a group of compassionate individuals, dismayed by the growing hunger crisis in Africa, took action. Starting the non-profit 'Food-On-Every-Table' we sought financial support from companies to address the urgent issue of hunger. However, the response was dishearteningly silent, prompting us to reassess our approach. \n\n Recognizing the economic challenges faced by businesses, coupled with South Africa's staggering 40% unemployment rate, we understood the need for a sustainable solution that addressed both hunger and unemployment.  "
                 }
               ]
             }
@@ -187,13 +192,13 @@
         {
           "type": "full-width-text-block",
           "title": "",
-          "text": " Moreover, as we delved deeper into the philanthropic landscape, we realized that other noteworthy causes were grappling with similar funding challenges. \n\n In response, we developed a unique vehicle at CYan People, offering a means for anyone with a worthy cause to generate income, creating a versatile platform that empowers diverse initiatives. Out of this realization, CYan People emerged – a dynamic solution uniting non-profits and individuals, fostering a community where support and financial sustainability converge to create meaningful change. Our journey reflects the resilience born from adversity, as we strive to make a lasting impact on the lives of those facing hunger, unemployment, and a shortage of funding for their noble causes. \n\n Join us in building a community that transforms good intentions into tangible impacts, ensuring a brighter future for both individuals and the non-profits they support. CYan People make a difference today!"
+          "text": " Moreover, as we delved deeper into the philanthropic landscape, we realized that other noteworthy causes were grappling with similar funding challenges. \n\n In response, we developed a unique vehicle at Inaethe, offering a means for anyone with a worthy cause to generate income, creating a versatile platform that empowers diverse initiatives. Out of this realization, Inaethe emerged – a dynamic solution uniting non-profits and individuals, fostering a community where support and financial sustainability converge to create meaningful change. Our journey reflects the resilience born from adversity, as we strive to make a lasting impact on the lives of those facing hunger, unemployment, and a shortage of funding for their noble causes. \n\n Join us in building a community that transforms good intentions into tangible impacts, ensuring a brighter future for both individuals and the non-profits they support. Inaethe make a difference today!"
         },
         { "type": "space-above", "size": "24" },
         {
           "type": "hero",
           "header": "Join the movement",
-          "text": "CYan People is more than an initiative; it's a movement of compassion, driven by the belief that change is possible when people come together. Whether you're interested in subscribing, volunteering, or partnering with us, we invite you to be a part of our journey.",
+          "text": "Inaethe is more than an initiative; it's a movement of compassion, driven by the belief that change is possible when people come together. Whether you're interested in subscribing, volunteering, or partnering with us, we invite you to be a part of our journey.",
           "cta": {
             "title": "Join Us Now!",
             "link": "/subscribe"
@@ -210,7 +215,7 @@
               "content": [
                 {
                   "title": "How the Help’em system works",
-                  "text": "When you join as a subscriber, you become a Hope Builder, and the process is straightforward: \n• Your recruits contribute a monthly subscription fee, determined by their chosen package. \n• You earn a 40% Monthly Income per Recruit from the monthly subscription fee of each person you bring on board. \n• Another 40% of the subscription fee is directed towards the cause chosen by your recruit or subscriber. \n• The remaining 20% is allocated to sustaining, advancing, and continually improving the CYan People system. \n• Your subscription extends beyond a mere commitment; it embodies a promise of hope. Join us today and be a part of creating a world where we can collectively contribute to each other's well-being."
+                  "text": "When you join as a subscriber, you become a Hope Builder, and the process is straightforward: \n• Your recruits contribute a monthly subscription fee, determined by their chosen package. \n• You earn a 40% Monthly Income per Recruit from the monthly subscription fee of each person you bring on board. \n• Another 40% of the subscription fee is directed towards the cause chosen by your recruit or subscriber. \n• The remaining 20% is allocated to sustaining, advancing, and continually improving the Inaethe system. \n• Your subscription extends beyond a mere commitment; it embodies a promise of hope. Join us today and be a part of creating a world where we can collectively contribute to each other's well-being."
                 }
               ]
             },
@@ -224,12 +229,12 @@
         {
           "type": "full-width-text-block",
           "title": "Our Values",
-          "text": "At CYan People, our values serve as our guiding light. They include 'compassion', 'transparency,' 'collaboration,' and these principles underpin everything we do. We take pride in our commitment to complete transparency in our operations, ensuring that every contribution makes a meaningful impact."
+          "text": "At Inaethe, our values serve as our guiding light. They include 'compassion', 'transparency,' 'collaboration,' and these principles underpin everything we do. We take pride in our commitment to complete transparency in our operations, ensuring that every contribution makes a meaningful impact."
         },
         {
           "type": "full-width-text-block",
           "title": "Meet our team",
-          "text": "Our success is a testament to the dedication and passion of our team. Meet the individuals who drive CYan People forward, from our founders to our committed volunteers. Together, we share a common goal - to eradicate hunger in Africa and to bring hope to those who need it most."
+          "text": "Our success is a testament to the dedication and passion of our team. Meet the individuals who drive Inaethe forward, from our founders to our committed volunteers. Together, we share a common goal - to eradicate hunger in Africa and to bring hope to those who need it most."
         },
         { "type": "space-above", "size": "24" }
       ]
@@ -316,7 +321,7 @@
             {
               "icon": "sliders",
               "title": "Customizable Subscription Tiers",
-              "description": "Choose from flexible subscription tiers designed to suit different needs and goals. Whether you’re an individual donor or a large organization, Inaethe offers solutions tailored to you."
+              "description": "Choose from flexible subscription tiers designed to suit different needs and goals. Whether you’re an individual donor or a large organization, Inaethe offers solutions tailogray to you."
             },
             {
               "icon": "bank-card",
@@ -354,6 +359,24 @@
         },
         { "type": "space-above", "size": "10" }
       ]
+    },
+    {
+      "id": "register-npo",
+      "title": "Register NPO",
+      "type": "centered-color-page",
+      "colorCode": "gray-900",
+      "components": [
+        {
+          "type": "centered-page-header",
+          "title": "Join Ina Ethe & Empower Your Impact",
+          "description": "Register your organization to access tools and connect with a broader community"
+        },
+        {
+          "type": "centered-page-components-container",
+          "maxWidthinXLsize": 4,
+          "components": [{ "type": "state-handled-npo-registration-form" }]
+        }
+      ]
     }
   ],
   "defaultPages": [
@@ -365,7 +388,7 @@
         {
           "type": "center-width-text-block",
           "title": "Your Information Is Saved:",
-          "text": "Your details have been securely saved to our database, ensuring a seamless experience as you embark on your journey of giving back. Rest assured, your support is in good hands."
+          "text": "Your details have been securely saved to our database, ensuring a seamless experience as you embark on your journey of giving back. Rest assugray, your support is in good hands."
         },
         {
           "type": "center-width-text-block",

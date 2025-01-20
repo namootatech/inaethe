@@ -340,7 +340,11 @@ const fullWidthTextBlock = ({ ...rest }) => (
 
 const centerWidthTextBlock = ({ ...rest }) => (
   <div key={`section-${rest.title} `} className='max-w-2xl mx-auto p-4'>
-    <h1 className='text-3xl font-semibold leading-normal text-gray-900 dark:text-gray-900 mb-2'>
+    <h1
+      className={`text-3xl font-semibold leading-normal ${
+        rest.color === 'light' ? 'text-gray-100' : 'text-gray-900'
+      } dark:text-gray-900 mb-2`}
+    >
       {rest?.title}
     </h1>
     <div
@@ -351,6 +355,7 @@ const centerWidthTextBlock = ({ ...rest }) => (
 );
 
 const PayFastButton = ({ siteConfig, data, ...rest }) => {
+  console.log('Payfast data', data);
   return (
     <button
       className={siteConfig?.colors?.button?.primary?.class}
@@ -681,10 +686,10 @@ const componentBuilders = {
   PageDoneHowItWorks1,
 };
 
-const RenderPageComponents = ({ items }) => {
+const RenderPageComponents = ({ items, data }) => {
   const siteConfig = useConfig();
-  const Components = items.map((a, i) => {
-    return componentBuilders[a.type]({ ...a, siteConfig });
+  const Components = items?.map((a, i) => {
+    return componentBuilders[a.type]({ ...a, data, siteConfig });
   });
   return Components;
 };
