@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { DashboardCard } from '@/components/ui/app-card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,33 +9,53 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-const subscriptions = [
-  {
-    id: 1,
-    npo: 'Save the Oceans',
-    tier: 'Gold',
-    amount: 50,
-    renewalDate: '2023-08-15',
-  },
-  {
-    id: 2,
-    npo: 'Educate for Future',
-    tier: 'Silver',
-    amount: 25,
-    renewalDate: '2023-09-01',
-  },
-  {
-    id: 3,
-    npo: 'Green Earth Initiative',
-    tier: 'Bronze',
-    amount: 10,
-    renewalDate: '2023-08-30',
-  },
-];
+import { useAuth } from '@/context/AuthContext';
+import moment from 'moment';
+// const subscriptions = [
+//   {
+//     id: 1,
+//     npo: 'Save the Oceans',
+//     tier: 'Gold',
+//     amount: 50,
+//     renewalDate: '2023-08-15',
+//   },
+//   {
+//     id: 2,
+//     npo: 'Educate for Future',
+//     tier: 'Silver',
+//     amount: 25,
+//     renewalDate: '2023-09-01',
+//   },
+//   {
+//     id: 3,
+//     npo: 'Green Earth Initiative',
+//     tier: 'Bronze',
+//     amount: 10,
+//     renewalDate: '2023-08-30',
+//   },
+// ];
 export default function Subscriptions() {
+  const [subscriptions, setSubs] = useState([]);
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      const { subscriptions } = user;
+      setSubs(subscriptions);
+    }
+  }, [user]);
+
+  const cleanSubscriptions = subscriptions.map((s) => ({
+    id: s['_id'],
+    npo: s.partner.name,
+    amount: s.amount,
+    tier: s.subscriptionTier,
+    createDate: moment(s.createdDate).format('DD MMM YYYY'),
+  }));
+
   const [filter, setFilter] = useState('');
   const [sort, setSort] = useState('date');
-  const filteredSubscriptions = subscriptions.filter((sub) =>
+  const filteredSubscriptions = cleanSubscriptions.filter((sub) =>
     sub.npo.toLowerCase().includes(filter.toLowerCase())
   );
   const sortedSubscriptions = [...filteredSubscriptions].sort((a, b) => {
@@ -74,16 +94,10 @@ export default function Subscriptions() {
             <div className='flex justify-between items-center'>
               <div>
                 <p className='text-gray-300'>Tier: {sub.tier}</p>
-                <p className='text-gray-300'>Amount: ${sub.amount}</p>
-                <p className='text-gray-300'>Renewal Date: {sub.renewalDate}</p>
+                <p className='text-gray-300'>Amount: R {sub.amount}</p>
+                <p className='text-gray-300'>Create Date: {sub.createDate}</p>
               </div>
               <div className='space-x-2'>
-                <Button
-                  variant='outline'
-                  className='text-gray-300 border-gray-700 hover:bg-gray-700'
-                >
-                  Upgrade
-                </Button>
                 <Button variant='destructive'>Cancel</Button>
               </div>
             </div>
