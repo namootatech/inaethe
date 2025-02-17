@@ -1,7 +1,7 @@
 {
   "organisationId": "inaethe",
   "partnerName": "Inaethe",
-  "tagline": "Transforming good intentions into tangible impacts.",
+  "tagline": "A Transforming good intentions into tangible impacts.",
   "about": "At Inaethe, we believe in the power of generosity and financial sustainability. Join us in building a community that empowers non-profit organizations to thrive while offering individuals the opportunity to earn while making a difference. Together, let's create a brighter future.",
   "cta": {
     "class": " mb-6 text-white bg-pink-500 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-xl px-4 py-3 text-center mr-3 md:mr-0 dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800",
@@ -422,21 +422,22 @@
         {
           "type": "center-width-text-block",
           "title": " Make Your First Donation",
-          "color": "light",
           "text": "It's time to turn your commitment into action! Click the button below to make your first donation to the non-profit organization you've subscribed to. Every contribution, no matter the size, has the power to create positive change."
         },
         {
           "type": "payfast-button-center-width",
           "title": "Make First Donation",
-          "color": "light",
           "url": "https://sandbox.payfast.co.za/eng/process?cmd=_paynow&receiver=17900794&item_name=Go%20Bananas%20Subscription&amount=100.00&return_url=https://go-bananas.co.za/subscribe-return-with-first-payment-done&cancel_url=https://go-bananas.co.za/subscribe-return-with-first-payment-failed"
         },
 
         {
           "type": "center-width-text-block",
           "title": " Impact in Motion",
-          "color": "light",
           "text": "With your generosity, you're helping to fund critical projects, support essential services, and make a tangible difference in communities worldwide. Thank you for taking this crucial step toward building a better future for all."
+        },
+        {
+          "type": "center-width-text-block",
+          "text": "Take pride in knowing that your contribution is making a meaningful impact. Let's continue to spread hope, kindness, and compassion together!"
         },
 
         { "type": "space-below", "size": "10" }
@@ -446,19 +447,29 @@
       "id": "subscribe-return-with-first-payment-done",
       "title": "Subscribe",
       "components": [
+        { "type": "space-above", "size": "10" },
         { "type": "checkbox-center" },
         {
           "type": "center-width-text-block",
-          "title": "Subscribed! ",
-          "color": "light",
-          "text": "Thank you for subscribing! Your support means the world to us and the non-profit organization you've chosen to subscribe to. Together, we're making a difference and creating positive change in the world."
+          "title": "Thank You for Joining the InaEthe Community! ",
+          "text": " Welcome aboard! Your support means the world to us and the non-profit organization you've chosen to subscribe to. Together, we're making a difference and creating positive change in the world."
+        },
+        {
+          "type": "login-button-center-width",
+          "title": "Login to Your Account"
         },
         {
           "type": "center-width-text-block",
           "title": "Your Impact Matters!",
-          "color": "light",
           "text": "Your subscription isn't just a transaction—it's a powerful commitment to making a difference. With your support, we're empowering non-profits to create lasting change and improve lives around the world."
-        }
+        },
+        {
+          "type": "center-width-text-block",
+          "title": "Stay Connected!",
+          "text": "Keep an eye on your inbox for updates, exclusive content, and opportunities to further engage with the organization you've subscribed to. Together, we'll continue to build a brighter future and make a difference in the lives of those who need it most."
+        },
+
+        { "type": "space-below", "size": "10" }
       ]
     },
     {
@@ -487,6 +498,27 @@
           "text": "Keep an eye on your inbox for updates, exclusive content, and opportunities to further engage with the organization you've subscribed to. Together, we'll continue to build a brighter future and make a difference in the lives of those who need it most."
         },
 
+        { "type": "space-below", "size": "10" }
+      ]
+    },
+    {
+      "id": "app-subscribe-return-with-first-payment-done-app",
+      "title": "Subscribe",
+      "components": [
+        { "type": "space-above", "size": "10" },
+        { "type": "checkbox-center" },
+        {
+          "type": "center-width-text-block",
+          "title": "Your Impact Matters!",
+          "color": "light",
+          "text": "Your subscription isn't just a transaction—it's a powerful commitment to making a difference. With your support, we're empowering non-profits to create lasting change and improve lives around the world."
+        },
+        {
+          "type": "center-width-text-block",
+          "title": "Stay Connected!",
+          "color": "light",
+          "text": "Keep an eye on your inbox for updates, exclusive content, and opportunities to further engage with the organization you've subscribed to. Together, we'll continue to build a brighter future and make a difference in the lives of those who need it most."
+        },
         { "type": "space-below", "size": "10" }
       ]
     },

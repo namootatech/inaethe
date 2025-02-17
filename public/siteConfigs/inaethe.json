@@ -502,6 +502,27 @@
       ]
     },
     {
+      "id": "app-subscribe-return-with-first-payment-done-app",
+      "title": "Subscribe",
+      "components": [
+        { "type": "space-above", "size": "10" },
+        { "type": "checkbox-center" },
+        {
+          "type": "center-width-text-block",
+          "title": "Your Impact Matters!",
+          "color": "light",
+          "text": "Your subscription isn't just a transaction—it's a powerful commitment to making a difference. With your support, we're empowering non-profits to create lasting change and improve lives around the world."
+        },
+        {
+          "type": "center-width-text-block",
+          "title": "Stay Connected!",
+          "color": "light",
+          "text": "Keep an eye on your inbox for updates, exclusive content, and opportunities to further engage with the organization you've subscribed to. Together, we'll continue to build a brighter future and make a difference in the lives of those who need it most."
+        },
+        { "type": "space-below", "size": "10" }
+      ]
+    },
+    {
       "id": "cancelled-payment",
       "title": "Payment Unsuccessful",
       "components": [

@@ -365,8 +365,37 @@
         {
           "type": "center-width-text-block",
           "title": "Your Information Is Saved:",
-          "text": "Your details have been securely saved to our database, ensuring a seamless experience as you embark on your journey of giving back. Rest assured, your support is in good hands."
+          "text": "Your details have been securely saved to our database, ensuring a seamless experience as you embark on your journey of giving back. Rest assugray, your support is in good hands."
         },
+        {
+          "type": "center-width-text-block",
+          "title": " Make Your First Donation",
+          "text": "It's time to turn your commitment into action! Click the button below to make your first donation to the non-profit organization you've subscribed to. Every contribution, no matter the size, has the power to create positive change."
+        },
+        {
+          "type": "payfast-button-center-width",
+          "title": "Make First Donation",
+          "url": "https://sandbox.payfast.co.za/eng/process?cmd=_paynow&receiver=17900794&item_name=Go%20Bananas%20Subscription&amount=100.00&return_url=https://go-bananas.co.za/subscribe-return-with-first-payment-done&cancel_url=https://go-bananas.co.za/subscribe-return-with-first-payment-failed"
+        },
+
+        {
+          "type": "center-width-text-block",
+          "title": " Impact in Motion",
+          "text": "With your generosity, you're helping to fund critical projects, support essential services, and make a tangible difference in communities worldwide. Thank you for taking this crucial step toward building a better future for all."
+        },
+        {
+          "type": "center-width-text-block",
+          "text": "Take pride in knowing that your contribution is making a meaningful impact. Let's continue to spread hope, kindness, and compassion together!"
+        },
+
+        { "type": "space-below", "size": "10" }
+      ]
+    },
+    {
+      "id": "app-subscribe-return-without-first-payment-done",
+      "title": "Subscribe",
+      "components": [
+        { "type": "space-above", "size": "10" },
         {
           "type": "center-width-text-block",
           "title": " Make Your First Donation",
@@ -417,6 +446,54 @@
           "text": "Keep an eye on your inbox for updates, exclusive content, and opportunities to further engage with the organization you've subscribed to. Together, we'll continue to build a brighter future and make a difference in the lives of those who need it most."
         },
 
+        { "type": "space-below", "size": "10" }
+      ]
+    },
+    {
+      "id": "app-subscribe-return-with-first-payment-done",
+      "title": "Subscribe",
+      "components": [
+        { "type": "space-above", "size": "10" },
+        { "type": "checkbox-center" },
+        {
+          "type": "center-width-text-block",
+          "title": "Thank You for Joining the InaEthe Community! ",
+          "text": " Welcome aboard! Your support means the world to us and the non-profit organization you've chosen to subscribe to. Together, we're making a difference and creating positive change in the world."
+        },
+        {
+          "type": "login-button-center-width",
+          "title": "Login to Your Account"
+        },
+        {
+          "type": "center-width-text-block",
+          "title": "Your Impact Matters!",
+          "text": "Your subscription isn't just a transaction—it's a powerful commitment to making a difference. With your support, we're empowering non-profits to create lasting change and improve lives around the world."
+        },
+        {
+          "type": "center-width-text-block",
+          "title": "Stay Connected!",
+          "text": "Keep an eye on your inbox for updates, exclusive content, and opportunities to further engage with the organization you've subscribed to. Together, we'll continue to build a brighter future and make a difference in the lives of those who need it most."
+        },
+
+        { "type": "space-below", "size": "10" }
+      ]
+    },
+    {
+      "id": "app-subscribe-return-with-first-payment-done-app",
+      "title": "Subscribe",
+      "components": [
+        { "type": "space-above", "size": "10" },
+        { "type": "checkbox-center" },
+        {
+          "type": "center-width-text-block",
+          "title": "Your Impact Matters!",
+          "text": "Your subscription isn't just a transaction—it's a powerful commitment to making a difference. With your support, we're empowering non-profits to create lasting change and improve lives around the world."
+        },
+        {
+          "type": "center-width-text-block",
+          "title": "Stay Connected!",
+          "text": "Keep an eye on your inbox for updates, exclusive content, and opportunities to further engage with the organization you've subscribed to. Together, we'll continue to build a brighter future and make a difference in the lives of those who need it most."
+        },
         { "type": "space-below", "size": "10" }
       ]
     },

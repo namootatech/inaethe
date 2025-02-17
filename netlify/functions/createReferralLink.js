@@ -59,12 +59,11 @@ exports.handler = async (event, context) => {
     };
 
     const result = await referralLinksCollection.insertOne(newReferralLink);
-
     return {
       statusCode: 201,
       body: JSON.stringify({
         message: 'Referral link created successfully',
-        data: result?.ops?[0]
+        data: result?.ops[0],
       }),
     };
   } catch (error) {

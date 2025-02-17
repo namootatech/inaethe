@@ -20,7 +20,10 @@ export const ApiProvider = ({ children }) => {
 
   // Function to make API calls with error handling and logging
   const apiRequest = async (endpoint, method = 'GET', data = null) => {
-    console.log(`*** [API CONTEXT] Making ${method} request to: ${endpoint}`);
+    console.log(
+      `*** [API CONTEXT] Making ${method} request to: ${endpoint}`,
+      data
+    );
     setLoading(true);
     try {
       const response = await axios({
@@ -44,8 +47,8 @@ export const ApiProvider = ({ children }) => {
       setError(err.message || 'Something went wrong');
       return Promise.reject(
         err.response.data.message ||
-          err.data.message ||
-          e.message ||
+          err.data?.message ||
+          err.message ||
           'Something went wrong'
       );
     }
@@ -112,12 +115,117 @@ export const ApiProvider = ({ children }) => {
     return await apiRequest(`/posts/${postId}`, 'DELETE');
   };
 
+  const createReferralLink = async (data) => {
+    console.log(
+      `*** [API CONTEXT] Creating referral link for user ID: ${data.userId}...`
+    );
+    return await apiRequest(`/createReferralLink`, 'POST', data);
+  };
+
+  const getUserReferralLink = async (userId) => {
+    console.log(
+      `*** [API CONTEXT] Fetching referral link for user ID: ${userId}...`
+    );
+    return await apiRequest('/getUserReferralLink', 'POST', { userId });
+  };
+
+  const getUserEarnings = async (userId, page, limit) => {
+    console.log('*** [API CONTEXT] Fetching user earnings...', {
+      userId,
+      page,
+      limit,
+    });
+    return await apiRequest(`/getUserEarnings`, 'POST', {
+      userId,
+      page,
+      limit,
+    });
+  };
+
+  const getUserTransactions = async (userId, page, limit) => {
+    console.log('*** [API CONTEXT] Fetching user transactions...', {
+      userId,
+      page,
+      limit,
+    });
+    return await apiRequest(`/getUserTransactions`, 'POST', {
+      userId,
+      page,
+      limit,
+    });
+  };
+
+  const getUserWithdrawalRequests = async (userId, page, limit) => {
+    console.log('*** [API CONTEXT] Fetching user withdrawal requests...', {
+      userId,
+      page,
+      limit,
+    });
+    return await apiRequest(`/getUserWithdrawalRequests`, 'POST', {
+      userId,
+      page,
+      limit,
+    });
+  };
+
+  const createWithdrawalRequest = async (withdrawalRequest) => {
+    console.log(
+      '*** [API CONTEXT] Creating user withdrawal request...',
+      withdrawalRequest
+    );
+    return await apiRequest(
+      `/createWithdrawalRequest`,
+      'POST',
+      withdrawalRequest
+    );
+  };
+
+  const addBlogPost = async (blogData) => {
+    console.log('*** [API CONTEXT] Adding a new blog post...');
+    return await apiRequest('/blogPosts', 'POST', blogData);
+  };
+
+  const updateBlogPost = async (blogId, blogData) => {
+    console.log(`*** [API CONTEXT] Updating blog post with ID: ${blogId}...`);
+    return await apiRequest(`/blogPosts/${blogId}`, 'PUT', blogData);
+  };
+
+  const deleteBlogPost = async (blogId) => {
+    console.log(`*** [API CONTEXT] Deleting blog post with ID: ${blogId}...`);
+    return await apiRequest(`/blogPosts/${blogId}`, 'DELETE');
+  };
+
+  const getAllPublicBlogPosts = async () => {
+    console.log('*** [API CONTEXT] Fetching all public blog posts...');
+    return await apiRequest('/blogPosts/public', 'GET');
+  };
+
+  const getUserBlogPosts = async (userId) => {
+    console.log(
+      `*** [API CONTEXT] Fetching blog posts for user ID: ${userId}...`
+    );
+    return await apiRequest(`/blogPosts/user/${userId}`, 'GET');
+  };
+
+  const getBlogPostContent = async (userId) => {
+    console.log(
+      `*** [API CONTEXT] Fetching blog posts for user ID: ${userId}...`
+    );
+    return await apiRequest(`/blogPosts/user/${userId}`, 'GET');
+  };
+
   return (
     <ApiContext.Provider
       value={{
         loading,
         error,
         register,
+        addBlogPost,
+        getBlogPostContent,
+        getUserBlogPosts,
+        getAllPublicBlogPosts,
+        deleteBlogPost,
+        updateBlogPost,
         login,
         getUser,
         listNetworkTransactions,
@@ -129,6 +237,12 @@ export const ApiProvider = ({ children }) => {
         addSubscription,
         restoreUser,
         addNpo,
+        createReferralLink,
+        getUserReferralLink,
+        getUserEarnings,
+        getUserTransactions,
+        getUserWithdrawalRequests,
+        createWithdrawalRequest,
       }}
     >
       {children}

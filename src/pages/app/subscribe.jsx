@@ -11,6 +11,7 @@ import RenderPageComponents from '@/components/content/generator';
 import { useConfig } from '@/context/ConfigContext';
 import { Suspense } from 'react';
 import { downloadConfig } from '@/util/config';
+import { useAuth } from '@/context/AuthContext';
 const levelPrices = {
   Nourisher: 50,
   CaringPartner: 100,
@@ -31,15 +32,37 @@ const MERCHANT_ID = process.env.NEXT_PUBLIC_MERCHANT_ID;
 const MERCHANT_KEY = process.env.NEXT_PUBLIC_MERCHANT_KEY;
 
 function ReturnPage() {
+  const { user } = useAuth();
+  const userDate = user.user;
   const params = useSearchParams();
   const siteConfig = useConfig();
-  const [partnerConfig, setPartnerConfig] = useState({});
+  const [partnerConfig, setPartnerConfig] = useState(null);
 
   let userData = {};
 
   for (const [key, value] of params.entries()) {
     userData[key] = value;
   }
+
+  const noFirstPaymentConfig = siteConfig?.defaultPages?.find(
+    (p) => p.id === 'app-subscribe-return-without-first-payment-done-app'
+  );
+  console.log('SITE CONFIG', siteConfig);
+  console.log(siteConfig?.defaultPages);
+  const firstPaymentDoneConfig = siteConfig?.defaultPages?.find((p) => {
+    console.log(
+      p.id,
+      '===',
+      'app-subscribe-return-with-first-payment-done-app',
+      p.id === 'app-subscribe-return-with-first-payment-done-app'
+    );
+    return p.id === 'app-subscribe-return-with-first-payment-done-app';
+  });
+  console.log(
+    'subscrptions page',
+    noFirstPaymentConfig,
+    firstPaymentDoneConfig
+  );
 
   const paymentId = uuidv4();
   let payfastData = {
@@ -80,27 +103,9 @@ function ReturnPage() {
     custom_str4: userData?.partner ? userData?.partner : '',
     custom_str5: userData?.subscriptionTier ? userData?.subscriptionTier : '',
   };
-
-  if (userData?.parent) {
-    payfastData = {
-      ...payfastData,
-      custom_str1: userData?.parent ? userData?.parent : '',
-    };
-  }
-  const noFirstPaymentConfig = siteConfig?.defaultPages?.find(
-    (p) => p.id === 'app-subscribe-return-without-first-payment-done'
-  );
-  const firstPaymentDoneConfig = siteConfig?.defaultPages?.find(
-    (p) => p.id === 'app-subscribe-return-with-first-payment-done'
-  );
-  console.log(
-    'subscrptions page',
-    noFirstPaymentConfig,
-    firstPaymentDoneConfig
-  );
   useEffect(() => {
     const fetchPartnerConfig = async () => {
-      if (userData.partner) {
+      if (userData.partner && !partnerConfig) {
         const c = await downloadConfig(userData.partner);
         setPartnerConfig(c);
       }
@@ -122,7 +127,7 @@ function ReturnPage() {
         />
       </div>
       <p className='text-white text-xl font-manrope my-2 max-w-2xl mx-auto p-6 text-center flex items-center justify-center'>
-        {partnerConfig.tagline}
+        {partnerConfig?.tagline}
       </p>
 
       {userData.firstPaymentDone === 'false' && (
@@ -133,7 +138,7 @@ function ReturnPage() {
       )}
       {/* button for the user to login to their dashboard */}
       {userData.firstPaymentDone === 'true' && (
-        <RenderPageComponents items={firstPaymentDoneConfig.components} />
+        <RenderPageComponents items={firstPaymentDoneConfig?.components} />
       )}
     </div>
   );
