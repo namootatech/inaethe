@@ -53,10 +53,10 @@ const multiTextBlock = (props) => (
     {props.cta && (
       <Link
         type='button'
-        href={props.cta.link}
+        href={props.cta?.link}
         className={props.siteConfig?.nav?.ctaClass}
       >
-        {props.cta.title}
+        {props.cta?.title}
       </Link>
     )}
   </div>
@@ -77,7 +77,7 @@ const articleBuilder = ({ siteConfig, ...rest }) => {
       <div
         className={`bg-${siteConfig.colors.secondaryColor}-900 absolute`}
         style={{
-          // backgroundImage: `url('${rest.image}')`, // Use the provided image URL
+          // backgroundImage: `url('${rest?.image}')`, // Use the provided image URL
           // backgroundSize: 'cover',
           // backgroundPosition: 'center',
           // filter: ' blur(1px) brightness(0.3)',
@@ -190,7 +190,7 @@ export const PricingSection = ({ ...rest }) => (
         </p>
       </div>
       <div className='mt-10 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-8'>
-        {rest.plans.map((plan) => (
+        {rest?.plans.map((plan) => (
           <div
             key={plan.name}
             className='relative p-8 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col'
@@ -253,7 +253,7 @@ const spaBuilder = ({ siteConfig, ...rest }) => {
         <div
           className={`grid md:grid-cols-${rest?.elements?.length} grid-cols-1 flex flex-col justify-center items-center section-image `}
         >
-          {rest.elements.map((e) => {
+          {rest?.elements.map((e) => {
             const Icon = icons[e.icon];
             return (
               <div
@@ -281,7 +281,7 @@ const heroBuilder = ({ siteConfig, ...rest }) => {
       <div
         className='absolute inset-0'
         style={{
-          backgroundImage: `url('${rest.image}')`,
+          backgroundImage: `url('${rest?.image}')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           zIndex: -2, // Ensures this is below the overlay and content
@@ -308,16 +308,19 @@ const heroBuilder = ({ siteConfig, ...rest }) => {
           <p className='text-white text-base/loose text-2xl md:text-2xl lg:text-2xl dark:text-gray-100 mb-6'>
             {rest?.text}
           </p>
-          <Link href={rest.cta.link} className={siteConfig?.heroButton?.class}>
-            {rest.cta.title}
+          <Link
+            href={rest?.cta?.link}
+            className={siteConfig?.heroButton?.class}
+          >
+            {rest?.cta?.title}
           </Link>
         </div>
         <div
           className={`md:flex hidden h-full w-full justify-center items-center col-span-1`}
         >
           <img
-            src={rest.logo.src}
-            alt={rest.logo.alt}
+            src={rest?.logo?.src}
+            alt={rest?.logo?.alt}
             className='h-72 w-72 shadow-2xl rounded-full animate-pulse-shadow '
           />
         </div>
@@ -327,7 +330,7 @@ const heroBuilder = ({ siteConfig, ...rest }) => {
 };
 
 const fullWidthTextBlock = ({ ...rest }) => (
-  <div key={`section-${rest.title}`}>
+  <div key={`section-${rest?.title}`}>
     <h1 className='max-w-lg text-3xl font-semibold leading-normal text-gray-900 dark:text-gray-900 mb-2'>
       {rest?.title}
     </h1>
@@ -339,10 +342,10 @@ const fullWidthTextBlock = ({ ...rest }) => (
 );
 
 const centerWidthTextBlock = ({ ...rest }) => (
-  <div key={`section-${rest.title} `} className='max-w-2xl mx-auto p-4'>
+  <div key={`section-${rest?.title} `} className='max-w-2xl mx-auto p-4'>
     <h1
       className={`text-3xl font-semibold leading-normal ${
-        rest.color === 'light' ? 'text-gray-100' : 'text-gray-900'
+        rest?.color === 'light' ? 'text-gray-100' : 'text-gray-900'
       } dark:text-gray-900 mb-2`}
     >
       {rest?.title}
@@ -361,7 +364,7 @@ const PayFastButton = ({ siteConfig, data, ...rest }) => {
       className={siteConfig?.colors?.button?.primary?.class}
       onClick={() => postToURL(process.env.NEXT_PUBLIC_PAYFAST_URL, data)}
     >
-      {rest.title}
+      {rest?.title}
     </button>
   );
 };
@@ -453,7 +456,7 @@ const CrossCenter = ({ siteConfig, data, ...rest }) => {
 const LoginButton = ({ siteConfig, ...rest }) => {
   return (
     <Link href='/login' className={siteConfig?.colors?.button?.primary?.class}>
-      {rest.title}
+      {rest?.title}
     </Link>
   );
 };
@@ -558,8 +561,8 @@ const Card = ({ siteConfig, ...rest }) => {
         <h3 className='text-xl font-semibold text-gray-900'>{title}</h3>
         <p className='mt-2 text-gray-600'>{description}</p>
         {cta && (
-          <Link href={cta.link} className='mt-4 inline-block text-indigo-600'>
-            {cta.title}
+          <Link href={cta?.link} className='mt-4 inline-block text-indigo-600'>
+            {cta?.title}
           </Link>
         )}
       </div>
@@ -600,9 +603,11 @@ const Tabs = ({ siteConfig, ...rest }) => {
 const CenteredPageHeader = ({ siteConfig, ...rest }) => (
   <div className='sm:mx-auto sm:w-full sm:max-w-4xl'>
     <h2 className='mt-6 text-center text-3xl font-extrabold text-white'>
-      {rest.title}
+      {rest?.title}
     </h2>
-    <p className='mt-2 text-center text-sm text-gray-300'>{rest.description}</p>
+    <p className='mt-2 text-center text-sm text-gray-300'>
+      {rest?.description}
+    </p>
   </div>
 );
 
@@ -632,8 +637,8 @@ const componentBuilders = {
   'checkbox-center': CheckBoxCenter,
   cross: Cross,
   'cross-center': CrossCenter,
-  'space-above': ({ ...rest }) => <div className={`h-${rest.size}`} />,
-  'space-below': ({ ...rest }) => <div className={`h-${rest.size}`} />,
+  'space-above': ({ ...rest }) => <div className={`h-${rest?.size}`} />,
+  'space-below': ({ ...rest }) => <div className={`h-${rest?.size}`} />,
   'full-width-text-block': fullWidthTextBlock,
   'center-width-text-block': centerWidthTextBlock,
   'payfast-button': ({ siteConfig, data, ...rest }) => (
@@ -689,7 +694,7 @@ const componentBuilders = {
 const RenderPageComponents = ({ items, data }) => {
   const siteConfig = useConfig();
   const Components = items?.map((a, i) => {
-    return componentBuilders[a.type]({ ...a, data, siteConfig });
+    return componentBuilders[a.type]({ ...a, data: a.data, siteConfig });
   });
   return Components;
 };

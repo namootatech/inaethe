@@ -214,6 +214,14 @@ export const ApiProvider = ({ children }) => {
     return await apiRequest(`/blogPosts/user/${userId}`, 'GET');
   };
 
+  const addSubscriber = async (email, organisationId) => {
+    console.log(`*** [API CONTEXT] Uadding subscriber`);
+    return await apiRequest(`/addSubscriber`, 'POST', {
+      email,
+      organisationId,
+    });
+  };
+
   return (
     <ApiContext.Provider
       value={{
@@ -243,6 +251,7 @@ export const ApiProvider = ({ children }) => {
         getUserTransactions,
         getUserWithdrawalRequests,
         createWithdrawalRequest,
+        addSubscriber,
       }}
     >
       {children}

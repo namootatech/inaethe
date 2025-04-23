@@ -7,9 +7,11 @@ import {
 } from './dataMining';
 import handlers from './handlers';
 import eventCompletionHandlers from './eventCompletionHandlers';
+import { useApi } from '../ApiContext';
 const EventHandlersContext = createContext();
 
 export const EventHandlersProvider = ({ children }) => {
+  const apiContext = useApi();
   const handleEvent = curry(
     (
       handlerConfig,
@@ -40,9 +42,13 @@ export const EventHandlersProvider = ({ children }) => {
           componentState,
           updateComponentState,
           event,
+          apiContext,
         };
-        handlers[handlerId](...handlerParams, props)
+        console.log(handlers[handlerId]);
+        return handlers[handlerId](...handlerParams, props)
           .then((data) => {
+            console.log('** [EVENT HANDLERS] event handled successfully');
+            console.log(data);
             const successHandlers = handlerConfig[
               'when-handler-succeeds-run'
             ]?.map((h) => [h, eventCompletionHandlers[h]]);
