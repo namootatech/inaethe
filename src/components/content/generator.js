@@ -44,7 +44,7 @@ const multiTextBlock = (props) => (
   <div className='h-full px-8 py-8 text-center md:text-left'>
     {props.content.map((item) => (
       <React.Fragment key={item.title}>
-        <h2 className={props.siteConfig?.section?.header?.class}>
+        <h2 className='text-pink-500 text-4xl mb-4 font-extrabold leading-none tracking-tight text-gray-900 dark:text-white'>
           {item.title}
         </h2>
         <p
@@ -57,7 +57,7 @@ const multiTextBlock = (props) => (
       <Link
         type='button'
         href={props.cta?.link}
-        className={props.siteConfig?.nav?.ctaClass}
+        className={`text-white bg-${props.siteConfig.primaryColorCode} hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg  text-xl px-4 py-2 text-center mr-3 md:mr-0 dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800`}
       >
         {props.cta?.title}
       </Link>
@@ -313,7 +313,7 @@ const heroBuilder = ({ siteConfig, ...rest }) => {
           </p>
           <Link
             href={rest?.cta?.link}
-            className={siteConfig?.heroButton?.class}
+            className={`mb-6 text-white bg-${siteConfig?.colors?.primaryColorCode} hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-${siteConfig?.colors?.primaryColorCode} font-medium rounded-lg text-xl px-4 py-3 text-center mr-3 md:mr-0 dark:bg-${siteConfig?.colors?.primaryColorCode} dark:hover:bg-pink-700 dark:focus:ring-pink-800`}
           >
             {rest?.cta?.title}
           </Link>
@@ -321,11 +321,11 @@ const heroBuilder = ({ siteConfig, ...rest }) => {
         <div
           className={`md:flex hidden h-full w-full justify-center items-center col-span-1`}
         >
-          <img
+          {/* <img
             src={rest?.logo?.src}
             alt={rest?.logo?.alt}
             className='h-72 w-72 shadow-2xl rounded-full animate-pulse-shadow '
-          />
+          /> */}
         </div>
       </div>
     </div>
@@ -364,7 +364,7 @@ const PayFastButton = ({ siteConfig, data, ...rest }) => {
   console.log('Payfast data', data);
   return (
     <button
-      className={siteConfig?.colors?.button?.primary?.class}
+      className='text-white bg-pink-500 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg  text-xl px-4 py-3 text-center mr-3 md:mr-0 dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800'
       onClick={() => postToURL(process.env.NEXT_PUBLIC_PAYFAST_URL, data)}
     >
       {rest?.title}
@@ -458,7 +458,10 @@ const CrossCenter = ({ siteConfig, data, ...rest }) => {
 
 const LoginButton = ({ siteConfig, ...rest }) => {
   return (
-    <Link href='/login' className={siteConfig?.colors?.button?.primary?.class}>
+    <Link
+      href='/login'
+      className='text-white bg-pink-500 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg  text-xl px-4 py-3 text-center mr-3 md:mr-0 dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800'
+    >
       {rest?.title}
     </Link>
   );

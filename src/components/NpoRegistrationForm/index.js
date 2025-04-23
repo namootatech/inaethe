@@ -17,6 +17,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { useConfig } from '@/context/ConfigContext';
 import { useApi } from '@/context/ApiContext';
+import { useRouter } from 'next/router';
 
 const schema = yup.object().shape({
   organizationName: yup.string().required('Organization name is required'),
@@ -116,6 +117,7 @@ const SelectField = ({
 );
 
 const NpoRegistrationForm = () => {
+  const router = useRouter();
   const api = useApi();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const siteConfig = useConfig();
@@ -131,7 +133,6 @@ const NpoRegistrationForm = () => {
     console.log(data);
     setIsSubmitting(true);
     try {
-      // Simulating API call
       api
         .addNpo(data)
         .then((response) => {
@@ -150,6 +151,7 @@ const NpoRegistrationForm = () => {
       toast.error('Registration failed. Please try again.');
     } finally {
       setIsSubmitting(false);
+      router.push('/npo-login');
     }
   };
 
