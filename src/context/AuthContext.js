@@ -10,6 +10,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const router = useRouter();
   const [user, setUser] = useState(null);
+  const [partner, setPartner] = useState(null);
   const api = useApi();
   const jwtSecret = process.env.NEXT_PUBLIC_JWT_ENCODE_SECRET;
   const [loading, setLoading] = useState(true);
@@ -69,6 +70,27 @@ export const AuthProvider = ({ children }) => {
       .finally(() => setLoading(false));
   };
 
+  const loginPartner = async (data) => {
+    setLoading(true);
+    return api
+      .loginNpo(data)
+      .then((data) => {
+        console.log('** [AUTH CONTEXT] Login data', data);
+        setPartner(data.data);
+        Cookies.set('partner', JSON.stringify(data.data.user), { expires: 2 });
+        console.log(
+          '** [AUTH CONTEXT] Partner loggedin & cookie set:',
+          data.data.user
+        );
+        return Promise.resolve(partner);
+      })
+      .catch((error) => {
+        console.error('** [AUTH CONTEXT] Login failed', error);
+        return Promise.reject(error);
+      })
+      .finally(() => setLoading(false));
+  };
+
   const logoutUser = () => {
     setUser(null);
     Cookies.remove('user');
@@ -77,7 +99,16 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, setUser, loginUser, loading, logoutUser }}
+      value={{
+        user,
+        setUser,
+        loginUser,
+        partner,
+        setPartner,
+        loginPartner,
+        loading,
+        logoutUser,
+      }}
     >
       {children}
     </AuthContext.Provider>

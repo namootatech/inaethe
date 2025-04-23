@@ -1,14 +1,10 @@
-// src/context/ApiContext.js
 import React, { createContext, useContext, useState } from 'react';
 import axios from 'axios';
 
-// Set your API base URL (replace with your actual API URL)
 const API_URL = process.env.NEXT_PUBLIC_FUNCTIONS_URL + '/.netlify/functions';
 
-// Create a context for the API
 const ApiContext = createContext();
 
-// Custom hook to use the API context
 export const useApi = () => {
   return useContext(ApiContext);
 };
@@ -63,6 +59,11 @@ export const ApiProvider = ({ children }) => {
   const login = async (credentials) => {
     console.log('*** [API CONTEXT] Logging in user...');
     return await apiRequest('/login', 'POST', credentials);
+  };
+
+  const loginNpo = async (credentials) => {
+    console.log('*** [API CONTEXT] Logging in user...');
+    return await apiRequest('/loginNpo', 'POST', credentials);
   };
 
   const restoreUser = async (token) => {
@@ -252,6 +253,7 @@ export const ApiProvider = ({ children }) => {
         getUserWithdrawalRequests,
         createWithdrawalRequest,
         addSubscriber,
+        loginNpo,
       }}
     >
       {children}
