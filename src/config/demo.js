@@ -6,17 +6,8 @@ import {
 
 const components = [
   {
-    type: 'hero',
-    header: 'Transforming good intentions into tangible impacts.',
-    text: "At Inaethe, we believe in the power of generosity and financial sustainability. Join us in building a community that empowers non-profit organizations to thrive while offering individuals the opportunity to earn while making a difference. Together, let's create a brighter future.",
-    cta: {
-      title: 'Make an Impact Today!',
-      link: '/subscribe',
-    },
-    image: 'home-page-header.jpg',
-  },
-  {
     type: 'article',
+    category: 'Content Blocks',
     elements: [
       {
         type: 'image-block',
@@ -43,6 +34,7 @@ const components = [
   },
   {
     type: 'spa-block',
+    category: 'Feature Blocks',
     elements: [
       {
         icon: 'food-truck',
@@ -66,6 +58,7 @@ const components = [
   },
   {
     type: 'article',
+    category: 'Content Blocks',
     elements: [
       {
         type: 'multi-text-blocks',
@@ -92,6 +85,7 @@ const components = [
   },
   {
     type: 'card',
+    category: 'Cards',
     title: 'Join Us',
     image: '/images/inaethe/donations-square.jpg',
     description:
@@ -103,6 +97,7 @@ const components = [
   },
   {
     type: 'accordion',
+    category: 'Interactive Elements',
     items: [
       {
         title: 'What is Inaethe?',
@@ -123,21 +118,25 @@ const components = [
   },
   {
     type: 'alert-banner',
+    category: 'Notifications',
     message: 'This is an alert banner message.',
     alertType: 'warning',
   },
   {
     type: 'alert-banner',
+    category: 'Notifications',
     message: 'This is an alert banner message.',
     alertType: 'info',
   },
   {
     type: 'alert-banner',
+    category: 'Notifications',
     message: 'This is an alert banner message.',
     alertType: 'error',
   },
   {
     type: 'FlexwindHero1',
+    category: 'Hero Sections',
     title: 'A Huge Title Hero that as a huge title hero',
     description:
       "This is a very long description that explains a bit more about what's going on in this hero and often talks about the products",
@@ -171,6 +170,7 @@ const components = [
   },
   {
     type: 'FlexwindHero2',
+    category: 'Hero Sections',
     title: 'A Huge Title Hero that as a huge title hero',
     description:
       "This is a very long description that explains a bit more about what's going on in this hero and often talks about the products",
@@ -183,21 +183,29 @@ const components = [
         },
       },
     ],
-    img: {
+    img1: {
       src: '/images/inaethe/donations-square.jpg',
       alt: 'Hero Image',
     },
+    img2: {
+      src: '/images/inaethe/donations-square.jpg',
+      alt: 'Hero Image',
+    },
+    partners: [
+      {
+        link: 'https://www.example.com',
+        name: 'Partner 1',
+        img: '/images/inaethe/donations-square.jpg',
+      },
+    ],
   },
   {
     type: 'FlexwindHero3',
+    category: 'Hero Sections',
     title: 'A Huge Title Hero that as a huge title hero',
     description:
       "This is a very long description that explains a bit more about what's going on in this hero and often talks about the products",
-    stats: [
-      { title: 'Users', detail: '10,000+', icon: <BsFillPauseBtnFill /> },
-      { title: 'Countries', detail: '50+', icon: <BsAirplaneFill /> },
-      { title: 'Satisfaction', detail: '98%', icon: <BsFillHeartFill /> },
-    ],
+
     ctas: [
       {
         text: 'Get Started',
@@ -215,25 +223,123 @@ const components = [
   },
   {
     type: 'FlexwindHero4',
-    title: 'A Huge Title Hero that as a huge title hero',
+    category: 'Hero Sections',
+    title: 'True change  is at your fingertips',
     description:
-      "This is a very long description that explains a bit more about what's going on in this hero and often talks about the products",
+      'We are champions of change, and we believe that true change is at your fingertips. With our platform, you can make a difference in the world while also earning rewards for yourself. Join us today and be part of the solution.',
+    data: {
+      email: {
+        'on-change': {
+          'handle-with': 'do-nothing',
+          'when-handler-succeeds-run': ['do-nothing'],
+          'when-handler-fails-run': ['notify-something-went-wrong'],
+        },
+      },
+    },
     ctas: [
       {
-        text: 'Get Started',
-        link: '/signup',
-        onClick: () => {
-          alert('cta click');
+        text: 'Join Us Now!',
+        'on-click': {
+          'handle-with': 'do-nothing',
+          'when-handler-succeeds-run': ['notify-you-will-hear-from-us'],
+          'when-handler-fails-run': ['notify-something-went-wrong'],
         },
       },
     ],
     img: {
-      src: '/images/inaethe/donations-square.jpg',
+      src: '/images/inaethe/donations.jpg',
+      alt: 'Hero Image',
+    },
+  },
+  {
+    type: 'FlexwindHero5',
+    category: 'Hero Sections',
+    title: 'Changing the world, one meal at a time',
+    description:
+      ' We at organisation X are dedicated to making a difference in the world. Our mission is to provide meals to those in need, and we believe that every meal counts. With your support, we can continue to make a positive impact on the lives of those who are struggling.',
+
+    ctas: [
+      {
+        link: '/signup',
+        text: 'Get Started',
+      },
+      {
+        text: 'Learn more',
+        link: '/signup',
+        style: 'light',
+      },
+    ],
+    stats: [
+      { title: 'Users', detail: '10,000+', icon: 'pause' },
+      { title: 'Countries', detail: '50+', icon: 'airplane' },
+      { title: 'Satisfaction', detail: '98%', icon: 'heart' },
+    ],
+    img: {
+      src: '/images/inaethe/donations.jpg',
+      alt: 'Hero Image',
+    },
+  },
+  {
+    type: 'FlexwindHero6',
+    category: 'Hero Sections',
+    title: 'A Huge Title Hero that as a huge title hero',
+    description:
+      "This is a very long description that explains a bit more about what's going on in this hero and often talks about the products",
+
+    ctas: [
+      {
+        link: '/signup',
+        text: 'Get Started',
+      },
+      {
+        text: 'Learn more',
+        link: '/signup',
+        style: 'light',
+      },
+    ],
+    stats: [
+      { title: 'Users', detail: '10,000+', icon: 'pause' },
+      { title: 'Countries', detail: '50+', icon: 'airplane' },
+      { title: 'Satisfaction', detail: '98%', icon: 'heart' },
+    ],
+    img: {
+      src: '/images/inaethe/donations.jpg',
+      alt: 'Hero Image',
+    },
+  },
+  {
+    hint: 'Buy more today',
+    type: 'FlexwindHero7',
+    category: 'Hero Sections',
+    title: 'A home for your products at the heart of society',
+    description:
+      'Our mission is to create a platform that connects people with the products they need, while also giving back to the community. We believe that by working together, we can make a positive impact on the world around us. Join us in our mission to create a better future for all.',
+
+    ctas: [
+      {
+        icon: 'home',
+        link: '/signup',
+        text: 'Get Started',
+      },
+      {
+        icon: 'settings',
+        text: 'Learn more',
+        link: '/signup',
+        style: 'light',
+      },
+    ],
+    img1: {
+      src: '/images/inaethe/donations.jpg',
+      alt: 'Hero Image',
+    },
+    img2: {
+      src: '/images/inaethe/donations.jpg',
       alt: 'Hero Image',
     },
   },
   {
     type: 'FlexwindFeatures1',
+    category: 'Feature Blocks',
     title:
       'Join Inaethe: Empower Communities Through Affiliate-Driven Donations',
     description:
@@ -261,7 +367,7 @@ const components = [
         icon: 'sliders',
         title: 'Customizable Subscription Tiers',
         description:
-          'Choose from flexible subscription tiers designed to suit different needs and goals. Whether you’re an individual donor or a large organization, Inaethe offers solutions tailored to you.',
+          "Choose from flexible subscription tiers designed to suit different needs and goals. Whether you're an individual donor or a large organization, Inaethe offers solutions tailored to you.",
       },
       {
         icon: 'bank-card',
@@ -276,46 +382,6 @@ const components = [
           'Our team is here to support you every step of the way. From campaign setup to troubleshooting, Inaethe provides resources and assistance to help you succeed.',
       },
     ],
-  },
-  {
-    type: 'FlowBiteCta1',
-    props: {
-      // theme: theme,
-      title: 'Your Title Here',
-      description:
-        'Your description text goes here. Make it engaging and informative.',
-      link: '/your-destination-url',
-      image: 'https://your-light-theme-image-url.jpg', // Optional - will use default if not provided
-      darkImage: 'https://your-dark-theme-image-url.jpg', // Optional - will use default if not provided
-    },
-  },
-  // FlowBiteCta2 CTA
-  {
-    type: 'FlowBiteCta2',
-    props: {
-      heading: 'Join our platform today!',
-      description:
-        'Discover a world of endless possibilities with our cutting-edge tools and features.',
-      primaryButton: {
-        text: 'Sign Up Now',
-        link: '/signup',
-      },
-      secondaryButton: {
-        text: 'Learn More',
-        link: '/learn-more',
-      },
-    },
-  },
-  // FlowBiteCta3 CTA
-  {
-    type: 'FlowBiteCta3',
-    props: {
-      // theme: theme,
-      title: 'Start your journey with us today',
-      description: 'Join our community and discover amazing opportunities',
-      buttonText: 'Get Started',
-      buttonLink: '/signup',
-    },
   },
 ];
 

@@ -168,7 +168,26 @@
     {
       "id": "about",
       "title": "About",
+      "type": "color-page",
+      "colorCode": "gray-900",
       "components": [
+        {
+          "type": "FlexwindHero3",
+          "title": "Who We Are & Why We Exist",
+          "description": "Inaethe was born from a deep desire to tackle hunger and unemployment in Africa. We unite generosity with opportunity, creating a space where non-profits can thrive and individuals can earn while making a real difference. This is our story—and our mission.",
+          "ctas": [
+            {
+              "text": "Join the Movement",
+              "link": "/register"
+            }
+          ],
+          "hint": "Empowering Causes, Sustaining Change",
+          "img": {
+            "src": "/images/inaethe/donations-square.jpg",
+            "alt": "Community members working together to support a cause"
+          }
+        },
+
         {
           "type": "article",
           "elements": [
@@ -188,24 +207,39 @@
             }
           ]
         },
-        { "type": "space-above", "size": "10" },
         {
-          "type": "full-width-text-block",
-          "title": "",
-          "text": " Moreover, as we delved deeper into the philanthropic landscape, we realized that other noteworthy causes were grappling with similar funding challenges. \n\n In response, we developed a unique vehicle at Inaethe, offering a means for anyone with a worthy cause to generate income, creating a versatile platform that empowers diverse initiatives. Out of this realization, Inaethe emerged – a dynamic solution uniting non-profits and individuals, fostering a community where support and financial sustainability converge to create meaningful change. Our journey reflects the resilience born from adversity, as we strive to make a lasting impact on the lives of those facing hunger, unemployment, and a shortage of funding for their noble causes. \n\n Join us in building a community that transforms good intentions into tangible impacts, ensuring a brighter future for both individuals and the non-profits they support. Inaethe make a difference today!"
+          "type": "centered-page-header",
+          "title": "Join Ina Ethe & Empower Your Impact",
+          "description": "Register your organization to access tools and connect with a broader community"
         },
-        { "type": "space-above", "size": "24" },
         {
-          "type": "hero",
-          "header": "Join the movement",
-          "text": "Inaethe is more than an initiative; it's a movement of compassion, driven by the belief that change is possible when people come together. Whether you're interested in subscribing, volunteering, or partnering with us, we invite you to be a part of our journey.",
-          "cta": {
-            "title": "Join Us Now!",
-            "link": "/subscribe"
-          },
-          "image": "/images/inaethe/donations.jpg"
+          "type": "centered-page-components-container",
+          "maxWidthinXLsize": 4,
+          "components": [{ "type": "state-handled-npo-registration-form" }]
         },
-        { "type": "space-above", "size": "24" },
+        {
+          "type": "spa-block",
+          "elements": [
+            {
+              "icon": "food-truck",
+              "title": "Impact",
+              "text": "Your subscription directly translates into meals for those in need."
+            },
+            {
+              "icon": "book",
+              "title": "Transparency",
+              "text": "We offer complete transparency in our operations"
+            },
+            {
+              "icon": "user-group",
+              "title": "Community",
+              "text": "Join a passionate community of individuals dedicated to ending hunger in Africa."
+            }
+          ],
+          "bg": "bg-pink-800",
+          "fg": "text-white",
+          "title": "Why Inaethe"
+        },
         {
           "type": "article",
           "elements": [
@@ -224,19 +258,7 @@
               "image": "/images/inaethe/volunteers.jpg"
             }
           ]
-        },
-        { "type": "space-above", "size": "24" },
-        {
-          "type": "full-width-text-block",
-          "title": "Our Values",
-          "text": "At Inaethe, our values serve as our guiding light. They include 'compassion', 'transparency,' 'collaboration,' and these principles underpin everything we do. We take pride in our commitment to complete transparency in our operations, ensuring that every contribution makes a meaningful impact."
-        },
-        {
-          "type": "full-width-text-block",
-          "title": "Meet our team",
-          "text": "Our success is a testament to the dedication and passion of our team. Meet the individuals who drive Inaethe forward, from our founders to our committed volunteers. Together, we share a common goal - to eradicate hunger in Africa and to bring hope to those who need it most."
-        },
-        { "type": "space-above", "size": "24" }
+        }
       ]
     },
     {

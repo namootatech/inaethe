@@ -22,6 +22,9 @@ import {
   FlexwindHero7,
   FlexwindHero5,
 } from './heros';
+
+import { Icon } from './icon';
+
 import { useConfig } from '@/context/ConfigContext';
 import { FlexwindFeatures1 } from './features';
 import { PageDoneHowItWorks1 } from './howItWorks';
@@ -689,6 +692,7 @@ const componentBuilders = {
   FlexwindHero7,
   FlexwindFeatures1,
   PageDoneHowItWorks1,
+  Icon,
 };
 
 const RenderPageComponents = ({ items, data }) => {

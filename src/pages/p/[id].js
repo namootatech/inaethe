@@ -90,6 +90,12 @@ function Page({ page, id }) {
         >
           {page && <RenderPageComponents items={page?.components} />}
         </div>
+      ) : page.type === 'color-page' ? (
+        <div
+          className={`min-h-screen bg-${page.colorCode} flex flex-col justify-center`}
+        >
+          {page && <RenderPageComponents items={page?.components} />}
+        </div>
       ) : (
         <div className='w-full md:mt-4'>
           {page && <RenderPageComponents items={page?.components} />}
