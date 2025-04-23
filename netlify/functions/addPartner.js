@@ -1,4 +1,6 @@
 const { MongoClient } = require('mongodb');
+const { assoc, omit } = require('ramda');
+const bcrypt = require('bcrypt-nodejs');
 require('dotenv').config();
 
 const NEXT_PUBLIC_MONGODB_DB = process.env.NEXT_PUBLIC_MONGODB_DB;
@@ -55,10 +57,12 @@ exports.handler = async (event, context) => {
         }),
       };
     }
-
+    const { email, password } = partnerData;
+    const hash = bcrypt.hashSync(password);
+    const partner = assoc('hash', hash, partnerData);
     console.log('** [ADD PARTNER FUNCTION] No duplicate found, inserting data');
     const result = await partnersCollection.insertOne({
-      ...partnerData,
+      ...partner,
       slug: toKebab(partnerData.organizationName),
     });
 
