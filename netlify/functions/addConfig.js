@@ -12,9 +12,9 @@ exports.handler = async (event) => {
 
   try {
     console.log('** [ADD CONFIG FUNCTION] Parsing request body...');
-    const { orgName, config, customDomain } = JSON.parse(event.body);
-
-    if (!orgName || !config || !customDomain) {
+    const { orgName, config } = JSON.parse(event.body);
+    console.log(orgName, config);
+    if (!orgName || !config) {
       console.error(
         '** [ADD CONFIG FUNCTION] Missing required fields in request body.'
       );

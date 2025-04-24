@@ -222,6 +222,10 @@ export const ApiProvider = ({ children }) => {
       organisationId,
     });
   };
+  const addSiteConfig = async (data) => {
+    console.log(`*** [API CONTEXT] Uadding subscriber`);
+    return await apiRequest(`/addConfig`, 'POST', data);
+  };
 
   return (
     <ApiContext.Provider
@@ -254,6 +258,7 @@ export const ApiProvider = ({ children }) => {
         createWithdrawalRequest,
         addSubscriber,
         loginNpo,
+        addSiteConfig,
       }}
     >
       {children}
