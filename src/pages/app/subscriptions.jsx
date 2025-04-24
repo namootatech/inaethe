@@ -45,7 +45,7 @@ export default function Subscriptions() {
     }
   }, [user]);
 
-  const cleanSubscriptions = subscriptions.map((s) => ({
+  const cleanSubscriptions = subscriptions?.map((s) => ({
     id: s['_id'],
     npo: s.partner.name,
     amount: s.amount,

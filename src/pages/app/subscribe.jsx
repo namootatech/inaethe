@@ -33,7 +33,7 @@ const MERCHANT_KEY = process.env.NEXT_PUBLIC_MERCHANT_KEY;
 
 function ReturnPage() {
   const { user } = useAuth();
-  const userDate = user.user;
+  const userDate = user?.user;
   const params = useSearchParams();
   const siteConfig = useConfig();
   const [partnerConfig, setPartnerConfig] = useState(null);
