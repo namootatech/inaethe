@@ -25,18 +25,18 @@
   "colors": {
     "lightBgColoCode": "pink-50",
     "secondaryLighBgColorCode": "gray-100",
-    "primaryColorCode": "rose-300",
-    "primaryColor": "rose",
-    "accentColor": "purple",
-    "secondaryColor": "amber",
-    "secondaryColorCode": "amber-300",
+    "primaryColorCode": "pink-pink-500",
+    "primaryColor": "pink",
+    "accentColor": "indigo",
+    "secondaryColor": "gray",
+    "secondaryColorCode": "gray-pink-500",
     "textColorCode": "gray-700",
     "progressColor": "#d946ef",
-    "accentColorCode": "purple-300"
+    "accentColorCode": "indigo-pink-500"
   },
   "footer": {
-    "bg": "bg-indigo-800",
-    "fg": "text-gray-200"
+    "bg": "bg-gray-800",
+    "fg": "text-white"
   },
   "pages": [
     {
