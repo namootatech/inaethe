@@ -1,0 +1,500 @@
+{
+  "organisationId": "aquahope",
+  "partnerName": "AquaHope Foundation",
+  "tagline": "Clean Water, Brighter Futures",
+  "about": "AquaHope Foundation is dedicated to providing sustainable clean water solutions to communities in need worldwide. Through innovative technology, community partnerships, and education, we're working to end the global water crisis one community at a time.",
+  "cta": {
+    "text": "Make a Difference Today!"
+  },
+  "nav": {
+    "ctaText": "Donate Now"
+  },
+  "socialMedia": {
+    "facebook": "https://www.facebook.com/inaethe",
+    "twitter": "https://twitter.com/inaethe",
+    "instagram": "https://www.instagram.com/inaethe",
+    "linkedin": "https://www.linkedin.com/company/inaethe",
+    "youtube": "",
+    "tiktok": "",
+    "pinterest": "",
+    "snapchat": ""
+  },
+  "brand": {
+    "logo": "/logo.png"
+  },
+  "colors": {
+    "lightBgColoCode": "blue-50",
+    "secondaryLighBgColorCode": "gray-100",
+    "primaryColorCode": "blue-blue-500",
+    "primaryColor": "blue",
+    "accentColor": "teal",
+    "secondaryColor": "gray",
+    "secondaryColorCode": "gray-blue-500",
+    "textColorCode": "gray-700",
+    "progressColor": "#3b82f6",
+    "accentColorCode": "teal-blue-500"
+  },
+  "footer": {
+    "bg": "bg-gray-800",
+    "fg": "text-white"
+  },
+  "pages": [
+    {
+      "id": "homepage",
+      "title": "Home",
+      "components": [
+        {
+          "type": "FlexwindHero3",
+          "title": "Bringing Clean Water to Communities in Need",
+          "description": "At AquaHope Foundation, we're dedicated to providing sustainable clean water solutions to underserved communities worldwide. Every donation helps us install water purification systems, dig wells, and educate communities on water conservation.",
+          "ctas": [
+            {
+              "text": "Donate Now",
+              "link": "/donate"
+            }
+          ],
+          "hint": "Change Lives Today",
+          "img": {
+            "src": "https://images.unsplash.com/photo-1594789020554-458e45b6a5c0?q=80&w=1974&auto=format&fit=crop",
+            "alt": "Child drinking clean water"
+          }
+        },
+        {
+          "type": "article",
+          "elements": [
+            {
+              "type": "image-block",
+              "image": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=2070&auto=format&fit=crop"
+            },
+            {
+              "type": "multi-text-blocks",
+              "cta": {
+                "title": "Support Our Mission",
+                "link": "/donate"
+              },
+              "content": [
+                {
+                  "title": "Our Mission",
+                  "text": "At AquaHope Foundation, our mission is to ensure every person has access to clean, safe drinking water. We work with local communities to implement sustainable water solutions that improve health, enable education, and create economic opportunities."
+                },
+                {
+                  "title": "",
+                  "text": "Join us in our commitment to end the global water crisis. Together, we can transform lives and build resilient communities through the power of clean water. Every drop counts!"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "spa-block",
+          "elements": [
+            {
+              "icon": "droplet",
+              "title": "Clean Water",
+              "text": "We've provided clean water access to over 500,000 people in 15 countries."
+            },
+            {
+              "icon": "heart",
+              "title": "Community Impact",
+              "text": "Our projects reduce waterborne illness by 80% in served communities."
+            },
+            {
+              "icon": "users",
+              "title": "Volunteer Network",
+              "text": "Join our global network of 2,500+ volunteers making a difference."
+            }
+          ],
+          "bg": "bg-blue-700",
+          "fg": "text-white",
+          "title": "Our Impact"
+        },
+        {
+          "type": "article",
+          "elements": [
+            {
+              "type": "multi-text-blocks",
+              "cta": {
+                "title": "Get Involved",
+                "link": "/volunteer"
+              },
+              "content": [
+                {
+                  "title": "Our Story",
+                  "text": "AquaHope Foundation began in 2010 when our founder witnessed firsthand the devastating effects of water scarcity during a humanitarian mission. What started as a single well project in a rural village has grown into a global initiative spanning four continents, with innovative water solutions tailored to each community's unique needs."
+                },
+                {
+                  "title": "Sustainable Solutions",
+                  "text": "We don't just provide water—we create lasting change. Our approach combines technology, education, and community ownership to ensure water systems remain functional for generations. We train local technicians, establish water committees, and implement usage fees that fund ongoing maintenance and repairs."
+                }
+              ]
+            },
+            {
+              "type": "image-block",
+              "image": "https://images.unsplash.com/photo-1541252260730-0412e8e2108e?q=80&w=1974&auto=format&fit=crop"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about",
+      "title": "About",
+      "type": "color-page",
+      "colorCode": "gray-900",
+      "components": [
+        {
+          "type": "FlexwindHero3",
+          "title": "Our Story & Mission",
+          "description": "AquaHope Foundation was born from a simple belief: clean water is a fundamental human right. Learn about our journey from a single well project to a global clean water initiative.",
+          "ctas": [
+            {
+              "text": "Join Our Mission",
+              "link": "/get-involved"
+            }
+          ],
+          "hint": "Making Waves of Change",
+          "img": {
+            "src": "https://images.unsplash.com/photo-1567427361984-0cbe7396fc6c?q=80&w=2070&auto=format&fit=crop",
+            "alt": "Team working on water project"
+          }
+        },
+        {
+          "type": "article",
+          "elements": [
+            {
+              "type": "image-block",
+              "image": "https://images.unsplash.com/photo-1525438160292-a4a860951216?q=80&w=2070&auto=format&fit=crop"
+            },
+            {
+              "type": "multi-text-blocks",
+              "content": [
+                {
+                  "title": "Our Beginning",
+                  "text": "AquaHope Foundation was founded in 2010 by Dr. Maya Waters after witnessing children falling ill from contaminated water sources during a medical mission in rural East Africa. Determined to address the root cause rather than just treating symptoms, Dr. Waters partnered with local engineers to install the first AquaHope well system.\n\nWhat began as a single project has evolved into a global organization with operations in 15 countries across Africa, Asia, and Latin America. Our team now includes hydrologists, engineers, community developers, and public health experts all united by a common goal: clean water for all."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "spa-block",
+          "elements": [
+            {
+              "icon": "target",
+              "title": "Our Vision",
+              "text": "A world where everyone has sustainable access to clean, safe water."
+            },
+            {
+              "icon": "compass",
+              "title": "Our Mission",
+              "text": "To implement sustainable water solutions through technology, education, and community partnership."
+            },
+            {
+              "icon": "award",
+              "title": "Our Values",
+              "text": "Sustainability, Community Ownership, Innovation, Transparency, and Respect."
+            }
+          ],
+          "bg": "bg-blue-800",
+          "fg": "text-white",
+          "title": "What Drives Us"
+        },
+        {
+          "type": "article",
+          "elements": [
+            {
+              "type": "multi-text-blocks",
+              "content": [
+                {
+                  "title": "Our Approach",
+                  "text": "At AquaHope, we believe that lasting solutions require more than just technology—they need community ownership and ongoing support. Our comprehensive approach includes:\n\n• Thorough community assessment and engagement\n• Locally appropriate water technology implementation\n• Training of community water committees\n• WASH education programs\n• Ongoing monitoring and support\n• Microfinance options for system maintenance\n\nThis holistic strategy ensures our water systems continue functioning long after our teams have moved on to the next project."
+                }
+              ]
+            },
+            {
+              "type": "image-block",
+              "image": "https://images.unsplash.com/photo-1551734322-f8c1df7f8c39?q=80&w=1974&auto=format&fit=crop"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "projects",
+      "title": "Projects",
+      "components": [
+        {
+          "type": "FlexwindHero4",
+          "title": "Our Global Impact",
+          "description": "Explore our current and completed water projects around the world. From deep wells in drought-prone regions to rainwater harvesting systems in monsoon areas, we tailor our solutions to local conditions and needs.",
+          "data": {
+            "email": {
+              "on-change": {
+                "handle-with": "save-to-component-state",
+                "with-params": [
+                  {
+                    "type": "plain-string",
+                    "payload": "email"
+                  },
+                  {
+                    "type": "event-data",
+                    "payload": {
+                      "type": "path",
+                      "value": [
+                        "target",
+                        "value"
+                      ]
+                    }
+                  }
+                ],
+                "when-handler-succeeds-run": [
+                  "do-nothing"
+                ],
+                "when-handler-fails-run": [
+                  "notify-something-went-wrong"
+                ]
+              }
+            }
+          },
+          "ctas": [
+            {
+              "text": "Subscribe to Updates",
+              "on-click": {
+                "handle-with": "save-new-newsletter-subscriber",
+                "with-params": [
+                  {
+                    "type": "component-state-value",
+                    "payload": {
+                      "type": "field-id",
+                      "value": "email"
+                    }
+                  },
+                  {
+                    "type": "site-config-value",
+                    "payload": {
+                      "type": "field-id",
+                      "value": "organisationId"
+                    }
+                  }
+                ],
+                "when-handler-succeeds-run": [
+                  "notify-you-will-hear-from-us",
+                  "clear-component-state"
+                ],
+                "when-handler-fails-run": [
+                  "notify-something-went-wrong"
+                ]
+              }
+            }
+          ],
+          "img": {
+            "src": "https://images.unsplash.com/photo-1603977189851-ea933a9a73a6?q=80&w=2070&auto=format&fit=crop",
+            "alt": "World map with project locations"
+          }
+        },
+        {
+          "type": "FlexwindFeatures1",
+          "hint": "Current Projects",
+          "title": "Where We're Working Now",
+          "description": "These are some of our current priority projects where your support can make an immediate difference. Each project is designed with the specific needs and conditions of the local community in mind.",
+          "features": [
+            {
+              "icon": "map-pin",
+              "title": "Maji Clean Water Initiative - Kenya",
+              "description": "Installing 15 deep wells and solar-powered pumps to serve 20,000 people across drought-affected communities in northern Kenya. Project includes training of local technicians and establishment of water committees."
+            },
+            {
+              "icon": "map-pin",
+              "title": "School WASH Program - Nepal",
+              "description": "Providing clean water systems, handwashing stations, and separate toilet facilities for 25 schools serving 12,000 students. Includes comprehensive hygiene education program and teacher training."
+            },
+            {
+              "icon": "map-pin",
+              "title": "Rainwater Harvesting - Guatemala",
+              "description": "Implementing rainwater collection systems for 500 households in highland communities with limited groundwater access. Systems include first-flush diverters and biosand filters for water purification."
+            },
+            {
+              "icon": "map-pin",
+              "title": "Urban Water Kiosks - Bangladesh",
+              "description": "Establishing 10 community water kiosks with advanced filtration in densely populated urban areas, providing affordable clean water to approximately 30,000 people."
+            },
+            {
+              "icon": "map-pin",
+              "title": "River Filtration System - Cambodia",
+              "description": "Installing a community-scale river water filtration system to serve 5,000 people in the Mekong Delta region, where groundwater is contaminated with arsenic."
+            },
+            {
+              "icon": "map-pin",
+              "title": "Emergency Response - Haiti",
+              "description": "Deploying portable water purification units and distributing household filters in areas affected by recent natural disasters, serving approximately 8,000 people."
+            }
+          ]
+        },
+        {
+          "type": "PageDoneHowItWorks1",
+          "title": "How We Implement Water Projects",
+          "description": "Our proven process ensures that each water project is sustainable, community-owned, and delivers lasting impact. Here's how we turn your support into clean water for communities in need:",
+          "steps": [
+            {
+              "title": "Community Assessment & Partnership",
+              "description": "We begin by working closely with community leaders to understand water needs, existing resources, and cultural considerations. This collaborative approach ensures community buy-in from the start.",
+              "icon": "FaUsers"
+            },
+            {
+              "title": "Technical Design & Implementation",
+              "description": "Our engineers design water solutions tailored to local conditions—whether deep wells, rainwater harvesting, or filtration systems. Local workers are hired and trained during construction, creating jobs and building capacity.",
+              "icon": "FaWrench"
+            },
+            {
+              "title": "Education & Sustainability Planning",
+              "description": "We provide comprehensive WASH education and train community water committees to manage and maintain systems. A sustainability plan, including user fees for maintenance, ensures long-term functionality.",
+              "icon": "FaGraduationCap"
+            }
+          ]
+        },
+        {
+          "type": "space-above",
+          "size": "10"
+        }
+      ]
+    },
+    {
+      "id": "get-involved",
+      "title": "Get Involved",
+      "type": "centered-color-page",
+      "colorCode": "gray-900",
+      "components": [
+        {
+          "type": "centered-page-header",
+          "title": "Join the AquaHope Movement",
+          "description": "There are many ways to support our mission of bringing clean water to communities worldwide"
+        },
+        {
+          "type": "centered-page-components-container",
+          "maxWidthinXLsize": 4,
+          "components": [
+            {
+              "type": "card",
+              "title": "Donate",
+              "image": "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?q=80&w=2070&auto=format&fit=crop",
+              "description": "Your financial support directly funds water projects around the world. Just $50 can provide clean water to one person for life.",
+              "cta": {
+                "title": "Give Now",
+                "link": "/donate"
+              }
+            },
+            {
+              "type": "card",
+              "title": "Volunteer",
+              "image": "https://images.unsplash.com/photo-1559027615-cd4628902d4a?q=80&w=2070&auto=format&fit=crop",
+              "description": "Join us in the field or support our work remotely with your skills in engineering, public health, communications, or fundraising.",
+              "cta": {
+                "title": "Apply Now",
+                "link": "/volunteer"
+              }
+            },
+            {
+              "type": "card",
+              "title": "Fundraise",
+              "image": "https://images.unsplash.com/photo-1560252829-804f1aedf1be?q=80&w=2070&auto=format&fit=crop",
+              "description": "Start your own fundraising campaign for clean water. Perfect for birthdays, athletic events, or school projects.",
+              "cta": {
+                "title": "Start Campaign",
+                "link": "/fundraise"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "defaultPages": [
+    {
+      "id": "donate",
+      "title": "Donate",
+      "components": [
+        {
+          "type": "space-above",
+          "size": "10"
+        },
+        {
+          "type": "center-width-text-block",
+          "title": "Your Donation Makes a Difference",
+          "text": "Every contribution brings us closer to a world where everyone has access to clean, safe water. Your generosity transforms lives and creates healthier communities."
+        },
+        {
+          "type": "center-width-text-block",
+          "title": "Where Your Money Goes",
+          "text": "85% of every donation goes directly to water projects, 10% to education and awareness programs, and 5% to administrative costs. We maintain full transparency with detailed impact reports available quarterly."
+        },
+        {
+          "type": "donation-form-center-width",
+          "title": "Make Your Donation",
+          "options": [
+            {
+              "amount": 25,
+              "description": "Provides clean water to one person"
+            },
+            {
+              "amount": 100,
+              "description": "Provides clean water to a family"
+            },
+            {
+              "amount": 500,
+              "description": "Funds a school water station"
+            },
+            {
+              "amount": 2500,
+              "description": "Sponsors a community well"
+            }
+          ]
+        },
+        {
+          "type": "center-width-text-block",
+          "title": "Your Impact",
+          "text": "With your support, we can continue to bring clean water to communities in need, reducing waterborne diseases, improving education outcomes, and creating economic opportunities. Thank you for being part of the solution!"
+        },
+        {
+          "type": "space-below",
+          "size": "10"
+        }
+      ]
+    },
+    {
+      "id": "thank-you",
+      "title": "Thank You",
+      "components": [
+        {
+          "type": "space-above",
+          "size": "10"
+        },
+        {
+          "type": "checkbox-center"
+        },
+        {
+          "type": "center-width-text-block",
+          "title": "Thank You for Your Donation!",
+          "text": "Your generosity is making clean water possible for communities in need. Your contribution will help fund sustainable water projects that transform lives and create healthier futures."
+        },
+        {
+          "type": "center-width-text-block",
+          "title": "What Happens Next",
+          "text": "You'll receive a receipt for your donation via email shortly. We'll also send you updates about the projects your donation is supporting and the impact you're helping to create."
+        },
+        {
+          "type": "center-width-text-block",
+          "title": "Share Your Impact",
+          "text": "Help us spread the word about the importance of clean water access by sharing your support on social media. Together, we can inspire others to join our mission."
+        },
+        {
+          "type": "social-share-buttons-center",
+          "message": "I just supported AquaHope Foundation's mission to bring clean water to communities worldwide. Join me in making a difference!"
+        },
+        {
+          "type": "space-below",
+          "size": "10"
+        }
+      ]
+    }
+  ]
+}
