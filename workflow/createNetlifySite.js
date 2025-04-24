@@ -33,7 +33,7 @@ async function createNetlifySite(
     NEXT_PUBLIC_PAYFAST_URL,
     NEXT_PUBLIC_WEBSITE_URL:
       orgName && orgName !== '' && orgName !== 'unknown'
-        ? `https://${orgName}.xhap.co.za`
+        ? `https://${orgName}.inaethe.co.za`
         : NEXT_PUBLIC_WEBSITE_URL,
     NEXT_PUBLIC_MERCHANT_ID,
     NEXT_PUBLIC_MERCHANT_KEY,
@@ -55,9 +55,9 @@ async function createNetlifySite(
 
   const token = NETLIFY_AUTH_TOKEN;
   const payload = {
-    account_slug: 'clinicplusdev',
+    account_slug: 'abqwabi',
     name: `${orgName}-inaethe-za`,
-    custom_domain: `${orgName}.xhap.co.za`,
+    custom_domain: `${orgName}.inaethe.co.za`,
     env: environmentVariables,
     created_via: '',
     repo: {
