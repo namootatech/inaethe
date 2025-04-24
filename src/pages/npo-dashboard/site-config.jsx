@@ -68,7 +68,6 @@ import { ComponentEditor } from '@/components/component-editor';
 import { ColorPicker } from '@/components/color-picker';
 import { ImageUploader } from '@/components/image-uploader';
 import { useApi } from '@/context/ApiContext';
-
 const uploadToCloudinary = async (file) => {
   try {
     const formData = new FormData();
@@ -482,7 +481,6 @@ export default function SiteConfigPage() {
     type: '',
     colorCode: '',
   });
-
   const api = useApi();
   // Initialize the form with default values
   const form = useForm({
@@ -495,8 +493,16 @@ export default function SiteConfigPage() {
     setIsSubmitting(true);
 
     try {
-      // In a real application, you would send this data to your API
+      // Log the data being submitted
       console.log('Form data:', JSON.stringify(data, null, 2));
+
+      // Validate the data against the schema
+      const validationResult = formSchema.safeParse(data);
+      if (!validationResult.success) {
+        console.error('Validation errors:', validationResult.error);
+        throw new Error('Form validation failed');
+      }
+
       const confg = {
         ...data,
         colors: {
@@ -536,7 +542,18 @@ export default function SiteConfigPage() {
           });
         });
 
+      // In a real application, you would send this data to your API
+      // await fetch('/api/site-config', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify(data)
+      // })
+
       // Show success message
+      toast({
+        title: 'Configuration saved',
+        description: 'Your site configuration has been successfully saved.',
+      });
 
       // Update preview
       setPreviewConfig(data);
@@ -2147,11 +2164,34 @@ export default function SiteConfigPage() {
                                       const importedConfig = JSON.parse(
                                         event.target?.result
                                       );
-                                      form.reset(importedConfig);
+
+                                      // First reset the form to clear any existing values
+                                      form.reset();
+
+                                      // Then set values field by field to ensure proper validation
+                                      Object.keys(importedConfig).forEach(
+                                        (key) => {
+                                          if (key in defaultValues) {
+                                            form.setValue(
+                                              key,
+                                              importedConfig[key],
+                                              {
+                                                shouldValidate: true,
+                                                shouldDirty: true,
+                                                shouldTouch: true,
+                                              }
+                                            );
+                                          }
+                                        }
+                                      );
+
+                                      // Update the preview
+                                      setPreviewConfig(importedConfig);
+
                                       toast({
                                         title: 'Configuration imported',
                                         description:
-                                          'The configuration has been successfully imported.',
+                                          "The configuration has been successfully imported. Click 'Save Configuration' to apply changes.",
                                       });
                                     } catch (error) {
                                       console.error(
@@ -2226,10 +2266,6 @@ export default function SiteConfigPage() {
                 <Button
                   type='submit'
                   disabled={isSubmitting}
-                  onClick={() => {
-                    console.log('performing save function');
-                    return form.handleSubmit(onSubmit);
-                  }}
                   className='bg-pink-500 hover:bg-pink-600 text-white'
                 >
                   {isSubmitting ? (
