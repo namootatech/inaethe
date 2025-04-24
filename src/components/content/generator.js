@@ -24,11 +24,16 @@ import {
 } from './heros';
 
 import { Icon } from './icon';
-
 import { useConfig } from '@/context/ConfigContext';
 import { FlexwindFeatures1 } from './features';
 import { PageDoneHowItWorks1 } from './howItWorks';
 import { keys } from 'ramda';
+
+import { 
+  FlowBiteCta1,
+  FlowBiteCta2,
+  FlowBiteCta3,
+} from './ctas'
 
 const imageBlock = (props) => (
   <div
@@ -693,6 +698,9 @@ const componentBuilders = {
   FlexwindHero4,
   FlexwindHero6,
   FlexwindHero7,
+  FlowBiteCta1: (props) => <FlowBiteCta1 {...props} />,
+  FlowBiteCta2: (props) => <FlowBiteCta2 {...props} />,
+  FlowBiteCta3: (props) => <FlowBiteCta3 {...props} />,
   FlexwindFeatures1,
   PageDoneHowItWorks1,
   Icon,
