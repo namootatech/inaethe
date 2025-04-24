@@ -17,7 +17,7 @@ import {
   ChevronUp,
   Upload,
 } from 'lucide-react';
-
+import { toast } from 'react-hot-toast';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -47,7 +47,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
-import { toast } from '@/components/ui/use-toast';
 import {
   Dialog,
   DialogContent,
@@ -524,22 +523,16 @@ export default function SiteConfigPage() {
         })
         .then((response) => {
           console.log('Response:', response);
-          toast({
-            title: 'Configuration saved',
-            description: 'Your site configuration has been successfully saved.',
-          });
+          toast.success('Your site configuration has been successfully saved.');
           router.push(
             `/npo-dashboard/site?domain=${data.organisationId}.inaethe.co.za&orgId=${data.organisationId}`
           );
         })
         .catch((e) => {
           console.log('Error:', e);
-          toast({
-            title: 'Error',
-            description:
-              'There was a problem saving your configuration. Please try again.',
-            variant: 'destructive',
-          });
+          toast.error(
+            'There was a problem saving your configuration. Please try again.'
+          );
         });
 
       // In a real application, you would send this data to your API
@@ -550,10 +543,7 @@ export default function SiteConfigPage() {
       // })
 
       // Show success message
-      toast({
-        title: 'Configuration saved',
-        description: 'Your site configuration has been successfully saved.',
-      });
+      toast.success('Your site configuration has been successfully saved.');
 
       // Update preview
       setPreviewConfig(data);
@@ -562,12 +552,9 @@ export default function SiteConfigPage() {
       // router.push('/admin/dashboard')
     } catch (error) {
       console.error('Error saving configuration:', error);
-      toast({
-        title: 'Error',
-        description:
-          'There was a problem saving your configuration. Please try again.',
-        variant: 'destructive',
-      });
+      toast.error(
+        'There was a problem saving your configuration. Please try again.'
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -582,10 +569,7 @@ export default function SiteConfigPage() {
   // Reset the form to default values
   const resetForm = () => {
     form.reset(defaultValues);
-    toast({
-      title: 'Form reset',
-      description: 'The form has been reset to default values.',
-    });
+    toast.error('The form has been reset to default values.');
   };
 
   // Add a new page
@@ -620,10 +604,7 @@ export default function SiteConfigPage() {
     }
 
     setShowPageDialog(false);
-    toast({
-      title: 'Page added',
-      description: `The page "${newPage.title}" has been added successfully.`,
-    });
+    toast.error(`The page "${newPage.title}" has been added successfully.`);
   };
 
   // Delete a page
@@ -651,10 +632,7 @@ export default function SiteConfigPage() {
         }
       }
 
-      toast({
-        title: 'Page deleted',
-        description: 'The page has been deleted successfully.',
-      });
+      toast.success('The page has been deleted successfully.');
     }
   };
 
@@ -690,10 +668,7 @@ export default function SiteConfigPage() {
       form.setValue('pages', pages);
     }
 
-    toast({
-      title: 'Page duplicated',
-      description: 'The page has been duplicated successfully.',
-    });
+    toast.info('The page has been duplicated successfully.');
   };
 
   // Add a component to a page
@@ -730,10 +705,7 @@ export default function SiteConfigPage() {
       form.setValue('pages', pages);
     }
 
-    toast({
-      title: 'Component added',
-      description: 'A new component has been added to the page.',
-    });
+    toast.info('A new component has been added to the page.');
   };
 
   // Edit a component
@@ -791,10 +763,7 @@ export default function SiteConfigPage() {
     }
 
     setShowComponentEditor(false);
-    toast({
-      title: 'Component updated',
-      description: 'The component has been updated successfully.',
-    });
+    toast.info('The component has been updated successfully.');
   };
 
   // Delete a component
@@ -826,10 +795,7 @@ export default function SiteConfigPage() {
         form.setValue('pages', pages);
       }
 
-      toast({
-        title: 'Component deleted',
-        description: 'The component has been deleted successfully.',
-      });
+      toast.info('The component has been deleted successfully.');
     }
   };
 
@@ -1139,27 +1105,20 @@ export default function SiteConfigPage() {
                                   onUpload={async (file) => {
                                     try {
                                       setIsSubmitting(true);
-                                      toast({
-                                        title: 'Uploading...',
-                                        description:
-                                          'Your logo is being uploaded to Cloudinary.',
-                                      });
+                                      toast.info(
+                                        'Your logo is being uploaded to Cloudinary.'
+                                      );
                                       const url = await uploadToCloudinary(
                                         file
                                       );
                                       field.onChange(url);
-                                      toast({
-                                        title: 'Upload successful',
-                                        description:
-                                          'Your logo has been uploaded successfully.',
-                                      });
+                                      toast.info(
+                                        'Your logo has been uploaded successfully.'
+                                      );
                                     } catch (error) {
-                                      toast({
-                                        title: 'Upload failed',
-                                        description:
-                                          'There was a problem uploading your logo. Please try again.',
-                                        variant: 'destructive',
-                                      });
+                                      toast.error(
+                                        'There was a problem uploading your logo. Please try again.'
+                                      );
                                       console.error('Upload error:', error);
                                     } finally {
                                       setIsSubmitting(false);
@@ -2188,22 +2147,17 @@ export default function SiteConfigPage() {
                                       // Update the preview
                                       setPreviewConfig(importedConfig);
 
-                                      toast({
-                                        title: 'Configuration imported',
-                                        description:
-                                          "The configuration has been successfully imported. Click 'Save Configuration' to apply changes.",
-                                      });
+                                      toast.success(
+                                        "The configuration has been successfully imported. Click 'Save Configuration' to apply changes."
+                                      );
                                     } catch (error) {
                                       console.error(
                                         'Error parsing JSON:',
                                         error
                                       );
-                                      toast({
-                                        title: 'Import failed',
-                                        description:
-                                          "The file could not be imported. Please ensure it's a valid JSON file.",
-                                        variant: 'destructive',
-                                      });
+                                      toast.error(
+                                        "The file could not be imported. Please ensure it's a valid JSON file."
+                                      );
                                     }
                                   };
                                   reader.readAsText(file);
@@ -2237,11 +2191,9 @@ export default function SiteConfigPage() {
                                 )
                               ) {
                                 form.reset(defaultValues);
-                                toast({
-                                  title: 'Settings reset',
-                                  description:
-                                    'All settings have been reset to their default values.',
-                                });
+                                toast.info(
+                                  'All settings have been reset to their default values.'
+                                );
                               }
                             }}
                           >
