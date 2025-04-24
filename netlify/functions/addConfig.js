@@ -1,5 +1,7 @@
-const { Octokit } = require('@octokit/rest');
-require('dotenv').config();
+import { Octokit } from '@octokit/rest';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 /**
  * Utility functions for interacting with GitHub API
