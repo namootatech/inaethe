@@ -1,4 +1,3 @@
-import { Octokit } from '@octokit/rest';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -8,6 +7,7 @@ const ORG_NAME = 'namootatech';
 const REPO_NAME = 'inaethe';
 const BRANCH = 'main';
 const CONFIG_PATH = 'public/siteConfigs';
+const API_BASE = 'https://api.github.com';
 
 export const handler = async (event) => {
   if (event.httpMethod !== 'POST') {
@@ -26,6 +26,13 @@ export const handler = async (event) => {
     };
   }
 
+  const headers = {
+    Accept: 'application/vnd.github.v3+json',
+    Authorization: `Bearer ${GITHUB_TOKEN}`,
+    'Content-Type': 'application/json',
+    'X-GitHub-Api-Version': '2022-11-28',
+  };
+
   try {
     const { orgName, config } = JSON.parse(event.body);
 
@@ -38,36 +45,55 @@ export const handler = async (event) => {
       };
     }
 
-    const octokit = new Octokit({ auth: GITHUB_TOKEN });
     const configFileName = `${orgName}.json`;
     const filePath = `${CONFIG_PATH}/${configFileName}`;
 
     // Try to get existing file to get its SHA
     let existingFile;
     try {
-      const { data } = await octokit.repos.getContent({
-        owner: ORG_NAME,
-        repo: REPO_NAME,
-        path: filePath,
-        ref: BRANCH,
-      });
-      existingFile = data;
+      const response = await fetch(
+        `${API_BASE}/repos/${ORG_NAME}/${REPO_NAME}/contents/${filePath}?ref=${BRANCH}`,
+        { headers }
+      );
+
+      if (response.status === 200) {
+        existingFile = await response.json();
+      } else if (response.status !== 404) {
+        throw new Error(`Failed to check file: ${response.statusText}`);
+      }
     } catch (error) {
-      if (error.status !== 404) {
+      if (!error.message.includes('404')) {
         throw error;
       }
     }
 
-    // Create or update file
-    const response = await octokit.repos.createOrUpdateFileContents({
-      owner: ORG_NAME,
-      repo: REPO_NAME,
-      path: filePath,
+    // Prepare the request body for creating/updating file
+    const requestBody = {
       message: `::auto-deploy:: ${orgName}`,
       content: Buffer.from(JSON.stringify(config, null, 2)).toString('base64'),
       branch: BRANCH,
-      ...(existingFile && { sha: existingFile.sha }),
-    });
+    };
+
+    if (existingFile) {
+      requestBody.sha = existingFile.sha;
+    }
+
+    // Create or update file
+    const response = await fetch(
+      `${API_BASE}/repos/${ORG_NAME}/${REPO_NAME}/contents/${filePath}`,
+      {
+        method: 'PUT',
+        headers,
+        body: JSON.stringify(requestBody),
+      }
+    );
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || response.statusText);
+    }
+
+    const result = await response.json();
 
     return {
       statusCode: 200,
@@ -75,18 +101,19 @@ export const handler = async (event) => {
         message: `Configuration ${
           existingFile ? 'updated' : 'added'
         } successfully`,
-        file: response.data.content.html_url,
+        file: result.content.html_url,
       }),
     };
   } catch (error) {
     console.error('Error:', error);
 
-    const errorMessage =
-      error.status === 403
-        ? 'Invalid token or insufficient permissions'
-        : error.status === 404
-        ? 'Repository not found'
-        : error.message;
+    const errorMessage = error.message.includes('401')
+      ? 'Invalid token'
+      : error.message.includes('403')
+      ? 'Insufficient permissions'
+      : error.message.includes('404')
+      ? 'Repository not found'
+      : error.message;
 
     return {
       statusCode: error.status || 500,
