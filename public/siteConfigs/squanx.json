@@ -1,0 +1,131 @@
+{
+  "organisationId": "squanx",
+  "partnerName": "squanx",
+  "tagline": "Transforming good intentions into tangible impacts.",
+  "about": "At Inaethe, we believe in the power of generosity and financial sustainability. Join us in building a community that empowers non-profit organizations to thrive while offering individuals the opportunity to earn while making a difference. Together, let's create a brighter future.",
+  "cta": {
+    "text": "Make an Impact Today!"
+  },
+  "nav": {
+    "ctaText": "Get started"
+  },
+  "socialMedia": {
+    "facebook": "https://www.facebook.com/inaethe",
+    "twitter": "https://twitter.com/inaethe",
+    "instagram": "https://www.instagram.com/inaethe",
+    "linkedin": "https://www.linkedin.com/company/inaethe",
+    "youtube": "",
+    "tiktok": "",
+    "pinterest": "",
+    "snapchat": ""
+  },
+  "brand": {
+    "logo": "/logo.png"
+  },
+  "colors": {
+    "lightBgColoCode": "pink-50",
+    "secondaryLighBgColorCode": "gray-100",
+    "primaryColorCode": "pink-pink-500",
+    "primaryColor": "pink",
+    "accentColor": "indigo",
+    "secondaryColor": "gray",
+    "secondaryColorCode": "gray-pink-500",
+    "textColorCode": "gray-700",
+    "progressColor": "#d946ef",
+    "accentColorCode": "indigo-pink-500"
+  },
+  "footer": {
+    "bg": "bg-gray-800",
+    "fg": "text-white"
+  },
+  "pages": [
+    {
+      "id": "homepage",
+      "title": "Home",
+      "components": [
+        {
+          "type": "hero",
+          "header": "Transforming good intentions into tangible impacts.",
+          "text": "At Inaethe, we believe in the power of generosity and financial sustainability. Join us in building a community that empowers non-profit organizations to thrive while offering individuals the opportunity to earn while making a difference. Together, let's create a brighter future.",
+          "cta": {
+            "title": "Make an Impact Today!",
+            "link": "/subscribe"
+          },
+          "logo": {
+            "src": "/logo.png",
+            "alt": "Inaethe logo"
+          },
+          "image": "/images/inaethe/home-page-header.jpg"
+        },
+        {
+          "type": "article",
+          "image": "/images/inaethe/garbage.jpg",
+          "elements": [
+            {
+              "type": "image-block",
+              "image": "/images/inaethe/garbage.jpg"
+            },
+            {
+              "type": "multi-text-blocks",
+              "cta": {
+                "title": "Subscribe",
+                "link": "/subscribe"
+              },
+              "content": [
+                {
+                  "title": "Our Mission",
+                  "text": "At Inaethe, our mission is twofold: we empower non-profit organizations to generate crucial income for their causes, while simultaneously providing individuals with the opportunity to earn while helping these causes thrive. We believe in the power of mutual benefit, creating a platform where generosity and financial sustainability coexist."
+                },
+                {
+                  "title": "",
+                  "text": "Join us in building a community that transforms good intentions into tangible impacts, ensuring a brighter future for both individuals and the non-profits they support. Inaethe make a difference today!"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about",
+      "title": "About",
+      "type": "color-page",
+      "colorCode": "gray-900",
+      "components": [
+        {
+          "type": "FlexwindHero3",
+          "title": "Who We Are & Why We Exist",
+          "description": "Inaethe was born from a deep desire to tackle hunger and unemployment in Africa. We unite generosity with opportunity, creating a space where non-profits can thrive and individuals can earn while making a real difference. This is our story—and our mission.",
+          "ctas": [
+            {
+              "text": "Join the Movement",
+              "link": "/register"
+            }
+          ],
+          "hint": "Empowering Causes, Sustaining Change",
+          "img": {
+            "src": "/images/inaethe/donations-square.jpg",
+            "alt": "Community members working together to support a cause"
+          }
+        }
+      ]
+    }
+  ],
+  "defaultPages": [
+    {
+      "id": "subscribe-return-without-first-payment-done",
+      "title": "Subscribe",
+      "components": [
+        {
+          "type": "space-above",
+          "size": "10"
+        },
+        {
+          "type": "center-width-text-block",
+          "title": "Your Information Is Saved:",
+          "text": "Your details have been securely saved to our database, ensuring a seamless experience as you embark on your journey of giving back. Rest assured, your support is in good hands."
+        }
+      ]
+    }
+  ]
+}
