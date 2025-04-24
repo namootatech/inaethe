@@ -128,7 +128,7 @@ exports.handler = async (event) => {
         message: `Configuration ${
           currentFileSha ? 'updated' : 'added'
         } and sub-site deployed for ${orgName}`,
-        fileUrl: result.content.html_url,
+        fileUrl: result?.content?.html_url,
       }),
     };
   } catch (error) {
