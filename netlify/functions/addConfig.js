@@ -1,8 +1,18 @@
-const { exec } = require('child_process');
-const fs = require('fs');
-const path = require('path');
+const { Octokit } = require('@octokit/rest');
+const { createOrUpdateFile, getFileContent } = require('./github-utils');
+require('dotenv').config();
+
+// GitHub configuration
+const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
+const ORG_NAME = 'namootatech'; // Organization name
+const REPO_NAME = 'inaethe';
+const BRANCH = 'main';
+const CONFIG_PATH = 'public/siteConfigs';
 
 exports.handler = async (event) => {
+  console.log('** [ADD CONFIG FUNCTION] Function started');
+
+  // Only allow POST requests
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
@@ -10,187 +20,140 @@ exports.handler = async (event) => {
     };
   }
 
+  // Validate GitHub token
+  if (!GITHUB_TOKEN) {
+    console.error(
+      '** [ADD CONFIG FUNCTION] Missing GITHUB_TOKEN environment variable'
+    );
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        error: 'Server configuration error: Missing GitHub organization token',
+      }),
+    };
+  }
+
   try {
+    // Parse request body
     console.log('** [ADD CONFIG FUNCTION] Parsing request body...');
     const { orgName, config } = JSON.parse(event.body);
-    console.log(orgName, config);
+
+    // Validate required fields
     if (!orgName || !config) {
       console.error(
-        '** [ADD CONFIG FUNCTION] Missing required fields in request body.'
+        '** [ADD CONFIG FUNCTION] Missing required fields in request body'
       );
       return {
         statusCode: 400,
-        body: JSON.stringify({ error: 'Missing required fields' }),
+        body: JSON.stringify({
+          error: 'Missing required fields: orgName and config are required',
+        }),
       };
     }
 
-    const configFileName = `${orgName}.json`;
-    const repoPath = '/tmp/inaethe-repo'; // Temporary clone directory
-    const siteConfigsDirPath = path.join(repoPath, 'public/siteConfigs');
-    const configFilePath = path.join(siteConfigsDirPath, configFileName);
+    // Initialize GitHub client with organization access
+    const octokit = new Octokit({
+      auth: GITHUB_TOKEN,
+      baseUrl: 'https://api.github.com',
+    });
 
-    // Step 1: Clone the repository
-    await executeCommand(`rm -rf ${repoPath}`);
-    await executeCommand(`ls`);
-    console.log('** [ADD CONFIG FUNCTION] Cloning repository...');
-    await executeCommand(
-      `pwd &&
-      git clone https://github.com/namootatech/inaethe.git ${repoPath}
-      cd ${repoPath} &&
-      git checkout main &&
-       git status
-       git pull origin main`
-    );
-    console.log(
-      '** [ADD CONFIG FUNCTION] Repository cloned successfully to:',
-      repoPath
-    );
-
-    // Step 2: Ensure the public/siteConfigs directory exists
-    console.log(
-      '** [ADD CONFIG FUNCTION] Ensuring siteConfigs directory exists...'
-    );
-    if (!fs.existsSync(siteConfigsDirPath)) {
-      fs.mkdirSync(siteConfigsDirPath, { recursive: true });
-      console.log(
-        '** [ADD CONFIG FUNCTION] Created missing directory:',
-        siteConfigsDirPath
-      );
-    }
-
-    // Step 3: Write the config file
-    console.log(
-      `** [ADD CONFIG FUNCTION] Writing config file: ${configFileName}`
-    );
-    fs.writeFileSync(configFilePath, JSON.stringify(config, null, 2));
-    console.log(
-      '** [ADD CONFIG FUNCTION] Config file written successfully at:',
-      configFilePath
-    );
-
-    // Step 4: Commit and push the new config file
-    console.log('** [ADD CONFIG FUNCTION] Committing and pushing changes...');
-    await executeCommand(
-      `
-      cd ${repoPath} &&
-      git add public/siteConfigs/${configFileName}
-     `
-    );
-    // Step 4: Commit and push the new config file
-    console.log('** [ADD CONFIG FUNCTION] Preparing to commit changes...');
+    // Verify organization access
     try {
-      const stagedFiles = await executeCommand(
-        `
-    cd ${repoPath} &&
-    git diff --cached --name-only
-    `
-      );
-
-      if (!stagedFiles.includes(`public/siteConfigs/${configFileName}`)) {
-        console.warn(
-          `** [ADD CONFIG FUNCTION] File ${configFileName} is not staged. Skipping commit.`
-        );
-      } else {
-        await executeCommand(
-          `
-      cd ${repoPath} &&
-      git commit -m "::auto-deploy:: ${orgName}"
-      `
-        );
-        console.log('** [ADD CONFIG FUNCTION] Changes committed successfully.');
-      }
+      await octokit.orgs.get({ org: ORG_NAME });
     } catch (error) {
-      console.error(
-        `** [ADD CONFIG FUNCTION] Failed to commit changes for ${orgName}.\nReason:`,
-        error.message
-      );
-      throw error; // Re-throw to propagate error handling
+      if (error.status === 401 || error.status === 403) {
+        return {
+          statusCode: 401,
+          body: JSON.stringify({
+            error: 'Invalid or insufficient organization token permissions',
+          }),
+        };
+      }
+      throw error;
     }
 
-    // Step 4: Commit and push the new config file
-    console.log('** [ADD CONFIG FUNCTION] Committing and pushing changes...');
+    const configFileName = `${orgName}.json`;
+    const filePath = `${CONFIG_PATH}/${configFileName}`;
+
+    console.log(
+      `** [ADD CONFIG FUNCTION] Preparing to update file: ${filePath}`
+    );
+
+    // Get the current file (if it exists) to get its SHA
+    let currentFileSha;
     try {
-      // Try pushing changes
-      await executeCommand(`
-    cd ${repoPath} &&
-    git push origin main
-  `);
-      console.log(
-        '** [ADD CONFIG FUNCTION] Changes committed and pushed successfully.'
+      const fileData = await getFileContent(
+        octokit,
+        ORG_NAME,
+        REPO_NAME,
+        filePath,
+        BRANCH
       );
-    } catch (pushError) {
-      if (pushError.includes('non-fast-forward')) {
-        console.warn(
-          '** [ADD CONFIG FUNCTION] Push failed: Non-fast-forward. Attempting to pull and re-apply changes...'
-        );
-
-        // Pull latest changes and merge them
-        await executeCommand(`
-      cd ${repoPath} &&
-      git pull origin main --rebase
-    `);
-
-        // Push the changes again after rebasing
-        await executeCommand(`
-      cd ${repoPath} &&
-      git push origin main
-    `);
+      currentFileSha = fileData.sha;
+      console.log(
+        `** [ADD CONFIG FUNCTION] Existing file found with SHA: ${currentFileSha}`
+      );
+    } catch (error) {
+      if (error.status === 404) {
         console.log(
-          '** [ADD CONFIG FUNCTION] Changes pushed successfully after resolving conflicts.'
+          `** [ADD CONFIG FUNCTION] File doesn't exist yet, will create new file`
         );
       } else {
-        console.error(
-          '** [ADD CONFIG FUNCTION] Push failed for an unknown reason:',
-          pushError
-        );
-        throw pushError; // Rethrow if it’s not a fast-forward issue
+        throw error;
       }
     }
 
+    // Create or update the file in the repository
+    const configContent = JSON.stringify(config, null, 2);
+    const result = await createOrUpdateFile(
+      octokit,
+      ORG_NAME,
+      REPO_NAME,
+      filePath,
+      configContent,
+      `::auto-deploy:: ${orgName}`,
+      BRANCH,
+      currentFileSha
+    );
+
     console.log(
-      '** [ADD CONFIG FUNCTION] Changes committed and pushed successfully.'
+      `** [ADD CONFIG FUNCTION] File successfully ${
+        currentFileSha ? 'updated' : 'created'
+      }`
     );
 
     return {
       statusCode: 200,
       body: JSON.stringify({
-        message: `Configuration added and sub-site deployed for ${orgName}.`,
+        message: `Configuration ${
+          currentFileSha ? 'updated' : 'added'
+        } and sub-site deployed for ${orgName}`,
+        fileUrl: result.content.html_url,
       }),
     };
   } catch (error) {
     console.error('** [ADD CONFIG FUNCTION] Error:', error);
+
+    // Provide more detailed error message based on error type
+    let errorMessage = error.message;
+    if (error.status === 401) {
+      errorMessage =
+        'GitHub authentication failed. Check your organization token permissions.';
+    } else if (error.status === 403) {
+      errorMessage =
+        'GitHub API rate limit exceeded or insufficient organization permissions.';
+    } else if (error.status === 404) {
+      errorMessage = 'Repository or file path not found in the organization.';
+    } else if (error.status === 409) {
+      errorMessage = 'Conflict occurred. The branch might have been updated.';
+    }
+
     return {
-      statusCode: 500,
-      body: JSON.stringify({ error: error.message }),
+      statusCode: error.status || 500,
+      body: JSON.stringify({
+        error: errorMessage,
+        details: error.response?.data || 'No additional details available',
+      }),
     };
   }
-};
-
-// Helper function to execute shell commands
-const executeCommand = (cmd) => {
-  console.log(`** [ADD CONFIG FUNCTION] Executing command: ${cmd}`);
-  return new Promise((resolve, reject) => {
-    exec(cmd, (error, stdout, stderr) => {
-      if (error) {
-        console.error(
-          `** [ADD CONFIG FUNCTION] Command failed: ${cmd}\n` +
-            `Exit Code: ${error.code || 'N/A'}\n` +
-            `Error Output: ${stderr.trim() || 'N/A'}\n` +
-            `Standard Output: ${stdout.trim() || 'N/A'}`
-        );
-        reject(
-          new Error(
-            `Command "${cmd}" failed with code ${error.code || 'N/A'}.\n` +
-              `Error Output: ${stderr.trim() || 'N/A'}`
-          )
-        );
-      } else {
-        console.log(
-          `** [ADD CONFIG FUNCTION] Command succeeded: ${cmd}\nOutput:`,
-          stdout.trim()
-        );
-        resolve(stdout.trim());
-      }
-    });
-  });
 };
