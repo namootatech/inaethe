@@ -82,9 +82,11 @@ export default function Dashboard() {
           </p>
         </div>
         <div className='mt-4 md:mt-0'>
-          <Button className='bg-primary text-primary-foreground hover:bg-primary/90'>
-            Create Website
-          </Button>
+          <Link href='/npo-dashboard/site-config' className='w-full'>
+            <Button className='bg-pink-500 text-white hover:bg-pink-800'>
+              Create Website
+            </Button>
+          </Link>
         </div>
       </div>
 
