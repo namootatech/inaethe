@@ -13,12 +13,12 @@ const Layout = ({ children }) => {
         <>
           <Head>
             <title>{config?.partnerName}</title>
-            <link rel='icon' href={config?.favicon.ico} sizes='any' />
-            <link rel='icon' href={config?.favicon.appleTouch} sizes='any' />
-            <link rel='icon' href={config?.favicon.size32} sizes='any' />
-            <link rel='icon' href={config?.favicon.size16} sizes='any' />
-            <link rel='icon' href={config?.favicon.size512} sizes='any' />
-            <link rel='icon' href={config?.favicon.size192} sizes='any' />
+            <link rel='icon' href={config?.favicon?.ico} sizes='any' />
+            <link rel='icon' href={config?.favicon?.appleTouch} sizes='any' />
+            <link rel='icon' href={config?.favicon?.size32} sizes='any' />
+            <link rel='icon' href={config?.favicon?.size16} sizes='any' />
+            <link rel='icon' href={config?.favicon?.size512} sizes='any' />
+            <link rel='icon' href={config?.favicon?.size192} sizes='any' />
           </Head>
           <Navigation />
           <main className='w-screen md:w-full mt-20'>{children}</main>
