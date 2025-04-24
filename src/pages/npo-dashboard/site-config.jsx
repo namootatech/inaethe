@@ -67,6 +67,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { ComponentEditor } from '@/components/component-editor';
 import { ColorPicker } from '@/components/color-picker';
 import { ImageUploader } from '@/components/image-uploader';
+import { useApi } from '@/context/ApiContext';
 
 const uploadToCloudinary = async (file) => {
   try {
@@ -332,28 +333,128 @@ const shadeOptions = [
   { value: '900', label: 'Very Dark', description: 'Intense' },
 ];
 
-// Component type options
+// Component type options with categories
 const componentTypes = [
-  { value: 'hero', label: 'Hero Section' },
-  { value: 'article', label: 'Article' },
-  { value: 'spa-block', label: 'Features Block' },
-  { value: 'FlexwindHero3', label: 'Flexwind Hero 3' },
-  { value: 'FlexwindHero4', label: 'Flexwind Hero 4' },
-  { value: 'FlexwindFeatures1', label: 'Flexwind Features' },
-  { value: 'PageDoneHowItWorks1', label: 'How It Works' },
-  { value: 'centered-page-header', label: 'Centered Page Header' },
+  // Content Blocks
+  { value: 'article', label: 'Article', category: 'Content Blocks' },
+  {
+    value: 'center-width-text-block',
+    label: 'Centered Text Block',
+    category: 'Content Blocks',
+  },
+
+  // Hero Sections
+  { value: 'hero', label: 'Hero Section', category: 'Hero Sections' },
+  {
+    value: 'FlexwindHero1',
+    label: 'Flexwind Hero 1',
+    category: 'Hero Sections',
+  },
+  {
+    value: 'FlexwindHero2',
+    label: 'Flexwind Hero 2',
+    category: 'Hero Sections',
+  },
+  {
+    value: 'FlexwindHero3',
+    label: 'Flexwind Hero 3',
+    category: 'Hero Sections',
+  },
+  {
+    value: 'FlexwindHero4',
+    label: 'Flexwind Hero 4',
+    category: 'Hero Sections',
+  },
+  {
+    value: 'FlexwindHero5',
+    label: 'Flexwind Hero 5',
+    category: 'Hero Sections',
+  },
+  {
+    value: 'FlexwindHero6',
+    label: 'Flexwind Hero 6',
+    category: 'Hero Sections',
+  },
+  {
+    value: 'FlexwindHero7',
+    label: 'Flexwind Hero 7',
+    category: 'Hero Sections',
+  },
+
+  // Feature Blocks
+  { value: 'spa-block', label: 'Features Block', category: 'Feature Blocks' },
+  {
+    value: 'FlexwindFeatures1',
+    label: 'Flexwind Features',
+    category: 'Feature Blocks',
+  },
+
+  // Cards
+  { value: 'card', label: 'Card', category: 'Cards' },
+
+  // Interactive Elements
+  { value: 'accordion', label: 'Accordion', category: 'Interactive Elements' },
+
+  // Notifications
+  { value: 'alert-banner', label: 'Alert Banner', category: 'Notifications' },
+
+  // Layout Components
+  {
+    value: 'centered-page-header',
+    label: 'Centered Page Header',
+    category: 'Layout Components',
+  },
   {
     value: 'centered-page-components-container',
     label: 'Centered Components Container',
+    category: 'Layout Components',
   },
-  { value: 'center-width-text-block', label: 'Centered Text Block' },
-  { value: 'space-above', label: 'Space Above' },
-  { value: 'space-below', label: 'Space Below' },
-  { value: 'payfast-button-center-width', label: 'PayFast Button' },
-  { value: 'login-button-center-width', label: 'Login Button' },
-  { value: 'checkbox-center', label: 'Centered Checkbox' },
-  { value: 'cross-center', label: 'Centered Cross' },
+  { value: 'space-above', label: 'Space Above', category: 'Layout Components' },
+  { value: 'space-below', label: 'Space Below', category: 'Layout Components' },
+
+  // Action Components
+  {
+    value: 'payfast-button-center-width',
+    label: 'PayFast Button',
+    category: 'Action Components',
+  },
+  {
+    value: 'login-button-center-width',
+    label: 'Login Button',
+    category: 'Action Components',
+  },
+  {
+    value: 'checkbox-center',
+    label: 'Centered Checkbox',
+    category: 'Action Components',
+  },
+  {
+    value: 'cross-center',
+    label: 'Centered Cross',
+    category: 'Action Components',
+  },
+
+  // How It Works
+  {
+    value: 'PageDoneHowItWorks1',
+    label: 'How It Works',
+    category: 'How It Works',
+  },
 ];
+
+// Function to group component types by category
+const getComponentTypesByCategory = () => {
+  const categories = {};
+
+  componentTypes.forEach((type) => {
+    if (!categories[type.category]) {
+      categories[type.category] = [];
+    }
+    categories[type.category].push(type);
+  });
+
+  return categories;
+};
 
 // Page type options
 const pageTypes = [
@@ -382,6 +483,7 @@ export default function SiteConfigPage() {
     colorCode: '',
   });
 
+  const api = useApi();
   // Initialize the form with default values
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -395,12 +497,46 @@ export default function SiteConfigPage() {
     try {
       // In a real application, you would send this data to your API
       console.log('Form data:', JSON.stringify(data, null, 2));
+      const confg = {
+        ...data,
+        colors: {
+          ...data.colors,
+          primaryColorCode:
+            data.colors.primaryColor + '-' + data.colors.primaryColorCode,
+          secondaryColorCode:
+            data.colors.secondaryColor + '-' + data.colors.primaryColorCode,
+          accentColorCode:
+            data.colors.accentColor + '-' + data.colors.primaryColorCode,
+        },
+      };
+
+      api
+        .addSiteConfig({
+          orgName: data.organisationId,
+          config: confg,
+          customeDomain: `${data.organisationId}.inaethe.co.za`,
+        })
+        .then((response) => {
+          console.log('Response:', response);
+          toast({
+            title: 'Configuration saved',
+            description: 'Your site configuration has been successfully saved.',
+          });
+          router.push(
+            `/npo-dashboard/site?domain=${data.organisationId}.inaethe.co.za&orgId=${data.organisationId}`
+          );
+        })
+        .catch((e) => {
+          console.log('Error:', e);
+          toast({
+            title: 'Error',
+            description:
+              'There was a problem saving your configuration. Please try again.',
+            variant: 'destructive',
+          });
+        });
 
       // Show success message
-      toast({
-        title: 'Configuration saved',
-        description: 'Your site configuration has been successfully saved.',
-      });
 
       // Update preview
       setPreviewConfig(data);
@@ -753,6 +889,9 @@ export default function SiteConfigPage() {
     const componentType = componentTypes.find((ct) => ct.value === type);
     return componentType ? componentType.label : type;
   };
+
+  // Get component categories
+  const componentCategories = getComponentTypesByCategory();
 
   return (
     <div className='container mx-auto py-10'>

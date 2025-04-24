@@ -1,20 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Check, ChevronDown } from 'lucide-react';
+import { useState } from 'react';
+import { Check } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from '@/components/ui/command';
 import {
   Select,
   SelectContent,
@@ -22,20 +16,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-
-// Shade options
-const shadeOptions = [
-  { value: '50', label: 'Very Light', description: 'Almost white' },
-  { value: '100', label: 'Extra Light', description: 'Very pale' },
-  { value: '200', label: 'Light', description: 'Pale' },
-  { value: '300', label: 'Medium Light', description: 'Soft' },
-  { value: '400', label: 'Medium', description: 'Moderate' },
-  { value: '500', label: 'Standard', description: 'Default intensity' },
-  { value: '600', label: 'Medium Dark', description: 'Rich' },
-  { value: '700', label: 'Dark', description: 'Bold' },
-  { value: '800', label: 'Extra Dark', description: 'Deep' },
-  { value: '900', label: 'Very Dark', description: 'Intense' },
-];
 
 export function ColorPicker({
   value,
@@ -51,111 +31,133 @@ export function ColorPicker({
     value?.split('-')[1] || '500'
   );
 
-  useEffect(() => {
-    // Parse the value when it changes externally
-    if (value) {
-      const parts = value.split('-');
-      if (parts.length >= 1) {
-        setSelectedColor(parts[0]);
-      }
-      if (parts.length >= 2) {
-        setSelectedShade(parts[1]);
-      }
-    }
+  // Parse the color value (e.g., "pink-500" -> { color: "pink", shade: "500" })
+  const parseValue = (val) => {
+    if (!val) return { color: '', shade: '500' };
+    const parts = val.split('-');
+    return {
+      color: parts[0],
+      shade: parts.length > 1 ? parts[1] : '500',
+    };
+  };
+
+  // When the component mounts or value changes, update the internal state
+  useState(() => {
+    const { color, shade } = parseValue(value);
+    setSelectedColor(color);
+    setSelectedShade(shade);
   }, [value]);
 
+  // Handle color selection
   const handleColorSelect = (color) => {
     setSelectedColor(color);
     if (showIntensity) {
       onChange(`${color}-${selectedShade}`);
     } else {
       onChange(color);
+      setOpen(false);
     }
-    setOpen(false);
   };
 
+  // Handle shade selection
   const handleShadeSelect = (shade) => {
     setSelectedShade(shade);
     onChange(`${selectedColor}-${shade}`);
+    setOpen(false);
   };
 
-  // Find the selected color option
-  const selectedOption = options.find(
+  // Find the current color option
+  const currentColorOption = options.find(
     (option) => option.value === selectedColor
   );
 
-  return (
-    <div className='flex flex-col space-y-2'>
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <button
-            className='flex h-10 w-full items-center justify-between rounded-md border border-pink-200 bg-white px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50'
-            role='combobox'
-            aria-expanded={open}
-          >
-            <div className='flex items-center gap-2'>
-              {selectedColor && (
-                <div
-                  className='h-4 w-4 rounded-full'
-                  style={{
-                    backgroundColor:
-                      selectedOption?.color || `var(--${selectedColor}-500)`,
-                  }}
-                />
-              )}
-              <span>{selectedOption?.label || 'Select a color'}</span>
-            </div>
-            <ChevronDown className='h-4 w-4 opacity-50' />
-          </button>
-        </PopoverTrigger>
-        <PopoverContent className='w-[200px] p-0 bg-white'>
-          <Command>
-            <CommandInput placeholder='Search colors...' />
-            <CommandList>
-              <CommandEmpty>No colors found.</CommandEmpty>
-              <CommandGroup>
-                {options.map((option) => (
-                  <CommandItem
-                    key={option.value}
-                    value={option.value}
-                    onSelect={() => handleColorSelect(option.value)}
-                    className='flex items-center gap-2 cursor-pointer'
-                  >
-                    <div
-                      className='h-4 w-4 rounded-full'
-                      style={{ backgroundColor: option.color }}
-                    />
-                    <span>{option.label}</span>
-                    {selectedColor === option.value && (
-                      <Check className='h-4 w-4 ml-auto' />
-                    )}
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-            </CommandList>
-          </Command>
-        </PopoverContent>
-      </Popover>
+  // Shade options
+  const shadeOptions = [
+    { value: '50', label: 'Very Light' },
+    { value: '100', label: 'Extra Light' },
+    { value: '200', label: 'Light' },
+    { value: '300', label: 'Medium Light' },
+    { value: '400', label: 'Medium' },
+    { value: '500', label: 'Standard' },
+    { value: '600', label: 'Medium Dark' },
+    { value: '700', label: 'Dark' },
+    { value: '800', label: 'Extra Dark' },
+    { value: '900', label: 'Very Dark' },
+  ];
 
-      {showIntensity && selectedColor && (
-        <Select value={selectedShade} onValueChange={handleShadeSelect}>
-          <SelectTrigger className='border-pink-200'>
-            <SelectValue placeholder='Select intensity' />
-          </SelectTrigger>
-          <SelectContent className='bg-white'>
-            {shadeOptions.map((option) => (
-              <SelectItem key={option.value} value={option.value}>
-                <div className='flex flex-col'>
-                  <span>{option.label}</span>
-                  <span className='text-xs text-muted-foreground'>
-                    {option.description}
-                  </span>
-                </div>
-              </SelectItem>
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          variant='outline'
+          className={cn(
+            'w-full justify-start border-pink-200 hover:bg-pink-50 text-left font-normal',
+            !value && 'text-muted-foreground'
+          )}
+        >
+          {currentColorOption ? (
+            <div className='flex items-center gap-2'>
+              <div
+                className='h-4 w-4 rounded-full border'
+                style={{ backgroundColor: currentColorOption.color }}
+              />
+              <span>{currentColorOption.label}</span>
+              {showIntensity && selectedShade && (
+                <span className='text-muted-foreground'>
+                  (
+                  {shadeOptions.find((s) => s.value === selectedShade)?.label ||
+                    selectedShade}
+                  )
+                </span>
+              )}
+            </div>
+          ) : (
+            'Select color'
+          )}
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className='w-64 p-3'>
+        <div className='space-y-4'>
+          <div className='grid grid-cols-5 gap-2'>
+            {options.map((option) => (
+              <Button
+                key={option.value}
+                variant='outline'
+                className={cn(
+                  'h-8 w-8 p-0 border',
+                  selectedColor === option.value &&
+                    'ring-2 ring-pink-500 ring-offset-2'
+                )}
+                style={{ backgroundColor: option.color }}
+                onClick={() => handleColorSelect(option.value)}
+                title={option.label}
+              >
+                {selectedColor === option.value && (
+                  <Check className='h-4 w-4 text-white drop-shadow-[0_0_2px_rgba(0,0,0,0.5)]' />
+                )}
+              </Button>
             ))}
-          </SelectContent>
-        </Select>
-      )}
-    </div>
+          </div>
+
+          {showIntensity && selectedColor && (
+            <div className='space-y-2'>
+              <div className='text-xs font-medium'>Intensity</div>
+              <Select value={selectedShade} onValueChange={handleShadeSelect}>
+                <SelectTrigger className='border-pink-200'>
+                  <SelectValue placeholder='Select intensity' />
+                </SelectTrigger>
+                <SelectContent className='bg-white'>
+                  {shadeOptions.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          )}
+        </div>
+      </PopoverContent>
+    </Popover>
   );
 }
