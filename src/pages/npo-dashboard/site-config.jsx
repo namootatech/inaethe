@@ -2226,7 +2226,10 @@ export default function SiteConfigPage() {
                 <Button
                   type='submit'
                   disabled={isSubmitting}
-                  onClick={form.handleSubmit(onSubmit)}
+                  onClick={() => {
+                    console.log('performing save function');
+                    return form.handleSubmit(onSubmit);
+                  }}
                   className='bg-pink-500 hover:bg-pink-600 text-white'
                 >
                   {isSubmitting ? (
