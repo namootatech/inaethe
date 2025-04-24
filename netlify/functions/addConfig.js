@@ -1,112 +1,15 @@
-import { Octokit as OctokitCore } from '@octokit/core';
-import { restEndpointMethods } from '@octokit/plugin-rest-endpoint-methods';
+import { Octokit } from '@octokit/rest';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-// Create Octokit constructor with plugins
-const Octokit = OctokitCore.plugin(restEndpointMethods);
-
-// GitHub configuration
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-const ORG_NAME = 'namootatech'; // Organization name
+const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
+const ORG_NAME = 'namootatech';
 const REPO_NAME = 'inaethe';
 const BRANCH = 'main';
 const CONFIG_PATH = 'public/siteConfigs';
 
-/**
- * Get content of a file from GitHub repository
- *
- * @param {Object} octokit - Initialized Octokit client
- * @param {string} owner - Repository owner
- * @param {string} repo - Repository name
- * @param {string} path - File path in the repository
- * @param {string} branch - Branch name
- * @returns {Promise<Object>} - File content and metadata
- */
-async function getFileContent(octokit, owner, repo, path, branch = 'main') {
-  try {
-    const response = await octokit.rest.repos.getContent({
-      owner,
-      repo,
-      path,
-      ref: branch,
-    });
-
-    return {
-      content: Buffer.from(response.data.content, 'base64').toString(),
-      sha: response.data.sha,
-    };
-  } catch (error) {
-    // Rethrow with status for easier error handling
-    if (error.status) {
-      throw error;
-    }
-    throw new Error(`Failed to get file content: ${error.message}`);
-  }
-}
-
-/**
- * Create or update a file in GitHub repository
- *
- * @param {Object} octokit - Initialized Octokit client
- * @param {string} owner - Repository owner
- * @param {string} repo - Repository name
- * @param {string} path - File path in the repository
- * @param {string} content - File content (plain text)
- * @param {string} message - Commit message
- * @param {string} branch - Branch name
- * @param {string} [sha] - File SHA (required for updating existing files)
- * @returns {Promise<Object>} - GitHub API response
- */
-async function createOrUpdateFile(
-  octokit,
-  owner,
-  repo,
-  path,
-  content,
-  message,
-  branch = 'main',
-  sha = null
-) {
-  try {
-    const params = {
-      owner,
-      repo,
-      path,
-      message,
-      content: Buffer.from(content).toString('base64'),
-      branch,
-    };
-
-    // If SHA is provided, it's an update operation
-    if (sha) {
-      params.sha = sha;
-    }
-
-    return await octokit.rest.repos.createOrUpdateFileContents(params);
-  } catch (error) {
-    console.error('GitHub API error:', error.response?.data || error.message);
-
-    // Handle specific errors
-    if (error.status === 409) {
-      throw new Error(
-        'Conflict: The branch has been updated since you last fetched it.'
-      );
-    }
-
-    // Rethrow with status for easier error handling
-    if (error.status) {
-      throw error;
-    }
-    throw new Error(`Failed to create/update file: ${error.message}`);
-  }
-}
-
 export const handler = async (event) => {
-  console.log('** [ADD CONFIG FUNCTION] Function started');
-
-  // Only allow POST requests
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
@@ -114,139 +17,80 @@ export const handler = async (event) => {
     };
   }
 
-  // Validate GitHub token
   if (!GITHUB_TOKEN) {
-    console.error(
-      '** [ADD CONFIG FUNCTION] Missing GITHUB_TOKEN environment variable'
-    );
     return {
       statusCode: 500,
       body: JSON.stringify({
-        error: 'Server configuration error: Missing GitHub organization token',
+        error: 'Missing GITHUB_TOKEN environment variable',
       }),
     };
   }
 
   try {
-    // Parse request body
-    console.log('** [ADD CONFIG FUNCTION] Parsing request body...');
     const { orgName, config } = JSON.parse(event.body);
 
-    // Validate required fields
     if (!orgName || !config) {
-      console.error(
-        '** [ADD CONFIG FUNCTION] Missing required fields in request body'
-      );
       return {
         statusCode: 400,
         body: JSON.stringify({
-          error: 'Missing required fields: orgName and config are required',
+          error: 'Missing required fields: orgName and config',
         }),
       };
     }
 
-    // Initialize GitHub client with organization access
-    const octokit = new Octokit({
-      auth: GITHUB_TOKEN,
-    });
-
-    // Verify organization access
-    try {
-      await octokit.rest.orgs.get({ org: ORG_NAME });
-    } catch (error) {
-      if (error.status === 401 || error.status === 403) {
-        return {
-          statusCode: 401,
-          body: JSON.stringify({
-            error: 'Invalid or insufficient organization token permissions',
-          }),
-        };
-      }
-      throw error;
-    }
-
+    const octokit = new Octokit({ auth: GITHUB_TOKEN });
     const configFileName = `${orgName}.json`;
     const filePath = `${CONFIG_PATH}/${configFileName}`;
 
-    console.log(
-      `** [ADD CONFIG FUNCTION] Preparing to update file: ${filePath}`
-    );
-
-    // Get the current file (if it exists) to get its SHA
-    let currentFileSha;
+    // Try to get existing file to get its SHA
+    let existingFile;
     try {
-      const fileData = await getFileContent(
-        octokit,
-        ORG_NAME,
-        REPO_NAME,
-        filePath,
-        BRANCH
-      );
-      currentFileSha = fileData.sha;
-      console.log(
-        `** [ADD CONFIG FUNCTION] Existing file found with SHA: ${currentFileSha}`
-      );
+      const { data } = await octokit.repos.getContent({
+        owner: ORG_NAME,
+        repo: REPO_NAME,
+        path: filePath,
+        ref: BRANCH,
+      });
+      existingFile = data;
     } catch (error) {
-      if (error.status === 404) {
-        console.log(
-          `** [ADD CONFIG FUNCTION] File doesn't exist yet, will create new file`
-        );
-      } else {
+      if (error.status !== 404) {
         throw error;
       }
     }
 
-    // Create or update the file in the repository
-    const configContent = JSON.stringify(config, null, 2);
-    const result = await createOrUpdateFile(
-      octokit,
-      ORG_NAME,
-      REPO_NAME,
-      filePath,
-      configContent,
-      `::auto-deploy:: ${orgName}`,
-      BRANCH,
-      currentFileSha
-    );
-
-    console.log(
-      `** [ADD CONFIG FUNCTION] File successfully ${
-        currentFileSha ? 'updated' : 'created'
-      }`
-    );
+    // Create or update file
+    const response = await octokit.repos.createOrUpdateFileContents({
+      owner: ORG_NAME,
+      repo: REPO_NAME,
+      path: filePath,
+      message: `::auto-deploy:: ${orgName}`,
+      content: Buffer.from(JSON.stringify(config, null, 2)).toString('base64'),
+      branch: BRANCH,
+      ...(existingFile && { sha: existingFile.sha }),
+    });
 
     return {
       statusCode: 200,
       body: JSON.stringify({
         message: `Configuration ${
-          currentFileSha ? 'updated' : 'added'
-        } and sub-site deployed for ${orgName}`,
-        fileUrl: result.content.html_url,
+          existingFile ? 'updated' : 'added'
+        } successfully`,
+        file: response.data.content.html_url,
       }),
     };
   } catch (error) {
-    console.error('** [ADD CONFIG FUNCTION] Error:', error);
+    console.error('Error:', error);
 
-    // Provide more detailed error message based on error type
-    let errorMessage = error.message;
-    if (error.status === 401) {
-      errorMessage =
-        'GitHub authentication failed. Check your organization token permissions.';
-    } else if (error.status === 403) {
-      errorMessage =
-        'GitHub API rate limit exceeded or insufficient organization permissions.';
-    } else if (error.status === 404) {
-      errorMessage = 'Repository or file path not found in the organization.';
-    } else if (error.status === 409) {
-      errorMessage = 'Conflict occurred. The branch might have been updated.';
-    }
+    const errorMessage =
+      error.status === 403
+        ? 'Invalid token or insufficient permissions'
+        : error.status === 404
+        ? 'Repository not found'
+        : error.message;
 
     return {
       statusCode: error.status || 500,
-      body: JSON.stringify({
-        error: errorMessage,
-        details: error.response?.data || 'No additional details available',
-      }),
+      body: JSON.stringify({ error: errorMessage }),
     };
   }
 };
