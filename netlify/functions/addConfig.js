@@ -1,11 +1,18 @@
-import { Octokit } from '@octokit/rest';
+import { Octokit as OctokitCore } from '@octokit/core';
+import { restEndpointMethods } from '@octokit/plugin-rest-endpoint-methods';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-/**
- * Utility functions for interacting with GitHub API
- */
+// Create Octokit constructor with plugins
+const Octokit = OctokitCore.plugin(restEndpointMethods);
+
+// GitHub configuration
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const ORG_NAME = 'namootatech'; // Organization name
+const REPO_NAME = 'inaethe';
+const BRANCH = 'main';
+const CONFIG_PATH = 'public/siteConfigs';
 
 /**
  * Get content of a file from GitHub repository
@@ -19,7 +26,7 @@ dotenv.config();
  */
 async function getFileContent(octokit, owner, repo, path, branch = 'main') {
   try {
-    const response = await octokit.repos.getContent({
+    const response = await octokit.rest.repos.getContent({
       owner,
       repo,
       path,
@@ -77,7 +84,7 @@ async function createOrUpdateFile(
       params.sha = sha;
     }
 
-    return await octokit.repos.createOrUpdateFileContents(params);
+    return await octokit.rest.repos.createOrUpdateFileContents(params);
   } catch (error) {
     console.error('GitHub API error:', error.response?.data || error.message);
 
@@ -96,14 +103,7 @@ async function createOrUpdateFile(
   }
 }
 
-// GitHub configuration
-const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
-const ORG_NAME = 'namootatech'; // Organization name
-const REPO_NAME = 'inaethe';
-const BRANCH = 'main';
-const CONFIG_PATH = 'public/siteConfigs';
-
-exports.handler = async (event) => {
+export const handler = async (event) => {
   console.log('** [ADD CONFIG FUNCTION] Function started');
 
   // Only allow POST requests
@@ -148,12 +148,11 @@ exports.handler = async (event) => {
     // Initialize GitHub client with organization access
     const octokit = new Octokit({
       auth: GITHUB_TOKEN,
-      baseUrl: 'https://api.github.com',
     });
 
     // Verify organization access
     try {
-      await octokit.orgs.get({ org: ORG_NAME });
+      await octokit.rest.orgs.get({ org: ORG_NAME });
     } catch (error) {
       if (error.status === 401 || error.status === 403) {
         return {
@@ -222,7 +221,7 @@ exports.handler = async (event) => {
         message: `Configuration ${
           currentFileSha ? 'updated' : 'added'
         } and sub-site deployed for ${orgName}`,
-        fileUrl: result?.content?.html_url,
+        fileUrl: result.content.html_url,
       }),
     };
   } catch (error) {
