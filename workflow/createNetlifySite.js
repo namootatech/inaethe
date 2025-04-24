@@ -28,6 +28,8 @@ async function createNetlifySite(
 ) {
   const apiUrl = `https://api.netlify.com/api/v1/sites`;
   const secrets = {
+    CI: 'false',
+    NPM_FLAGS: '--legacy-peer-deps',
     NETLIFY_AUTH_TOKEN,
     NEXT_PUBLIC_API_URL,
     NEXT_PUBLIC_PAYFAST_URL,
