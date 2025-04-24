@@ -9,7 +9,7 @@ import * as gtag from '@/lib/gtag';
 import { useRouter } from 'next/router';
 import { ThemeProvider } from 'next-themes';
 import Layout from '@/components/layout';
-import AppLayout from '@/components/app/layout';
+import AppLayout from '@/components/app/mainlayout';
 import { usePathname } from 'next/navigation';
 import { ApiProvider } from '@/context/ApiContext';
 import { Toaster } from 'react-hot-toast';

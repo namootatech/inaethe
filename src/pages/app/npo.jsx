@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Layout from '@/components/app/layout';
+import Layout from '@/components/app/mainlayout';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   Card,
