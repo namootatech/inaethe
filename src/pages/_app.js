@@ -7,6 +7,12 @@ import { hotjar } from 'react-hotjar';
 import { useEffect } from 'react';
 import * as gtag from '@/lib/gtag';
 import { useRouter } from 'next/router';
+import { ThemeProvider } from 'next-themes';
+import Layout from '@/components/layout';
+import AppLayout from '@/components/app/layout';
+import { usePathname } from 'next/navigation';
+import { ApiProvider } from '@/context/ApiContext';
+import { Toaster } from 'react-hot-toast';
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -23,14 +29,25 @@ export default function App({ Component, pageProps }) {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
   }, [router.events]);
+
+  const pathname = usePathname();
+  const RouteLayout = pathname.includes('app') ? AppLayout : Layout;
+
   return (
-    <AuthProvider>
-      <ConfigProvider>
-        <EventHandlersProvider>
-          <ToastContainer />
-          <Component {...pageProps} />
-        </EventHandlersProvider>
-      </ConfigProvider>
-    </AuthProvider>
+    <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+      <ApiProvider>
+        <AuthProvider>
+          <ConfigProvider>
+            <EventHandlersProvider>
+              <RouteLayout>
+                <ToastContainer />
+                <Component {...pageProps} />
+                <Toaster position='top-right' />
+              </RouteLayout>
+            </EventHandlersProvider>
+          </ConfigProvider>
+        </AuthProvider>
+      </ApiProvider>
+    </ThemeProvider>
   );
 }

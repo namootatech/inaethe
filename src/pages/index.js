@@ -9,14 +9,14 @@ function Home({ siteConfig }) {
 
   const page = config?.pages?.find((page) => page.id === 'homepage');
   return (
-    <Layout>
+    <div>
       {page && (
         <RenderPageComponents
           items={page?.components}
           siteConfig={siteConfig}
         />
       )}
-    </Layout>
+    </div>
   );
 }
 

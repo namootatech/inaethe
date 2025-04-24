@@ -156,15 +156,6 @@ const SubscriptionForm = () => {
   console.log('API URL', API_URL);
   return (
     <div className='md:w-9/12 p-8 mx-auto bg-white rounded-lg shadow-md'>
-      <h1 className='text-2xl font-semibold mb-4 text-4xl'>
-        Join Inaethe - Be a Hope Builder!
-      </h1>
-      <p className='mb-4 mt-2 text-2xl'>
-        Subscribe to Inaethe, and join us in our mission to end hunger in
-        Africa. Choose a subscription tier and start making a real difference
-        today.
-      </p>
-
       <form onSubmit={handleSubmit} className='my-12'>
         <div className='mb-4'>
           <label
@@ -177,7 +168,6 @@ const SubscriptionForm = () => {
             id='subscriptionTier'
             name='subscriptionTier'
             className='rounded border p-2 w-full'
-            onChange={handleInputChange}
           >
             <option key='Nourisher' value='Nourisher'>
               Nourisher Level (R50/month)
@@ -287,33 +277,6 @@ const SubscriptionForm = () => {
           {passwordError && <p className='text-red-500'>{passwordError}</p>}
         </div>
 
-        <div className='flex items-start mb-6 my-6'>
-          <div className='flex items-center h-5 mb-4'>
-            <input
-              type='checkbox'
-              id='agreeToTerms'
-              name='agreeToTerms'
-              checked={formData.agreeToTerms}
-              value={formData.agreeToTerms}
-              onChange={toggleTerms}
-              className='w-7 h-7 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800'
-              required
-            />
-          </div>
-          <label
-            htmlFor='terms'
-            className='ml-2 text-xl font-medium text-gray-900 dark:text-gray-300'
-          >
-            I agree with the{' '}
-            <Link
-              href='/terms'
-              className='text-blue-600 hover:underline dark:text-blue-500'
-            >
-              terms and conditions
-            </Link>
-          </label>
-          <br />
-        </div>
         {termsError && <p className='text-red-500'>{termsError}</p>}
         {error && <p className='text-red-500'>{error}</p>}
         <br />

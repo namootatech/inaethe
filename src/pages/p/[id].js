@@ -83,11 +83,25 @@ export async function getStaticPaths() {
 
 function Page({ page, id }) {
   return (
-    <Layout>
-      <div className='w-full md:mt-4'>
-        {page && <RenderPageComponents items={page?.components} />}
-      </div>
-    </Layout>
+    <div>
+      {page.type === 'centered-color-page' ? (
+        <div
+          className={`min-h-screen bg-${page.colorCode} flex flex-col justify-center py-12 sm:px-6 lg:px-8`}
+        >
+          {page && <RenderPageComponents items={page?.components} />}
+        </div>
+      ) : page.type === 'color-page' ? (
+        <div
+          className={`min-h-screen bg-${page.colorCode} flex flex-col justify-center`}
+        >
+          {page && <RenderPageComponents items={page?.components} />}
+        </div>
+      ) : (
+        <div className='w-full md:mt-4'>
+          {page && <RenderPageComponents items={page?.components} />}
+        </div>
+      )}
+    </div>
   );
 }
 

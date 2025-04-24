@@ -1,8 +1,0 @@
-{
-  "siteConfig": "modern",
-  "pages": ["about", "contact", "donate"],
-  "branding": {
-    "logo": "logo.png",
-    "colors": ["#ff0000", "#00ff00"]
-  }
-}

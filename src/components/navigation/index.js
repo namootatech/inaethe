@@ -42,14 +42,14 @@ const Navigation = () => {
             <>
               <Link
                 type='button'
-                href='/subscribe'
-                className={config?.nav?.ctaClass}
+                href='/register'
+                className={`text-white bg-${config.colors.primaryColorCode} hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg  text-xl px-4 py-2 text-center mr-3 md:mr-0 dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800`}
               >
                 Get started
               </Link>
               <Link
                 type='button'
-                href='/login'
+                href='/signin'
                 className='text-white bg-black hover:bg-red-800 hidden md:block focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  text-xl px-4 py-2 text-center ml-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
               >
                 Login
@@ -89,13 +89,7 @@ const Navigation = () => {
           id='navbar-sticky'
         >
           {config && (
-            <ul
-              className={
-                config
-                  ? config?.nav.burgerMenu?.class
-                  : 'md:bg-transparent sm:bg-transparent  flex p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 flex-col'
-              }
-            >
+            <ul className='md:bg-transparent sm:bg-transparent  flex p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 flex-col'>
               {config.pages.map((p) => (
                 <li key={p.id}>
                   <Link
@@ -116,7 +110,7 @@ const Navigation = () => {
               </li>
               <Link
                 type='button'
-                href='/login'
+                href='/signin'
                 className='md:hidden block text-white bg-black hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  text-xl px-4 py-2 text-center ml-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
               >
                 Login

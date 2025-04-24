@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from '@/components/SideBar';
-import Header from '@/components/header/dashboard';
+import Header from '@/components/header/app';
 
 import { useRouter } from 'next/router';
 import { useAuth } from '@/context/AuthContext';
