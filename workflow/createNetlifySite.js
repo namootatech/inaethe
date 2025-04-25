@@ -35,7 +35,7 @@ async function createNetlifySite(
     NEXT_PUBLIC_PAYFAST_URL,
     NEXT_PUBLIC_WEBSITE_URL:
       orgName && orgName !== '' && orgName !== 'unknown'
-        ? `https://${orgName}.inaethe.co.za`
+        ? `https://${orgName}-inaethe-za.netlify.app`
         : NEXT_PUBLIC_WEBSITE_URL,
     NEXT_PUBLIC_MERCHANT_ID,
     NEXT_PUBLIC_MERCHANT_KEY,
