@@ -6,16 +6,16 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/Card';
-import { Alert, AlertDescription, AlertTitle } from '@/components//ui/Alert';
+} from '@/components/ui/card';
+import { Alert, AlertDescription, AlertTitle } from '@/components//ui/alert';
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from '@/components//ui/Tabs';
-import { Button } from '@/components/ui/Button';
-import { Progress } from '@/components/ui/Progress';
+} from '@/components//ui/tabs';
+import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
 import { CheckCircle, AlertCircle, Loader2, ExternalLink } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 
