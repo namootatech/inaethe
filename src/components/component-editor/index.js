@@ -1,41 +1,47 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Plus, Trash2, Upload, ImageIcon } from "lucide-react"
-import { ImageUploader } from "@/components/image-uploader"
-import { ColorPicker } from "@/components/color-picker"
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Plus, Trash2, Upload, ImageIcon } from 'lucide-react';
+import { ImageUploader } from '@/components/image-uploader';
+import { ColorPicker } from '@/components/color-picker';
 
 // User-friendly color options
 const colorOptions = [
-  { value: "slate", label: "Dark Gray", color: "#64748b" },
-  { value: "gray", label: "Gray", color: "#6b7280" },
-  { value: "zinc", label: "Zinc Gray", color: "#71717a" },
-  { value: "neutral", label: "Neutral Gray", color: "#737373" },
-  { value: "stone", label: "Stone Gray", color: "#78716c" },
-  { value: "red", label: "Red", color: "#ef4444" },
-  { value: "orange", label: "Orange", color: "#f97316" },
-  { value: "amber", label: "Amber", color: "#f59e0b" },
-  { value: "yellow", label: "Yellow", color: "#eab308" },
-  { value: "lime", label: "Lime Green", color: "#84cc16" },
-  { value: "green", label: "Green", color: "#22c55e" },
-  { value: "emerald", label: "Emerald", color: "#10b981" },
-  { value: "teal", label: "Teal", color: "#14b8a6" },
-  { value: "cyan", label: "Cyan", color: "#06b6d4" },
-  { value: "sky", label: "Sky Blue", color: "#0ea5e9" },
-  { value: "blue", label: "Blue", color: "#3b82f6" },
-  { value: "indigo", label: "Indigo", color: "#6366f1" },
-  { value: "violet", label: "Violet", color: "#8b5cf6" },
-  { value: "purple", label: "Purple", color: "#a855f7" },
-  { value: "fuchsia", label: "Fuchsia", color: "#d946ef" },
-  { value: "pink", label: "Pink", color: "#ec4899" },
-  { value: "rose", label: "Rose", color: "#f43f5e" },
-]
+  { value: 'slate', label: 'Dark Gray', color: '#64748b' },
+  { value: 'gray', label: 'Gray', color: '#6b7280' },
+  { value: 'zinc', label: 'Zinc Gray', color: '#71717a' },
+  { value: 'neutral', label: 'Neutral Gray', color: '#737373' },
+  { value: 'stone', label: 'Stone Gray', color: '#78716c' },
+  { value: 'red', label: 'Red', color: '#ef4444' },
+  { value: 'orange', label: 'Orange', color: '#f97316' },
+  { value: 'amber', label: 'Amber', color: '#f59e0b' },
+  { value: 'yellow', label: 'Yellow', color: '#eab308' },
+  { value: 'lime', label: 'Lime Green', color: '#84cc16' },
+  { value: 'green', label: 'Green', color: '#22c55e' },
+  { value: 'emerald', label: 'Emerald', color: '#10b981' },
+  { value: 'teal', label: 'Teal', color: '#14b8a6' },
+  { value: 'cyan', label: 'Cyan', color: '#06b6d4' },
+  { value: 'sky', label: 'Sky Blue', color: '#0ea5e9' },
+  { value: 'blue', label: 'Blue', color: '#3b82f6' },
+  { value: 'indigo', label: 'Indigo', color: '#6366f1' },
+  { value: 'violet', label: 'Violet', color: '#8b5cf6' },
+  { value: 'purple', label: 'Purple', color: '#a855f7' },
+  { value: 'fuchsia', label: 'Fuchsia', color: '#d946ef' },
+  { value: 'pink', label: 'Pink', color: '#ec4899' },
+  { value: 'rose', label: 'Rose', color: '#f43f5e' },
+];
 
 // Component type options with categories
 const componentTypes = [
@@ -202,11 +208,9 @@ const componentTypes = [
     label: 'Statistics Grid',
     category: 'Stats Sections',
   },
+];
 
-// Now add the editor interfaces for each new component type
-// Add these in the renderComponentFields function, before the default case (around line 2300)
-
-// Event handler options\
+// Event handler options
 const eventHandlerOptions = [
   {
     value: 'save-new-newsletter-subscriber',
@@ -2709,14 +2713,18 @@ export function ComponentEditor({
                 </div>
               )}
               <ImageUploader
-                onUpload={(file) => handleImageUpload(file, ['backgroundImage'])}
+                onUpload={(file) =>
+                  handleImageUpload(file, ['backgroundImage'])
+                }
                 buttonText='Upload Background Image'
                 buttonIcon={<ImageIcon className='h-4 w-4 mr-2' />}
                 buttonClassName='bg-pink-500 hover:bg-pink-600 text-white'
               />
               <Input
                 value={editedComponent.backgroundImage || ''}
-                onChange={(e) => handleChange(['backgroundImage'], e.target.value)}
+                onChange={(e) =>
+                  handleChange(['backgroundImage'], e.target.value)
+                }
                 placeholder='https://images.unsplash.com/photo-1574068468668-a05a11f871da'
                 className='mt-2'
               />
@@ -2783,7 +2791,9 @@ export function ComponentEditor({
                     <label>Content</label>
                     <Textarea
                       value={editedComponent.content || ''}
-                      onChange={(e) => handleChange(['content'], e.target.value)}
+                      onChange={(e) =>
+                        handleChange(['content'], e.target.value)
+                      }
                       placeholder='Content text'
                       rows={4}
                     />
@@ -2833,7 +2843,9 @@ export function ComponentEditor({
               <label>Image Position</label>
               <Select
                 value={editedComponent.imagePosition || 'right'}
-                onValueChange={(value) => handleChange(['imagePosition'], value)}
+                onValueChange={(value) =>
+                  handleChange(['imagePosition'], value)
+                }
               >
                 <SelectTrigger className='border-pink-200'>
                   <SelectValue placeholder='Select position' />
@@ -2846,14 +2858,18 @@ export function ComponentEditor({
             </div>
             <Card>
               <CardHeader>
-                <CardTitle className='text-sm'>Call to Action (Optional)</CardTitle>
+                <CardTitle className='text-sm'>
+                  Call to Action (Optional)
+                </CardTitle>
               </CardHeader>
               <CardContent className='space-y-4'>
                 <div className='space-y-2'>
                   <label>CTA Text</label>
                   <Input
                     value={editedComponent.cta?.text || ''}
-                    onChange={(e) => handleChange(['cta', 'text'], e.target.value)}
+                    onChange={(e) =>
+                      handleChange(['cta', 'text'], e.target.value)
+                    }
                     placeholder='Learn More About Our Work'
                   />
                 </div>
@@ -2861,7 +2877,9 @@ export function ComponentEditor({
                   <label>CTA Link</label>
                   <Input
                     value={editedComponent.cta?.link || ''}
-                    onChange={(e) => handleChange(['cta', 'link'], e.target.value)}
+                    onChange={(e) =>
+                      handleChange(['cta', 'link'], e.target.value)
+                    }
                     placeholder='/about'
                   />
                 </div>
@@ -2898,7 +2916,9 @@ export function ComponentEditor({
                           variant='ghost'
                           className='h-6 w-6 text-destructive'
                           onClick={() => {
-                            const newTestimonials = [...editedComponent.testimonials];
+                            const newTestimonials = [
+                              ...editedComponent.testimonials,
+                            ];
                             newTestimonials.splice(index, 1);
                             handleChange(['testimonials'], newTestimonials);
                           }}
@@ -2913,7 +2933,9 @@ export function ComponentEditor({
                         <Input
                           value={testimonial.name || ''}
                           onChange={(e) => {
-                            const newTestimonials = [...editedComponent.testimonials];
+                            const newTestimonials = [
+                              ...editedComponent.testimonials,
+                            ];
                             newTestimonials[index].name = e.target.value;
                             handleChange(['testimonials'], newTestimonials);
                           }}
@@ -2925,7 +2947,9 @@ export function ComponentEditor({
                         <Input
                           value={testimonial.role || ''}
                           onChange={(e) => {
-                            const newTestimonials = [...editedComponent.testimonials];
+                            const newTestimonials = [
+                              ...editedComponent.testimonials,
+                            ];
                             newTestimonials[index].role = e.target.value;
                             handleChange(['testimonials'], newTestimonials);
                           }}
@@ -2937,7 +2961,9 @@ export function ComponentEditor({
                         <Textarea
                           value={testimonial.quote || ''}
                           onChange={(e) => {
-                            const newTestimonials = [...editedComponent.testimonials];
+                            const newTestimonials = [
+                              ...editedComponent.testimonials,
+                            ];
                             newTestimonials[index].quote = e.target.value;
                             handleChange(['testimonials'], newTestimonials);
                           }}
@@ -2961,7 +2987,9 @@ export function ComponentEditor({
                             setIsUploading(true);
                             uploadToCloudinary(file)
                               .then((url) => {
-                                const newTestimonials = [...editedComponent.testimonials];
+                                const newTestimonials = [
+                                  ...editedComponent.testimonials,
+                                ];
                                 newTestimonials[index].avatar = url;
                                 handleChange(['testimonials'], newTestimonials);
                                 setIsUploading(false);
@@ -2978,7 +3006,9 @@ export function ComponentEditor({
                         <Input
                           value={testimonial.avatar || ''}
                           onChange={(e) => {
-                            const newTestimonials = [...editedComponent.testimonials];
+                            const newTestimonials = [
+                              ...editedComponent.testimonials,
+                            ];
                             newTestimonials[index].avatar = e.target.value;
                             handleChange(['testimonials'], newTestimonials);
                           }}
@@ -2994,7 +3024,9 @@ export function ComponentEditor({
                   variant='outline'
                   className='w-full border-pink-200 hover:bg-pink-50 text-pink-700'
                   onClick={() => {
-                    const newTestimonials = [...(editedComponent.testimonials || [])];
+                    const newTestimonials = [
+                      ...(editedComponent.testimonials || []),
+                    ];
                     newTestimonials.push({
                       name: 'New Testimonial',
                       role: 'Role',
@@ -3233,11 +3265,16 @@ export function ComponentEditor({
                       </div>
                       <Card>
                         <CardHeader>
-                          <CardTitle className='text-xs'>Social Links</CardTitle>
+                          <CardTitle className='text-xs'>
+                            Social Links
+                          </CardTitle>
                         </CardHeader>
                         <CardContent className='space-y-4'>
                           {member.socialLinks?.map((link, linkIndex) => (
-                            <div key={linkIndex} className='space-y-2 border-t pt-2 first:border-t-0 first:pt-0'>
+                            <div
+                              key={linkIndex}
+                              className='space-y-2 border-t pt-2 first:border-t-0 first:pt-0'
+                            >
                               <div className='flex justify-between items-center'>
                                 <label>Social Link {linkIndex + 1}</label>
                                 <Button
@@ -3245,10 +3282,15 @@ export function ComponentEditor({
                                   variant='ghost'
                                   className='h-6 w-6 text-destructive'
                                   onClick={() => {
-                                    const newSocialLinks = [...member.socialLinks];
+                                    const newSocialLinks = [
+                                      ...member.socialLinks,
+                                    ];
                                     newSocialLinks.splice(linkIndex, 1);
-                                    const newMembers = [...editedComponent.members];
-                                    newMembers[index].socialLinks = newSocialLinks;
+                                    const newMembers = [
+                                      ...editedComponent.members,
+                                    ];
+                                    newMembers[index].socialLinks =
+                                      newSocialLinks;
                                     handleChange(['members'], newMembers);
                                   }}
                                 >
@@ -3260,10 +3302,16 @@ export function ComponentEditor({
                                 <Input
                                   value={link.icon || ''}
                                   onChange={(e) => {
-                                    const newSocialLinks = [...member.socialLinks];
-                                    newSocialLinks[linkIndex].icon = e.target.value;
-                                    const newMembers = [...editedComponent.members];
-                                    newMembers[index].socialLinks = newSocialLinks;
+                                    const newSocialLinks = [
+                                      ...member.socialLinks,
+                                    ];
+                                    newSocialLinks[linkIndex].icon =
+                                      e.target.value;
+                                    const newMembers = [
+                                      ...editedComponent.members,
+                                    ];
+                                    newMembers[index].socialLinks =
+                                      newSocialLinks;
                                     handleChange(['members'], newMembers);
                                   }}
                                   placeholder='linkedin'
@@ -3274,10 +3322,16 @@ export function ComponentEditor({
                                 <Input
                                   value={link.url || ''}
                                   onChange={(e) => {
-                                    const newSocialLinks = [...member.socialLinks];
-                                    newSocialLinks[linkIndex].url = e.target.value;
-                                    const newMembers = [...editedComponent.members];
-                                    newMembers[index].socialLinks = newSocialLinks;
+                                    const newSocialLinks = [
+                                      ...member.socialLinks,
+                                    ];
+                                    newSocialLinks[linkIndex].url =
+                                      e.target.value;
+                                    const newMembers = [
+                                      ...editedComponent.members,
+                                    ];
+                                    newMembers[index].socialLinks =
+                                      newSocialLinks;
                                     handleChange(['members'], newMembers);
                                   }}
                                   placeholder='https://linkedin.com/in/username'
@@ -3290,7 +3344,9 @@ export function ComponentEditor({
                             variant='outline'
                             className='w-full border-pink-200 hover:bg-pink-50 text-pink-700'
                             onClick={() => {
-                              const newSocialLinks = [...(member.socialLinks || [])];
+                              const newSocialLinks = [
+                                ...(member.socialLinks || []),
+                              ];
                               newSocialLinks.push({
                                 icon: 'linkedin',
                                 url: 'https://linkedin.com/in/',
@@ -3393,7 +3449,10 @@ export function ComponentEditor({
               </CardHeader>
               <CardContent className='space-y-4'>
                 {editedComponent.socialLinks?.map((link, index) => (
-                  <div key={index} className='space-y-2 border-t pt-2 first:border-t-0 first:pt-0'>
+                  <div
+                    key={index}
+                    className='space-y-2 border-t pt-2 first:border-t-0 first:pt-0'
+                  >
                     <div className='flex justify-between items-center'>
                       <label>Social Link {index + 1}</label>
                       <Button
@@ -3401,7 +3460,9 @@ export function ComponentEditor({
                         variant='ghost'
                         className='h-6 w-6 text-destructive'
                         onClick={() => {
-                          const newSocialLinks = [...editedComponent.socialLinks];
+                          const newSocialLinks = [
+                            ...editedComponent.socialLinks,
+                          ];
                           newSocialLinks.splice(index, 1);
                           handleChange(['socialLinks'], newSocialLinks);
                         }}
@@ -3414,7 +3475,9 @@ export function ComponentEditor({
                       <Input
                         value={link.icon || ''}
                         onChange={(e) => {
-                          const newSocialLinks = [...editedComponent.socialLinks];
+                          const newSocialLinks = [
+                            ...editedComponent.socialLinks,
+                          ];
                           newSocialLinks[index].icon = e.target.value;
                           handleChange(['socialLinks'], newSocialLinks);
                         }}
@@ -3426,7 +3489,9 @@ export function ComponentEditor({
                       <Input
                         value={link.url || ''}
                         onChange={(e) => {
-                          const newSocialLinks = [...editedComponent.socialLinks];
+                          const newSocialLinks = [
+                            ...editedComponent.socialLinks,
+                          ];
                           newSocialLinks[index].url = e.target.value;
                           handleChange(['socialLinks'], newSocialLinks);
                         }}
@@ -3440,7 +3505,9 @@ export function ComponentEditor({
                   variant='outline'
                   className='w-full border-pink-200 hover:bg-pink-50 text-pink-700'
                   onClick={() => {
-                    const newSocialLinks = [...(editedComponent.socialLinks || [])];
+                    const newSocialLinks = [
+                      ...(editedComponent.socialLinks || []),
+                    ];
                     newSocialLinks.push({
                       icon: 'linkedin',
                       url: 'https://linkedin.com/in/',
@@ -3797,11 +3864,12 @@ export function ComponentEditor({
                       <div className='space-y-2'>
                         <label>Change Percentage (Optional)</label>
                         <Input
-                          type="number"
+                          type='number'
                           value={stat.change || ''}
                           onChange={(e) => {
                             const newStats = [...editedComponent.stats];
-                            newStats[index].change = Number(e.target.value) || 0;
+                            newStats[index].change =
+                              Number(e.target.value) || 0;
                             handleChange(['stats'], newStats);
                           }}
                           placeholder='12'
@@ -3823,7 +3891,7 @@ export function ComponentEditor({
                       icon: 'star',
                       value: '0+',
                       label: 'New Stat',
-                      change: 0
+                      change: 0,
                     });
                     handleChange(['stats'], newStats);
                   }}
