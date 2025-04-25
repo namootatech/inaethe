@@ -6,11 +6,16 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from './ui/Card';
-import { Alert, AlertDescription, AlertTitle } from './ui/Alert';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/Tabs';
-import { Button } from './ui/Button';
-import { Progress } from './ui/Progress';
+} from '@/components/ui/Card';
+import { Alert, AlertDescription, AlertTitle } from '@/components//ui/Alert';
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from '@/components//ui/Tabs';
+import { Button } from '@/components/ui/Button';
+import { Progress } from '@/components/ui/Progress';
 import { CheckCircle, AlertCircle, Loader2, ExternalLink } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 
@@ -283,9 +288,13 @@ function DeploymentStatusPage() {
 
         <CardContent>
           <Tabs value={activeTab} onValueChange={setActiveTab} className='mb-6'>
-            <TabsList className='grid w-full grid-cols-2'>
-              <TabsTrigger value='live'>Live Site</TabsTrigger>
-              <TabsTrigger value='preview'>Preview Site</TabsTrigger>
+            <TabsList className='grid w-full grid-cols-2 bg-gray-400'>
+              <TabsTrigger value='live' className='text-black'>
+                Live Site
+              </TabsTrigger>
+              <TabsTrigger value='preview' className='text-black'>
+                Preview Site
+              </TabsTrigger>
             </TabsList>
             <TabsContent value='live'>
               {renderDeploymentStatus(
