@@ -1,0 +1,674 @@
+{
+  "organisationId": "ecoaction",
+  "partnerName": "EcoAction Alliance",
+  "tagline": "Protecting Our Planet for Future Generations",
+  "about": "EcoAction Alliance is a global environmental organization dedicated to addressing climate change, protecting biodiversity, and promoting sustainable practices. Through community-based initiatives, policy advocacy, and education, we work to create a more sustainable and equitable world.",
+  "cta": {
+    "text": "Join the Movement for Climate Action"
+  },
+  "nav": {
+    "ctaText": "Donate"
+  },
+  "socialMedia": {
+    "facebook": "https://www.facebook.com/ecoactionalliance",
+    "twitter": "https://twitter.com/ecoactionorg",
+    "instagram": "https://www.instagram.com/ecoactionalliance",
+    "linkedin": "https://www.linkedin.com/company/ecoaction-alliance",
+    "youtube": "https://www.youtube.com/ecoactionalliance",
+    "tiktok": "https://www.tiktok.com/@ecoactionalliance",
+    "pinterest": "",
+    "snapchat": ""
+  },
+  "brand": {
+    "logo": "/logo.png"
+  },
+  "colors": {
+    "lightBgColoCode": "green-50",
+    "secondaryLighBgColorCode": "gray-100",
+    "primaryColorCode": "green-green-600",
+    "primaryColor": "green",
+    "accentColor": "yellow",
+    "secondaryColor": "gray",
+    "secondaryColorCode": "gray-green-600",
+    "textColorCode": "gray-700",
+    "progressColor": "#16a34a",
+    "accentColorCode": "yellow-green-600"
+  },
+  "footer": {
+    "bg": "bg-gray-800",
+    "fg": "text-white"
+  },
+  "pages": [
+    {
+      "id": "homepage",
+      "title": "Home",
+      "components": [
+        {
+          "type": "FlexwindHero3",
+          "title": "Taking Action for a Sustainable Future",
+          "description": "At EcoAction Alliance, we're committed to addressing the climate crisis through community-based initiatives, policy advocacy, and education. Join us in creating a more sustainable and equitable world for current and future generations.",
+          "hint": "Act Now for Our Planet",
+          "ctas": [
+            {
+              "text": "Join Our Movement",
+              "link": "/get-involved"
+            },
+            {
+              "text": "Support Our Work",
+              "link": "/donate"
+            }
+          ],
+          "img": {
+            "src": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=2274&auto=format&fit=crop",
+            "alt": "Lush green forest landscape with sunlight"
+          }
+        },
+        {
+          "type": "stats-section",
+          "title": "Our Impact",
+          "description": "Since 2005, EcoAction Alliance has been making measurable progress in environmental conservation and climate action.",
+          "stats": [
+            {
+              "value": "5M+",
+              "label": "Trees Planted",
+              "icon": "seedling",
+              "description": "Restoring forests worldwide"
+            },
+            {
+              "value": "120K",
+              "label": "Volunteers",
+              "icon": "users",
+              "description": "Active in 45 countries"
+            },
+            {
+              "value": "250+",
+              "label": "Conservation Projects",
+              "icon": "globe",
+              "description": "Protecting critical habitats"
+            },
+            {
+              "value": "30%",
+              "label": "Carbon Reduction",
+              "icon": "trending-down",
+              "description": "In partner communities"
+            }
+          ]
+        },
+        {
+          "type": "content-section",
+          "title": "Our Mission",
+          "subtitle": "Why We Exist",
+          "content": [
+            "EcoAction Alliance was founded on the belief that environmental challenges require collaborative solutions. We work at the intersection of community action, policy change, and innovative technology to create lasting environmental impact.",
+            "Our approach focuses on empowering local communities to become stewards of their natural resources while advocating for systemic changes that address the root causes of environmental degradation and climate change."
+          ],
+          "image": "https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?q=80&w=2070&auto=format&fit=crop",
+          "imagePosition": "right",
+          "cta": {
+            "text": "Learn About Our Approach",
+            "link": "/about"
+          }
+        },
+        {
+          "type": "cta-section",
+          "title": "Join the Movement for Climate Action",
+          "description": "Whether you volunteer, donate, or spread awareness, your support helps us create a more sustainable future. Together, we can make a difference for our planet.",
+          "buttonText": "Get Involved Today",
+          "buttonLink": "/get-involved",
+          "backgroundImage": "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?q=80&w=2074&auto=format&fit=crop"
+        },
+        {
+          "type": "social-proof-section",
+          "title": "What Our Supporters Say",
+          "testimonials": [
+            {
+              "name": "Sarah Johnson",
+              "role": "Monthly Donor",
+              "quote": "Supporting EcoAction Alliance gives me hope for the future. Their transparent approach and measurable impact make me confident my donations are making a real difference.",
+              "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974&auto=format&fit=crop"
+            },
+            {
+              "name": "Michael Chen",
+              "role": "Volunteer",
+              "quote": "Volunteering with EcoAction has been transformative. I've learned so much about conservation while connecting with like-minded people committed to environmental stewardship.",
+              "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop"
+            },
+            {
+              "name": "Elena Rodriguez",
+              "role": "Corporate Partner",
+              "quote": "EcoAction Alliance helped our company implement sustainable practices that reduced our carbon footprint by 35%. Their expertise and practical approach made the transition smooth and effective.",
+              "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop"
+            }
+          ]
+        },
+        {
+          "type": "logo-grid",
+          "title": "Our Partners",
+          "description": "We collaborate with organizations committed to environmental sustainability and social responsibility.",
+          "logos": [
+            {
+              "name": "Green Future Foundation",
+              "image": "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=1974&auto=format&fit=crop",
+              "url": "https://example.com"
+            },
+            {
+              "name": "Sustainable Business Alliance",
+              "image": "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=1974&auto=format&fit=crop",
+              "url": "https://example.com"
+            },
+            {
+              "name": "Global Conservation Fund",
+              "image": "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=1974&auto=format&fit=crop",
+              "url": "https://example.com"
+            },
+            {
+              "name": "Clean Energy Initiative",
+              "image": "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=1974&auto=format&fit=crop",
+              "url": "https://example.com"
+            },
+            {
+              "name": "Ocean Protection Coalition",
+              "image": "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=1974&auto=format&fit=crop",
+              "url": "https://example.com"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about",
+      "title": "About",
+      "components": [
+        {
+          "type": "FlexwindHero7",
+          "title": "Our Story & Mission",
+          "description": "EcoAction Alliance began in 2005 when a group of environmental scientists and community organizers came together with a shared vision: to create practical, community-based solutions to environmental challenges. Learn about our journey and the dedicated team behind our initiatives.",
+          "ctas": [
+            {
+              "icon": "users",
+              "link": "/team",
+              "text": "Meet Our Team"
+            },
+            {
+              "icon": "file-text",
+              "text": "Annual Report",
+              "link": "/reports",
+              "style": "light"
+            }
+          ],
+          "img1": {
+            "src": "https://images.unsplash.com/photo-1552799446-159ba9523315?q=80&w=2070&auto=format&fit=crop",
+            "alt": "Team planting trees"
+          },
+          "img2": {
+            "src": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=2013&auto=format&fit=crop",
+            "alt": "Conservationists in the field"
+          }
+        },
+        {
+          "type": "content-section",
+          "title": "Our Beginning",
+          "subtitle": "The EcoAction Story",
+          "content": [
+            "EcoAction Alliance was founded by Dr. Maya Patel and environmental activist James Rivera, who met while working on reforestation projects in Southeast Asia. Witnessing firsthand the devastating effects of deforestation and climate change on local communities, they committed to creating an organization that would address environmental challenges through community empowerment and systemic change.",
+            "What began as a small tree-planting initiative has grown into a global organization implementing comprehensive environmental programs in 45 countries across six continents. Today, EcoAction works with local communities, governments, and partner organizations to create sustainable solutions tailored to local needs and contexts."
+          ],
+          "image": "https://images.unsplash.com/photo-1464582883107-8adf2dca8a9f?q=80&w=2070&auto=format&fit=crop",
+          "imagePosition": "left"
+        },
+        {
+          "type": "timeline",
+          "items": [
+            {
+              "date": "2005",
+              "title": "Foundation",
+              "description": "EcoAction Alliance is established with a focus on community-based reforestation projects in Southeast Asia."
+            },
+            {
+              "date": "2008",
+              "title": "Expansion to Africa",
+              "description": "Launch of watershed protection and sustainable agriculture programs in East Africa."
+            },
+            {
+              "date": "2012",
+              "title": "Climate Policy Initiative",
+              "description": "Begin advocacy work for climate policy reform at national and international levels."
+            },
+            {
+              "date": "2015",
+              "title": "Urban Sustainability Program",
+              "description": "Launch of programs focused on green urban planning and community gardens in major cities."
+            },
+            {
+              "date": "2018",
+              "title": "Clean Energy Transition",
+              "description": "Start of renewable energy projects in rural communities lacking reliable electricity."
+            },
+            {
+              "date": "2022",
+              "title": "Digital Conservation Platform",
+              "description": "Development of technology tools for community-based environmental monitoring and conservation."
+            }
+          ]
+        },
+        {
+          "type": "team-section",
+          "title": "Our Leadership Team",
+          "description": "Meet the dedicated professionals guiding our mission and strategy.",
+          "members": [
+            {
+              "name": "Dr. Maya Patel",
+              "role": "Co-Founder & Executive Director",
+              "bio": "Environmental scientist with 20+ years of experience in conservation and climate science. Maya leads our overall strategy and vision.",
+              "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=1974&auto=format&fit=crop",
+              "socialLinks": [
+                {
+                  "icon": "twitter",
+                  "url": "https://twitter.com/example"
+                },
+                {
+                  "icon": "linkedin",
+                  "url": "https://linkedin.com/in/example"
+                }
+              ]
+            },
+            {
+              "name": "James Rivera",
+              "role": "Co-Founder & Director of Programs",
+              "bio": "Former community organizer with expertise in participatory development. James oversees our field programs and community partnerships.",
+              "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop",
+              "socialLinks": [
+                {
+                  "icon": "twitter",
+                  "url": "https://twitter.com/example"
+                },
+                {
+                  "icon": "linkedin",
+                  "url": "https://linkedin.com/in/example"
+                }
+              ]
+            },
+            {
+              "name": "Dr. Aisha Okafor",
+              "role": "Director of Research",
+              "bio": "Climate scientist specializing in ecosystem restoration. Aisha leads our research initiatives and impact measurement.",
+              "image": "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop",
+              "socialLinks": [
+                {
+                  "icon": "twitter",
+                  "url": "https://twitter.com/example"
+                },
+                {
+                  "icon": "linkedin",
+                  "url": "https://linkedin.com/in/example"
+                }
+              ]
+            },
+            {
+              "name": "Thomas Chen",
+              "role": "Director of Partnerships",
+              "bio": "Former corporate sustainability executive. Thomas develops our strategic partnerships with businesses and foundations.",
+              "image": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1974&auto=format&fit=crop",
+              "socialLinks": [
+                {
+                  "icon": "twitter",
+                  "url": "https://twitter.com/example"
+                },
+                {
+                  "icon": "linkedin",
+                  "url": "https://linkedin.com/in/example"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "FlexwindFeatures1",
+          "title": "Our Approach to Environmental Action",
+          "description": "EcoAction Alliance takes a comprehensive approach to addressing environmental challenges. We believe that lasting change requires working at multiple levels, from local communities to global policy.",
+          "features": [
+            {
+              "icon": "users",
+              "title": "Community Empowerment",
+              "description": "We work with local communities to develop and implement environmental solutions that address their specific needs and build on local knowledge and practices."
+            },
+            {
+              "icon": "seedling",
+              "title": "Ecosystem Restoration",
+              "description": "Our restoration projects focus on rebuilding degraded ecosystems, from forests and wetlands to coral reefs, using science-based approaches and indigenous knowledge."
+            },
+            {
+              "icon": "bullhorn",
+              "title": "Advocacy & Policy",
+              "description": "We advocate for environmental policies that protect natural resources, reduce carbon emissions, and promote sustainable development at local, national, and international levels."
+            },
+            {
+              "icon": "book-open",
+              "title": "Education & Awareness",
+              "description": "Through workshops, school programs, and digital campaigns, we raise awareness about environmental issues and empower people to take action in their daily lives."
+            },
+            {
+              "icon": "refresh-cw",
+              "title": "Sustainable Livelihoods",
+              "description": "We develop programs that enable communities to earn income through sustainable practices, demonstrating that environmental protection and economic well-being can go hand in hand."
+            },
+            {
+              "icon": "trending-up",
+              "title": "Impact Measurement",
+              "description": "We rigorously measure the environmental and social impacts of our programs, using data to continuously improve our approaches and demonstrate results to supporters."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "programs",
+      "title": "Programs",
+      "components": [
+        {
+          "type": "FlexwindHero6",
+          "title": "Our Environmental Programs",
+          "description": "Explore our diverse initiatives designed to address climate change, protect biodiversity, and promote sustainable practices. From forest conservation to clean energy, our programs take a comprehensive approach to environmental challenges.",
+          "ctas": [
+            {
+              "link": "/donate",
+              "text": "Support Our Programs"
+            },
+            {
+              "text": "Become a Partner",
+              "link": "/partners",
+              "style": "light"
+            }
+          ],
+          "stats": [
+            {
+              "title": "Active Programs",
+              "detail": "12",
+              "icon": "activity"
+            },
+            {
+              "title": "Countries",
+              "detail": "45",
+              "icon": "globe"
+            },
+            {
+              "title": "Communities Served",
+              "detail": "350+",
+              "icon": "users"
+            }
+          ],
+          "img": {
+            "src": "https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?q=80&w=2070&auto=format&fit=crop",
+            "alt": "Reforestation project in progress"
+          }
+        },
+        {
+          "type": "content-section",
+          "title": "Forest Conservation & Restoration",
+          "subtitle": "Flagship Program",
+          "content": [
+            "Our forest conservation and restoration program works to protect existing forests and restore degraded forest landscapes. We use a combination of natural regeneration, assisted regeneration, and strategic tree planting to rebuild forest ecosystems.",
+            "Working closely with local communities, we ensure that forest restoration also supports sustainable livelihoods through agroforestry, non-timber forest products, and ecosystem services payments."
+          ],
+          "image": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=2013&auto=format&fit=crop",
+          "imagePosition": "right",
+          "cta": {
+            "text": "Learn More",
+            "link": "/programs/forest-conservation"
+          }
+        },
+        {
+          "type": "content-section",
+          "title": "Clean Water Initiative",
+          "subtitle": "Watershed Protection",
+          "content": [
+            "Our Clean Water Initiative focuses on protecting and restoring watersheds that provide drinking water to communities and support biodiversity. Through riparian restoration, pollution reduction, and sustainable water management, we help ensure clean water for people and nature.",
+            "This program includes community-based water quality monitoring, green infrastructure development, and education on water conservation practices."
+          ],
+          "image": "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=2070&auto=format&fit=crop",
+          "imagePosition": "left",
+          "cta": {
+            "text": "Learn More",
+            "link": "/programs/clean-water"
+          }
+        },
+        {
+          "type": "content-section",
+          "title": "Climate-Smart Agriculture",
+          "subtitle": "Sustainable Food Systems",
+          "content": [
+            "Our Climate-Smart Agriculture program helps farmers adapt to changing climate conditions while reducing their environmental footprint. We promote agroecological practices that build soil health, conserve water, and reduce dependence on chemical inputs.",
+            "Through farmer field schools, demonstration plots, and market connections, we support the transition to agricultural systems that are productive, resilient, and environmentally sustainable."
+          ],
+          "image": "https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?q=80&w=2070&auto=format&fit=crop",
+          "imagePosition": "right",
+          "cta": {
+            "text": "Learn More",
+            "link": "/programs/climate-smart-agriculture"
+          }
+        },
+        {
+          "type": "content-section",
+          "title": "Renewable Energy Access",
+          "subtitle": "Clean Energy Transition",
+          "content": [
+            "Our Renewable Energy Access program works to bring clean, affordable energy to communities without reliable electricity. Through solar, micro-hydro, and wind projects, we help reduce dependence on fossil fuels and deforestation for energy needs.",
+            "This program includes training local technicians, establishing community energy committees, and developing sustainable financing mechanisms to ensure long-term maintenance and operation."
+          ],
+          "image": "https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=2072&auto=format&fit=crop",
+          "imagePosition": "left",
+          "cta": {
+            "text": "Learn More",
+            "link": "/programs/renewable-energy"
+          }
+        },
+        {
+          "type": "PageDoneHowItWorks1",
+          "title": "How We Implement Environmental Programs",
+          "description": "Our proven process ensures that each environmental initiative is community-driven, scientifically sound, and designed for long-term success. Here's how we turn your support into effective environmental action:",
+          "steps": [
+            {
+              "title": "Assessment & Partnership",
+              "description": "We begin by working closely with communities to understand environmental challenges, existing resources, and local priorities. This collaborative approach ensures community ownership from the start.",
+              "icon": "FaUsers"
+            },
+            {
+              "title": "Program Design & Implementation",
+              "description": "Based on the assessment, we design tailored environmental programs that address identified needs. Implementation involves local stakeholders at every stage, from planning to execution and monitoring.",
+              "icon": "FaTools"
+            },
+            {
+              "title": "Monitoring, Support & Transition",
+              "description": "We provide ongoing support and rigorous monitoring to ensure program effectiveness, making adjustments as needed. Over time, we transition management to local stakeholders, ensuring the sustainability of environmental improvements.",
+              "icon": "FaChartLine"
+            }
+          ]
+        },
+        {
+          "type": "faq-section",
+          "title": "Frequently Asked Questions",
+          "description": "Common questions about our environmental programs and approach",
+          "faqs": [
+            {
+              "question": "How do you select communities for your programs?",
+              "answer": "We select communities based on environmental need, community interest and commitment, potential for impact, and strategic alignment with our mission. We prioritize areas facing significant environmental challenges where our approach can make a meaningful difference."
+            },
+            {
+              "question": "How do you measure the impact of your programs?",
+              "answer": "We use a combination of ecological monitoring (e.g., forest cover change, water quality, biodiversity indicators), social impact assessment (e.g., livelihood improvements, community capacity), and carbon measurement for climate mitigation projects. We publish annual impact reports with detailed metrics."
+            },
+            {
+              "question": "Do you work with local governments?",
+              "answer": "Yes, we collaborate with local governments in most of our program areas. Government partnerships are often essential for scaling solutions, ensuring policy support, and maintaining long-term sustainability of environmental initiatives."
+            },
+            {
+              "question": "How do you ensure programs continue after EcoAction leaves?",
+              "answer": "Sustainability is built into our program design from the beginning. We focus on building local capacity, establishing community management structures, developing sustainable financing mechanisms, and ensuring that environmental solutions also provide economic benefits to communities."
+            },
+            {
+              "question": "Can businesses partner with specific programs?",
+              "answer": "Yes, we offer corporate partnership opportunities that can be tailored to specific programs or geographic areas. These partnerships can include financial support, employee engagement, technical collaboration, and co-development of environmental initiatives."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "get-involved",
+      "title": "Get Involved",
+      "type": "centered-color-page",
+      "colorCode": "gray-900",
+      "components": [
+        {
+          "type": "centered-page-header",
+          "title": "Join the EcoAction Movement",
+          "description": "There are many ways to support our mission of environmental conservation and climate action"
+        },
+        {
+          "type": "centered-page-components-container",
+          "maxWidthinXLsize": 4,
+          "components": [
+            {
+              "type": "card",
+              "title": "Donate",
+              "image": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=2069&auto=format&fit=crop",
+              "description": "Your financial support directly funds our environmental programs around the world. Monthly donors receive special updates from the field.",
+              "cta": {
+                "title": "Donate Now",
+                "link": "/donate"
+              }
+            },
+            {
+              "type": "card",
+              "title": "Volunteer",
+              "image": "https://images.unsplash.com/photo-1544027993-37dbfe43562a?q=80&w=2070&auto=format&fit=crop",
+              "description": "Share your skills and passion with our team and the communities we serve. We offer both in-person and remote volunteer opportunities.",
+              "cta": {
+                "title": "Explore Opportunities",
+                "link": "/volunteer"
+              }
+            },
+            {
+              "type": "card",
+              "title": "Partner With Us",
+              "image": "https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2069&auto=format&fit=crop",
+              "description": "Businesses, foundations, schools, and other organizations can partner with EcoAction to support environmental initiatives and engage their communities in meaningful action.",
+              "cta": {
+                "title": "Become a Partner",
+                "link": "/partners"
+              }
+            }
+          ]
+        },
+        {
+          "type": "cta-section",
+          "title": "Take Action in Your Community",
+          "description": "Environmental change starts locally. Join one of our community initiatives or start your own project with our support and resources.",
+          "buttonText": "Find Local Initiatives",
+          "buttonLink": "/local-action"
+        }
+      ]
+    }
+  ],
+  "defaultPages": [
+    {
+      "id": "donate",
+      "title": "Donate",
+      "components": [
+        {
+          "type": "space-above",
+          "size": "10"
+        },
+        {
+          "type": "center-width-text-block",
+          "title": "Your Donation Supports Environmental Action",
+          "text": "Your support enables us to implement conservation projects, advocate for climate policy, and empower communities to become environmental stewards. Every contribution makes a difference in our mission to protect our planet for future generations."
+        },
+        {
+          "type": "center-width-text-block",
+          "title": "Where Your Money Goes",
+          "text": "85% of every donation goes directly to environmental programs, 10% to program development and evaluation, and 5% to administrative costs. We're committed to transparency and efficiency in our use of donor funds."
+        },
+        {
+          "type": "donation-form-center-width",
+          "title": "Make Your Donation",
+          "options": [
+            {
+              "amount": 25,
+              "description": "Plants 25 trees in a restoration project"
+            },
+            {
+              "amount": 100,
+              "description": "Provides clean water access for a family"
+            },
+            {
+              "amount": 500,
+              "description": "Funds a community renewable energy installation"
+            },
+            {
+              "amount": 1000,
+              "description": "Protects an acre of critical habitat"
+            }
+          ]
+        },
+        {
+          "type": "donation-progress",
+          "title": "2024 Reforestation Campaign",
+          "description": "Help us reach our goal of planting 1 million trees this year in critical ecosystems.",
+          "goal": 500000,
+          "current": 325000,
+          "donorsCount": 1250,
+          "cta": {
+            "text": "Contribute to the Campaign",
+            "link": "#donation-form"
+          }
+        },
+        {
+          "type": "center-width-text-block",
+          "title": "Your Impact",
+          "text": "With your support, we can continue to expand our environmental conservation efforts, helping communities build resilience to climate change and protecting biodiversity for future generations. Thank you for being part of our mission!"
+        },
+        {
+          "type": "space-below",
+          "size": "10"
+        }
+      ]
+    },
+    {
+      "id": "thank-you",
+      "title": "Thank You",
+      "components": [
+        {
+          "type": "space-above",
+          "size": "10"
+        },
+        {
+          "type": "checkbox-center"
+        },
+        {
+          "type": "center-width-text-block",
+          "title": "Thank You for Your Donation!",
+          "text": "Your generosity is making environmental conservation possible in communities around the world. Your contribution will help fund our efforts to protect ecosystems, address climate change, and create a more sustainable future."
+        },
+        {
+          "type": "center-width-text-block",
+          "title": "What Happens Next",
+          "text": "You'll receive a receipt for your donation via email shortly. We'll also send you updates about the projects your donation is supporting and the impact you're helping to create."
+        },
+        {
+          "type": "center-width-text-block",
+          "title": "Share Your Impact",
+          "text": "Help us spread the word about the importance of environmental conservation by sharing your support on social media. Together, we can inspire others to join our mission."
+        },
+        {
+          "type": "social-share-buttons-center",
+          "message": "I just supported EcoAction Alliance's mission to protect our planet for future generations. Join me in making a difference!"
+        },
+        {
+          "type": "space-below",
+          "size": "10"
+        }
+      ]
+    }
+  ]
+}
