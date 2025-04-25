@@ -1,16 +1,116 @@
+'use client';
+
 import { GiFoodTruck } from 'react-icons/gi';
 import { BsBook } from 'react-icons/bs';
 import { HiUserGroup } from 'react-icons/hi';
-import { Fragment } from 'react';
 import React from 'react';
 import Link from 'next/link';
 import nl2br from 'nl2br';
 import { postToURL } from '@/components/payfast/payfast';
 import NpoRegistrationForm from '../NpoRegistrationForm';
+import {
+  FaDroplet,
+  FaHeart,
+  FaUsers,
+  FaShield,
+  FaSearch,
+  FaGlobe,
+  FaSeedling,
+  FaUtensils,
+  FaSchool,
+  FaBook,
+  FaUser,
+  FaHandsHelping,
+  FaRecycle,
+  FaBullhorn,
+  FaMapPin,
+  FaMicroscope,
+  FaGraduationCap,
+  FaChartLine,
+  FaBuilding,
+  FaLaptop,
+  FaBriefcase,
+  FaRefreshCw,
+  FaTools,
+  FaCalendar,
+  FaHandshake,
+  FaTruck,
+  FaFilter,
+  FaCloudRain,
+  FaTrendingUp,
+  FaCompass,
+  FaAward,
+  FaTarget,
+  FaActivity,
+  FaQuoteLeft,
+  FaQuoteRight,
+  FaEnvelope,
+  FaPhone,
+  FaMapMarkerAlt,
+  FaClock,
+  FaCheckCircle,
+  FaQuestion,
+  FaArrowRight,
+  FaLinkedin,
+  FaTwitter,
+  FaFacebook,
+  FaInstagram,
+  FaYoutube,
+  FaGithub,
+} from 'react-icons/fa';
+
 const icons = {
   'food-truck': GiFoodTruck,
   book: BsBook,
   'user-group': HiUserGroup,
+  droplet: FaDroplet,
+  heart: FaHeart,
+  users: FaUsers,
+  shield: FaShield,
+  search: FaSearch,
+  globe: FaGlobe,
+  seedling: FaSeedling,
+  utensils: FaUtensils,
+  school: FaSchool,
+  'book-open': FaBook,
+  user: FaUser,
+  'hands-helping': FaHandsHelping,
+  recycle: FaRecycle,
+  bullhorn: FaBullhorn,
+  'map-pin': FaMapPin,
+  microscope: FaMicroscope,
+  'graduation-cap': FaGraduationCap,
+  'chart-line': FaChartLine,
+  building: FaBuilding,
+  laptop: FaLaptop,
+  briefcase: FaBriefcase,
+  'refresh-cw': FaRefreshCw,
+  tools: FaTools,
+  calendar: FaCalendar,
+  handshake: FaHandshake,
+  truck: FaTruck,
+  filter: FaFilter,
+  'cloud-rain': FaCloudRain,
+  'trending-up': FaTrendingUp,
+  compass: FaCompass,
+  award: FaAward,
+  target: FaTarget,
+  activity: FaActivity,
+  'quote-left': FaQuoteLeft,
+  'quote-right': FaQuoteRight,
+  envelope: FaEnvelope,
+  phone: FaPhone,
+  'map-marker': FaMapMarkerAlt,
+  clock: FaClock,
+  'check-circle': FaCheckCircle,
+  question: FaQuestion,
+  'arrow-right': FaArrowRight,
+  linkedin: FaLinkedin,
+  twitter: FaTwitter,
+  facebook: FaFacebook,
+  instagram: FaInstagram,
+  youtube: FaYoutube,
+  github: FaGithub,
 };
 
 import {
@@ -27,13 +127,8 @@ import { Icon } from './icon';
 import { useConfig } from '@/context/ConfigContext';
 import { FlexwindFeatures1 } from './features';
 import { PageDoneHowItWorks1 } from './howItWorks';
-import { keys } from 'ramda';
 
-import { 
-  FlowBiteCta1,
-  FlowBiteCta2,
-  FlowBiteCta3,
-} from './ctas'
+import { FlowBiteCta1, FlowBiteCta2, FlowBiteCta3 } from './ctas';
 
 const imageBlock = (props) => (
   <div
@@ -168,7 +263,7 @@ export const TestimonialSection = ({ testimonials }) => (
               <div className='flex items-center'>
                 <img
                   className='h-12 w-12 rounded-full mr-4'
-                  src={testimonial.avatar}
+                  src={testimonial.avatar || '/placeholder.svg'}
                   alt={testimonial.name}
                 />
                 <div>
@@ -327,7 +422,7 @@ const heroBuilder = ({ siteConfig, ...rest }) => {
           className={`md:flex hidden h-full w-full justify-center items-center col-span-1`}
         >
           {/* <img
-            src={rest?.logo?.src}
+            src={rest?.logo?.src || "/placeholder.svg"}
             alt={rest?.logo?.alt}
             className='h-72 w-72 shadow-2xl rounded-full animate-pulse-shadow '
           /> */}
@@ -492,9 +587,9 @@ const Modal = ({ siteConfig, data, ...rest }) => {
                 stroke='currentColor'
               >
                 <path
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
-                  stroke-width='2'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth='2'
                   d='M6 18L18 6M6 6l12 12'
                 />
               </svg>
@@ -526,9 +621,9 @@ const AlertBanner = ({ siteConfig, ...rest }) => {
           stroke='currentColor'
         >
           <path
-            stroke-linecap='round'
-            stroke-linejoin='round'
-            stroke-width='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth='2'
             d='M9 5l7 7-7 7'
           />
         </svg>
@@ -567,7 +662,11 @@ const Card = ({ siteConfig, ...rest }) => {
   const { image, title, description, cta } = rest;
   return (
     <div className='bg-white rounded-lg shadow-md overflow-hidden'>
-      <img src={image} alt={title} className='w-full h-48 object-cover' />
+      <img
+        src={image || '/placeholder.svg'}
+        alt={title}
+        className='w-full h-48 object-cover'
+      />
       <div className='p-4'>
         <h3 className='text-xl font-semibold text-gray-900'>{title}</h3>
         <p className='mt-2 text-gray-600'>{description}</p>
@@ -640,6 +739,698 @@ const CenteredPageComponentsContainer = ({ siteConfig, ...rest }) => {
   );
 };
 
+// Team Member Component
+const TeamMember = ({ siteConfig, ...rest }) => {
+  const { name, role, image, bio, socialLinks } = rest;
+  return (
+    <div className='bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden'>
+      <img
+        src={image || '/placeholder.svg'}
+        alt={name}
+        className='w-full h-64 object-cover'
+      />
+      <div className='p-6'>
+        <h3 className='text-xl font-semibold text-gray-900 dark:text-white'>
+          {name}
+        </h3>
+        <p className='text-sm text-gray-600 dark:text-gray-400'>{role}</p>
+        <p className='mt-3 text-gray-700 dark:text-gray-300'>{bio}</p>
+        {socialLinks && (
+          <div className='mt-4 flex space-x-3'>
+            {socialLinks.map((link, index) => (
+              <a
+                key={index}
+                href={link.url}
+                className={`text-${siteConfig?.colors?.primaryColorCode} hover:text-${siteConfig?.colors?.secondaryColorCode}`}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                <Icon name={link.icon} />
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+// Timeline Component
+const Timeline = ({ siteConfig, ...rest }) => {
+  const { items } = rest;
+  return (
+    <div className='relative mx-auto max-w-7xl'>
+      <div className='absolute left-1/2 -ml-0.5 w-0.5 h-full bg-gray-200 dark:bg-gray-800'></div>
+      <div className='space-y-12'>
+        {items.map((item, index) => (
+          <div key={index} className='relative'>
+            <div
+              className={`absolute left-1/2 -ml-3 w-6 h-6 rounded-full border-4 border-white dark:border-gray-900 ${
+                index === 0
+                  ? `bg-${siteConfig?.colors?.primaryColorCode}`
+                  : 'bg-gray-200 dark:bg-gray-700'
+              }`}
+            ></div>
+            <div
+              className={`relative ${
+                index % 2 === 0
+                  ? 'pr-8 md:pr-12 md:text-right md:mr-8'
+                  : 'pl-8 md:pl-12 md:ml-8'
+              } ${index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'}`}
+            >
+              <div className='bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md'>
+                <span
+                  className={`text-${siteConfig?.colors?.primaryColorCode} text-sm font-semibold`}
+                >
+                  {item.date}
+                </span>
+                <h3 className='mt-2 text-xl font-bold text-gray-900 dark:text-white'>
+                  {item.title}
+                </h3>
+                <p className='mt-2 text-gray-700 dark:text-gray-300'>
+                  {item.description}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// Statistics Grid Component
+const StatisticsGrid = ({ siteConfig, ...rest }) => {
+  const { stats } = rest;
+  return (
+    <div className='bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden'>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-gray-200 dark:bg-gray-700'>
+        {stats.map((stat, index) => (
+          <div
+            key={index}
+            className='bg-white dark:bg-gray-800 p-8 text-center'
+          >
+            <div
+              className={`inline-flex p-3 rounded-full bg-${siteConfig?.colors?.lightBgColoCode} dark:bg-gray-700 text-${siteConfig?.colors?.primaryColorCode} mb-4`}
+            >
+              <Icon name={stat.icon} size={24} />
+            </div>
+            <h3 className='text-3xl font-bold text-gray-900 dark:text-white'>
+              {stat.value}
+            </h3>
+            <p className='mt-1 text-sm text-gray-500 dark:text-gray-400'>
+              {stat.label}
+            </p>
+            {stat.change && (
+              <p
+                className={`mt-2 text-sm ${
+                  stat.change > 0 ? 'text-green-500' : 'text-red-500'
+                }`}
+              >
+                {stat.change > 0 ? '↑' : '↓'} {Math.abs(stat.change)}%
+              </p>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// Gallery Component
+const Gallery = ({ siteConfig, ...rest }) => {
+  const { images, title, description } = rest;
+  return (
+    <div className='py-12'>
+      {(title || description) && (
+        <div className='text-center mb-12'>
+          {title && (
+            <h2 className='text-3xl font-bold text-gray-900 dark:text-white mb-4'>
+              {title}
+            </h2>
+          )}
+          {description && (
+            <p className='text-gray-600 dark:text-gray-400 max-w-2xl mx-auto'>
+              {description}
+            </p>
+          )}
+        </div>
+      )}
+      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
+        {images.map((image, index) => (
+          <div key={index} className='overflow-hidden rounded-lg shadow-md'>
+            <img
+              src={image.src || '/placeholder.svg'}
+              alt={image.alt || `Gallery image ${index + 1}`}
+              className='w-full h-64 object-cover transition-transform duration-300 hover:scale-105'
+            />
+            {image.caption && (
+              <div className='p-4 bg-white dark:bg-gray-800'>
+                <p className='text-gray-700 dark:text-gray-300'>
+                  {image.caption}
+                </p>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// Contact Form Component
+const ContactForm = ({ siteConfig, ...rest }) => {
+  const { title, description, fields, submitText } = rest;
+  return (
+    <div className='max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden'>
+      <div className='p-8'>
+        {title && (
+          <h2 className='text-2xl font-bold text-gray-900 dark:text-white mb-2'>
+            {title}
+          </h2>
+        )}
+        {description && (
+          <p className='text-gray-600 dark:text-gray-400 mb-6'>{description}</p>
+        )}
+
+        <form className='space-y-6'>
+          {fields.map((field, index) => (
+            <div key={index}>
+              <label
+                htmlFor={field.id}
+                className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'
+              >
+                {field.label}{' '}
+                {field.required && <span className='text-red-500'>*</span>}
+              </label>
+              {field.type === 'textarea' ? (
+                <textarea
+                  id={field.id}
+                  name={field.id}
+                  rows={4}
+                  className='w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white'
+                  placeholder={field.placeholder}
+                  required={field.required}
+                ></textarea>
+              ) : (
+                <input
+                  type={field.type}
+                  id={field.id}
+                  name={field.id}
+                  className='w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white'
+                  placeholder={field.placeholder}
+                  required={field.required}
+                />
+              )}
+            </div>
+          ))}
+
+          <div>
+            <button
+              type='submit'
+              className={`w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-white bg-${siteConfig?.colors?.primaryColorCode} hover:bg-${siteConfig?.colors?.primaryColorCode}/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${siteConfig?.colors?.primaryColorCode}`}
+            >
+              {submitText || 'Submit'}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+// Donation Progress Component
+const DonationProgress = ({ siteConfig, ...rest }) => {
+  const { goal, current, title, description, cta } = rest;
+  const percentage = Math.min(Math.round((current / goal) * 100), 100);
+
+  return (
+    <div className='bg-white dark:bg-gray-800 rounded-lg shadow-md p-6'>
+      {title && (
+        <h3 className='text-xl font-bold text-gray-900 dark:text-white mb-2'>
+          {title}
+        </h3>
+      )}
+      {description && (
+        <p className='text-gray-600 dark:text-gray-400 mb-4'>{description}</p>
+      )}
+
+      <div className='mb-2 flex justify-between items-center'>
+        <span className='text-sm font-medium text-gray-700 dark:text-gray-300'>
+          ${current.toLocaleString()} raised
+        </span>
+        <span className='text-sm font-medium text-gray-700 dark:text-gray-300'>
+          ${goal.toLocaleString()} goal
+        </span>
+      </div>
+
+      <div className='w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 mb-4'>
+        <div
+          className={`bg-${siteConfig?.colors?.primaryColorCode} h-2.5 rounded-full`}
+          style={{ width: `${percentage}%` }}
+        ></div>
+      </div>
+
+      <div className='flex items-center justify-between mb-4'>
+        <span className='text-sm text-gray-600 dark:text-gray-400'>
+          {percentage}% of goal
+        </span>
+        {rest.donorsCount && (
+          <span className='text-sm text-gray-600 dark:text-gray-400'>
+            {rest.donorsCount} donors
+          </span>
+        )}
+      </div>
+
+      {cta && (
+        <Link
+          href={cta.link}
+          className={`block w-full text-center py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-${siteConfig?.colors?.primaryColorCode} hover:bg-${siteConfig?.colors?.primaryColorCode}/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${siteConfig?.colors?.primaryColorCode}`}
+        >
+          {cta.text}
+        </Link>
+      )}
+    </div>
+  );
+};
+
+// NEW COMPONENTS
+
+// CTA Section Component
+const CTASection = ({ siteConfig, ...rest }) => {
+  const { title, description, buttonText, buttonLink, backgroundImage } = rest;
+
+  return (
+    <div className='relative py-16 sm:py-24'>
+      {backgroundImage && (
+        <div className='absolute inset-0 overflow-hidden'>
+          <img
+            src={backgroundImage || '/placeholder.svg'}
+            alt='Background'
+            className='w-full h-full object-cover'
+          />
+          <div className='absolute inset-0 bg-black opacity-60'></div>
+        </div>
+      )}
+
+      <div
+        className={`relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${
+          backgroundImage ? 'text-white' : 'text-gray-900 dark:text-white'
+        }`}
+      >
+        <div className='text-center'>
+          <h2 className='text-3xl font-extrabold tracking-tight sm:text-4xl'>
+            {title}
+          </h2>
+          <p className='mt-4 text-lg leading-6 max-w-2xl mx-auto'>
+            {description}
+          </p>
+          <div className='mt-8'>
+            <Link
+              href={buttonLink}
+              className={`inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-${siteConfig?.colors?.primaryColorCode} hover:bg-${siteConfig?.colors?.primaryColorCode}/90`}
+            >
+              {buttonText}
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Content Section Component
+const ContentSection = ({ siteConfig, ...rest }) => {
+  const {
+    title,
+    subtitle,
+    content,
+    image,
+    imagePosition = 'right',
+    cta,
+  } = rest;
+
+  return (
+    <div className='py-16 bg-white dark:bg-gray-900'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+        <div
+          className={`lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center ${
+            imagePosition === 'left' ? 'lg:grid-flow-row-dense' : ''
+          }`}
+        >
+          <div
+            className={`${imagePosition === 'left' ? 'lg:col-start-2' : ''}`}
+          >
+            {subtitle && (
+              <p
+                className={`text-sm font-semibold tracking-wide uppercase text-${siteConfig?.colors?.primaryColorCode}`}
+              >
+                {subtitle}
+              </p>
+            )}
+            <h2 className='mt-2 text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl'>
+              {title}
+            </h2>
+            <div className='mt-6 text-gray-500 dark:text-gray-300 space-y-6'>
+              {typeof content === 'string' ? (
+                <p>{content}</p>
+              ) : (
+                content.map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))
+              )}
+            </div>
+            {cta && (
+              <div className='mt-8'>
+                <Link
+                  href={cta.link}
+                  className={`inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-${siteConfig?.colors?.primaryColorCode} hover:bg-${siteConfig?.colors?.primaryColorCode}/90`}
+                >
+                  {cta.text}
+                </Link>
+              </div>
+            )}
+          </div>
+          <div
+            className={`mt-10 lg:mt-0 ${
+              imagePosition === 'left' ? 'lg:col-start-1' : ''
+            }`}
+          >
+            <div className='aspect-w-5 aspect-h-3 overflow-hidden rounded-lg shadow-lg'>
+              <img
+                src={image || '/placeholder.svg'}
+                alt={title}
+                className='w-full h-full object-cover'
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Social Proof Section Component
+const SocialProofSection = ({ siteConfig, ...rest }) => {
+  const { title, testimonials } = rest;
+
+  return (
+    <div className='bg-white dark:bg-gray-900 py-16 sm:py-24'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+        {title && (
+          <div className='text-center'>
+            <h2 className='text-3xl font-extrabold text-gray-900 dark:text-white'>
+              {title}
+            </h2>
+          </div>
+        )}
+        <div className='mt-12'>
+          <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
+            {testimonials.map((testimonial, index) => (
+              <div
+                key={index}
+                className='bg-gray-50 dark:bg-gray-800 rounded-lg p-6 shadow-md'
+              >
+                <div className='flex items-center mb-4'>
+                  <div className='flex-shrink-0'>
+                    <img
+                      className='h-12 w-12 rounded-full'
+                      src={testimonial.avatar || '/placeholder.svg'}
+                      alt={testimonial.name}
+                    />
+                  </div>
+                  <div className='ml-4'>
+                    <h3 className='text-lg font-medium text-gray-900 dark:text-white'>
+                      {testimonial.name}
+                    </h3>
+                    {testimonial.role && (
+                      <p className='text-sm text-gray-500 dark:text-gray-400'>
+                        {testimonial.role}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <div className='relative'>
+                  <svg
+                    className={`absolute top-0 left-0 transform -translate-x-3 -translate-y-2 h-8 w-8 text-${siteConfig?.colors?.primaryColorCode} opacity-25`}
+                    fill='currentColor'
+                    viewBox='0 0 32 32'
+                    aria-hidden='true'
+                  >
+                    <path d='M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z' />
+                  </svg>
+                  <p className='relative mt-4 text-gray-600 dark:text-gray-300'>
+                    {testimonial.quote}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// FAQ Section Component
+const FAQSection = ({ siteConfig, ...rest }) => {
+  const { title, description, faqs } = rest;
+  const [openIndex, setOpenIndex] = React.useState(null);
+
+  const toggleFaq = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  return (
+    <div className='bg-white dark:bg-gray-900 py-16'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+        <div className='text-center'>
+          <h2 className='text-3xl font-extrabold text-gray-900 dark:text-white'>
+            {title}
+          </h2>
+          {description && (
+            <p className='mt-4 text-lg text-gray-500 dark:text-gray-300 max-w-2xl mx-auto'>
+              {description}
+            </p>
+          )}
+        </div>
+        <div className='mt-12'>
+          <dl className='space-y-6 divide-y divide-gray-200 dark:divide-gray-700'>
+            {faqs.map((faq, index) => (
+              <div key={index} className='pt-6'>
+                <dt className='text-lg'>
+                  <button
+                    onClick={() => toggleFaq(index)}
+                    className='text-left w-full flex justify-between items-start text-gray-900 dark:text-white'
+                  >
+                    <span className='font-medium'>{faq.question}</span>
+                    <span className='ml-6 h-7 flex items-center'>
+                      <svg
+                        className={`${
+                          openIndex === index ? '-rotate-180' : 'rotate-0'
+                        } h-6 w-6 transform transition-transform duration-200 ease-in-out`}
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke='currentColor'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth={2}
+                          d='M19 9l-7 7-7-7'
+                        />
+                      </svg>
+                    </span>
+                  </button>
+                </dt>
+                <dd
+                  className={`mt-2 pr-12 transition-all duration-200 ease-in-out ${
+                    openIndex === index
+                      ? 'block opacity-100'
+                      : 'hidden opacity-0'
+                  }`}
+                >
+                  <p className='text-base text-gray-500 dark:text-gray-300'>
+                    {faq.answer}
+                  </p>
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Team Section Component
+const TeamSection = ({ siteConfig, ...rest }) => {
+  const { title, description, members } = rest;
+
+  return (
+    <div className='bg-white dark:bg-gray-900 py-16'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+        <div className='text-center'>
+          <h2 className='text-3xl font-extrabold text-gray-900 dark:text-white'>
+            {title}
+          </h2>
+          {description && (
+            <p className='mt-4 text-lg text-gray-500 dark:text-gray-300 max-w-2xl mx-auto'>
+              {description}
+            </p>
+          )}
+        </div>
+        <div className='mt-12 grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+          {members.map((member, index) => (
+            <div
+              key={index}
+              className='bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden'
+            >
+              <img
+                className='w-full h-64 object-cover'
+                src={member.image || '/placeholder.svg'}
+                alt={member.name}
+              />
+              <div className='p-6'>
+                <h3 className='text-lg font-medium text-gray-900 dark:text-white'>
+                  {member.name}
+                </h3>
+                <p
+                  className={`text-${siteConfig?.colors?.primaryColorCode} mb-2`}
+                >
+                  {member.role}
+                </p>
+                <p className='text-gray-500 dark:text-gray-300 text-sm'>
+                  {member.bio}
+                </p>
+                {member.socialLinks && (
+                  <div className='mt-4 flex space-x-3'>
+                    {member.socialLinks.map((link, i) => (
+                      <a
+                        key={i}
+                        href={link.url}
+                        className={`text-gray-400 hover:text-${siteConfig?.colors?.primaryColorCode}`}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                      >
+                        <Icon name={link.icon} />
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Logo Grid Component
+const LogoGrid = ({ siteConfig, ...rest }) => {
+  const { title, description, logos } = rest;
+
+  return (
+    <div className='bg-white dark:bg-gray-900 py-16'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+        {(title || description) && (
+          <div className='text-center'>
+            {title && (
+              <h2 className='text-3xl font-extrabold text-gray-900 dark:text-white'>
+                {title}
+              </h2>
+            )}
+            {description && (
+              <p className='mt-4 text-lg text-gray-500 dark:text-gray-300 max-w-2xl mx-auto'>
+                {description}
+              </p>
+            )}
+          </div>
+        )}
+        <div className='mt-10'>
+          <div className='grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-5'>
+            {logos.map((logo, index) => (
+              <div key={index} className='flex justify-center'>
+                <a
+                  href={logo.url}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='flex items-center justify-center p-4 grayscale hover:grayscale-0 transition-all duration-200'
+                >
+                  <img
+                    className='h-16 object-contain'
+                    src={logo.image || '/placeholder.svg'}
+                    alt={logo.name}
+                  />
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Stats Section Component
+const StatsSection = ({ siteConfig, ...rest }) => {
+  const { title, description, stats } = rest;
+
+  return (
+    <div className='bg-white dark:bg-gray-900 py-16'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+        {(title || description) && (
+          <div className='text-center'>
+            {title && (
+              <h2 className='text-3xl font-extrabold text-gray-900 dark:text-white'>
+                {title}
+              </h2>
+            )}
+            {description && (
+              <p className='mt-4 text-lg text-gray-500 dark:text-gray-300 max-w-2xl mx-auto'>
+                {description}
+              </p>
+            )}
+          </div>
+        )}
+        <div className='mt-10'>
+          <div className='grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4'>
+            {stats.map((stat, index) => (
+              <div
+                key={index}
+                className='bg-gray-50 dark:bg-gray-800 rounded-lg p-6 text-center'
+              >
+                {stat.icon && (
+                  <div className='flex justify-center mb-4'>
+                    <div
+                      className={`p-3 rounded-full bg-${siteConfig?.colors?.primaryColorCode}/10 text-${siteConfig?.colors?.primaryColorCode}`}
+                    >
+                      <Icon name={stat.icon} size={24} />
+                    </div>
+                  </div>
+                )}
+                <p className='text-4xl font-extrabold text-gray-900 dark:text-white'>
+                  {stat.value}
+                </p>
+                <p className='mt-2 text-lg font-medium text-gray-500 dark:text-gray-300'>
+                  {stat.label}
+                </p>
+                {stat.description && (
+                  <p className='mt-1 text-sm text-gray-400 dark:text-gray-400'>
+                    {stat.description}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const componentBuilders = {
   article: articleBuilder,
   'spa-block': spaBuilder,
@@ -690,6 +1481,50 @@ const componentBuilders = {
   'state-handled-npo-registration-form': ({ siteConfig, ...rest }) => (
     <NpoRegistrationForm {...rest} siteConfig={siteConfig} />
   ),
+  'team-member': ({ siteConfig, ...rest }) => (
+    <TeamMember {...rest} siteConfig={siteConfig} />
+  ),
+  timeline: ({ siteConfig, ...rest }) => (
+    <Timeline {...rest} siteConfig={siteConfig} />
+  ),
+  'statistics-grid': ({ siteConfig, ...rest }) => (
+    <StatisticsGrid {...rest} siteConfig={siteConfig} />
+  ),
+  gallery: ({ siteConfig, ...rest }) => (
+    <Gallery {...rest} siteConfig={siteConfig} />
+  ),
+  'contact-form': ({ siteConfig, ...rest }) => (
+    <ContactForm {...rest} siteConfig={siteConfig} />
+  ),
+  'donation-progress': ({ siteConfig, ...rest }) => (
+    <DonationProgress {...rest} siteConfig={siteConfig} />
+  ),
+  'feature-section': FeatureSection,
+  'testimonial-section': TestimonialSection,
+  'pricing-section': PricingSection,
+
+  // New components
+  'cta-section': ({ siteConfig, ...rest }) => (
+    <CTASection {...rest} siteConfig={siteConfig} />
+  ),
+  'content-section': ({ siteConfig, ...rest }) => (
+    <ContentSection {...rest} siteConfig={siteConfig} />
+  ),
+  'social-proof-section': ({ siteConfig, ...rest }) => (
+    <SocialProofSection {...rest} siteConfig={siteConfig} />
+  ),
+  'faq-section': ({ siteConfig, ...rest }) => (
+    <FAQSection {...rest} siteConfig={siteConfig} />
+  ),
+  'team-section': ({ siteConfig, ...rest }) => (
+    <TeamSection {...rest} siteConfig={siteConfig} />
+  ),
+  'logo-grid': ({ siteConfig, ...rest }) => (
+    <LogoGrid {...rest} siteConfig={siteConfig} />
+  ),
+  'stats-section': ({ siteConfig, ...rest }) => (
+    <StatsSection {...rest} siteConfig={siteConfig} />
+  ),
 
   FlexwindHero1,
   FlexwindHero5,
@@ -709,6 +1544,7 @@ const componentBuilders = {
 const RenderPageComponents = ({ items, data }) => {
   const siteConfig = useConfig();
   const Components = items?.map((a, i) => {
+    console.log('RenderPageComponents', a.type);
     return componentBuilders[a.type]({ ...a, data: a.data, siteConfig });
   });
   return Components;

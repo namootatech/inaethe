@@ -1,48 +1,41 @@
-'use client';
+"use client"
 
-import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { label } from '@/components/ui/form';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Plus, Trash2, Upload, ImageIcon } from 'lucide-react';
-import { ImageUploader } from '@/components/image-uploader';
-import { ColorPicker } from '@/components/color-picker';
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Plus, Trash2, Upload, ImageIcon } from "lucide-react"
+import { ImageUploader } from "@/components/image-uploader"
+import { ColorPicker } from "@/components/color-picker"
 
 // User-friendly color options
 const colorOptions = [
-  { value: 'slate', label: 'Dark Gray', color: '#64748b' },
-  { value: 'gray', label: 'Gray', color: '#6b7280' },
-  { value: 'zinc', label: 'Zinc Gray', color: '#71717a' },
-  { value: 'neutral', label: 'Neutral Gray', color: '#737373' },
-  { value: 'stone', label: 'Stone Gray', color: '#78716c' },
-  { value: 'red', label: 'Red', color: '#ef4444' },
-  { value: 'orange', label: 'Orange', color: '#f97316' },
-  { value: 'amber', label: 'Amber', color: '#f59e0b' },
-  { value: 'yellow', label: 'Yellow', color: '#eab308' },
-  { value: 'lime', label: 'Lime Green', color: '#84cc16' },
-  { value: 'green', label: 'Green', color: '#22c55e' },
-  { value: 'emerald', label: 'Emerald', color: '#10b981' },
-  { value: 'teal', label: 'Teal', color: '#14b8a6' },
-  { value: 'cyan', label: 'Cyan', color: '#06b6d4' },
-  { value: 'sky', label: 'Sky Blue', color: '#0ea5e9' },
-  { value: 'blue', label: 'Blue', color: '#3b82f6' },
-  { value: 'indigo', label: 'Indigo', color: '#6366f1' },
-  { value: 'violet', label: 'Violet', color: '#8b5cf6' },
-  { value: 'purple', label: 'Purple', color: '#a855f7' },
-  { value: 'fuchsia', label: 'Fuchsia', color: '#d946ef' },
-  { value: 'pink', label: 'Pink', color: '#ec4899' },
-  { value: 'rose', label: 'Rose', color: '#f43f5e' },
-];
+  { value: "slate", label: "Dark Gray", color: "#64748b" },
+  { value: "gray", label: "Gray", color: "#6b7280" },
+  { value: "zinc", label: "Zinc Gray", color: "#71717a" },
+  { value: "neutral", label: "Neutral Gray", color: "#737373" },
+  { value: "stone", label: "Stone Gray", color: "#78716c" },
+  { value: "red", label: "Red", color: "#ef4444" },
+  { value: "orange", label: "Orange", color: "#f97316" },
+  { value: "amber", label: "Amber", color: "#f59e0b" },
+  { value: "yellow", label: "Yellow", color: "#eab308" },
+  { value: "lime", label: "Lime Green", color: "#84cc16" },
+  { value: "green", label: "Green", color: "#22c55e" },
+  { value: "emerald", label: "Emerald", color: "#10b981" },
+  { value: "teal", label: "Teal", color: "#14b8a6" },
+  { value: "cyan", label: "Cyan", color: "#06b6d4" },
+  { value: "sky", label: "Sky Blue", color: "#0ea5e9" },
+  { value: "blue", label: "Blue", color: "#3b82f6" },
+  { value: "indigo", label: "Indigo", color: "#6366f1" },
+  { value: "violet", label: "Violet", color: "#8b5cf6" },
+  { value: "purple", label: "Purple", color: "#a855f7" },
+  { value: "fuchsia", label: "Fuchsia", color: "#d946ef" },
+  { value: "pink", label: "Pink", color: "#ec4899" },
+  { value: "rose", label: "Rose", color: "#f43f5e" },
+]
 
 // Component type options with categories
 const componentTypes = [
@@ -151,9 +144,69 @@ const componentTypes = [
     label: 'How It Works',
     category: 'How It Works',
   },
-];
+  // CTA Sections
+  {
+    value: 'cta-section',
+    label: 'CTA Section',
+    category: 'CTA Sections',
+  },
 
-// Event handler options
+  // Content Sections
+  {
+    value: 'content-section',
+    label: 'Content Section',
+    category: 'Content Sections',
+  },
+
+  // Social Proof
+  {
+    value: 'social-proof-section',
+    label: 'Social Proof Section',
+    category: 'Social Proof',
+  },
+
+  // FAQ Sections
+  {
+    value: 'faq-section',
+    label: 'FAQ Section',
+    category: 'FAQ Sections',
+  },
+
+  // Team Sections
+  {
+    value: 'team-section',
+    label: 'Team Section',
+    category: 'Team Sections',
+  },
+  {
+    value: 'team-member',
+    label: 'Team Member',
+    category: 'Team Sections',
+  },
+
+  // Logo Grid
+  {
+    value: 'logo-grid',
+    label: 'Logo Grid',
+    category: 'Partner Sections',
+  },
+
+  // Stats Sections
+  {
+    value: 'stats-section',
+    label: 'Stats Section',
+    category: 'Stats Sections',
+  },
+  {
+    value: 'statistics-grid',
+    label: 'Statistics Grid',
+    category: 'Stats Sections',
+  },
+
+// Now add the editor interfaces for each new component type
+// Add these in the renderComponentFields function, before the default case (around line 2300)
+
+// Event handler options\
 const eventHandlerOptions = [
   {
     value: 'save-new-newsletter-subscriber',
@@ -1270,7 +1323,7 @@ export function ComponentEditor({
               <label>Alert Type</label>
               <Select
                 value={editedComponent.alertType || 'info'}
-                onValueChange={(value) => handleChange(['alertType'], value)}
+                onChange={(value) => handleChange(['alertType'], value)}
               >
                 <SelectTrigger className='border-pink-200'>
                   <SelectValue placeholder='Select alert type' />
@@ -2602,6 +2655,1180 @@ export function ComponentEditor({
                   }}
                 >
                   <Plus className='h-3 w-3 mr-1' /> Add Feature
+                </Button>
+              </CardContent>
+            </Card>
+          </>
+        );
+
+      case 'cta-section':
+        return (
+          <>
+            <div className='space-y-2'>
+              <label>Title</label>
+              <Input
+                value={editedComponent.title || ''}
+                onChange={(e) => handleChange(['title'], e.target.value)}
+                placeholder='Join Our Conservation Efforts Today'
+              />
+            </div>
+            <div className='space-y-2'>
+              <label>Description</label>
+              <Textarea
+                value={editedComponent.description || ''}
+                onChange={(e) => handleChange(['description'], e.target.value)}
+                placeholder='Your support helps us protect endangered species and preserve critical habitats...'
+                rows={3}
+              />
+            </div>
+            <div className='space-y-2'>
+              <label>Button Text</label>
+              <Input
+                value={editedComponent.buttonText || ''}
+                onChange={(e) => handleChange(['buttonText'], e.target.value)}
+                placeholder='Donate Now'
+              />
+            </div>
+            <div className='space-y-2'>
+              <label>Button Link</label>
+              <Input
+                value={editedComponent.buttonLink || ''}
+                onChange={(e) => handleChange(['buttonLink'], e.target.value)}
+                placeholder='/donate'
+              />
+            </div>
+            <div className='space-y-4'>
+              <label>Background Image (Optional)</label>
+              {editedComponent.backgroundImage && (
+                <div className='flex items-center justify-center p-2 border rounded-md bg-muted/40 mb-2'>
+                  <img
+                    src={editedComponent.backgroundImage || '/placeholder.svg'}
+                    alt='Background Preview'
+                    className='max-h-40 object-contain'
+                  />
+                </div>
+              )}
+              <ImageUploader
+                onUpload={(file) => handleImageUpload(file, ['backgroundImage'])}
+                buttonText='Upload Background Image'
+                buttonIcon={<ImageIcon className='h-4 w-4 mr-2' />}
+                buttonClassName='bg-pink-500 hover:bg-pink-600 text-white'
+              />
+              <Input
+                value={editedComponent.backgroundImage || ''}
+                onChange={(e) => handleChange(['backgroundImage'], e.target.value)}
+                placeholder='https://images.unsplash.com/photo-1574068468668-a05a11f871da'
+                className='mt-2'
+              />
+            </div>
+          </>
+        );
+
+      case 'content-section':
+        return (
+          <>
+            <div className='space-y-2'>
+              <label>Title</label>
+              <Input
+                value={editedComponent.title || ''}
+                onChange={(e) => handleChange(['title'], e.target.value)}
+                placeholder='Our Conservation Approach'
+              />
+            </div>
+            <div className='space-y-2'>
+              <label>Subtitle</label>
+              <Input
+                value={editedComponent.subtitle || ''}
+                onChange={(e) => handleChange(['subtitle'], e.target.value)}
+                placeholder='Science-Based Solutions'
+              />
+            </div>
+            <Card>
+              <CardHeader>
+                <CardTitle className='text-sm'>Content Paragraphs</CardTitle>
+              </CardHeader>
+              <CardContent className='space-y-4'>
+                {Array.isArray(editedComponent.content) ? (
+                  editedComponent.content.map((paragraph, index) => (
+                    <div key={index} className='space-y-2'>
+                      <div className='flex justify-between items-center'>
+                        <label>Paragraph {index + 1}</label>
+                        <Button
+                          size='icon'
+                          variant='ghost'
+                          className='h-6 w-6 text-destructive'
+                          onClick={() => {
+                            const newContent = [...editedComponent.content];
+                            newContent.splice(index, 1);
+                            handleChange(['content'], newContent);
+                          }}
+                        >
+                          <Trash2 className='h-3 w-3' />
+                        </Button>
+                      </div>
+                      <Textarea
+                        value={paragraph || ''}
+                        onChange={(e) => {
+                          const newContent = [...editedComponent.content];
+                          newContent[index] = e.target.value;
+                          handleChange(['content'], newContent);
+                        }}
+                        placeholder='Content paragraph'
+                        rows={3}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <div className='space-y-2'>
+                    <label>Content</label>
+                    <Textarea
+                      value={editedComponent.content || ''}
+                      onChange={(e) => handleChange(['content'], e.target.value)}
+                      placeholder='Content text'
+                      rows={4}
+                    />
+                  </div>
+                )}
+                {Array.isArray(editedComponent.content) && (
+                  <Button
+                    size='sm'
+                    variant='outline'
+                    className='w-full border-pink-200 hover:bg-pink-50 text-pink-700'
+                    onClick={() => {
+                      const newContent = [...(editedComponent.content || [])];
+                      newContent.push('');
+                      handleChange(['content'], newContent);
+                    }}
+                  >
+                    <Plus className='h-3 w-3 mr-1' /> Add Paragraph
+                  </Button>
+                )}
+              </CardContent>
+            </Card>
+            <div className='space-y-4'>
+              <label>Image</label>
+              {editedComponent.image && (
+                <div className='flex items-center justify-center p-2 border rounded-md bg-muted/40 mb-2'>
+                  <img
+                    src={editedComponent.image || '/placeholder.svg'}
+                    alt='Content Image Preview'
+                    className='max-h-40 object-contain'
+                  />
+                </div>
+              )}
+              <ImageUploader
+                onUpload={(file) => handleImageUpload(file, ['image'])}
+                buttonText='Upload Image'
+                buttonIcon={<ImageIcon className='h-4 w-4 mr-2' />}
+                buttonClassName='bg-pink-500 hover:bg-pink-600 text-white'
+              />
+              <Input
+                value={editedComponent.image || ''}
+                onChange={(e) => handleChange(['image'], e.target.value)}
+                placeholder='https://images.unsplash.com/photo-1535338454770-8be927b5a00b'
+                className='mt-2'
+              />
+            </div>
+            <div className='space-y-2'>
+              <label>Image Position</label>
+              <Select
+                value={editedComponent.imagePosition || 'right'}
+                onValueChange={(value) => handleChange(['imagePosition'], value)}
+              >
+                <SelectTrigger className='border-pink-200'>
+                  <SelectValue placeholder='Select position' />
+                </SelectTrigger>
+                <SelectContent className='bg-white'>
+                  <SelectItem value='right'>Right</SelectItem>
+                  <SelectItem value='left'>Left</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <Card>
+              <CardHeader>
+                <CardTitle className='text-sm'>Call to Action (Optional)</CardTitle>
+              </CardHeader>
+              <CardContent className='space-y-4'>
+                <div className='space-y-2'>
+                  <label>CTA Text</label>
+                  <Input
+                    value={editedComponent.cta?.text || ''}
+                    onChange={(e) => handleChange(['cta', 'text'], e.target.value)}
+                    placeholder='Learn More About Our Work'
+                  />
+                </div>
+                <div className='space-y-2'>
+                  <label>CTA Link</label>
+                  <Input
+                    value={editedComponent.cta?.link || ''}
+                    onChange={(e) => handleChange(['cta', 'link'], e.target.value)}
+                    placeholder='/about'
+                  />
+                </div>
+              </CardContent>
+            </Card>
+          </>
+        );
+
+      case 'social-proof-section':
+        return (
+          <>
+            <div className='space-y-2'>
+              <label>Title</label>
+              <Input
+                value={editedComponent.title || ''}
+                onChange={(e) => handleChange(['title'], e.target.value)}
+                placeholder='What Our Supporters Say'
+              />
+            </div>
+            <Card>
+              <CardHeader>
+                <CardTitle className='text-sm'>Testimonials</CardTitle>
+              </CardHeader>
+              <CardContent className='space-y-4'>
+                {editedComponent.testimonials?.map((testimonial, index) => (
+                  <Card key={index} className='border-dashed'>
+                    <CardHeader className='py-2'>
+                      <div className='flex justify-between items-center'>
+                        <CardTitle className='text-xs'>
+                          Testimonial {index + 1}
+                        </CardTitle>
+                        <Button
+                          size='icon'
+                          variant='ghost'
+                          className='h-6 w-6 text-destructive'
+                          onClick={() => {
+                            const newTestimonials = [...editedComponent.testimonials];
+                            newTestimonials.splice(index, 1);
+                            handleChange(['testimonials'], newTestimonials);
+                          }}
+                        >
+                          <Trash2 className='h-3 w-3' />
+                        </Button>
+                      </div>
+                    </CardHeader>
+                    <CardContent className='py-2 space-y-2'>
+                      <div className='space-y-2'>
+                        <label>Name</label>
+                        <Input
+                          value={testimonial.name || ''}
+                          onChange={(e) => {
+                            const newTestimonials = [...editedComponent.testimonials];
+                            newTestimonials[index].name = e.target.value;
+                            handleChange(['testimonials'], newTestimonials);
+                          }}
+                          placeholder='Sarah Johnson'
+                        />
+                      </div>
+                      <div className='space-y-2'>
+                        <label>Role</label>
+                        <Input
+                          value={testimonial.role || ''}
+                          onChange={(e) => {
+                            const newTestimonials = [...editedComponent.testimonials];
+                            newTestimonials[index].role = e.target.value;
+                            handleChange(['testimonials'], newTestimonials);
+                          }}
+                          placeholder='Monthly Donor'
+                        />
+                      </div>
+                      <div className='space-y-2'>
+                        <label>Quote</label>
+                        <Textarea
+                          value={testimonial.quote || ''}
+                          onChange={(e) => {
+                            const newTestimonials = [...editedComponent.testimonials];
+                            newTestimonials[index].quote = e.target.value;
+                            handleChange(['testimonials'], newTestimonials);
+                          }}
+                          placeholder='Supporting this organization has been incredibly rewarding...'
+                          rows={3}
+                        />
+                      </div>
+                      <div className='space-y-4'>
+                        <label>Avatar</label>
+                        {testimonial.avatar && (
+                          <div className='flex items-center justify-center p-2 border rounded-md bg-muted/40 mb-2'>
+                            <img
+                              src={testimonial.avatar || '/placeholder.svg'}
+                              alt='Avatar Preview'
+                              className='h-12 w-12 rounded-full object-cover'
+                            />
+                          </div>
+                        )}
+                        <ImageUploader
+                          onUpload={(file) => {
+                            setIsUploading(true);
+                            uploadToCloudinary(file)
+                              .then((url) => {
+                                const newTestimonials = [...editedComponent.testimonials];
+                                newTestimonials[index].avatar = url;
+                                handleChange(['testimonials'], newTestimonials);
+                                setIsUploading(false);
+                              })
+                              .catch((error) => {
+                                console.error('Upload error:', error);
+                                setIsUploading(false);
+                              });
+                          }}
+                          buttonText='Upload Avatar'
+                          buttonIcon={<ImageIcon className='h-4 w-4 mr-2' />}
+                          buttonClassName='bg-pink-500 hover:bg-pink-600 text-white'
+                        />
+                        <Input
+                          value={testimonial.avatar || ''}
+                          onChange={(e) => {
+                            const newTestimonials = [...editedComponent.testimonials];
+                            newTestimonials[index].avatar = e.target.value;
+                            handleChange(['testimonials'], newTestimonials);
+                          }}
+                          placeholder='https://images.unsplash.com/photo-1494790108377-be9c29b29330'
+                          className='mt-2'
+                        />
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+                <Button
+                  size='sm'
+                  variant='outline'
+                  className='w-full border-pink-200 hover:bg-pink-50 text-pink-700'
+                  onClick={() => {
+                    const newTestimonials = [...(editedComponent.testimonials || [])];
+                    newTestimonials.push({
+                      name: 'New Testimonial',
+                      role: 'Role',
+                      quote: 'Quote text goes here...',
+                      avatar: '',
+                    });
+                    handleChange(['testimonials'], newTestimonials);
+                  }}
+                >
+                  <Plus className='h-3 w-3 mr-1' /> Add Testimonial
+                </Button>
+              </CardContent>
+            </Card>
+          </>
+        );
+
+      case 'faq-section':
+        return (
+          <>
+            <div className='space-y-2'>
+              <label>Title</label>
+              <Input
+                value={editedComponent.title || ''}
+                onChange={(e) => handleChange(['title'], e.target.value)}
+                placeholder='Frequently Asked Questions'
+              />
+            </div>
+            <div className='space-y-2'>
+              <label>Description</label>
+              <Textarea
+                value={editedComponent.description || ''}
+                onChange={(e) => handleChange(['description'], e.target.value)}
+                placeholder='Find answers to common questions about our work and how you can get involved.'
+                rows={3}
+              />
+            </div>
+            <Card>
+              <CardHeader>
+                <CardTitle className='text-sm'>FAQ Items</CardTitle>
+              </CardHeader>
+              <CardContent className='space-y-4'>
+                {editedComponent.faqs?.map((faq, index) => (
+                  <Card key={index} className='border-dashed'>
+                    <CardHeader className='py-2'>
+                      <div className='flex justify-between items-center'>
+                        <CardTitle className='text-xs'>
+                          FAQ {index + 1}
+                        </CardTitle>
+                        <Button
+                          size='icon'
+                          variant='ghost'
+                          className='h-6 w-6 text-destructive'
+                          onClick={() => {
+                            const newFaqs = [...editedComponent.faqs];
+                            newFaqs.splice(index, 1);
+                            handleChange(['faqs'], newFaqs);
+                          }}
+                        >
+                          <Trash2 className='h-3 w-3' />
+                        </Button>
+                      </div>
+                    </CardHeader>
+                    <CardContent className='py-2 space-y-2'>
+                      <div className='space-y-2'>
+                        <label>Question</label>
+                        <Input
+                          value={faq.question || ''}
+                          onChange={(e) => {
+                            const newFaqs = [...editedComponent.faqs];
+                            newFaqs[index].question = e.target.value;
+                            handleChange(['faqs'], newFaqs);
+                          }}
+                          placeholder='How is my donation used?'
+                        />
+                      </div>
+                      <div className='space-y-2'>
+                        <label>Answer</label>
+                        <Textarea
+                          value={faq.answer || ''}
+                          onChange={(e) => {
+                            const newFaqs = [...editedComponent.faqs];
+                            newFaqs[index].answer = e.target.value;
+                            handleChange(['faqs'], newFaqs);
+                          }}
+                          placeholder='85% of every donation goes directly to field conservation programs...'
+                          rows={3}
+                        />
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+                <Button
+                  size='sm'
+                  variant='outline'
+                  className='w-full border-pink-200 hover:bg-pink-50 text-pink-700'
+                  onClick={() => {
+                    const newFaqs = [...(editedComponent.faqs || [])];
+                    newFaqs.push({
+                      question: 'New Question',
+                      answer: 'Answer to the question...',
+                    });
+                    handleChange(['faqs'], newFaqs);
+                  }}
+                >
+                  <Plus className='h-3 w-3 mr-1' /> Add FAQ
+                </Button>
+              </CardContent>
+            </Card>
+          </>
+        );
+
+      case 'team-section':
+        return (
+          <>
+            <div className='space-y-2'>
+              <label>Title</label>
+              <Input
+                value={editedComponent.title || ''}
+                onChange={(e) => handleChange(['title'], e.target.value)}
+                placeholder='Our Leadership Team'
+              />
+            </div>
+            <div className='space-y-2'>
+              <label>Description</label>
+              <Textarea
+                value={editedComponent.description || ''}
+                onChange={(e) => handleChange(['description'], e.target.value)}
+                placeholder='Meet the dedicated professionals leading our efforts around the world.'
+                rows={3}
+              />
+            </div>
+            <Card>
+              <CardHeader>
+                <CardTitle className='text-sm'>Team Members</CardTitle>
+              </CardHeader>
+              <CardContent className='space-y-4'>
+                {editedComponent.members?.map((member, index) => (
+                  <Card key={index} className='border-dashed'>
+                    <CardHeader className='py-2'>
+                      <div className='flex justify-between items-center'>
+                        <CardTitle className='text-xs'>
+                          Member {index + 1}
+                        </CardTitle>
+                        <Button
+                          size='icon'
+                          variant='ghost'
+                          className='h-6 w-6 text-destructive'
+                          onClick={() => {
+                            const newMembers = [...editedComponent.members];
+                            newMembers.splice(index, 1);
+                            handleChange(['members'], newMembers);
+                          }}
+                        >
+                          <Trash2 className='h-3 w-3' />
+                        </Button>
+                      </div>
+                    </CardHeader>
+                    <CardContent className='py-2 space-y-2'>
+                      <div className='space-y-2'>
+                        <label>Name</label>
+                        <Input
+                          value={member.name || ''}
+                          onChange={(e) => {
+                            const newMembers = [...editedComponent.members];
+                            newMembers[index].name = e.target.value;
+                            handleChange(['members'], newMembers);
+                          }}
+                          placeholder='Dr. Elena Morales'
+                        />
+                      </div>
+                      <div className='space-y-2'>
+                        <label>Role</label>
+                        <Input
+                          value={member.role || ''}
+                          onChange={(e) => {
+                            const newMembers = [...editedComponent.members];
+                            newMembers[index].role = e.target.value;
+                            handleChange(['members'], newMembers);
+                          }}
+                          placeholder='Founder & Executive Director'
+                        />
+                      </div>
+                      <div className='space-y-2'>
+                        <label>Bio</label>
+                        <Textarea
+                          value={member.bio || ''}
+                          onChange={(e) => {
+                            const newMembers = [...editedComponent.members];
+                            newMembers[index].bio = e.target.value;
+                            handleChange(['members'], newMembers);
+                          }}
+                          placeholder='Dr. Morales founded our organization after witnessing...'
+                          rows={3}
+                        />
+                      </div>
+                      <div className='space-y-4'>
+                        <label>Image</label>
+                        {member.image && (
+                          <div className='flex items-center justify-center p-2 border rounded-md bg-muted/40 mb-2'>
+                            <img
+                              src={member.image || '/placeholder.svg'}
+                              alt='Member Preview'
+                              className='h-32 w-32 object-cover'
+                            />
+                          </div>
+                        )}
+                        <ImageUploader
+                          onUpload={(file) => {
+                            setIsUploading(true);
+                            uploadToCloudinary(file)
+                              .then((url) => {
+                                const newMembers = [...editedComponent.members];
+                                newMembers[index].image = url;
+                                handleChange(['members'], newMembers);
+                                setIsUploading(false);
+                              })
+                              .catch((error) => {
+                                console.error('Upload error:', error);
+                                setIsUploading(false);
+                              });
+                          }}
+                          buttonText='Upload Image'
+                          buttonIcon={<ImageIcon className='h-4 w-4 mr-2' />}
+                          buttonClassName='bg-pink-500 hover:bg-pink-600 text-white'
+                        />
+                        <Input
+                          value={member.image || ''}
+                          onChange={(e) => {
+                            const newMembers = [...editedComponent.members];
+                            newMembers[index].image = e.target.value;
+                            handleChange(['members'], newMembers);
+                          }}
+                          placeholder='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2'
+                          className='mt-2'
+                        />
+                      </div>
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className='text-xs'>Social Links</CardTitle>
+                        </CardHeader>
+                        <CardContent className='space-y-4'>
+                          {member.socialLinks?.map((link, linkIndex) => (
+                            <div key={linkIndex} className='space-y-2 border-t pt-2 first:border-t-0 first:pt-0'>
+                              <div className='flex justify-between items-center'>
+                                <label>Social Link {linkIndex + 1}</label>
+                                <Button
+                                  size='icon'
+                                  variant='ghost'
+                                  className='h-6 w-6 text-destructive'
+                                  onClick={() => {
+                                    const newSocialLinks = [...member.socialLinks];
+                                    newSocialLinks.splice(linkIndex, 1);
+                                    const newMembers = [...editedComponent.members];
+                                    newMembers[index].socialLinks = newSocialLinks;
+                                    handleChange(['members'], newMembers);
+                                  }}
+                                >
+                                  <Trash2 className='h-3 w-3' />
+                                </Button>
+                              </div>
+                              <div className='space-y-2'>
+                                <label>Icon</label>
+                                <Input
+                                  value={link.icon || ''}
+                                  onChange={(e) => {
+                                    const newSocialLinks = [...member.socialLinks];
+                                    newSocialLinks[linkIndex].icon = e.target.value;
+                                    const newMembers = [...editedComponent.members];
+                                    newMembers[index].socialLinks = newSocialLinks;
+                                    handleChange(['members'], newMembers);
+                                  }}
+                                  placeholder='linkedin'
+                                />
+                              </div>
+                              <div className='space-y-2'>
+                                <label>URL</label>
+                                <Input
+                                  value={link.url || ''}
+                                  onChange={(e) => {
+                                    const newSocialLinks = [...member.socialLinks];
+                                    newSocialLinks[linkIndex].url = e.target.value;
+                                    const newMembers = [...editedComponent.members];
+                                    newMembers[index].socialLinks = newSocialLinks;
+                                    handleChange(['members'], newMembers);
+                                  }}
+                                  placeholder='https://linkedin.com/in/username'
+                                />
+                              </div>
+                            </div>
+                          ))}
+                          <Button
+                            size='sm'
+                            variant='outline'
+                            className='w-full border-pink-200 hover:bg-pink-50 text-pink-700'
+                            onClick={() => {
+                              const newSocialLinks = [...(member.socialLinks || [])];
+                              newSocialLinks.push({
+                                icon: 'linkedin',
+                                url: 'https://linkedin.com/in/',
+                              });
+                              const newMembers = [...editedComponent.members];
+                              newMembers[index].socialLinks = newSocialLinks;
+                              handleChange(['members'], newMembers);
+                            }}
+                          >
+                            <Plus className='h-3 w-3 mr-1' /> Add Social Link
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    </CardContent>
+                  </Card>
+                ))}
+                <Button
+                  size='sm'
+                  variant='outline'
+                  className='w-full border-pink-200 hover:bg-pink-50 text-pink-700'
+                  onClick={() => {
+                    const newMembers = [...(editedComponent.members || [])];
+                    newMembers.push({
+                      name: 'New Team Member',
+                      role: 'Position',
+                      bio: 'Bio information...',
+                      image: '',
+                      socialLinks: [
+                        {
+                          icon: 'linkedin',
+                          url: 'https://linkedin.com/in/',
+                        },
+                      ],
+                    });
+                    handleChange(['members'], newMembers);
+                  }}
+                >
+                  <Plus className='h-3 w-3 mr-1' /> Add Team Member
+                </Button>
+              </CardContent>
+            </Card>
+          </>
+        );
+
+      case 'team-member':
+        return (
+          <>
+            <div className='space-y-2'>
+              <label>Name</label>
+              <Input
+                value={editedComponent.name || ''}
+                onChange={(e) => handleChange(['name'], e.target.value)}
+                placeholder='Dr. Elena Morales'
+              />
+            </div>
+            <div className='space-y-2'>
+              <label>Role</label>
+              <Input
+                value={editedComponent.role || ''}
+                onChange={(e) => handleChange(['role'], e.target.value)}
+                placeholder='Founder & Executive Director'
+              />
+            </div>
+            <div className='space-y-2'>
+              <label>Bio</label>
+              <Textarea
+                value={editedComponent.bio || ''}
+                onChange={(e) => handleChange(['bio'], e.target.value)}
+                placeholder='Dr. Morales founded our organization after witnessing...'
+                rows={3}
+              />
+            </div>
+            <div className='space-y-4'>
+              <label>Image</label>
+              {editedComponent.image && (
+                <div className='flex items-center justify-center p-2 border rounded-md bg-muted/40 mb-2'>
+                  <img
+                    src={editedComponent.image || '/placeholder.svg'}
+                    alt='Member Preview'
+                    className='h-32 w-32 object-cover'
+                  />
+                </div>
+              )}
+              <ImageUploader
+                onUpload={(file) => handleImageUpload(file, ['image'])}
+                buttonText='Upload Image'
+                buttonIcon={<ImageIcon className='h-4 w-4 mr-2' />}
+                buttonClassName='bg-pink-500 hover:bg-pink-600 text-white'
+              />
+              <Input
+                value={editedComponent.image || ''}
+                onChange={(e) => handleChange(['image'], e.target.value)}
+                placeholder='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2'
+                className='mt-2'
+              />
+            </div>
+            <Card>
+              <CardHeader>
+                <CardTitle className='text-sm'>Social Links</CardTitle>
+              </CardHeader>
+              <CardContent className='space-y-4'>
+                {editedComponent.socialLinks?.map((link, index) => (
+                  <div key={index} className='space-y-2 border-t pt-2 first:border-t-0 first:pt-0'>
+                    <div className='flex justify-between items-center'>
+                      <label>Social Link {index + 1}</label>
+                      <Button
+                        size='icon'
+                        variant='ghost'
+                        className='h-6 w-6 text-destructive'
+                        onClick={() => {
+                          const newSocialLinks = [...editedComponent.socialLinks];
+                          newSocialLinks.splice(index, 1);
+                          handleChange(['socialLinks'], newSocialLinks);
+                        }}
+                      >
+                        <Trash2 className='h-3 w-3' />
+                      </Button>
+                    </div>
+                    <div className='space-y-2'>
+                      <label>Icon</label>
+                      <Input
+                        value={link.icon || ''}
+                        onChange={(e) => {
+                          const newSocialLinks = [...editedComponent.socialLinks];
+                          newSocialLinks[index].icon = e.target.value;
+                          handleChange(['socialLinks'], newSocialLinks);
+                        }}
+                        placeholder='linkedin'
+                      />
+                    </div>
+                    <div className='space-y-2'>
+                      <label>URL</label>
+                      <Input
+                        value={link.url || ''}
+                        onChange={(e) => {
+                          const newSocialLinks = [...editedComponent.socialLinks];
+                          newSocialLinks[index].url = e.target.value;
+                          handleChange(['socialLinks'], newSocialLinks);
+                        }}
+                        placeholder='https://linkedin.com/in/username'
+                      />
+                    </div>
+                  </div>
+                ))}
+                <Button
+                  size='sm'
+                  variant='outline'
+                  className='w-full border-pink-200 hover:bg-pink-50 text-pink-700'
+                  onClick={() => {
+                    const newSocialLinks = [...(editedComponent.socialLinks || [])];
+                    newSocialLinks.push({
+                      icon: 'linkedin',
+                      url: 'https://linkedin.com/in/',
+                    });
+                    handleChange(['socialLinks'], newSocialLinks);
+                  }}
+                >
+                  <Plus className='h-3 w-3 mr-1' /> Add Social Link
+                </Button>
+              </CardContent>
+            </Card>
+          </>
+        );
+
+      case 'logo-grid':
+        return (
+          <>
+            <div className='space-y-2'>
+              <label>Title</label>
+              <Input
+                value={editedComponent.title || ''}
+                onChange={(e) => handleChange(['title'], e.target.value)}
+                placeholder='Our Partners & Supporters'
+              />
+            </div>
+            <div className='space-y-2'>
+              <label>Description</label>
+              <Textarea
+                value={editedComponent.description || ''}
+                onChange={(e) => handleChange(['description'], e.target.value)}
+                placeholder='We collaborate with organizations around the world to maximize our impact.'
+                rows={3}
+              />
+            </div>
+            <Card>
+              <CardHeader>
+                <CardTitle className='text-sm'>Logos</CardTitle>
+              </CardHeader>
+              <CardContent className='space-y-4'>
+                {editedComponent.logos?.map((logo, index) => (
+                  <Card key={index} className='border-dashed'>
+                    <CardHeader className='py-2'>
+                      <div className='flex justify-between items-center'>
+                        <CardTitle className='text-xs'>
+                          Logo {index + 1}
+                        </CardTitle>
+                        <Button
+                          size='icon'
+                          variant='ghost'
+                          className='h-6 w-6 text-destructive'
+                          onClick={() => {
+                            const newLogos = [...editedComponent.logos];
+                            newLogos.splice(index, 1);
+                            handleChange(['logos'], newLogos);
+                          }}
+                        >
+                          <Trash2 className='h-3 w-3' />
+                        </Button>
+                      </div>
+                    </CardHeader>
+                    <CardContent className='py-2 space-y-2'>
+                      <div className='space-y-2'>
+                        <label>Name</label>
+                        <Input
+                          value={logo.name || ''}
+                          onChange={(e) => {
+                            const newLogos = [...editedComponent.logos];
+                            newLogos[index].name = e.target.value;
+                            handleChange(['logos'], newLogos);
+                          }}
+                          placeholder='Partner Name'
+                        />
+                      </div>
+                      <div className='space-y-2'>
+                        <label>URL</label>
+                        <Input
+                          value={logo.url || ''}
+                          onChange={(e) => {
+                            const newLogos = [...editedComponent.logos];
+                            newLogos[index].url = e.target.value;
+                            handleChange(['logos'], newLogos);
+                          }}
+                          placeholder='https://partner-website.com'
+                        />
+                      </div>
+                      <div className='space-y-4'>
+                        <label>Logo Image</label>
+                        {logo.image && (
+                          <div className='flex items-center justify-center p-2 border rounded-md bg-muted/40 mb-2'>
+                            <img
+                              src={logo.image || '/placeholder.svg'}
+                              alt='Logo Preview'
+                              className='h-16 object-contain'
+                            />
+                          </div>
+                        )}
+                        <ImageUploader
+                          onUpload={(file) => {
+                            setIsUploading(true);
+                            uploadToCloudinary(file)
+                              .then((url) => {
+                                const newLogos = [...editedComponent.logos];
+                                newLogos[index].image = url;
+                                handleChange(['logos'], newLogos);
+                                setIsUploading(false);
+                              })
+                              .catch((error) => {
+                                console.error('Upload error:', error);
+                                setIsUploading(false);
+                              });
+                          }}
+                          buttonText='Upload Logo'
+                          buttonIcon={<ImageIcon className='h-4 w-4 mr-2' />}
+                          buttonClassName='bg-pink-500 hover:bg-pink-600 text-white'
+                        />
+                        <Input
+                          value={logo.image || ''}
+                          onChange={(e) => {
+                            const newLogos = [...editedComponent.logos];
+                            newLogos[index].image = e.target.value;
+                            handleChange(['logos'], newLogos);
+                          }}
+                          placeholder='https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead'
+                          className='mt-2'
+                        />
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+                <Button
+                  size='sm'
+                  variant='outline'
+                  className='w-full border-pink-200 hover:bg-pink-50 text-pink-700'
+                  onClick={() => {
+                    const newLogos = [...(editedComponent.logos || [])];
+                    newLogos.push({
+                      name: 'New Partner',
+                      url: 'https://example.com',
+                      image: '',
+                    });
+                    handleChange(['logos'], newLogos);
+                  }}
+                >
+                  <Plus className='h-3 w-3 mr-1' /> Add Logo
+                </Button>
+              </CardContent>
+            </Card>
+          </>
+        );
+
+      case 'stats-section':
+        return (
+          <>
+            <div className='space-y-2'>
+              <label>Title</label>
+              <Input
+                value={editedComponent.title || ''}
+                onChange={(e) => handleChange(['title'], e.target.value)}
+                placeholder='Our Conservation Impact'
+              />
+            </div>
+            <div className='space-y-2'>
+              <label>Description</label>
+              <Textarea
+                value={editedComponent.description || ''}
+                onChange={(e) => handleChange(['description'], e.target.value)}
+                placeholder='Measurable results from our global conservation efforts.'
+                rows={3}
+              />
+            </div>
+            <Card>
+              <CardHeader>
+                <CardTitle className='text-sm'>Stats</CardTitle>
+              </CardHeader>
+              <CardContent className='space-y-4'>
+                {editedComponent.stats?.map((stat, index) => (
+                  <Card key={index} className='border-dashed'>
+                    <CardHeader className='py-2'>
+                      <div className='flex justify-between items-center'>
+                        <CardTitle className='text-xs'>
+                          Stat {index + 1}
+                        </CardTitle>
+                        <Button
+                          size='icon'
+                          variant='ghost'
+                          className='h-6 w-6 text-destructive'
+                          onClick={() => {
+                            const newStats = [...editedComponent.stats];
+                            newStats.splice(index, 1);
+                            handleChange(['stats'], newStats);
+                          }}
+                        >
+                          <Trash2 className='h-3 w-3' />
+                        </Button>
+                      </div>
+                    </CardHeader>
+                    <CardContent className='py-2 space-y-2'>
+                      <div className='space-y-2'>
+                        <label>Icon</label>
+                        <Input
+                          value={stat.icon || ''}
+                          onChange={(e) => {
+                            const newStats = [...editedComponent.stats];
+                            newStats[index].icon = e.target.value;
+                            handleChange(['stats'], newStats);
+                          }}
+                          placeholder='shield'
+                        />
+                      </div>
+                      <div className='space-y-2'>
+                        <label>Value</label>
+                        <Input
+                          value={stat.value || ''}
+                          onChange={(e) => {
+                            const newStats = [...editedComponent.stats];
+                            newStats[index].value = e.target.value;
+                            handleChange(['stats'], newStats);
+                          }}
+                          placeholder='150+'
+                        />
+                      </div>
+                      <div className='space-y-2'>
+                        <label>Label</label>
+                        <Input
+                          value={stat.label || ''}
+                          onChange={(e) => {
+                            const newStats = [...editedComponent.stats];
+                            newStats[index].label = e.target.value;
+                            handleChange(['stats'], newStats);
+                          }}
+                          placeholder='Species Protected'
+                        />
+                      </div>
+                      <div className='space-y-2'>
+                        <label>Description</label>
+                        <Input
+                          value={stat.description || ''}
+                          onChange={(e) => {
+                            const newStats = [...editedComponent.stats];
+                            newStats[index].description = e.target.value;
+                            handleChange(['stats'], newStats);
+                          }}
+                          placeholder='Endangered species under our conservation programs'
+                        />
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+                <Button
+                  size='sm'
+                  variant='outline'
+                  className='w-full border-pink-200 hover:bg-pink-50 text-pink-700'
+                  onClick={() => {
+                    const newStats = [...(editedComponent.stats || [])];
+                    newStats.push({
+                      icon: 'star',
+                      value: '0+',
+                      label: 'New Stat',
+                      description: 'Description of this statistic',
+                    });
+                    handleChange(['stats'], newStats);
+                  }}
+                >
+                  <Plus className='h-3 w-3 mr-1' /> Add Stat
+                </Button>
+              </CardContent>
+            </Card>
+          </>
+        );
+
+      case 'statistics-grid':
+        return (
+          <>
+            <div className='space-y-2'>
+              <label>Title</label>
+              <Input
+                value={editedComponent.title || ''}
+                onChange={(e) => handleChange(['title'], e.target.value)}
+                placeholder='Our Impact in Numbers'
+              />
+            </div>
+            <div className='space-y-2'>
+              <label>Description</label>
+              <Textarea
+                value={editedComponent.description || ''}
+                onChange={(e) => handleChange(['description'], e.target.value)}
+                placeholder='Measurable results from our conservation efforts worldwide.'
+                rows={3}
+              />
+            </div>
+            <Card>
+              <CardHeader>
+                <CardTitle className='text-sm'>Stats</CardTitle>
+              </CardHeader>
+              <CardContent className='space-y-4'>
+                {editedComponent.stats?.map((stat, index) => (
+                  <Card key={index} className='border-dashed'>
+                    <CardHeader className='py-2'>
+                      <div className='flex justify-between items-center'>
+                        <CardTitle className='text-xs'>
+                          Stat {index + 1}
+                        </CardTitle>
+                        <Button
+                          size='icon'
+                          variant='ghost'
+                          className='h-6 w-6 text-destructive'
+                          onClick={() => {
+                            const newStats = [...editedComponent.stats];
+                            newStats.splice(index, 1);
+                            handleChange(['stats'], newStats);
+                          }}
+                        >
+                          <Trash2 className='h-3 w-3' />
+                        </Button>
+                      </div>
+                    </CardHeader>
+                    <CardContent className='py-2 space-y-2'>
+                      <div className='space-y-2'>
+                        <label>Icon</label>
+                        <Input
+                          value={stat.icon || ''}
+                          onChange={(e) => {
+                            const newStats = [...editedComponent.stats];
+                            newStats[index].icon = e.target.value;
+                            handleChange(['stats'], newStats);
+                          }}
+                          placeholder='shield'
+                        />
+                      </div>
+                      <div className='space-y-2'>
+                        <label>Value</label>
+                        <Input
+                          value={stat.value || ''}
+                          onChange={(e) => {
+                            const newStats = [...editedComponent.stats];
+                            newStats[index].value = e.target.value;
+                            handleChange(['stats'], newStats);
+                          }}
+                          placeholder='150+'
+                        />
+                      </div>
+                      <div className='space-y-2'>
+                        <label>Label</label>
+                        <Input
+                          value={stat.label || ''}
+                          onChange={(e) => {
+                            const newStats = [...editedComponent.stats];
+                            newStats[index].label = e.target.value;
+                            handleChange(['stats'], newStats);
+                          }}
+                          placeholder='Species Protected'
+                        />
+                      </div>
+                      <div className='space-y-2'>
+                        <label>Change Percentage (Optional)</label>
+                        <Input
+                          type="number"
+                          value={stat.change || ''}
+                          onChange={(e) => {
+                            const newStats = [...editedComponent.stats];
+                            newStats[index].change = Number(e.target.value) || 0;
+                            handleChange(['stats'], newStats);
+                          }}
+                          placeholder='12'
+                        />
+                        <p className='text-xs text-muted-foreground'>
+                          Positive number for increase, negative for decrease
+                        </p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+                <Button
+                  size='sm'
+                  variant='outline'
+                  className='w-full border-pink-200 hover:bg-pink-50 text-pink-700'
+                  onClick={() => {
+                    const newStats = [...(editedComponent.stats || [])];
+                    newStats.push({
+                      icon: 'star',
+                      value: '0+',
+                      label: 'New Stat',
+                      change: 0
+                    });
+                    handleChange(['stats'], newStats);
+                  }}
+                >
+                  <Plus className='h-3 w-3 mr-1' /> Add Stat
                 </Button>
               </CardContent>
             </Card>
