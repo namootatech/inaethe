@@ -227,6 +227,11 @@ export const ApiProvider = ({ children }) => {
     return await apiRequest(`/addConfig`, 'POST', data);
   };
 
+  const checkLiveStatus = async (url) => {
+    console.log(`*** [API CONTEXT] Uadding subscriber`);
+    return await apiRequest(`/checkLiveStatus`, 'POST', { url });
+  };
+
   return (
     <ApiContext.Provider
       value={{
@@ -259,6 +264,7 @@ export const ApiProvider = ({ children }) => {
         addSubscriber,
         loginNpo,
         addSiteConfig,
+        checkLiveStatus,
       }}
     >
       {children}

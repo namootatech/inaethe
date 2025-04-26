@@ -18,6 +18,7 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { CheckCircle, AlertCircle, Loader2, ExternalLink } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
+import { useApi } from '@/context/ApiContext';
 
 // Format seconds into a minutes:seconds string
 function formatTime(seconds) {
@@ -30,6 +31,7 @@ function DeploymentStatusPage() {
   const searchParams = useSearchParams();
   const orgId = searchParams.get('orgId');
   const domain = searchParams.get('domain');
+  const api = useApi();
 
   const liveTestUrl = `https://${domain}/.netlify/functions/isLive`;
   const previewTestUrl = `https://${orgId}-inaethe-za.netlify.app/.netlify/functions/isLive`;
@@ -48,8 +50,8 @@ function DeploymentStatusPage() {
   // Function to check if the live site is up
   const checkLiveStatus = useCallback(async () => {
     try {
-      const response = await fetch(liveTestUrl);
-      const data = await response.json();
+      const response = await api.checkLiveStatus(liveTestUrl);
+      const data = response;
 
       if (data.isLive) {
         setLiveStatus('live');
@@ -69,8 +71,8 @@ function DeploymentStatusPage() {
   // Function to check if the preview site is up
   const checkPreviewStatus = useCallback(async () => {
     try {
-      const response = await fetch(previewTestUrl);
-      const data = await response.json();
+      const response = await api.checkLiveStatus(previewTestUrl);
+      const data = response;
 
       if (data.isLive) {
         setPreviewStatus('live');
