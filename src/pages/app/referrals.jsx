@@ -276,7 +276,7 @@ export default function Referrals() {
   }, [user]);
 
   const copyToClipboard = () => {
-    if (referralLink?.link) {
+    if (referralLink && referralLink.link) {
       navigator.clipboard
         .writeText(referralLink.link)
         .then(() => toast.success('Referral link copied to clipboard!'))
