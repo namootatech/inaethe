@@ -1,6 +1,9 @@
 import dotenv from 'dotenv';
+import { MongoClient, ObjectId } from 'mongodb';
 
 dotenv.config();
+
+const NEXT_PUBLIC_MONGODB_DB = process.env.NEXT_PUBLIC_MONGODB_DB;
 
 const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
 const ORG_NAME = 'namootatech';
@@ -10,6 +13,10 @@ const CONFIG_PATH = 'public/siteConfigs';
 const API_BASE = 'https://api.github.com';
 
 export const handler = async (event) => {
+  const client = new MongoClient(process.env.NEXT_PUBLIC_MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
@@ -94,6 +101,31 @@ export const handler = async (event) => {
     }
 
     const result = await response.json();
+
+    await client.connect();
+
+    const configsCollection = client
+      .db(NEXT_PUBLIC_MONGODB_DB)
+      .collection('partnerConfigs');
+
+    const existingConfig = await configsCollection.findOne({
+      organisationId: orgName,
+    });
+
+    if (existingConfig) {
+      await configsCollection.updateOne(
+        { organisationId: orgName },
+        { $set: { config: { ...config, updatedAt: new Date() } } }
+      );
+    }
+
+    if (!existingConfig) {
+      await configsCollection.insertOne({
+        organisationId: orgName,
+        config,
+        createdAt: new Date(),
+      });
+    }
 
     return {
       statusCode: 200,

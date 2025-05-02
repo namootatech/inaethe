@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -67,6 +67,7 @@ import { ComponentEditor } from '@/components/component-editor';
 import { ColorPicker } from '@/components/color-picker';
 import { ImageUploader } from '@/components/image-uploader';
 import { useApi } from '@/context/ApiContext';
+import { useAuth } from '@/context/AuthContext';
 const uploadToCloudinary = async (file) => {
   try {
     const formData = new FormData();
@@ -161,7 +162,7 @@ const formSchema = z.object({
 });
 
 // Sample default values
-const defaultValues = {
+let defaultConfig = {
   organisationId: 'inaethe',
   partnerName: 'Inaethe',
   tagline: 'Transforming good intentions into tangible impacts.',
@@ -481,11 +482,30 @@ export default function SiteConfigPage() {
     colorCode: '',
   });
   const api = useApi();
-  // Initialize the form with default values
+  const { partner: partnerData } = useAuth();
+
+  const defaultValues = {
+    ...defaultConfig,
+    organisationId: partnerData?.partner?.slug,
+    partnerName: partnerData?.partner?.organizationName,
+  };
+
+  console.log('Default values:', defaultValues);
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues,
   });
+
+  useEffect(() => {
+    if (partnerData?.partner) {
+      form.reset({
+        ...defaultConfig,
+        organisationId: partnerData.partner.slug,
+        partnerName: partnerData.partner.organizationName,
+      });
+    }
+  }, [partnerData?.partner, form]);
 
   // Handle form submission
   async function onSubmit(data) {
@@ -535,21 +555,10 @@ export default function SiteConfigPage() {
           );
         });
 
-      // In a real application, you would send this data to your API
-      // await fetch('/api/site-config', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(data)
-      // })
-
-      // Show success message
       toast.success('Your site configuration has been successfully saved.');
 
       // Update preview
       setPreviewConfig(data);
-
-      // In a real app, you might redirect or refresh data
-      // router.push('/admin/dashboard')
     } catch (error) {
       console.error('Error saving configuration:', error);
       toast.error(
@@ -562,13 +571,17 @@ export default function SiteConfigPage() {
 
   // Generate a preview of the JSON configuration
   const generatePreview = () => {
-    const currentValues = form.getValues();
+    const currentValues = form?.getValues();
     setPreviewConfig(currentValues);
   };
 
   // Reset the form to default values
   const resetForm = () => {
-    form.reset(defaultValues);
+    form?.reset({
+      ...defaultConfig,
+      organisationId: partnerData.partner.slug,
+      partnerName: partnerData.partner.organizationName,
+    });
     toast.error('The form has been reset to default values.');
   };
 
@@ -581,7 +594,7 @@ export default function SiteConfigPage() {
 
   // Save a new page
   const savePage = () => {
-    const formValues = form.getValues();
+    const formValues = form?.getValues();
 
     if (isDefaultPage) {
       const defaultPages = [...(formValues.defaultPages || [])];
@@ -590,7 +603,7 @@ export default function SiteConfigPage() {
         title: newPage.title,
         components: [],
       });
-      form.setValue('defaultPages', defaultPages);
+      form?.setValue('defaultPages', defaultPages);
     } else {
       const pages = [...(formValues.pages || [])];
       pages.push({
@@ -600,7 +613,7 @@ export default function SiteConfigPage() {
         colorCode: newPage.colorCode || undefined,
         components: [],
       });
-      form.setValue('pages', pages);
+      form?.setValue('pages', pages);
     }
 
     setShowPageDialog(false);
@@ -614,19 +627,19 @@ export default function SiteConfigPage() {
         'Are you sure you want to delete this page? This action cannot be undone.'
       )
     ) {
-      const formValues = form.getValues();
+      const formValues = form?.getValues();
 
       if (isDefault) {
         const defaultPages = [...(formValues.defaultPages || [])];
         defaultPages.splice(index, 1);
-        form.setValue('defaultPages', defaultPages);
+        form?.setValue('defaultPages', defaultPages);
         if (selectedDefaultPageIndex === index) {
           setSelectedDefaultPageIndex(null);
         }
       } else {
         const pages = [...(formValues.pages || [])];
         pages.splice(index, 1);
-        form.setValue('pages', pages);
+        form?.setValue('pages', pages);
         if (selectedPageIndex === index) {
           setSelectedPageIndex(null);
         }
@@ -638,7 +651,7 @@ export default function SiteConfigPage() {
 
   // Duplicate a page
   const duplicatePage = (index, isDefault = false) => {
-    const formValues = form.getValues();
+    const formValues = form?.getValues();
 
     if (isDefault) {
       const defaultPages = [...(formValues.defaultPages || [])];
@@ -652,7 +665,7 @@ export default function SiteConfigPage() {
         title: newPageTitle,
       });
 
-      form.setValue('defaultPages', defaultPages);
+      form?.setValue('defaultPages', defaultPages);
     } else {
       const pages = [...(formValues.pages || [])];
       const pageToDuplicate = pages[index];
@@ -665,7 +678,7 @@ export default function SiteConfigPage() {
         title: newPageTitle,
       });
 
-      form.setValue('pages', pages);
+      form?.setValue('pages', pages);
     }
 
     toast.info('The page has been duplicated successfully.');
@@ -673,7 +686,7 @@ export default function SiteConfigPage() {
 
   // Add a component to a page
   const addComponent = (pageIndex, isDefault = false) => {
-    const formValues = form.getValues();
+    const formValues = form?.getValues();
 
     if (isDefault) {
       const defaultPages = [...(formValues.defaultPages || [])];
@@ -688,7 +701,7 @@ export default function SiteConfigPage() {
 
       page.components = components;
       defaultPages[pageIndex] = page;
-      form.setValue('defaultPages', defaultPages);
+      form?.setValue('defaultPages', defaultPages);
     } else {
       const pages = [...(formValues.pages || [])];
       const page = pages[pageIndex];
@@ -702,7 +715,7 @@ export default function SiteConfigPage() {
 
       page.components = components;
       pages[pageIndex] = page;
-      form.setValue('pages', pages);
+      form?.setValue('pages', pages);
     }
 
     toast.info('A new component has been added to the page.');
@@ -710,7 +723,7 @@ export default function SiteConfigPage() {
 
   // Edit a component
   const editComponent = (pageIndex, componentIndex, isDefault = false) => {
-    const formValues = form.getValues();
+    const formValues = form?.getValues();
     let component;
 
     if (isDefault) {
@@ -732,7 +745,7 @@ export default function SiteConfigPage() {
 
   // Save edited component
   const saveComponent = (updatedComponent) => {
-    const formValues = form.getValues();
+    const formValues = form?.getValues();
 
     if (
       isDefaultPage &&
@@ -746,7 +759,7 @@ export default function SiteConfigPage() {
       components[selectedComponentIndex] = updatedComponent;
       page.components = components;
       defaultPages[selectedDefaultPageIndex] = page;
-      form.setValue('defaultPages', defaultPages);
+      form?.setValue('defaultPages', defaultPages);
     } else if (
       !isDefaultPage &&
       selectedPageIndex !== null &&
@@ -759,7 +772,7 @@ export default function SiteConfigPage() {
       components[selectedComponentIndex] = updatedComponent;
       page.components = components;
       pages[selectedPageIndex] = page;
-      form.setValue('pages', pages);
+      form?.setValue('pages', pages);
     }
 
     setShowComponentEditor(false);
@@ -773,7 +786,7 @@ export default function SiteConfigPage() {
         'Are you sure you want to delete this component? This action cannot be undone.'
       )
     ) {
-      const formValues = form.getValues();
+      const formValues = form?.getValues();
 
       if (isDefault) {
         const defaultPages = [...(formValues.defaultPages || [])];
@@ -783,7 +796,7 @@ export default function SiteConfigPage() {
         components.splice(componentIndex, 1);
         page.components = components;
         defaultPages[pageIndex] = page;
-        form.setValue('defaultPages', defaultPages);
+        form?.setValue('defaultPages', defaultPages);
       } else {
         const pages = [...(formValues.pages || [])];
         const page = pages[pageIndex];
@@ -792,7 +805,7 @@ export default function SiteConfigPage() {
         components.splice(componentIndex, 1);
         page.components = components;
         pages[pageIndex] = page;
-        form.setValue('pages', pages);
+        form?.setValue('pages', pages);
       }
 
       toast.info('The component has been deleted successfully.');
@@ -803,7 +816,7 @@ export default function SiteConfigPage() {
   const moveComponentUp = (pageIndex, componentIndex, isDefault = false) => {
     if (componentIndex === 0) return;
 
-    const formValues = form.getValues();
+    const formValues = form?.getValues();
 
     if (isDefault) {
       const defaultPages = [...(formValues.defaultPages || [])];
@@ -816,7 +829,7 @@ export default function SiteConfigPage() {
 
       page.components = components;
       defaultPages[pageIndex] = page;
-      form.setValue('defaultPages', defaultPages);
+      form?.setValue('defaultPages', defaultPages);
     } else {
       const pages = [...(formValues.pages || [])];
       const page = pages[pageIndex];
@@ -828,13 +841,13 @@ export default function SiteConfigPage() {
 
       page.components = components;
       pages[pageIndex] = page;
-      form.setValue('pages', pages);
+      form?.setValue('pages', pages);
     }
   };
 
   // Move component down
   const moveComponentDown = (pageIndex, componentIndex, isDefault = false) => {
-    const formValues = form.getValues();
+    const formValues = form?.getValues();
 
     if (isDefault) {
       const defaultPages = [...(formValues.defaultPages || [])];
@@ -849,7 +862,7 @@ export default function SiteConfigPage() {
 
       page.components = components;
       defaultPages[pageIndex] = page;
-      form.setValue('defaultPages', defaultPages);
+      form?.setValue('defaultPages', defaultPages);
     } else {
       const pages = [...(formValues.pages || [])];
       const page = pages[pageIndex];
@@ -863,7 +876,7 @@ export default function SiteConfigPage() {
 
       page.components = components;
       pages[pageIndex] = page;
-      form.setValue('pages', pages);
+      form?.setValue('pages', pages);
     }
   };
 
@@ -904,7 +917,7 @@ export default function SiteConfigPage() {
       <div className='grid grid-cols-1 lg:grid-cols-3 gap-8'>
         <div className='lg:col-span-2'>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
+            <form onSubmit={form?.handleSubmit(onSubmit)} className='space-y-8'>
               <Tabs value={activeTab} onValueChange={setActiveTab}>
                 <TabsList className='grid grid-cols-5 mb-8 bg-pink-50'>
                   <TabsTrigger
@@ -950,8 +963,9 @@ export default function SiteConfigPage() {
                     </CardHeader>
                     <CardContent className='space-y-4'>
                       <FormField
-                        control={form.control}
+                        control={form?.control}
                         name='organisationId'
+                        disabled
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>Organization ID</FormLabel>
@@ -968,7 +982,7 @@ export default function SiteConfigPage() {
                       />
 
                       <FormField
-                        control={form.control}
+                        control={form?.control}
                         name='partnerName'
                         render={({ field }) => (
                           <FormItem>
@@ -989,7 +1003,7 @@ export default function SiteConfigPage() {
                       />
 
                       <FormField
-                        control={form.control}
+                        control={form?.control}
                         name='tagline'
                         render={({ field }) => (
                           <FormItem>
@@ -1009,7 +1023,7 @@ export default function SiteConfigPage() {
                       />
 
                       <FormField
-                        control={form.control}
+                        control={form?.control}
                         name='about'
                         render={({ field }) => (
                           <FormItem>
@@ -1040,7 +1054,7 @@ export default function SiteConfigPage() {
                     </CardHeader>
                     <CardContent className='space-y-4'>
                       <FormField
-                        control={form.control}
+                        control={form?.control}
                         name='cta.text'
                         render={({ field }) => (
                           <FormItem>
@@ -1057,7 +1071,7 @@ export default function SiteConfigPage() {
                       />
 
                       <FormField
-                        control={form.control}
+                        control={form?.control}
                         name='nav.ctaText'
                         render={({ field }) => (
                           <FormItem>
@@ -1085,7 +1099,7 @@ export default function SiteConfigPage() {
                     </CardHeader>
                     <CardContent className='space-y-4'>
                       <FormField
-                        control={form.control}
+                        control={form?.control}
                         name='brand.logo'
                         render={({ field }) => (
                           <FormItem>
@@ -1178,7 +1192,7 @@ export default function SiteConfigPage() {
                     <CardContent className='space-y-6'>
                       <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                         <FormField
-                          control={form.control}
+                          control={form?.control}
                           name='colors.primaryColor'
                           render={({ field }) => (
                             <FormItem>
@@ -1197,7 +1211,7 @@ export default function SiteConfigPage() {
                         />
 
                         <FormField
-                          control={form.control}
+                          control={form?.control}
                           name='colors.primaryColorCode'
                           render={({ field }) => (
                             <FormItem>
@@ -1238,7 +1252,7 @@ export default function SiteConfigPage() {
                         />
 
                         <FormField
-                          control={form.control}
+                          control={form?.control}
                           name='colors.accentColor'
                           render={({ field }) => (
                             <FormItem>
@@ -1257,7 +1271,7 @@ export default function SiteConfigPage() {
                         />
 
                         <FormField
-                          control={form.control}
+                          control={form?.control}
                           name='colors.secondaryColor'
                           render={({ field }) => (
                             <FormItem>
@@ -1280,7 +1294,7 @@ export default function SiteConfigPage() {
 
                       <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                         <FormField
-                          control={form.control}
+                          control={form?.control}
                           name='colors.progressColor'
                           render={({ field }) => (
                             <FormItem>
@@ -1324,7 +1338,7 @@ export default function SiteConfigPage() {
                     <CardContent className='space-y-4'>
                       <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                         <FormField
-                          control={form.control}
+                          control={form?.control}
                           name='footer.bg'
                           render={({ field }) => (
                             <FormItem>
@@ -1348,7 +1362,7 @@ export default function SiteConfigPage() {
                         />
 
                         <FormField
-                          control={form.control}
+                          control={form?.control}
                           name='footer.fg'
                           render={({ field }) => (
                             <FormItem>
@@ -1401,7 +1415,7 @@ export default function SiteConfigPage() {
                     <CardContent className='space-y-4'>
                       <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                         <FormField
-                          control={form.control}
+                          control={form?.control}
                           name='socialMedia.facebook'
                           render={({ field }) => (
                             <FormItem>
@@ -1418,7 +1432,7 @@ export default function SiteConfigPage() {
                         />
 
                         <FormField
-                          control={form.control}
+                          control={form?.control}
                           name='socialMedia.twitter'
                           render={({ field }) => (
                             <FormItem>
@@ -1435,7 +1449,7 @@ export default function SiteConfigPage() {
                         />
 
                         <FormField
-                          control={form.control}
+                          control={form?.control}
                           name='socialMedia.instagram'
                           render={({ field }) => (
                             <FormItem>
@@ -1452,7 +1466,7 @@ export default function SiteConfigPage() {
                         />
 
                         <FormField
-                          control={form.control}
+                          control={form?.control}
                           name='socialMedia.linkedin'
                           render={({ field }) => (
                             <FormItem>
@@ -1469,7 +1483,7 @@ export default function SiteConfigPage() {
                         />
 
                         <FormField
-                          control={form.control}
+                          control={form?.control}
                           name='socialMedia.youtube'
                           render={({ field }) => (
                             <FormItem>
@@ -1486,7 +1500,7 @@ export default function SiteConfigPage() {
                         />
 
                         <FormField
-                          control={form.control}
+                          control={form?.control}
                           name='socialMedia.tiktok'
                           render={({ field }) => (
                             <FormItem>
@@ -1503,7 +1517,7 @@ export default function SiteConfigPage() {
                         />
 
                         <FormField
-                          control={form.control}
+                          control={form?.control}
                           name='socialMedia.pinterest'
                           render={({ field }) => (
                             <FormItem>
@@ -1520,7 +1534,7 @@ export default function SiteConfigPage() {
                         />
 
                         <FormField
-                          control={form.control}
+                          control={form?.control}
                           name='socialMedia.snapchat'
                           render={({ field }) => (
                             <FormItem>
@@ -1563,7 +1577,7 @@ export default function SiteConfigPage() {
                     <CardContent>
                       <ScrollArea className='h-[400px] pr-4'>
                         <Accordion type='single' collapsible className='w-full'>
-                          {form.watch('pages')?.map((page, pageIndex) => (
+                          {form?.watch('pages')?.map((page, pageIndex) => (
                             <AccordionItem
                               key={pageIndex}
                               value={`page-${pageIndex}`}
@@ -1593,10 +1607,10 @@ export default function SiteConfigPage() {
                                         value={page.id}
                                         onChange={(e) => {
                                           const pages = [
-                                            ...(form.getValues().pages || []),
+                                            ...(form?.getValues().pages || []),
                                           ];
                                           pages[pageIndex].id = e.target.value;
-                                          form.setValue('pages', pages);
+                                          form?.setValue('pages', pages);
                                         }}
                                       />
                                     </div>
@@ -1606,11 +1620,11 @@ export default function SiteConfigPage() {
                                         value={page.title}
                                         onChange={(e) => {
                                           const pages = [
-                                            ...(form.getValues().pages || []),
+                                            ...(form?.getValues().pages || []),
                                           ];
                                           pages[pageIndex].title =
                                             e.target.value;
-                                          form.setValue('pages', pages);
+                                          form?.setValue('pages', pages);
                                         }}
                                       />
                                     </div>
@@ -1620,10 +1634,10 @@ export default function SiteConfigPage() {
                                         value={page.type || ''}
                                         onValueChange={(value) => {
                                           const pages = [
-                                            ...(form.getValues().pages || []),
+                                            ...(form?.getValues().pages || []),
                                           ];
                                           pages[pageIndex].type = value;
-                                          form.setValue('pages', pages);
+                                          form?.setValue('pages', pages);
                                         }}
                                       >
                                         <SelectTrigger className='border-pink-200'>
@@ -1647,10 +1661,10 @@ export default function SiteConfigPage() {
                                         value={page.colorCode || ''}
                                         onChange={(value) => {
                                           const pages = [
-                                            ...(form.getValues().pages || []),
+                                            ...(form?.getValues().pages || []),
                                           ];
                                           pages[pageIndex].colorCode = value;
-                                          form.setValue('pages', pages);
+                                          form?.setValue('pages', pages);
                                         }}
                                         options={colorOptions}
                                         showIntensity={true}
@@ -1802,7 +1816,7 @@ export default function SiteConfigPage() {
                               </AccordionContent>
                             </AccordionItem>
                           ))}
-                          {!form.watch('pages')?.length && (
+                          {!form?.watch('pages')?.length && (
                             <div className='text-center p-8 text-muted-foreground'>
                               No pages added yet. Click "Add Page" to create
                               your first page.
@@ -1836,7 +1850,7 @@ export default function SiteConfigPage() {
                       <ScrollArea className='h-[400px] pr-4'>
                         <Accordion type='single' collapsible className='w-full'>
                           {form
-                            .watch('defaultPages')
+                            ?.watch('defaultPages')
                             ?.map((page, pageIndex) => (
                               <AccordionItem
                                 key={pageIndex}
@@ -1859,12 +1873,12 @@ export default function SiteConfigPage() {
                                           value={page.id}
                                           onChange={(e) => {
                                             const defaultPages = [
-                                              ...(form.getValues()
+                                              ...(form?.getValues()
                                                 .defaultPages || []),
                                             ];
                                             defaultPages[pageIndex].id =
                                               e.target.value;
-                                            form.setValue(
+                                            form?.setValue(
                                               'defaultPages',
                                               defaultPages
                                             );
@@ -1877,12 +1891,12 @@ export default function SiteConfigPage() {
                                           value={page.title}
                                           onChange={(e) => {
                                             const defaultPages = [
-                                              ...(form.getValues()
+                                              ...(form?.getValues()
                                                 .defaultPages || []),
                                             ];
                                             defaultPages[pageIndex].title =
                                               e.target.value;
-                                            form.setValue(
+                                            form?.setValue(
                                               'defaultPages',
                                               defaultPages
                                             );
@@ -2037,7 +2051,7 @@ export default function SiteConfigPage() {
                                 </AccordionContent>
                               </AccordionItem>
                             ))}
-                          {!form.watch('defaultPages')?.length && (
+                          {!form?.watch('defaultPages')?.length && (
                             <div className='text-center p-8 text-muted-foreground'>
                               No default pages added yet. Click "Add Default
                               Page" to create your first default page.
@@ -2075,7 +2089,7 @@ export default function SiteConfigPage() {
                             className='border-pink-200 hover:bg-pink-50 text-pink-700'
                             onClick={() => {
                               const dataStr = JSON.stringify(
-                                form.getValues(),
+                                form?.getValues(),
                                 null,
                                 2
                               );
@@ -2120,18 +2134,26 @@ export default function SiteConfigPage() {
                                   const reader = new FileReader();
                                   reader.onload = (event) => {
                                     try {
-                                      const importedConfig = JSON.parse(
+                                      let importedConfig = JSON.parse(
                                         event.target?.result
                                       );
 
+                                      importedConfig = {
+                                        ...importedConfig,
+                                        organisationId:
+                                          partnerData.partner.slug,
+                                        partnerName:
+                                          partnerData.partner.organizationName,
+                                      };
+
                                       // First reset the form to clear any existing values
-                                      form.reset();
+                                      form?.reset();
 
                                       // Then set values field by field to ensure proper validation
                                       Object.keys(importedConfig).forEach(
                                         (key) => {
                                           if (key in defaultValues) {
-                                            form.setValue(
+                                            form?.setValue(
                                               key,
                                               importedConfig[key],
                                               {
@@ -2190,7 +2212,7 @@ export default function SiteConfigPage() {
                                   'Are you sure you want to reset all settings? This action cannot be undone.'
                                 )
                               ) {
-                                form.reset(defaultValues);
+                                form?.reset(defaultValues);
                                 toast.info(
                                   'All settings have been reset to their default values.'
                                 );
