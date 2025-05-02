@@ -49,21 +49,21 @@ export default function Dashboard() {
   }, [user]);
 
   const totalContributions = transactions.reduce(
-    (total, transaction) => total + parseFloat(transaction['amount_gross']),
+    (total, transaction) => total + parseFloat(transaction['amount']),
     0
   );
   const affiliateTransactionsTotal = affiliateTransactions.reduce(
-    (total, transaction) => total + parseFloat(transaction['amount_gross']),
+    (total, transaction) => total + parseFloat(transaction['amount']),
     0
   );
 
   const transactionsData = transactions.map((t) => ({
-    name: t['billing_date'],
-    value: parseFloat(t['amount_gross']),
+    name: t['createdAt'],
+    value: parseFloat(t['amount']),
   }));
   const affiliateTransactionsData = affiliateTransactions.map((t) => ({
-    name: t['billing_date'],
-    value: parseFloat(t['amount_gross']),
+    name: t['createdAt'],
+    value: parseFloat(t['amount']),
   }));
   return (
     <div>

@@ -71,6 +71,11 @@ export const ApiProvider = ({ children }) => {
     return await apiRequest('/restoreUser', 'POST', token);
   };
 
+  const restorePartner = async (token) => {
+    console.log('*** [API CONTEXT] Logging in user...');
+    return await apiRequest('/restorePartner', 'POST', token);
+  };
+
   const getUser = async () => {
     console.log('*** [API CONTEXT] Fetching current user...');
     return await apiRequest('/user');
@@ -242,14 +247,17 @@ export const ApiProvider = ({ children }) => {
       value={{
         loading,
         error,
+        login,
         register,
+        loginNpo,
+        restoreUser,
+        restorePartner,
         addBlogPost,
         getBlogPostContent,
         getUserBlogPosts,
         getAllPublicBlogPosts,
         deleteBlogPost,
         updateBlogPost,
-        login,
         getUser,
         listNetworkTransactions,
         getNPO,
@@ -258,7 +266,6 @@ export const ApiProvider = ({ children }) => {
         updatePost,
         deletePost,
         addSubscription,
-        restoreUser,
         addNpo,
         createReferralLink,
         getUserReferralLink,
@@ -267,7 +274,6 @@ export const ApiProvider = ({ children }) => {
         getUserWithdrawalRequests,
         createWithdrawalRequest,
         addSubscriber,
-        loginNpo,
         addSiteConfig,
         checkLiveStatus,
         saveTransaction,

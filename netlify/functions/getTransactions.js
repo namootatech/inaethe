@@ -43,7 +43,7 @@ exports.handler = async (event, context) => {
           $lookup: {
             from: 'transactions',
             localField: 'email',
-            foreignField: 'email_address',
+            foreignField: 'email',
             as: 'transactions',
           },
         },
@@ -55,7 +55,7 @@ exports.handler = async (event, context) => {
         },
         {
           $sort: {
-            'transactions.billing_date': -1,
+            'transactions.createdAt': -1,
           },
         },
         {

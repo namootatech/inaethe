@@ -15,13 +15,7 @@ export const AuthProvider = ({ children }) => {
   const jwtSecret = process.env.NEXT_PUBLIC_JWT_ENCODE_SECRET;
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const storedUser = Cookies.get('user');
-    console.log(
-      '** [AUTH CONTEXT] Cookie User',
-      !isNil(storedUser) ? JSON.parse(storedUser) : storedUser,
-      jwtSecret
-    );
+  const restoreUser = (storedUser) => {
     if (storedUser && jwtSecret && isNil(user)) {
       const parsedUser = JSON.parse(storedUser);
       console.log('** [AUTH CONTEXT] Restoring user:', parsedUser);
@@ -47,6 +41,41 @@ export const AuthProvider = ({ children }) => {
       console.log('** [AUTH CONTEXT] No user found in cookies');
       setLoading(false); // No user to restore
     }
+  };
+
+  const restorePartner = (storedPartner) => {
+    if (storedPartner && jwtSecret && isNil(partner)) {
+      const parsedPartner = JSON.parse(storedPartner);
+      console.log('** [AUTH CONTEXT] Restoring partner:', storedPartner);
+      // Encode email with JWT
+      const encodedEmail = sign({ email: parsedPartner.email }, jwtSecret);
+
+      api
+        .restorePartner({ token: encodedEmail })
+        .then((restoredPartner) => {
+          setPartner(restoredPartner.data);
+          console.log(
+            '** [AUTH CONTEXT] Restored full partner:',
+            restoredPartner.data
+          );
+        })
+        .catch((error) => {
+          console.error('** [AUTH CONTEXT] Failed to restore partner:', error);
+          setPartner(null); // Clear the user state on error
+          Cookies.remove('partner'); // Clear the cookie
+        })
+        .finally(() => setLoading(false));
+    } else {
+      console.log('** [AUTH CONTEXT] No partner found in cookies');
+      setLoading(false); // No user to restore
+    }
+  };
+
+  useEffect(() => {
+    const storedUser = Cookies.get('user');
+    const storedPartner = Cookies.get('partner');
+    restoreUser(storedUser);
+    restorePartner(storedPartner);
   }, [api, jwtSecret]);
 
   const loginUser = async (data) => {
@@ -77,10 +106,12 @@ export const AuthProvider = ({ children }) => {
       .then((data) => {
         console.log('** [AUTH CONTEXT] Login data', data);
         setPartner(data.data);
-        Cookies.set('partner', JSON.stringify(data.data.user), { expires: 2 });
+        Cookies.set('partner', JSON.stringify(data.data.partner), {
+          expires: 2,
+        });
         console.log(
           '** [AUTH CONTEXT] Partner loggedin & cookie set:',
-          data.data.user
+          data.data.partner
         );
         return Promise.resolve(partner);
       })

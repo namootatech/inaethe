@@ -44,7 +44,7 @@ exports.handler = async (event, context) => {
       `** [GET USER TRANSACTIONS FUNCTION] Fetching transactions for userId: ${userId} with skip: ${skip} and limit: ${limit}`
     );
     const userTransactions = await transactionsCollection
-      .find({ custom_str2: userId })
+      .find({ userId })
       .skip(skip)
       .limit(limit)
       .toArray();
