@@ -60,7 +60,17 @@ export default function Subscriptions() {
     let payfastData = {
       merchant_id: MERCHANT_ID,
       merchant_key: MERCHANT_KEY,
-      return_url: `${WEBSITE_URL}/app/subscribe?firstPaymentDone=true&partner=${sub.npo}`,
+      return_url: `${WEBSITE_URL}/app/subscribe?subscriptionId=${
+        sub.id
+      }&userId=${userData._id}&subscriptionTier=${sub.tier}&amount=${
+        levelPrices[sub.tier]
+      }&firstName=${userData.firstName}&lastName=${userData.lastName}&email=${
+        userData.email
+      }&paymentMethod=payfast&level=${
+        keys(levelPrices).indexOf(userData.tier) + 1
+      }${user?.parent ? `&parent=${userData?.parent}&` : ''}&partner=${
+        sub?.npo
+      }&paymentId=${paymentId}`,
       cancel_url: `${WEBSITE_URL}/app/cancel?subscriptionId=${sub.id}&userId=${
         userData._id
       }&subscriptionTier=${sub.tier}&amount=${

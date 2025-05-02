@@ -232,6 +232,11 @@ export const ApiProvider = ({ children }) => {
     return await apiRequest(`/checkLiveStatus`, 'POST', { url });
   };
 
+  const saveTransaction = async (data) => {
+    console.log(`*** [API CONTEXT] Saving transaction`);
+    return await apiRequest(`/saveTransaction`, 'POST', data);
+  };
+
   return (
     <ApiContext.Provider
       value={{
@@ -265,6 +270,7 @@ export const ApiProvider = ({ children }) => {
         loginNpo,
         addSiteConfig,
         checkLiveStatus,
+        saveTransaction,
       }}
     >
       {children}

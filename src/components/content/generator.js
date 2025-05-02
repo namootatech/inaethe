@@ -1544,7 +1544,6 @@ const componentBuilders = {
 const RenderPageComponents = ({ items, data }) => {
   const siteConfig = useConfig();
   const Components = items?.map((a, i) => {
-    console.log('RenderPageComponents', a.type);
     return componentBuilders[a.type]({ ...a, data: a.data, siteConfig });
   });
   return Components;
