@@ -35,7 +35,7 @@ exports.handler = async function (event, context) {
         .db(NEXT_PUBLIC_MONGODB_DB)
         .collection('transactions');
       const userTransactions = await transactions
-        .find({ custom_str2: user._id.toString() })
+        .find({ userId: user._id.toString() })
         .toArray();
 
       const affiliates = await users
@@ -45,10 +45,9 @@ exports.handler = async function (event, context) {
       const affiliateSubscriptions = await subscriptions
         .find({ parentId: user._id.toString() })
         .toArray();
-      const affiliateIds = affiliates.map((a) => a._id.toString());
 
       const affiliateTransactions = await transactions
-        .find({ custom_str1: { $in: affiliateIds } })
+        .find({ parentId: user._id.toString() })
         .toArray();
 
       return {
