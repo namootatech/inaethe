@@ -1,0 +1,674 @@
+{
+  "organisationId": "skhumba-food-drive",
+  "partnerName": "Skhumba Food Drive",
+  "tagline": "Nourishing Communities, Cultivating Hope",
+  "about": "Skhumba Food Drive is a community-based organization dedicated to fighting hunger and food insecurity. Through food distribution programs, community gardens, and nutrition education, we work to ensure everyone has access to healthy, nutritious meals while promoting sustainable food systems.",
+  "cta": {
+    "text": "Join Us in Fighting Hunger Together"
+  },
+  "nav": {
+    "ctaText": "Donate Food"
+  },
+  "socialMedia": {
+    "facebook": "https://www.facebook.com/skhumbafooddrive",
+    "twitter": "https://twitter.com/skhumbafood",
+    "instagram": "https://www.instagram.com/skhumbafooddrive",
+    "linkedin": "https://www.linkedin.com/company/skhumba-food-drive",
+    "youtube": "https://www.youtube.com/skhumbafooddrive",
+    "tiktok": "https://www.tiktok.com/@skhumbafooddrive",
+    "pinterest": "",
+    "snapchat": ""
+  },
+  "brand": {
+    "logo": "/logo.png"
+  },
+  "colors": {
+    "lightBgColoCode": "green-50",
+    "secondaryLighBgColorCode": "gray-100",
+    "primaryColorCode": "green-green-600",
+    "primaryColor": "green",
+    "accentColor": "yellow",
+    "secondaryColor": "gray",
+    "secondaryColorCode": "gray-green-600",
+    "textColorCode": "gray-700",
+    "progressColor": "#16a34a",
+    "accentColorCode": "yellow-green-600"
+  },
+  "footer": {
+    "bg": "bg-green-800",
+    "fg": "text-white"
+  },
+  "pages": [
+    {
+      "id": "homepage",
+      "title": "Home",
+      "components": [
+        {
+          "type": "FlexwindHero3",
+          "title": "Fighting Hunger, Building Community",
+          "description": "At Skhumba Food Drive, we're committed to addressing food insecurity through community-based food distribution, urban farming initiatives, and nutrition education. Join us in creating a world where everyone has access to healthy, nutritious food.",
+          "hint": "Feed Hope, Feed Change",
+          "ctas": [
+            {
+              "text": "Donate Food",
+              "link": "/donate"
+            },
+            {
+              "text": "Volunteer With Us",
+              "link": "/volunteer"
+            }
+          ],
+          "img": {
+            "src": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=2070&auto=format&fit=crop",
+            "alt": "Community members distributing food packages"
+          }
+        },
+        {
+          "type": "stats-section",
+          "title": "Our Impact",
+          "description": "Since 2015, Skhumba Food Drive has been making a measurable difference in fighting hunger in our communities.",
+          "stats": [
+            {
+              "value": "2M+",
+              "label": "Meals Distributed",
+              "icon": "utensils",
+              "description": "Feeding families in need"
+            },
+            {
+              "value": "75K",
+              "label": "Volunteers",
+              "icon": "users",
+              "description": "Active in 15 communities"
+            },
+            {
+              "value": "120+",
+              "label": "Community Gardens",
+              "icon": "seedling",
+              "description": "Growing fresh produce"
+            },
+            {
+              "value": "45%",
+              "label": "Reduced Food Waste",
+              "icon": "recycle",
+              "description": "Through our recovery program"
+            }
+          ]
+        },
+        {
+          "type": "content-section",
+          "title": "Our Mission",
+          "subtitle": "Why We Exist",
+          "content": [
+            "Skhumba Food Drive was founded on the belief that access to nutritious food is a basic human right. We work at the intersection of food security, community empowerment, and sustainable agriculture to create lasting solutions to hunger.",
+            "Our approach focuses on not just providing immediate food relief, but also building community capacity to grow food, reduce waste, and develop resilient local food systems that can withstand economic and environmental challenges."
+          ],
+          "image": "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1974&auto=format&fit=crop",
+          "imagePosition": "right",
+          "cta": {
+            "text": "Learn About Our Approach",
+            "link": "/about"
+          }
+        },
+        {
+          "type": "cta-section",
+          "title": "Join Us in Fighting Hunger Together",
+          "description": "Whether you donate food, volunteer your time, or spread awareness, your support helps us create food-secure communities. Together, we can make a difference in the fight against hunger.",
+          "buttonText": "Get Involved Today",
+          "buttonLink": "/get-involved",
+          "backgroundImage": "https://images.unsplash.com/photo-1593113598332-cd59a93c6138?q=80&w=2070&auto=format&fit=crop"
+        },
+        {
+          "type": "social-proof-section",
+          "title": "What Our Community Says",
+          "testimonials": [
+            {
+              "name": "Thabo Molefe",
+              "role": "Monthly Donor",
+              "quote": "Supporting Skhumba Food Drive gives me confidence that my contributions are making a real difference. Their transparent approach and direct community impact are inspiring.",
+              "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1974&auto=format&fit=crop"
+            },
+            {
+              "name": "Nomsa Khumalo",
+              "role": "Volunteer",
+              "quote": "Volunteering with Skhumba has been a life-changing experience. I've connected with my community in meaningful ways while helping address food insecurity firsthand.",
+              "avatar": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=1974&auto=format&fit=crop"
+            },
+            {
+              "name": "David Ndlovu",
+              "role": "Community Garden Participant",
+              "quote": "The community garden program has transformed our neighborhood. We're growing our own food, teaching our children about nutrition, and building community bonds.",
+              "avatar": "https://images.unsplash.com/photo-1552058544-f2b08422138a?q=80&w=1998&auto=format&fit=crop"
+            }
+          ]
+        },
+        {
+          "type": "logo-grid",
+          "title": "Our Partners",
+          "description": "We collaborate with organizations committed to food security and community development.",
+          "logos": [
+            {
+              "name": "Fresh Foods Market",
+              "image": "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=1974&auto=format&fit=crop",
+              "url": "https://example.com"
+            },
+            {
+              "name": "Community Health Alliance",
+              "image": "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=1974&auto=format&fit=crop",
+              "url": "https://example.com"
+            },
+            {
+              "name": "Urban Farming Collective",
+              "image": "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=1974&auto=format&fit=crop",
+              "url": "https://example.com"
+            },
+            {
+              "name": "Nutrition Education Foundation",
+              "image": "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=1974&auto=format&fit=crop",
+              "url": "https://example.com"
+            },
+            {
+              "name": "Food Waste Reduction Initiative",
+              "image": "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=1974&auto=format&fit=crop",
+              "url": "https://example.com"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about",
+      "title": "About",
+      "components": [
+        {
+          "type": "FlexwindHero7",
+          "title": "Our Story & Mission",
+          "description": "Skhumba Food Drive began in 2015 when a group of community activists noticed the growing food insecurity in their neighborhoods. Learn about our journey and the dedicated team behind our food security initiatives.",
+          "ctas": [
+            {
+              "icon": "users",
+              "link": "/team",
+              "text": "Meet Our Team"
+            },
+            {
+              "icon": "file-text",
+              "text": "Annual Report",
+              "link": "/reports",
+              "style": "light"
+            }
+          ],
+          "img1": {
+            "src": "https://images.unsplash.com/photo-1593113630400-ea4288922497?q=80&w=2070&auto=format&fit=crop",
+            "alt": "Team distributing food packages"
+          },
+          "img2": {
+            "src": "https://images.unsplash.com/photo-1523540383849-4ae4125acd6f?q=80&w=2070&auto=format&fit=crop",
+            "alt": "Community garden volunteers"
+          }
+        },
+        {
+          "type": "content-section",
+          "title": "Our Beginning",
+          "subtitle": "The Skhumba Story",
+          "content": [
+            "Skhumba Food Drive was founded by Sipho Nkosi and community organizer Lerato Mabaso, who witnessed the challenges of food access in their community. Seeing how many families struggled to put nutritious meals on the table, they began organizing food collections and distributions from their neighborhood.",
+            "What began as a small weekend food distribution has grown into a comprehensive organization implementing food security programs across multiple communities. Today, Skhumba works with local farmers, businesses, and volunteers to create sustainable solutions to hunger."
+          ],
+          "image": "https://images.unsplash.com/photo-1615461066841-6116e61058f4?q=80&w=1976&auto=format&fit=crop",
+          "imagePosition": "left"
+        },
+        {
+          "type": "timeline",
+          "items": [
+            {
+              "date": "2015",
+              "title": "Foundation",
+              "description": "Skhumba Food Drive is established with weekend food distributions in one community."
+            },
+            {
+              "date": "2017",
+              "title": "First Community Garden",
+              "description": "Launch of our first community garden project to supplement food distributions with fresh produce."
+            },
+            {
+              "date": "2019",
+              "title": "Nutrition Education Program",
+              "description": "Begin offering workshops on healthy cooking, meal planning, and nutrition basics."
+            },
+            {
+              "date": "2020",
+              "title": "COVID-19 Emergency Response",
+              "description": "Expanded operations to meet increased need during the pandemic, reaching 5x more families."
+            },
+            {
+              "date": "2021",
+              "title": "Food Waste Recovery Initiative",
+              "description": "Started partnerships with local restaurants and markets to redirect surplus food to communities in need."
+            },
+            {
+              "date": "2023",
+              "title": "Mobile Food Pantry",
+              "description": "Launched mobile distribution units to reach underserved rural and urban communities."
+            }
+          ]
+        },
+        {
+          "type": "team-section",
+          "title": "Our Leadership Team",
+          "description": "Meet the dedicated professionals guiding our mission and strategy.",
+          "members": [
+            {
+              "name": "Sipho Nkosi",
+              "role": "Co-Founder & Executive Director",
+              "bio": "Community organizer with 15+ years of experience in social justice and food security. Sipho leads our overall strategy and vision.",
+              "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop",
+              "socialLinks": [
+                {
+                  "icon": "twitter",
+                  "url": "https://twitter.com/example"
+                },
+                {
+                  "icon": "linkedin",
+                  "url": "https://linkedin.com/in/example"
+                }
+              ]
+            },
+            {
+              "name": "Lerato Mabaso",
+              "role": "Co-Founder & Director of Programs",
+              "bio": "Former nutritionist with expertise in food systems. Lerato oversees our food distribution programs and community partnerships.",
+              "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=1974&auto=format&fit=crop",
+              "socialLinks": [
+                {
+                  "icon": "twitter",
+                  "url": "https://twitter.com/example"
+                },
+                {
+                  "icon": "linkedin",
+                  "url": "https://linkedin.com/in/example"
+                }
+              ]
+            },
+            {
+              "name": "Themba Dlamini",
+              "role": "Director of Urban Agriculture",
+              "bio": "Urban farming specialist with experience in community garden development. Themba leads our growing initiatives.",
+              "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1974&auto=format&fit=crop",
+              "socialLinks": [
+                {
+                  "icon": "twitter",
+                  "url": "https://twitter.com/example"
+                },
+                {
+                  "icon": "linkedin",
+                  "url": "https://linkedin.com/in/example"
+                }
+              ]
+            },
+            {
+              "name": "Precious Mokoena",
+              "role": "Director of Partnerships",
+              "bio": "Former nonprofit development executive. Precious develops our strategic partnerships with businesses and foundations.",
+              "image": "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop",
+              "socialLinks": [
+                {
+                  "icon": "twitter",
+                  "url": "https://twitter.com/example"
+                },
+                {
+                  "icon": "linkedin",
+                  "url": "https://linkedin.com/in/example"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "FlexwindFeatures1",
+          "title": "Our Approach to Food Security",
+          "description": "Skhumba Food Drive takes a comprehensive approach to addressing hunger. We believe that lasting change requires working at multiple levels, from immediate food relief to building sustainable food systems.",
+          "features": [
+            {
+              "icon": "truck",
+              "title": "Food Distribution",
+              "description": "We collect and distribute nutritious food to individuals and families facing food insecurity, with a focus on fresh produce, proteins, and culturally appropriate options."
+            },
+            {
+              "icon": "seedling",
+              "title": "Community Gardens",
+              "description": "Our urban farming initiatives empower communities to grow their own food, increasing access to fresh produce while building skills and community connections."
+            },
+            {
+              "icon": "book-open",
+              "title": "Nutrition Education",
+              "description": "Through workshops and cooking demonstrations, we help community members learn about healthy eating, meal planning, and food preparation on a budget."
+            },
+            {
+              "icon": "recycle",
+              "title": "Food Waste Recovery",
+              "description": "We partner with local businesses to rescue surplus food that would otherwise go to waste, redirecting it to people in need while reducing environmental impact."
+            },
+            {
+              "icon": "users",
+              "title": "Community Empowerment",
+              "description": "We build local capacity by training community members in food distribution, gardening, and advocacy, creating sustainable solutions led by the communities themselves."
+            },
+            {
+              "icon": "trending-up",
+              "title": "Impact Measurement",
+              "description": "We rigorously track our food distribution, garden yields, and program outcomes to continuously improve our approaches and demonstrate results to supporters."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "programs",
+      "title": "Programs",
+      "components": [
+        {
+          "type": "FlexwindHero6",
+          "title": "Our Food Security Programs",
+          "description": "Explore our diverse initiatives designed to address hunger, improve nutrition, and build sustainable food systems. From emergency food relief to community gardens, our programs take a comprehensive approach to food security challenges.",
+          "ctas": [
+            {
+              "link": "/donate",
+              "text": "Support Our Programs"
+            },
+            {
+              "text": "Become a Partner",
+              "link": "/partners",
+              "style": "light"
+            }
+          ],
+          "stats": [
+            {
+              "title": "Active Programs",
+              "detail": "8",
+              "icon": "activity"
+            },
+            {
+              "title": "Communities",
+              "detail": "15",
+              "icon": "map-pin"
+            },
+            {
+              "title": "Families Served",
+              "detail": "5,000+",
+              "icon": "users"
+            }
+          ],
+          "img": {
+            "src": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=2070&auto=format&fit=crop",
+            "alt": "Food distribution in progress"
+          }
+        },
+        {
+          "type": "content-section",
+          "title": "Food Distribution Network",
+          "subtitle": "Flagship Program",
+          "content": [
+            "Our Food Distribution Network provides nutritious food to individuals and families facing food insecurity. We operate weekly distribution points across 15 communities, offering fresh produce, proteins, grains, and other essentials.",
+            "Working closely with local farmers, businesses, and food banks, we ensure that our food packages are nutritionally balanced and culturally appropriate for the communities we serve."
+          ],
+          "image": "https://images.unsplash.com/photo-1593113598332-cd59a93c6138?q=80&w=2070&auto=format&fit=crop",
+          "imagePosition": "right",
+          "cta": {
+            "text": "Learn More",
+            "link": "/programs/food-distribution"
+          }
+        },
+        {
+          "type": "content-section",
+          "title": "Community Garden Initiative",
+          "subtitle": "Growing Together",
+          "content": [
+            "Our Community Garden Initiative establishes and supports urban farming projects that enable communities to grow their own fresh produce. Through these gardens, we increase access to nutritious food while building skills and fostering community connections.",
+            "Each garden is managed by local residents who receive training, tools, seeds, and ongoing support from our urban agriculture team."
+          ],
+          "image": "https://images.unsplash.com/photo-1523540383849-4ae4125acd6f?q=80&w=2070&auto=format&fit=crop",
+          "imagePosition": "left",
+          "cta": {
+            "text": "Learn More",
+            "link": "/programs/community-gardens"
+          }
+        },
+        {
+          "type": "content-section",
+          "title": "Nutrition Education Program",
+          "subtitle": "Knowledge for Health",
+          "content": [
+            "Our Nutrition Education Program helps community members learn about healthy eating, meal planning, and food preparation on a budget. Through workshops, cooking demonstrations, and educational materials, we empower people to make nutritious choices with the resources available to them.",
+            "This program includes specialized workshops for different age groups, from children to seniors, addressing the unique nutritional needs of each life stage."
+          ],
+          "image": "https://images.unsplash.com/photo-1607113761692-0da21048e0ed?q=80&w=1974&auto=format&fit=crop",
+          "imagePosition": "right",
+          "cta": {
+            "text": "Learn More",
+            "link": "/programs/nutrition-education"
+          }
+        },
+        {
+          "type": "content-section",
+          "title": "Food Waste Recovery",
+          "subtitle": "Rescue & Redistribute",
+          "content": [
+            "Our Food Waste Recovery program partners with local restaurants, markets, and farms to rescue surplus food that would otherwise go to waste. This perfectly good food is quickly redistributed to our community partners and distribution points.",
+            "This program not only provides additional food resources but also reduces the environmental impact of food waste while creating connections between local businesses and community needs."
+          ],
+          "image": "https://images.unsplash.com/photo-1621956838481-f8f616950454?q=80&w=1974&auto=format&fit=crop",
+          "imagePosition": "left",
+          "cta": {
+            "text": "Learn More",
+            "link": "/programs/food-waste-recovery"
+          }
+        },
+        {
+          "type": "PageDoneHowItWorks1",
+          "title": "How We Implement Food Security Programs",
+          "description": "Our proven process ensures that each food security initiative is community-driven, nutritionally sound, and designed for long-term success. Here's how we turn your support into effective action against hunger:",
+          "steps": [
+            {
+              "title": "Community Assessment",
+              "description": "We begin by working closely with communities to understand specific food security challenges, existing resources, and local priorities. This collaborative approach ensures community ownership from the start.",
+              "icon": "FaUsers"
+            },
+            {
+              "title": "Program Design & Implementation",
+              "description": "Based on the assessment, we design tailored food security programs that address identified needs. Implementation involves local stakeholders at every stage, from planning to execution and monitoring.",
+              "icon": "FaTools"
+            },
+            {
+              "title": "Monitoring & Sustainability",
+              "description": "We provide ongoing support and rigorous monitoring to ensure program effectiveness, making adjustments as needed. We focus on building local capacity to ensure the sustainability of food security improvements.",
+              "icon": "FaChartLine"
+            }
+          ]
+        },
+        {
+          "type": "faq-section",
+          "title": "Frequently Asked Questions",
+          "description": "Common questions about our food security programs and approach",
+          "faqs": [
+            {
+              "question": "How do you select communities for your programs?",
+              "answer": "We select communities based on food insecurity data, community interest and commitment, potential for impact, and strategic alignment with our mission. We prioritize areas with limited access to fresh, affordable food where our approach can make a meaningful difference."
+            },
+            {
+              "question": "How do you measure the impact of your programs?",
+              "answer": "We track metrics such as pounds of food distributed, number of meals provided, garden yields, program participation, and changes in food security status among participants. We also collect qualitative feedback through surveys and community conversations to understand the broader impact of our work."
+            },
+            {
+              "question": "Do you work with local governments?",
+              "answer": "Yes, we collaborate with local governments in most of our program areas. Government partnerships are often essential for accessing resources, coordinating with other services, and creating supportive policies for food security initiatives."
+            },
+            {
+              "question": "How do you ensure programs continue after initial support ends?",
+              "answer": "Sustainability is built into our program design from the beginning. We focus on building local capacity, establishing community management structures, developing resource networks, and ensuring that food security solutions are integrated into community systems and practices."
+            },
+            {
+              "question": "Can businesses partner with specific programs?",
+              "answer": "Yes, we offer corporate partnership opportunities that can be tailored to specific programs or geographic areas. These partnerships can include food donations, financial support, employee volunteer opportunities, and co-development of food security initiatives."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "get-involved",
+      "title": "Get Involved",
+      "type": "centered-color-page",
+      "colorCode": "green-900",
+      "components": [
+        {
+          "type": "centered-page-header",
+          "title": "Join the Skhumba Food Drive Movement",
+          "description": "There are many ways to support our mission of fighting hunger and building food-secure communities"
+        },
+        {
+          "type": "centered-page-components-container",
+          "maxWidthinXLsize": 4,
+          "components": [
+            {
+              "type": "card",
+              "title": "Donate Food or Funds",
+              "image": "https://images.unsplash.com/photo-1593113598332-cd59a93c6138?q=80&w=2070&auto=format&fit=crop",
+              "description": "Your donations of food items or financial support directly help us provide nutritious meals to those in need. Monthly donors receive special updates from our programs.",
+              "cta": {
+                "title": "Donate Now",
+                "link": "/donate"
+              }
+            },
+            {
+              "type": "card",
+              "title": "Volunteer",
+              "image": "https://images.unsplash.com/photo-1544027993-37dbfe43562a?q=80&w=2070&auto=format&fit=crop",
+              "description": "Share your time and skills with our team and the communities we serve. We offer opportunities in food distribution, community gardens, nutrition education, and more.",
+              "cta": {
+                "title": "Explore Opportunities",
+                "link": "/volunteer"
+              }
+            },
+            {
+              "type": "card",
+              "title": "Partner With Us",
+              "image": "https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2069&auto=format&fit=crop",
+              "description": "Businesses, farms, schools, and other organizations can partner with Skhumba Food Drive to support food security initiatives and engage their communities in meaningful action against hunger.",
+              "cta": {
+                "title": "Become a Partner",
+                "link": "/partners"
+              }
+            }
+          ]
+        },
+        {
+          "type": "cta-section",
+          "title": "Take Action in Your Community",
+          "description": "Food security starts locally. Join one of our community initiatives or start your own food drive with our support and resources.",
+          "buttonText": "Find Local Initiatives",
+          "buttonLink": "/local-action"
+        }
+      ]
+    }
+  ],
+  "defaultPages": [
+    {
+      "id": "donate",
+      "title": "Donate",
+      "components": [
+        {
+          "type": "space-above",
+          "size": "10"
+        },
+        {
+          "type": "center-width-text-block",
+          "title": "Your Donation Supports Food Security",
+          "text": "Your support enables us to distribute nutritious food, establish community gardens, provide nutrition education, and empower communities to become food secure. Every contribution makes a difference in our mission to fight hunger."
+        },
+        {
+          "type": "center-width-text-block",
+          "title": "Where Your Money Goes",
+          "text": "85% of every donation goes directly to food security programs, 10% to program development and evaluation, and 5% to administrative costs. We're committed to transparency and efficiency in our use of donor funds."
+        },
+        {
+          "type": "donation-form-center-width",
+          "title": "Make Your Donation",
+          "options": [
+            {
+              "amount": 25,
+              "description": "Provides 10 nutritious meals for families in need"
+            },
+            {
+              "amount": 100,
+              "description": "Supplies seeds and tools for a community garden plot"
+            },
+            {
+              "amount": 500,
+              "description": "Funds a nutrition education workshop series"
+            },
+            {
+              "amount": 1000,
+              "description": "Establishes a new community garden site"
+            }
+          ]
+        },
+        {
+          "type": "donation-progress",
+          "title": "2024 Food Security Campaign",
+          "description": "Help us reach our goal of providing 500,000 meals this year to families facing food insecurity.",
+          "goal": 500000,
+          "current": 275000,
+          "donorsCount": 950,
+          "cta": {
+            "text": "Contribute to the Campaign",
+            "link": "#donation-form"
+          }
+        },
+        {
+          "type": "center-width-text-block",
+          "title": "Your Impact",
+          "text": "With your support, we can continue to expand our food security efforts, helping communities build resilience to hunger and develop sustainable food systems. Thank you for being part of our mission!"
+        },
+        {
+          "type": "space-below",
+          "size": "10"
+        }
+      ]
+    },
+    {
+      "id": "thank-you",
+      "title": "Thank You",
+      "components": [
+        {
+          "type": "space-above",
+          "size": "10"
+        },
+        {
+          "type": "checkbox-center"
+        },
+        {
+          "type": "center-width-text-block",
+          "title": "Thank You for Your Donation!",
+          "text": "Your generosity is making food security possible in communities across our region. Your contribution will help fund our efforts to distribute nutritious food, establish community gardens, and create a more food-secure future."
+        },
+        {
+          "type": "center-width-text-block",
+          "title": "What Happens Next",
+          "text": "You'll receive a receipt for your donation via email shortly. We'll also send you updates about the programs your donation is supporting and the impact you're helping to create."
+        },
+        {
+          "type": "center-width-text-block",
+          "title": "Share Your Impact",
+          "text": "Help us spread the word about the importance of food security by sharing your support on social media. Together, we can inspire others to join our mission."
+        },
+        {
+          "type": "social-share-buttons-center",
+          "message": "I just supported Skhumba Food Drive's mission to fight hunger and build food-secure communities. Join me in making a difference!"
+        },
+        {
+          "type": "space-below",
+          "size": "10"
+        }
+      ]
+    }
+  ]
+}
