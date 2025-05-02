@@ -25,14 +25,14 @@
   "colors": {
     "lightBgColoCode": "green-50",
     "secondaryLighBgColorCode": "gray-100",
-    "primaryColorCode": "green-green-600",
+    "primaryColorCode": "green-600",
     "primaryColor": "green",
     "accentColor": "yellow",
     "secondaryColor": "gray",
-    "secondaryColorCode": "gray-green-600",
+    "secondaryColorCode": "green-600",
     "textColorCode": "gray-700",
     "progressColor": "#16a34a",
-    "accentColorCode": "yellow-green-600"
+    "accentColorCode": "green-600"
   },
   "footer": {
     "bg": "bg-green-800",
