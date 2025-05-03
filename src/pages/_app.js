@@ -31,7 +31,7 @@ export default function App({ Component, pageProps }) {
   }, [router.events]);
 
   const pathname = usePathname();
-  const RouteLayout = pathname.includes('app') ? AppLayout : Layout;
+  const RouteLayout = pathname?.includes('app') ? AppLayout : Layout;
 
   return (
     <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
