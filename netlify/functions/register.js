@@ -89,7 +89,7 @@ exports.handler = async (event, context) => {
       .db(NEXT_PUBLIC_MONGODB_DB)
       .collection('subscriptions');
     const subscription = {
-      userid: userId,
+      userId: userId,
       email,
       firstName: data.firstName,
       lastName: data.lastName,
@@ -100,7 +100,6 @@ exports.handler = async (event, context) => {
       subscriptionTier: data.subscriptionTier,
       amount: data.amount,
       parentId: data.parent,
-      userType: 'new-user',
     };
     console.log(
       '** [REGISTERFUNCTION] Subscription object created:',

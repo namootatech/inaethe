@@ -252,6 +252,24 @@ export const ApiProvider = ({ children }) => {
     return await apiRequest(`/incrementLinkVisits`, 'POST', { id });
   };
 
+  const getPartnerId = async (slug) => {
+    console.log(`*** [API CONTEXT] Saving transaction`);
+    return await apiRequest(`/getPartnerId`, 'POST', { slug });
+  };
+
+  const getUserSubscriptions = async (userId, page, limit) => {
+    console.log('*** [API CONTEXT] Fetching user transactions...', {
+      userId,
+      page,
+      limit,
+    });
+    return await apiRequest(`/getUserSubscriptions`, 'POST', {
+      userId,
+      page,
+      limit,
+    });
+  };
+
   return (
     <ApiContext.Provider
       value={{
@@ -289,6 +307,7 @@ export const ApiProvider = ({ children }) => {
         addSiteConfig,
         checkLiveStatus,
         saveTransaction,
+        getUserSubscriptions,
       }}
     >
       {children}

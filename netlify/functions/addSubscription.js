@@ -66,7 +66,7 @@ exports.handler = async (event, context) => {
       lastName,
       level,
       status: 'active',
-      date: new Date(),
+      createdDate: new Date(),
       partner,
       subscriptionTier,
       amount,

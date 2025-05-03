@@ -107,6 +107,26 @@ export default function Register() {
     }
   };
 
+  useEffect(() => {
+    const fetchPartnerId = async () => {
+      try {
+        const response = await api.getPartnerId(formData.partner.slug);
+        setFormData((prevData) => ({
+          ...prevData,
+          partner: {
+            ...prevData.partner,
+            id: response.data,
+          },
+        }));
+      } catch (error) {
+        console.error('Error fetching partner ID:', error);
+      }
+    };
+    if (formData.partner.slug) {
+      fetchPartnerId();
+    }
+  }, [formData.partner.slug]);
+
   const handleSelectChange = (value) => {
     setFormData((prevData) => ({
       ...prevData,
