@@ -242,6 +242,16 @@ export const ApiProvider = ({ children }) => {
     return await apiRequest(`/saveTransaction`, 'POST', data);
   };
 
+  const getLinkOwner = async (id) => {
+    console.log(`*** [API CONTEXT] Saving transaction`);
+    return await apiRequest(`/getLinkOwner`, 'POST', { id });
+  };
+
+  const incrementLinkVisits = async (id) => {
+    console.log(`*** [API CONTEXT] Saving transaction`);
+    return await apiRequest(`/incrementLinkVisits`, 'POST', { id });
+  };
+
   return (
     <ApiContext.Provider
       value={{
@@ -269,6 +279,8 @@ export const ApiProvider = ({ children }) => {
         addNpo,
         createReferralLink,
         getUserReferralLink,
+        getLinkOwner,
+        incrementLinkVisits,
         getUserEarnings,
         getUserTransactions,
         getUserWithdrawalRequests,

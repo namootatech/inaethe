@@ -145,7 +145,6 @@
 //   );
 // }
 
-
 import { useEffect, useState } from 'react';
 import { DashboardCard } from '@/components/ui/app-card';
 import { StatCard } from '@/components/ui/stat-card';
@@ -195,40 +194,50 @@ export default function Referrals() {
 
     // Group affiliates by month
     const monthlyData = {};
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    
-    affiliates.forEach(affiliate => {
+    const months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
+
+    affiliates.forEach((affiliate) => {
       if (affiliate.createdAt) {
         const date = new Date(affiliate.createdAt);
         const month = months[date.getMonth()];
-        
+
         if (!monthlyData[month]) {
           monthlyData[month] = 0;
         }
         monthlyData[month]++;
       }
     });
-    
+
     // Convert to array format for the graph
-    return months.map(month => ({
+    return months.map((month) => ({
       name: month,
-      value: monthlyData[month] || 0
+      value: monthlyData[month] || 0,
     }));
   };
 
   useEffect(() => {
     if (user) {
       console.log('user is', user);
-      const {
-        affiliateSubscriptions,
-        affiliateTransactions,
-        affiliates,
-      } = user;
-      
+      const { affiliateSubscriptions, affiliateTransactions, affiliates } =
+        user;
+
       setAffSubs(affiliateSubscriptions || []);
       setAffTrans(affiliateTransactions || []);
       setAffs(affiliates || []);
-      
+
       // Process data for the graph
       setGraphData(processReferralData());
     }
@@ -246,7 +255,7 @@ export default function Referrals() {
             setLoading(false);
           } else {
             const newLinkId = uid.rnd();
-            const newReferralLink = `https://inaethe.com/ref/${newLinkId}`;
+            const newReferralLink = `${process.env.NEXT_PUBLIC_WEBSITE_URL}/ref/${newLinkId}`;
             const link = {
               id: newLinkId,
               link: newReferralLink,
@@ -314,7 +323,9 @@ export default function Referrals() {
       <DashboardCard title='Your Referral Link'>
         <div className='flex gap-2'>
           <Input
-            value={loading ? 'Loading...' : (referralLink?.link || 'No link available')}
+            value={
+              loading ? 'Loading...' : referralLink?.link || 'No link available'
+            }
             readOnly
             className='bg-gray-900 border-gray-700 text-gray-300'
           />
@@ -329,11 +340,7 @@ export default function Referrals() {
       </DashboardCard>
       <div className='mt-6'>
         <DashboardCard title='Referral Activity'>
-          <Graph
-            data={graphData}
-            dataKey='value'
-            title='Monthly Referrals'
-          />
+          <Graph data={graphData} dataKey='value' title='Monthly Referrals' />
         </DashboardCard>
       </div>
     </div>

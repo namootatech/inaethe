@@ -11,6 +11,7 @@ export const AuthProvider = ({ children }) => {
   const router = useRouter();
   const [user, setUser] = useState(null);
   const [partner, setPartner] = useState(null);
+  const [parent, setParent] = useState('noparent');
   const api = useApi();
   const jwtSecret = process.env.NEXT_PUBLIC_JWT_ENCODE_SECRET;
   const [loading, setLoading] = useState(true);
@@ -128,6 +129,11 @@ export const AuthProvider = ({ children }) => {
     router.push('/signin');
   };
 
+  const saveParent = (parentId) => {
+    setParent(parentId);
+    console.log('** [AUTH CONTEXT] Parent saved:', parentId);
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -139,6 +145,8 @@ export const AuthProvider = ({ children }) => {
         loginPartner,
         loading,
         logoutUser,
+        saveParent,
+        parent,
       }}
     >
       {children}
