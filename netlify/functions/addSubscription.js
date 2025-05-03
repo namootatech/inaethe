@@ -25,24 +25,29 @@ exports.handler = async (event, context) => {
     // Parse subscription data from body
     const data = JSON.parse(event.body);
     const {
-      _id,
+      userId,
       email,
       firstName,
       lastName,
-      parent,
       subscriptionTier,
       amount,
       partner,
+      parentId,
+      level,
     } = data;
 
+    console.log('** [ADD SUBSCRIPTION FUNCTION] Received request');
+    console.log('** [ADD SUBSCRIPTION FUNCTION] Data:', data);
+
     if (
-      !_id ||
+      !userId ||
       !email ||
       !firstName ||
       !lastName ||
-      !parent ||
+      !parentId ||
       !subscriptionTier ||
-      !amount
+      !amount ||
+      !level
     ) {
       return {
         statusCode: 400,
@@ -55,18 +60,17 @@ exports.handler = async (event, context) => {
 
     // Create subscription object
     const subscription = {
-      userId: new ObjectId(_id),
+      userId: new ObjectId(userId),
       email,
       firstName,
       lastName,
-      level: subscriptionTier,
+      level,
       status: 'active',
       date: new Date(),
       partner,
       subscriptionTier,
       amount,
-      parentId: parent,
-      userType: 'existing-user',
+      parentId: parentId || 'noparent',
     };
 
     // Save subscription to database
@@ -74,14 +78,14 @@ exports.handler = async (event, context) => {
 
     // Fetch parent user for Slack notification
     const parentUser = await usersCollection.findOne({
-      _id: new ObjectId(parent),
+      _id: new ObjectId(parentId),
     });
 
     // Send Slack notification
     await slackNotifications.notifyNewSubscription(data, parentUser, true);
 
     // Send subscription welcome email
-    await sendSubscriptionsWelcomeEmail(client, data);
+    // await sendSubscriptionsWelcomeEmail(client, data);
 
     return {
       statusCode: 200,
