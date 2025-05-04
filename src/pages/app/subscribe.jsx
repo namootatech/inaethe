@@ -98,8 +98,11 @@ function ReturnPage() {
         parent: userData?.parent,
         partner: userData?.partner,
         paymentId: userData?.paymentId,
-        parentId: userData?.parent || 'noparent',
+        parentId: userData?.parentId || 'noparent',
         amount: userData?.amount,
+        createdDate: moment().format('YYYY-MM-DD'),
+        amountInCents: userData?.amountInCents,
+        paymentStatus: userData?.paymentStatus,
       };
 
       if (!saved) {

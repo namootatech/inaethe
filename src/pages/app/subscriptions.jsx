@@ -15,9 +15,7 @@ import {
 } from '@/components/ui/select';
 import { useAuth } from '@/context/AuthContext';
 import moment from 'moment';
-import { postToURL } from '@/components/payfast/payfast';
 import { v4 as uuidv4 } from 'uuid';
-import { keys } from 'ramda';
 import { useApi } from '@/context/ApiContext';
 import {
   Search,
@@ -28,7 +26,6 @@ import {
   AlertCircle,
   Loader2,
   XCircle,
-  CheckCircle,
   PlusCircle,
 } from 'lucide-react';
 import {
@@ -49,6 +46,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination';
+import { useRouter } from 'next/router';
 
 const levelPrices = {
   Nourisher: 50,
@@ -63,11 +61,7 @@ const levelPrices = {
   GlobalImpactVisionary: 10000,
 };
 
-const PAYFAST_URL = process.env.NEXT_PUBLIC_PAYFAST_URL;
-const WEBSITE_URL = process.env.NEXT_PUBLIC_WEBSITE_URL;
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
-const MERCHANT_ID = process.env.NEXT_PUBLIC_MERCHANT_ID;
-const MERCHANT_KEY = process.env.NEXT_PUBLIC_MERCHANT_KEY;
 
 const levelColors = {
   Nourisher: 'green',
@@ -90,6 +84,7 @@ export default function Subscriptions() {
   const [error, setError] = useState(null);
   const { user } = useAuth();
   const api = useApi();
+  const router = useRouter();
   const [filter, setFilter] = useState('');
   const [sort, setSort] = useState('date');
   const [cancelDialogOpen, setCancelDialogOpen] = useState(false);
@@ -121,8 +116,6 @@ export default function Subscriptions() {
           page,
           ITEMS_PER_PAGE
         );
-
-        console.log(response);
 
         if (!response || !response.data) {
           throw new Error('Invalid response from server');
@@ -161,20 +154,7 @@ export default function Subscriptions() {
     fetchSubscriptions(page);
   };
 
-  const cleanSubscriptions =
-    subscriptions?.map((s) => ({
-      id: s['_id'],
-      npo: s.partner?.name || 'Unknown Organization',
-      amount: s.amount,
-      tier: s.subscriptionTier,
-      createDate: moment(s.createdDate).format('DD MMM YYYY'),
-      status: s.status || 'active',
-      nextPaymentDate: s.nextPaymentDate
-        ? moment(s.nextPaymentDate).format('DD MMM YYYY')
-        : 'Not scheduled',
-    })) || [];
-
-  const paySubscription = async (sub) => {
+  const processYocoPayment = async (sub) => {
     try {
       setProcessingPayment(sub.id);
 
@@ -182,67 +162,34 @@ export default function Subscriptions() {
         throw new Error('User information not available');
       }
 
-      const userData = user.user;
-      const paymentId = uuidv4();
-
-      let payfastData = {
-        merchant_id: MERCHANT_ID,
-        merchant_key: MERCHANT_KEY,
-        return_url: `${WEBSITE_URL}/app/subscribe?subscriptionId=${
-          sub.id
-        }&userId=${userData._id}&subscriptionTier=${sub.tier}&amount=${
-          levelPrices[sub.tier]
-        }&firstName=${userData.firstName}&lastName=${userData.lastName}&email=${
-          userData.email
-        }&paymentMethod=payfast&level=${
-          keys(levelPrices).indexOf(userData.tier) + 1
-        }${user?.parent ? `&parent=${userData?.parent}&` : ''}&partner=${
-          sub?.npo
-        }&paymentId=${paymentId}`,
-        cancel_url: `${WEBSITE_URL}/app/cancel?subscriptionId=${
-          sub.id
-        }&userId=${userData._id}&subscriptionTier=${sub.tier}&amount=${
-          levelPrices[sub.tier]
-        }&firstName=${userData.firstName}&lastName=${userData.lastName}&email=${
-          userData.email
-        }&paymentMethod=payfast&agreeToTerms=true&level=${
-          keys(levelPrices).indexOf(userData.tier) + 1
-        }${user?.parent ? `&parent=${userData?.parent}&` : ''}&partner=${
-          sub?.npo
-        }`,
-        notify_url: `${API_URL}/notify`,
-        name_first: userData.firstName,
-        name_last: userData.lastName,
-        email_address: userData.email,
-        m_payment_id: paymentId,
-        amount: levelPrices[sub.tier],
-        item_name: `Inaethe Subscription to ${sub.npo}`,
-        item_description: `Inaethe Subscription for ${userData.firstName} ${userData.lastName} for the ${sub.tier} package on NPO ${sub.npo}.`,
-        subscription_type: 1,
-        billing_date: moment().format('YYYY-MM-DD'),
-        recurring_amount: levelPrices[sub.tier],
-        frequency: 3,
-        cycles: 12,
-        subscription_notify_email: true,
-        subscription_notify_webhook: true,
-        subscription_notify_buyer: true,
-        custom_str2: userData.id ? userData.id : '',
-        custom_str3: sub.id ? sub.id : '',
-        custom_str4: sub.npo ? sub.npo : '',
-        custom_str5: sub.tier ? sub.tier : '',
+      const data = {
+        subscriptionId: sub.id,
+        userId: user.user._id,
+        subscriptionTier: sub?.tier,
+        firstName: user.user?.firstName,
+        lastName: user.user?.lastName,
+        email: user.user?.email,
+        paymentMethod: 'yoco',
+        level: sub?.level,
+        partner: sub?.partner,
+        paymentId: uuidv4(),
+        parentId: user.user?.parentId || 'noparent',
+        amount: sub?.amount,
+        amountInCents: sub?.amount * 100,
       };
 
-      if (user?.parent) {
-        payfastData = {
-          ...payfastData,
-          custom_str1: user?.parent ? user?.parent : '',
-        };
+      // Create a checkout session on the server
+      const response = await api.createYocoCheckout(data);
+
+      if (!response || !response.data.redirectUrl) {
+        throw new Error('Failed to create checkout session');
       }
 
-      postToURL(PAYFAST_URL, payfastData);
+      // Redirect to Yoco checkout page
+      window.location.href = response.data.redirectUrl;
     } catch (error) {
-      console.error('Payment error:', error);
-      toast.error('Payment processing failed. Please try again.');
+      console.error('Payment setup error:', error);
+      toast.error('Payment setup failed. Please try again.');
       setProcessingPayment(null);
     }
   };
@@ -281,6 +228,25 @@ export default function Subscriptions() {
     setSelectedSubscription(sub);
     setCancelDialogOpen(true);
   };
+
+  const cleanSubscriptions =
+    subscriptions?.map((s) => ({
+      id: s['_id'],
+      npo: s.partner?.name || 'Unknown Organization',
+      partner: {
+        id: s.partner?.id,
+        name: s.partner?.name,
+        slug: s.partner?.slug,
+      },
+      amount: s.amount,
+      level: s.level,
+      tier: s.subscriptionTier,
+      createDate: moment(s.createdDate).format('DD MMM YYYY'),
+      status: s.status || 'active',
+      nextPaymentDate: s.nextPaymentDate
+        ? moment(s.nextPaymentDate).format('DD MMM YYYY')
+        : 'Not scheduled',
+    })) || [];
 
   const filteredSubscriptions =
     cleanSubscriptions?.filter((sub) =>
@@ -349,6 +315,26 @@ export default function Subscriptions() {
 
     return items;
   };
+
+  // Check for payment status from URL params when returning from Yoco
+  useEffect(() => {
+    const { payment_status, subscription_id } = router.query;
+
+    if (payment_status && subscription_id) {
+      if (payment_status === 'success') {
+        toast.success(
+          'Payment successful! Your subscription has been updated.'
+        );
+        // Refresh subscriptions to get updated status
+        fetchSubscriptions(currentPage);
+      } else if (payment_status === 'failed') {
+        toast.error('Payment failed. Please try again.');
+      }
+
+      // Clean up URL params
+      router.replace('/subscriptions', undefined, { shallow: true });
+    }
+  }, [router.query, fetchSubscriptions, currentPage, router]);
 
   return (
     <div className='min-h-screen p-4 md:p-6'>
@@ -523,7 +509,7 @@ export default function Subscriptions() {
 
                             <Button
                               className='bg-green-600 hover:bg-green-700 text-white'
-                              onClick={() => paySubscription(sub)}
+                              onClick={() => processYocoPayment(sub)}
                               disabled={
                                 processingPayment === sub.id ||
                                 processingCancel === sub.id
@@ -536,7 +522,7 @@ export default function Subscriptions() {
                                 </>
                               ) : (
                                 <>
-                                  <CheckCircle className='h-4 w-4 mr-2' />
+                                  <CreditCard className='h-4 w-4 mr-2' />
                                   Make Payment
                                 </>
                               )}
@@ -619,6 +605,7 @@ export default function Subscriptions() {
         )}
       </div>
 
+      {/* Cancel Subscription Dialog */}
       <Dialog open={cancelDialogOpen} onOpenChange={setCancelDialogOpen}>
         <DialogContent className='bg-gray-800 text-gray-100 border-gray-700'>
           <DialogHeader>

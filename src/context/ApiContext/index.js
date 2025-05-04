@@ -270,6 +270,11 @@ export const ApiProvider = ({ children }) => {
     });
   };
 
+  const createYocoCheckout = async (data) => {
+    console.log(`*** [API CONTEXT] Creating checkout session...`);
+    return await apiRequest(`/createYocoCheckout`, 'POST', data);
+  };
+
   return (
     <ApiContext.Provider
       value={{
@@ -308,6 +313,8 @@ export const ApiProvider = ({ children }) => {
         checkLiveStatus,
         saveTransaction,
         getUserSubscriptions,
+        getPartnerId,
+        createYocoCheckout,
       }}
     >
       {children}
