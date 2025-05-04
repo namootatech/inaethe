@@ -33,7 +33,7 @@ exports.handler = async (event) => {
       level: userData?.level,
       partner: userData?.partner,
       paymentId: userData?.paymentId,
-      parentId: userData?.parent || 'noparent',
+      parentId: userData?.parentId || 'noparent',
       amount: userData?.amount,
       amountInCents: userData?.amountInCents,
     };

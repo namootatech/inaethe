@@ -77,12 +77,13 @@ exports.handler = async (event, context) => {
     const result = await subscriptionsCollection.insertOne(subscription);
 
     // Fetch parent user for Slack notification
-    const parentUser = await usersCollection.findOne({
-      _id: new ObjectId(parentId),
-    });
+    // I commentwed th9is out because sometimes parentId is not an object id but the string noparent
+    // const parentUser = await usersCollection.findOne({
+    //   _id: new ObjectId(parentId),
+    // });
 
-    // Send Slack notification
-    await slackNotifications.notifyNewSubscription(data, parentUser, true);
+    // // Send Slack notification
+    // await slackNotifications.notifyNewSubscription(data, parentUser, true);
 
     // Send subscription welcome email
     // await sendSubscriptionsWelcomeEmail(client, data);

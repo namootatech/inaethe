@@ -6,22 +6,8 @@ import { Users, DollarSign, FileText, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { useEffect, useState } from 'react';
-const subscriptionData = [
-  { name: 'Jan', value: 400 },
-  { name: 'Feb', value: 300 },
-  { name: 'Mar', value: 200 },
-  { name: 'Apr', value: 278 },
-  { name: 'May', value: 189 },
-  { name: 'Jun', value: 239 },
-];
-const earningsData = [
-  { name: 'Jan', value: 2400 },
-  { name: 'Feb', value: 1398 },
-  { name: 'Mar', value: 9800 },
-  { name: 'Apr', value: 3908 },
-  { name: 'May', value: 4800 },
-  { name: 'Jun', value: 3800 },
-];
+import { useApi } from '@/context/ApiContext';
+
 export default function Dashboard() {
   const [affiliateSubscriptions, setAffSubs] = useState([]);
   const [affiliateTransactions, setAffTrans] = useState([]);
@@ -30,21 +16,76 @@ export default function Dashboard() {
   const [transactions, setTrans] = useState([]);
   const { user } = useAuth();
 
+  const {
+    getUserNetwork,
+    getUserNetworkTransactions,
+    getUserNetworkSubscriptions,
+  } = useApi();
+  const { getUserTransactions } = useApi();
+  const { getUserSubscriptions } = useApi();
+
+  const fetchUserTransactions = async () => {
+    try {
+      const response = await getUserTransactions(user.user._id);
+      if (response) {
+        setTrans(response.data);
+      }
+    } catch (error) {
+      console.error('Error fetching user transactions:', error);
+    }
+  };
+
+  const fetchUserSubscriptions = async () => {
+    try {
+      const response = await getUserSubscriptions(user.user._id);
+      if (response) {
+        setSubs(response.data);
+      }
+    } catch (error) {
+      console.error('Error fetching user subscriptions:', error);
+    }
+  };
+
+  const fetchUserNetwork = async () => {
+    try {
+      const response = await getUserNetwork(user.user._id);
+      if (response) {
+        setAffs(response.data);
+      }
+    } catch (error) {
+      console.error('Error fetching user network:', error);
+    }
+  };
+
+  const fetchUserNetworkTransactions = async () => {
+    try {
+      const response = await getUserNetworkTransactions(user.user._id);
+      if (response) {
+        setAffTrans(response.data);
+      }
+    } catch (error) {
+      console.error('Error fetching user network transactions:', error);
+    }
+  };
+
+  const fetchUserNetworkSubscriptions = async () => {
+    try {
+      const response = await getUserNetworkSubscriptions(user.user._id);
+      if (response) {
+        setAffSubs(response.data);
+      }
+    } catch (error) {
+      console.error('Error fetching user network subscriptions:', error);
+    }
+  };
+
   useEffect(() => {
     if (user) {
-      console.log('user is', user);
-      const {
-        affiliateSubscriptions,
-        affiliateTransactions,
-        affiliates,
-        subscriptions,
-        transactions,
-      } = user;
-      setAffSubs(affiliateSubscriptions);
-      setAffTrans(affiliateTransactions);
-      setAffs(affiliates);
-      setSubs(subscriptions);
-      setTrans(transactions);
+      fetchUserTransactions();
+      fetchUserSubscriptions();
+      fetchUserNetwork();
+      fetchUserNetworkTransactions();
+      fetchUserNetworkSubscriptions();
     }
   }, [user]);
 

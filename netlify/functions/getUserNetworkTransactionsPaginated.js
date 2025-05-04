@@ -53,10 +53,10 @@ exports.handler = async (event, context) => {
       console.log('** [GET USER TRANSACTIONS FUNCTION] Transactions not found');
       return {
         statusCode: 200,
-        body: JSON.stringify({
+        body: {
           message: 'No transactions found',
           data: [],
-        }),
+        },
       };
     }
 

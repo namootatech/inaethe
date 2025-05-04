@@ -161,6 +161,33 @@ export const ApiProvider = ({ children }) => {
     });
   };
 
+  const getUserNetworkTransactions = async (userId) => {
+    console.log('*** [API CONTEXT] Fetching user network transactions...', {
+      userId,
+    });
+    return await apiRequest(`/getUserNetworkTransactions`, 'POST', {
+      userId,
+    });
+  };
+
+  const getUserNetworkSubscriptions = async (userId) => {
+    console.log('*** [API CONTEXT] Fetching user network subscriptions...', {
+      userId,
+    });
+    return await apiRequest(`/getUserNetworkSubscriptions`, 'POST', {
+      userId,
+    });
+  };
+
+  const getUserNetwork = async (userId) => {
+    console.log('*** [API CONTEXT] Fetching user network...', {
+      userId,
+    });
+    return await apiRequest(`/getUserNetwork`, 'POST', {
+      userId,
+    });
+  };
+
   const getUserWithdrawalRequests = async (userId, page, limit) => {
     console.log('*** [API CONTEXT] Fetching user withdrawal requests...', {
       userId,
@@ -315,6 +342,9 @@ export const ApiProvider = ({ children }) => {
         getUserSubscriptions,
         getPartnerId,
         createYocoCheckout,
+        getUserNetworkTransactions,
+        getUserNetwork,
+        getUserNetworkSubscriptions,
       }}
     >
       {children}
