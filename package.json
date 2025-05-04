@@ -90,6 +90,7 @@
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",
     "short-unique-id": "^5.2.0",
+    "short-uuid": "^5.2.0",
     "sonner": "^1.7.1",
     "styled-components": "^6.1.14",
     "tailwind-merge": "^2.6.0",

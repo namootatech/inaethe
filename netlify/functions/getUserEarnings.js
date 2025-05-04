@@ -38,13 +38,16 @@ exports.handler = async (event, context) => {
     console.log(
       `** [GET USER EARNINGS FUNCTION] Fetching earnings for userId: ${userId}`
     );
-    const userEarnings = await earningsCollection.findOne({ userId });
+    const userEarnings = await earningsCollection.find({ userId }).toArray();
 
     if (!userEarnings) {
       console.log('** [GET USER EARNINGS FUNCTION] Earnings not found');
       return {
         statusCode: 200,
-        body: JSON.stringify({}),
+        body: JSON.stringify({
+          message: 'No earnings found',
+          data: [],
+        }),
       };
     }
 

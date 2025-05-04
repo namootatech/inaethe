@@ -53,7 +53,7 @@ exports.handler = async (event, context) => {
       statusCode: 200,
       body: JSON.stringify({
         message: 'Withdrawal request created successfully',
-        data: result.ops[0],
+        data: {},
       }),
     };
   } catch (error) {

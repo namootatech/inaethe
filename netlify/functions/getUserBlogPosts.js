@@ -33,13 +33,19 @@ exports.handler = async (event) => {
     if (userBlogPosts.length === 0) {
       return {
         statusCode: 404,
-        body: JSON.stringify({ error: 'No blog posts found for this user' }),
+        body: JSON.stringify({
+          message: 'No blog posts found for this user',
+          data: [],
+        }),
       };
     }
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ blogPosts: userBlogPosts }),
+      body: JSON.stringify({
+        message: 'User blog posts fetched successfully',
+        data: userBlogPosts,
+      }),
     };
   } catch (error) {
     console.error(

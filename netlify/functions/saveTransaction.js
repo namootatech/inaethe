@@ -78,6 +78,12 @@ exports.handler = async (event) => {
       .db(NEXT_PUBLIC_MONGODB_DB)
       .collection('transactions');
 
+    const earningsCollection = client
+      .db(NEXT_PUBLIC_MONGODB_DB)
+      .collection('earnings');
+
+    const createdAt = new Date();
+
     const transaction = {
       amount,
       subscriptionId,
@@ -91,7 +97,7 @@ exports.handler = async (event) => {
       parentId,
       partner,
       paymentId,
-      createdAt: new Date().toISOString(),
+      createdAt,
     };
 
     console.log('** [SAVE TRANSACTION FUNCTION] Inserting transaction...');
@@ -99,6 +105,44 @@ exports.handler = async (event) => {
     const result = await transactionsCollection.insertOne(transaction);
 
     console.log('** [SAVE TRANSACTION FUNCTION] transaction inserted:', result);
+    const fortyPercentOfAmount = (amount * 0.4).toFixed(2);
+    const twentyPercentOfAmount = (amount * 0.2).toFixed(2);
+
+    const parentEarning = {
+      userId: parentId,
+      amount: fortyPercentOfAmount,
+      subscriptionId,
+      transactionId: result.insertedId,
+      paymentId,
+      type: 'user-earning',
+      createdAt,
+    };
+
+    const partnerEarning = {
+      partner,
+      amount: fortyPercentOfAmount,
+      subscriptionId,
+      transactionId: result.insertedId,
+      paymentId,
+      type: 'partner-earning',
+      createdAt,
+    };
+
+    const systemEarning = {
+      amount: twentyPercentOfAmount,
+      subscriptionId,
+      transactionId: result.insertedId,
+      paymentId,
+      type: 'system-earning',
+      createdAt,
+    };
+
+    await earningsCollection.insertMany([
+      parentEarning,
+      partnerEarning,
+      systemEarning,
+    ]);
+
     return {
       statusCode: 201,
       body: JSON.stringify({
