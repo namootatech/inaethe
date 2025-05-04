@@ -17,8 +17,7 @@ async function createNetlifySite(
   NEXT_PUBLIC_API_URL,
   NEXT_PUBLIC_PAYFAST_URL,
   NEXT_PUBLIC_WEBSITE_URL,
-  NEXT_PUBLIC_MERCHANT_ID,
-  NEXT_PUBLIC_MERCHANT_KEY,
+  NEXT_PUBLIC_YOCO_SECRET_KEY,
   NEXT_PUBLIC_GOOGLE_ANALYTICS,
   NEXT_PUBLIC_MONGODB_URI,
   NEXT_PUBLIC_MONGODB_DB,
@@ -37,8 +36,7 @@ async function createNetlifySite(
       orgName && orgName !== '' && orgName !== 'unknown'
         ? `https://${orgName}-inaethe-za.netlify.app`
         : NEXT_PUBLIC_WEBSITE_URL,
-    NEXT_PUBLIC_MERCHANT_ID,
-    NEXT_PUBLIC_MERCHANT_KEY,
+    NEXT_PUBLIC_YOCO_SECRET_KEY,
     NEXT_PUBLIC_GOOGLE_ANALYTICS,
     NEXT_PUBLIC_MONGODB_URI,
     NEXT_PUBLIC_MONGODB_DB,
@@ -47,7 +45,6 @@ async function createNetlifySite(
     GIT_USER,
     GIT_PASS,
   };
-  console.log(secrets);
 
   const environmentVariables = Object.entries(secrets).map(([key, value]) => ({
     key,
@@ -122,22 +119,13 @@ async function createNetlifySite(
     NEXT_PUBLIC_API_URL,
     NEXT_PUBLIC_PAYFAST_URL,
     NEXT_PUBLIC_WEBSITE_URL,
-    NEXT_PUBLIC_MERCHANT_ID,
-    NEXT_PUBLIC_MERCHANT_KEY,
+    NEXT_PUBLIC_YOCO_SECRET_KEY,
     NEXT_PUBLIC_GOOGLE_ANALYTICS,
     NEXT_PUBLIC_MONGODB_URI,
     NEXT_PUBLIC_MONGODB_DB = 'unknown',
     GIT_USER,
     GIT_PASS,
   ] = args;
-
-  console.log(process.argv);
-  console.log('\nArguments:', args);
-
-  console.log('\n\nToken:', NETLIFY_AUTH_TOKEN);
-  console.log('Org Name:', orgName);
-  console.log('Installation ID:', installation_id);
-  console.log('Repository ID:', repo_id);
 
   if (!installation_id) {
     console.error('Installation ID is required');
@@ -164,8 +152,7 @@ async function createNetlifySite(
     NEXT_PUBLIC_API_URL,
     NEXT_PUBLIC_PAYFAST_URL,
     NEXT_PUBLIC_WEBSITE_URL,
-    NEXT_PUBLIC_MERCHANT_ID,
-    NEXT_PUBLIC_MERCHANT_KEY,
+    NEXT_PUBLIC_YOCO_SECRET_KEY,
     NEXT_PUBLIC_GOOGLE_ANALYTICS,
     NEXT_PUBLIC_MONGODB_URI,
     NEXT_PUBLIC_MONGODB_DB || 'unknown',
