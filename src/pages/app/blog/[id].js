@@ -27,7 +27,6 @@ import { FacebookIcon, TwitterIcon, LinkedinIcon } from 'react-share';
 import { useRouter } from 'next/router';
 import { useAuth } from '@/context/AuthContext';
 import { useApi } from '@/context/ApiContext';
-import Head from 'next/head';
 
 export default function BlogPostClient() {
   const [comments, setComments] = useState([]);
@@ -36,8 +35,6 @@ export default function BlogPostClient() {
   const [currentUrl, setCurrentUrl] = useState('');
   const [post, setPost] = useState(null);
   const [viewTracked, setViewTracked] = useState(false);
-  const [error, setError] = useState(null);
-  const [data, setData] = useState(null);
 
   const router = useRouter();
 
@@ -69,14 +66,13 @@ export default function BlogPostClient() {
   // Track view
   const trackView = async () => {
     if (post?._id) {
-      console.log('** [TRACK VIEW] Tracking view for post:', post._id);
-      await api.updateBlogPost(post._id, { views: post.views || 0 + 1 });
+      await api.updateBlogPost(post._id, { views: post.views + 1 });
     }
   };
 
   // Track share
   const trackShare = async (platform) => {
-    await api.updateBlogPost(post._id, { shares: post.shares || 0 + 1 });
+    await api.updateBlogPost(post._id, { shares: post.shares + 1 });
   };
 
   const handleScroll = () => {
@@ -122,24 +118,20 @@ export default function BlogPostClient() {
 
     if (!newComment.trim()) return;
 
-    try {
-      const response = await api.addBlogPostComment({
-        postId: post._id,
-        user: {
-          id: user.user._id,
-          name: user.user.firstName + ' ' + user.user.lastName,
-        },
-        content: newComment,
-      });
+    await api.addBlogPostComment({
+      postId: post._id,
+      user: {
+        id: user.user._id,
+        name: user.user.firstName + ' ' + user.user.lastName,
+      },
+      content: newComment,
+    });
 
-      setData(response.data);
-      setError(null);
-      setComments([...comments, response.data]);
-      setNewComment('');
-    } catch (err) {
-      setError(err);
-      setData(null);
+    if (error) {
       toast('Failed to post comment');
+    } else if (data) {
+      setComments([...comments, data]);
+      setNewComment('');
     }
   }
 
@@ -198,7 +190,7 @@ export default function BlogPostClient() {
     return (
       <div className='min-h-screen bg-black flex items-center justify-center px-4'>
         <div className='text-center'>
-          <MusicIcon className='h-12 w-12 text-pink-600 mx-auto mb-6' />
+          <MusicIcon className='h-12 w-12 text-red-600 mx-auto mb-6' />
           <h1 className='text-4xl font-bold text-white mb-4'>
             We cant find this blog post
           </h1>
@@ -213,103 +205,9 @@ export default function BlogPostClient() {
     );
   }
 
-  function getYoutubeVideoId(url) {
-    const regExp =
-      /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-    const match = url.match(regExp);
-
-    return match && match[2].length === 11 ? match[2] : null;
-  }
-
   return (
     <div className='min-h-screen'>
-      <Head>
-        <title>
-          {post?.title ? `${post.title} | Inaethe Blog` : 'Blog Post | Inaethe'}
-        </title>
-        <meta
-          name='description'
-          content={post?.excerpt || 'Read our latest blog post on Inaethe'}
-        />
-        <meta name='viewport' content='width=device-width, initial-scale=1' />
-        {/* Canonical URL */}
-        <link rel='canonical' href={currentUrl} />
-        {/* Open Graph / Facebook */}
-        <meta property='og:type' content='article' />
-        <meta property='og:title' content={post?.title || 'Blog Post'} />
-        <meta
-          property='og:description'
-          content={post?.excerpt || 'Read our latest blog post on Inaethe'}
-        />
-        <meta
-          property='og:image'
-          content={
-            post?.featuredImage ||
-            `${process.env.NEXT_PUBLIC_WEBSITE_URL}/og-image.jpg`
-          }
-        />
-        <meta property='og:url' content={currentUrl} />
-        <meta property='og:site_name' content='Inaethe Blog' />
-        {/* Twitter */}
-        <meta name='twitter:card' content='summary_large_image' />
-        <meta name='twitter:title' content={post?.title || 'Blog Post'} />
-        <meta
-          name='twitter:description'
-          content={post?.excerpt || 'Read our latest blog post on Inaethe'}
-        />
-        <meta
-          name='twitter:image'
-          content={
-            post?.featuredImage ||
-            `${process.env.NEXT_PUBLIC_WEBSITE_URL}/og-image.jpg`
-          }
-        />
-        {/* Article specific metadata */}
-        {post?.createdAt && (
-          <meta
-            property='article:published_time'
-            content={new Date(post.createdAt).toISOString()}
-          />
-        )}
-        {post?.categories?.map((category, index) => (
-          <meta key={index} property='article:tag' content={category} />
-        ))}
-      </Head>
-      {post && (
-        <script
-          type='application/ld+json'
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'BlogPosting',
-              headline: post.title,
-              description: post.excerpt,
-              image: post.featuredImage,
-              datePublished: new Date(post.createdAt).toISOString(),
-              dateModified: post.updatedAt
-                ? new Date(post.updatedAt).toISOString()
-                : new Date(post.createdAt).toISOString(),
-              author: {
-                '@type': 'Person',
-                name: post.author?.name || 'Anonymous',
-              },
-              publisher: {
-                '@type': 'Organization',
-                name: 'Inaethe',
-                logo: {
-                  '@type': 'ImageObject',
-                  url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}/logo.png`,
-                },
-              },
-              mainEntityOfPage: {
-                '@type': 'WebPage',
-                '@id': currentUrl,
-              },
-            }),
-          }}
-        />
-      )}
-      <article className='max-w-4xl mx-auto px-4 pt-24'>
+      <article className='max-w-4xl mx-auto px-4'>
         {/* Featured Image */}
         {post.featuredImage && (
           <div
@@ -320,7 +218,7 @@ export default function BlogPostClient() {
 
         {/* Title and Meta */}
         <header className='mb-12 text-center'>
-          <h1 className='text-5xl md:text-6xl font-bold text-zinc-900 mb-8 leading-tight'>
+          <h1 className='text-5xl md:text-6xl font-bold text-white mb-8 leading-tight'>
             {post.title}
           </h1>
 
@@ -342,7 +240,7 @@ export default function BlogPostClient() {
           </div>
 
           {post.excerpt && (
-            <p className='text-xl text-zinc-800 max-w-2xl mx-auto mb-6'>
+            <p className='text-xl text-zinc-400 max-w-2xl mx-auto mb-6'>
               {post.excerpt}
             </p>
           )}
@@ -437,7 +335,7 @@ export default function BlogPostClient() {
                 <h3 className='text-2xl font-bold mt-8 mb-4'>{children}</h3>
               ),
               p: ({ children }) => (
-                <p className='text-lg leading-relaxed mb-6 text-zinc-600'>
+                <p className='text-lg leading-relaxed mb-6 text-zinc-300'>
                   {children}
                 </p>
               ),
@@ -451,7 +349,7 @@ export default function BlogPostClient() {
                 <li className='text-zinc-300'>{children}</li>
               ),
               blockquote: ({ children }) => (
-                <blockquote className='border-l-4 border-pink-600 pl-4 italic my-6 text-zinc-400'>
+                <blockquote className='border-l-4 border-red-600 pl-4 italic my-6 text-zinc-400'>
                   {children}
                 </blockquote>
               ),
@@ -474,7 +372,7 @@ export default function BlogPostClient() {
         {/* Post Stats Card */}
         <div className='bg-zinc-900 rounded-xl p-6 mb-12'>
           <h3 className='text-xl font-bold text-white mb-4 flex items-center'>
-            <BarChart2 className='h-5 w-5 mr-2 text-pink-500' />
+            <BarChart2 className='h-5 w-5 mr-2 text-red-500' />
             Post Statistics
           </h3>
           <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
@@ -506,14 +404,14 @@ export default function BlogPostClient() {
         </div>
 
         {/* Call to Action */}
-        <div className='bg-pink-600 rounded-xl p-8 mb-12 text-center'>
+        <div className='bg-red-600 rounded-xl p-8 mb-12 text-center'>
           <h3 className='text-2xl font-bold text-white mb-4'>
             Enjoy this post?
           </h3>
           <p className='text-white mb-6'>
             Sign up for our newsletter to get more great content!
           </p>
-          <Button asChild className='bg-white text-pink-600 hover:bg-zinc-200'>
+          <Button asChild className='bg-white text-red-600 hover:bg-zinc-200'>
             <Link href='/register'>Sign Up Now</Link>
           </Button>
         </div>
@@ -559,7 +457,7 @@ export default function BlogPostClient() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 50 }}
-            className='fixed bottom-4 right-4 bg-pink-600 text-white p-6 rounded-xl shadow-lg'
+            className='fixed bottom-4 right-4 bg-red-600 text-white p-6 rounded-xl shadow-lg'
           >
             <h3 className='text-xl font-bold mb-2'>Enjoying the content?</h3>
             <p className='mb-4'>
@@ -568,7 +466,7 @@ export default function BlogPostClient() {
             <div className='flex space-x-4'>
               <Button
                 asChild
-                className='bg-white text-pink-600 hover:bg-zinc-200'
+                className='bg-white text-red-600 hover:bg-zinc-200'
               >
                 <Link href='/register'>Sign Up</Link>
               </Button>

@@ -17,12 +17,17 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { userId } = JSON.parse(event.body);
+    const { page, limit } = JSON.parse(event.body);
+    console.log(
+      `** [GET BLOG POSTS FUNCTION] Parsing request body...${page} and limit: ${limit}`
+    );
 
-    if (!userId) {
+    if (!page || !limit) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ error: 'Missing user ID' }),
+        body: JSON.stringify({
+          error: `Missing page: ${page} and limit: ${limit}`,
+        }),
       };
     }
 
@@ -31,18 +36,29 @@ exports.handler = async (event) => {
     const collection = database.collection('blogPosts');
 
     const userBlogPosts = await collection
-      .find({ 'author.id': userId })
+      .find({})
+      .skip((page - 1) * limit)
+      .limit(limit)
       .toArray();
 
     if (userBlogPosts.length === 0) {
+      console.error('** [GET  BLOG POSTS FUNCTION] No blog posts found', {
+        page,
+        limit,
+      });
       return {
-        statusCode: 404,
+        statusCode: 200,
         body: JSON.stringify({
           message: 'No blog posts found for this user',
           data: [],
         }),
       };
     }
+
+    console.log(
+      '** [GET BLOG POSTS FUNCTION] Blog posts fetched successfully',
+      userBlogPosts.length
+    );
 
     return {
       statusCode: 200,
@@ -53,7 +69,7 @@ exports.handler = async (event) => {
     };
   } catch (error) {
     console.error(
-      '** [GET USER BLOG POSTS FUNCTION] Error fetching user blog posts:',
+      '** [GET BLOG POSTS FUNCTION] Error fetching user blog posts:',
       error
     );
     return {

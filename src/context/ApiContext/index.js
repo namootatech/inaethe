@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 import axios from 'axios';
+import { data } from 'autoprefixer';
 
 const API_URL = process.env.NEXT_PUBLIC_FUNCTIONS_URL + '/.netlify/functions';
 
@@ -215,17 +216,20 @@ export const ApiProvider = ({ children }) => {
 
   const addBlogPost = async (blogData) => {
     console.log('*** [API CONTEXT] Adding a new blog post...');
-    return await apiRequest('/blogPosts', 'POST', blogData);
+    return await apiRequest('/addBlogPost', 'POST', blogData);
   };
 
   const updateBlogPost = async (blogId, blogData) => {
     console.log(`*** [API CONTEXT] Updating blog post with ID: ${blogId}...`);
-    return await apiRequest(`/blogPosts/${blogId}`, 'PUT', blogData);
+    return await apiRequest(`/updateBlogPost`, 'POST', {
+      postId: blogId,
+      data: blogData,
+    });
   };
 
   const deleteBlogPost = async (blogId) => {
     console.log(`*** [API CONTEXT] Deleting blog post with ID: ${blogId}...`);
-    return await apiRequest(`/blogPosts/${blogId}`, 'DELETE');
+    return await apiRequest(`/deleteBlogPost/`, 'POST', { blogId });
   };
 
   const getAllPublicBlogPosts = async () => {
@@ -237,14 +241,14 @@ export const ApiProvider = ({ children }) => {
     console.log(
       `*** [API CONTEXT] Fetching blog posts for user ID: ${userId}...`
     );
-    return await apiRequest(`/blogPosts/user/${userId}`, 'GET');
+    return await apiRequest(`/getUserBlogPosts`, 'POST', { userId });
   };
 
-  const getBlogPostContent = async (userId) => {
+  const getBlogPostContent = async (postId) => {
     console.log(
-      `*** [API CONTEXT] Fetching blog posts for user ID: ${userId}...`
+      `*** [API CONTEXT] Fetching blog posts for user ID: ${postId}...`
     );
-    return await apiRequest(`/blogPosts/user/${userId}`, 'GET');
+    return await apiRequest(`/getBlogPostContent`, 'POST', { id: postId });
   };
 
   const addSubscriber = async (email, organisationId) => {
@@ -302,6 +306,21 @@ export const ApiProvider = ({ children }) => {
     return await apiRequest(`/createYocoCheckout`, 'POST', data);
   };
 
+  const addBlogPostComment = async (data) => {
+    console.log(`*** [API CONTEXT] Creating checkout session...`);
+    return await apiRequest(`/addBlogPostComment`, 'POST', data);
+  };
+
+  const getBlogPostComments = async (postId) => {
+    console.log(`*** [API CONTEXT] Get BLOG post comments ${postId}.`);
+    return await apiRequest(`/getBlogPostComments`, 'POST', { postId });
+  };
+
+  const getBlogPosts = async (page, limit) => {
+    console.log(`*** [API CONTEXT] Get BLOG posts ${page} ${limit}.`);
+    return await apiRequest(`/getBlogPosts`, 'POST', { page, limit });
+  };
+
   return (
     <ApiContext.Provider
       value={{
@@ -314,10 +333,13 @@ export const ApiProvider = ({ children }) => {
         restorePartner,
         addBlogPost,
         getBlogPostContent,
+        getBlogPosts,
         getUserBlogPosts,
         getAllPublicBlogPosts,
         deleteBlogPost,
         updateBlogPost,
+        addBlogPostComment,
+        getBlogPostComments,
         getUser,
         listNetworkTransactions,
         getNPO,

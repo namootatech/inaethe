@@ -15,20 +15,28 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { id } = JSON.parse(event.body);
+    const { postId } = JSON.parse(event.body);
 
-    if (!id) {
+    if (!postId) {
+      console.error(
+        '** [GET BLOG POST CONTENT FUNCTION] Missing required fields in request body.',
+        { postId }
+      );
       return {
         statusCode: 400,
-        body: JSON.stringify({ error: 'Missing blog post ID' }),
+        body: JSON.stringify({
+          error: `Missing blog post ID ${postId}`,
+          message: 'Blog post ID is required',
+          data: null,
+        }),
       };
     }
 
     await client.connect();
     const database = client.db(process.env.NEXT_PUBLIC_MONGODB_DB);
-    const collection = database.collection('blogPosts');
+    const collection = database.collection('blogPostComments');
 
-    const blogPost = await collection.findOne({ _id: new ObjectId(id) });
+    const blogPost = await collection.find({ postId }).toArray();
 
     if (!blogPost) {
       return {

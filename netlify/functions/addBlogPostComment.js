@@ -17,18 +17,9 @@ exports.handler = async (event) => {
 
   try {
     console.log('** [ADD BLOG POST FUNCTION] Parsing request body...');
-    const {
-      title,
-      content,
-      tags,
-      excerpt,
-      visibility,
-      isDraft,
-      featuredImage,
-      author,
-    } = JSON.parse(event.body);
+    const { postId, content, user } = JSON.parse(event.body);
 
-    if (!title || !content || !author) {
+    if (!postId || !content || !user) {
       console.error(
         '** [ADD BLOG POST FUNCTION] Missing required fields in request body.',
         { title, content, author, visibility, excerpt, tags }
@@ -41,20 +32,12 @@ exports.handler = async (event) => {
 
     await client.connect();
     const database = client.db(NEXT_PUBLIC_MONGODB_DB);
-    const collection = database.collection('blogPosts');
+    const collection = database.collection('blogPostComments');
 
     const blogPost = {
-      title,
+      postId,
       content,
-      author,
-      visibility,
-      excerpt,
-      tags,
-      isDraft,
-      featuredImage,
-      likes: 0,
-      views: 0,
-      shares: 0,
+      user,
       createdAt: new Date().toISOString(),
     };
 
