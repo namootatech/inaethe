@@ -63,7 +63,7 @@ exports.handler = async (event, context) => {
       statusCode: 201,
       body: JSON.stringify({
         message: 'Referral link created successfully',
-        data: result?.ops[0],
+        data: {},
       }),
     };
   } catch (error) {
