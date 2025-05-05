@@ -81,11 +81,11 @@ const Footer = () => {
                 <Mail className='h-5 w-5 mr-2 text-gray-300' />
                 <a
                   href={`mailto:${
-                    siteConfig?.contactEmail || 'info@example.com'
+                    siteConfig?.contactEmail || 'info@inaethe.co.za'
                   }`}
                   className='text-gray-300 hover:text-white transition-colors'
                 >
-                  {siteConfig?.contactEmail || 'info@example.com'}
+                  {siteConfig?.contactEmail || 'info@inaethe.co.za'}
                 </a>
               </div>
               <div className='flex items-center'>
@@ -94,7 +94,7 @@ const Footer = () => {
                   href={`tel:${siteConfig?.contactPhone || '+27123456789'}`}
                   className='text-gray-300 hover:text-white transition-colors'
                 >
-                  {siteConfig?.contactPhone || '+27 12 345 6789'}
+                  {siteConfig?.contactPhone || '+27 60 311 6777'}
                 </a>
               </div>
               <div className='flex items-start'>

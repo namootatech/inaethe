@@ -126,7 +126,9 @@ export const AuthProvider = ({ children }) => {
   const logoutUser = () => {
     setUser(null);
     Cookies.remove('user');
-    router.push('/signin');
+    if (window.location.pathname !== '/npo-login') {
+      router.push('/signin');
+    }
   };
 
   const saveParent = (parentId) => {

@@ -18,7 +18,7 @@ export default function TopBar() {
   return (
     <div className='flex items-center justify-between p-4 bg-gray-900 border-b border-gray-700'>
       <div className='flex items-center'>
-        <Input
+        {/* <Input
           type='text'
           placeholder='Search...'
           className='w-64 bg-gray-800 border-gray-700 text-gray-300 focus:border-pink-700'
@@ -29,7 +29,8 @@ export default function TopBar() {
           className='ml-2 text-gray-400 hover:text-pink-700'
         >
           <Search className='h-5 w-5' />
-        </Button>
+        </Button> */}
+        <p className='text-gray-600 font-bold'> Donations Platform</p>
       </div>
       <div className='flex items-center space-x-4'>
         <Button

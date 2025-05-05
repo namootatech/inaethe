@@ -1,9 +1,16 @@
 'use client';
 
 import Head from 'next/head';
-import NpoLoginForm from '@/components/NpoLoginForm'; // Assuming the form is in this path
+import NpoLoginForm from '@/components/NpoLoginForm';
+import { useAuth } from '@/context/AuthContext';
 
 export default function NpoLoginPage() {
+  const { user, logoutUser } = useAuth();
+
+  if (user) {
+    logoutUser();
+  }
+
   return (
     <>
       <Head>

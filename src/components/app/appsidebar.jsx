@@ -38,8 +38,8 @@ const menuItems = [
   { icon: DollarSign, label: 'Earnings', href: '/app/earnings' },
   { icon: BarChart2, label: 'NPOs', href: '/app/npos' },
   { icon: FileText, label: 'Blog Posts', href: '/app/blog' },
-  { icon: User, label: 'Profile', href: '/app/profile' },
-  { icon: HelpCircle, label: 'Support', href: '/app/support' },
+  // { icon: User, label: 'Profile', href: '/app/profile' },
+  // { icon: HelpCircle, label: 'Support', href: '/app/support' },
 ];
 
 export default function SidebarComponent({ expanded, setExpanded }) {
