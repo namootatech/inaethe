@@ -149,6 +149,15 @@ export const ApiProvider = ({ children }) => {
     });
   };
 
+  const getPartnerEarnings = async (partner) => {
+    console.log('*** [API CONTEXT] Fetching user earnings...', {
+      partner,
+    });
+    return await apiRequest(`/getPartnerEarnings`, 'POST', {
+      partner,
+    });
+  };
+
   const getUserTransactions = async (userId, page, limit) => {
     console.log('*** [API CONTEXT] Fetching user transactions...', {
       userId,
@@ -197,6 +206,19 @@ export const ApiProvider = ({ children }) => {
     });
     return await apiRequest(`/getUserWithdrawalRequests`, 'POST', {
       userId,
+      page,
+      limit,
+    });
+  };
+
+  const getPartnerWithdrawalRequests = async (partnerId, page, limit) => {
+    console.log('*** [API CONTEXT] Fetching user withdrawal requests...', {
+      partnerId,
+      page,
+      limit,
+    });
+    return await apiRequest(`/getPartnerWithdrawalRequests`, 'POST', {
+      partnerId,
       page,
       limit,
     });
@@ -321,6 +343,22 @@ export const ApiProvider = ({ children }) => {
     return await apiRequest(`/getBlogPosts`, 'POST', { page, limit });
   };
 
+  const getPartnerTransactions = async (slug, page, limit) => {
+    console.log(`*** [API CONTEXT] Get partner transactions ${slug}.`);
+    return await apiRequest(`/getPartnerTransactions`, 'POST', {
+      slug,
+      page,
+      limit,
+    });
+  };
+
+  const getPartnerSubscriptions = async (partnerId, page, limit) => {
+    console.log(`*** [API CONTEXT] Get partner subscriptions ${partnerId}.`);
+    return await apiRequest(`/getPartnerSubscriptions`, 'POST', {
+      partnerId,
+    });
+  };
+
   return (
     <ApiContext.Provider
       value={{
@@ -367,6 +405,10 @@ export const ApiProvider = ({ children }) => {
         getUserNetworkTransactions,
         getUserNetwork,
         getUserNetworkSubscriptions,
+        getPartnerTransactions,
+        getPartnerSubscriptions,
+        getPartnerWithdrawalRequests,
+        getPartnerEarnings,
       }}
     >
       {children}
